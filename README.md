@@ -11,3 +11,8 @@ Estructura tipica de un repositorio para investigacion con codigo.
 1. Coloca los datos en data/.
 2. Ejecuta los scripts desde scripts/.
 3. Guarda los resultados en figures/.
+
+## Script standalone NINI
+- Script: `scripts/evolucion_nini.R`
+- Datos de entrada: `data/evolucion/*.csv`
+- Salida: `figures/evolucion_nini.png`

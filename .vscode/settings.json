@@ -1,0 +1,8 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "/^\\$root = \"c:\\\\Users\\\\user\\\\Documents\\\\GitHub\\\\graficos-el-quantificador\"; \\$src = Join-Path \\$root \"scripts\\\\NEET-RESEARCH-PROJECT\\\\DATOS\\\\evolucion\"; \\$dst = Join-Path \\$root \"data\\\\evolucion\"; if \\(Test-Path \\$src\\) \\{ if \\(-not \\(Test-Path \\$dst\\)\\) \\{ Move-Item -Path \\$src -Destination \\$dst \\} else \\{ Get-ChildItem -Path \\$src -File \\| Move-Item -Destination \\$dst -Force \\} \\}; Write-Output \"done\"$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}
