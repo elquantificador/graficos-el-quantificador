@@ -10,6 +10,9 @@ library(scales)
 library(cowplot)
 library(haven)
 
+out_path  <- "figures/escolaridad_ingreso.png"
+logo_path <- "quantificador.png"
+
 df <- read_sav("c:/Users/user/Downloads/1_BDD_ENEMDU_2026_01_SPSS/enemdu_persona_2026_01.sav")
 
 # ------------------------------------------------------------
@@ -105,6 +108,7 @@ p_base_box <- ggplot(boxstats, aes(x = escolaridad)) +
   geom_boxplot(
     aes(ymin = ymin, lower = lower, middle = middle, upper = upper, ymax = ymax),
     stat = "identity",
+    fill = "#ef9f4e",
     linewidth = 0.6
   ) +
   labs(
@@ -120,37 +124,34 @@ p_base_box <- ggplot(boxstats, aes(x = escolaridad)) +
   scale_y_continuous(labels = label_number(big.mark = ",", accuracy = 1)) +
   theme_classic() +
   theme(
-    axis.text.y  = element_text(colour = "grey20", size = 6.5),
-    axis.text.x  = element_text(colour = "grey20", size = 6.5, angle = 45, hjust = 1),
-    axis.title.x = element_text(size = 6.5, margin = margin(t = 6), hjust = 0),
-    axis.title.y = element_text(size = 6.5, margin = margin(r = 5), hjust = 0),
-    plot.title = element_text(colour = "grey20", size = 9.5, face = "bold", hjust = 0),
-    plot.subtitle = element_text(colour = "grey30", size = 7.5, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(
-      colour = "grey30", size = 5.5, lineheight = 1.1, hjust = 0,
-      margin = margin(t = 3)
-    ),
+    axis.text.y  = element_text(colour = "grey20", size = 7.5),
+    axis.text.x  = element_text(colour = "grey20", size = 7.5, angle = 45, hjust = 1),
+    axis.title.x = element_text(size = 7, margin = margin(t = 8, r = 0, b = 0, l = 0), hjust = 0),
+    axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 0),
+    plot.title    = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0),
+    plot.subtitle = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
+    plot.caption  = element_text(colour = "grey30", size = 5, lineheight = 1.1, hjust = 0, margin = margin(t = 6, r = 0, b = 0, l = 0)),
     axis.line = element_line(colour = "grey60"),
     legend.position = "none",
-    plot.margin = margin(12, 20, 8, 14),
+    plot.margin = margin(14, 36, 14, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     panel.grid = element_blank()
   )
 
-p_base_box
+# ------------------------------------------------------------
+# 5) Logo overlay
+# ------------------------------------------------------------
 
-# ------------------------------------------------------------
-# 5) Optional: logo overlay (same approach as your example)
-# ------------------------------------------------------------
-# logo_path <- file.path(project_root, "quantificador.png")
-#
-# p_box <- ggdraw() +
-#   draw_plot(p_base_box, x = 0, y = 0, width = 1, height = 1) +
-#   draw_image(
-#     logo_path,
-#     x = 0.86, y = 0.14,
-#     width = 0.10, height = 0.10
-#   )
-#
-# p_box
+p_box <- ggdraw() +
+  draw_plot(p_base_box, x = 0, y = 0, width = 1, height = 1) +
+  draw_image(
+    logo_path,
+    x = 0.90, y = 0.14,
+    width = 0.10, height = 0.10
+  )
+
+p_box
+
+# ---- Guardar ----
+ggsave(out_path, p_box, width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
