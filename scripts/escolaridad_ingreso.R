@@ -33,10 +33,10 @@ df2 <- df %>%
 
     escolaridad = case_when(
       p10a %in% c(1, 2, 3, 4, 5) ~ "Menos de secundaria",
-      p10a %in% c(6, 7)          ~ "Secundaria/Bachillerato",
-      p10a == 8                  ~ "Tecnología / sup. no universitario",
+      p10a %in% c(6, 7)          ~ "Secundaria",
+      p10a == 8                  ~ "Tecnología",
       p10a == 9                  ~ "Universidad",
-      p10a == 10                 ~ "Postgrado",
+      p10a == 10                 ~ "Posgrado",
       TRUE                       ~ NA_character_
     )
   ) %>%
@@ -51,10 +51,10 @@ df2_plot <- df2 %>%
       escolaridad,
       levels = c(
         "Menos de secundaria",
-        "Secundaria/Bachillerato",
-        "Tecnología / sup. no universitario",
+        "Secundaria",
+        "Tecnología",
         "Universidad",
-        "Postgrado"
+        "Posgrado"
       )
     )
   ) %>%
@@ -112,13 +112,12 @@ p_base_box <- ggplot(boxstats, aes(x = escolaridad)) +
     linewidth = 0.6
   ) +
   labs(
-    title = "El retorno a la educación: solo una maestría\nsupera los USD 1.000 mensuales",
-    subtitle = "Distribución del ingreso laboral mensual por nivel educativo\nEcuador, enero 2026 · población de 15 años y más",
+    title = "Solo los trabajadores con posgrados\ntienden a ganar más de USD 1,000 al mes",
+    subtitle = "Ingresos por nivel educativo, enero 2026, personas de 15+ años",
     x = "",
     y = "Ingreso laboral mensual (USD)",
     caption = paste0(
-      "Fuente: ENEMDU - INEC, enero 2026. Cálculos propios.\n",
-      "Caja = p25–p75, línea = mediana, bigotes = p10–p90 (percentiles ponderados)."
+      "Fuente: ENEMDU - INEC, enero 2026. Cálculos por el autor. Caja = p25–p75, línea = mediana, bigotes = p10–p90.\nSe implementan percentiles ponderados por pesos muestrales."
     )
   ) +
   scale_y_continuous(
