@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(wc -l data/evolucion/*.csv)"
+      "Bash(wc -l data/evolucion/*.csv)",
+      "Bash(du -sh data/evolucion/*.csv)",
+      "Bash(du -sh data/*.xlsx data/*.csv figures/*.png)"
     ]
   }
 }

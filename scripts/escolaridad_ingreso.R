@@ -13,7 +13,7 @@ library(haven)
 out_path  <- "figures/escolaridad_ingreso.png"
 logo_path <- "quantificador.png"
 
-df <- read_sav("c:/Users/user/Downloads/1_BDD_ENEMDU_2026_01_SPSS/enemdu_persona_2026_01.sav")
+df <- read_sav("data/enemdu_persona_2026_01.sav")
 
 # ------------------------------------------------------------
 # 1) Clean data and set category order
@@ -32,7 +32,7 @@ df2 <- df %>%
     ingrl = if_else(ingrl == -1, NA_real_, ingrl),
 
     escolaridad = case_when(
-      p10a %in% c(1, 2, 3, 4, 5) ~ "Menos de secundaria",
+      p10a %in% c(1, 2, 3, 4, 5) ~ "Menos de\nsecundaria",
       p10a %in% c(6, 7)          ~ "Secundaria",
       p10a == 8                  ~ "Tecnología",
       p10a == 9                  ~ "Universidad",
@@ -50,7 +50,7 @@ df2_plot <- df2 %>%
     escolaridad = factor(
       escolaridad,
       levels = c(
-        "Menos de secundaria",
+        "Menos de\nsecundaria",
         "Secundaria",
         "Tecnología",
         "Universidad",
@@ -87,6 +87,33 @@ q <- svyby(
   se = FALSE,
   keep.var = FALSE
 )
+
+# ------------------------------------------------------------
+# 3b) Calculate mean and median income overall and by education
+# ------------------------------------------------------------
+
+# Overall mean and median
+overall_mean <- svymean(~ingrl, des2, na.rm = TRUE)
+overall_median <- svyquantile(~ingrl, des2, quantiles = 0.5, na.rm = TRUE, ci = FALSE)
+
+# By education level
+edu_mean <- svyby(~ingrl, ~escolaridad, des2, svymean, na.rm = TRUE)
+edu_median <- svyby(~ingrl, ~escolaridad, des2, svyquantile, 
+                    quantiles = 0.5, na.rm = TRUE, ci = FALSE, se = FALSE, keep.var = FALSE)
+
+# Create summary tables
+cat("\n=== OVERALL INCOME STATISTICS ===\n")
+cat(sprintf("Mean Income: $%.2f\n", coef(overall_mean)))
+cat(sprintf("Median Income: $%.2f\n\n", as.numeric(overall_median)))
+
+cat("=== INCOME BY EDUCATION LEVEL ===\n")
+income_summary <- data.frame(
+  Escolaridad = edu_mean$escolaridad,
+  Media = round(edu_mean$ingrl, 2),
+  Mediana = round(as.numeric(edu_median[, 2]), 2)
+)
+print(income_summary, row.names = FALSE)
+cat("\n")
 
 # NOTE: svyquantile output columns are usually named "1".."5" here.
 # If yours are "0.05", "0.25", ... then replace `1` with `0.05`, etc.
@@ -137,7 +164,7 @@ p_base_box <- ggplot(boxstats, aes(x = escolaridad)) +
     plot.caption  = element_text(colour = "grey30", size = 5, lineheight = 1.1, hjust = 0, margin = margin(t = 6, r = 0, b = 0, l = 0)),
     axis.line = element_line(colour = "grey60"),
     legend.position = "none",
-    plot.margin = margin(14, 36, 6, 16),
+    plot.margin = margin(6, 36, 6, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     panel.grid = element_blank()
@@ -148,7 +175,7 @@ p_base_box <- ggplot(boxstats, aes(x = escolaridad)) +
 # ------------------------------------------------------------
 
 p_box <- ggdraw() +
-  draw_plot(p_base_box, x = 0, y = 0, width = 1, height = 1) +
+  draw_plot(p_base_box, x = 0, y = 0, width = 1, height = 0.99) +
   draw_image(
     logo_path,
     x = 0.88, y = 0.20,
