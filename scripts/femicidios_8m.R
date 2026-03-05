@@ -60,18 +60,21 @@ theme_women <-
         axis.line.x = element_line(color = 'black'),
         axis.line.y = element_line(color = 'black'),
         plot.title    = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0),
-        plot.subtitle = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
+        plot.subtitle = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0, margin = margin(b = 8)),
         axis.text = element_text(size = 7.5),
         axis.title.x = element_text(size = 7, margin = margin(t = 8, r = 0, b = 0, l = 0), hjust = 0),
-        axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 0),
-        plot.margin = margin(14, 36, 14, 16),
+        axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 1),
+        plot.margin = margin(14, 36, 4, 16),
         plot.title.position = "plot",
         plot.caption.position = "plot")
 
 # Caption largo para el gráfico 
 
-caption_grafo1<-
-  'Fuente: Fiscalía General del Estado. Femicidios corresponden al delito de femicidio según el art. 141 del Código Orgánico Integral Penal. Las cifras de otras muertes incluyen asesinatos, homicidios intencionales, sicariatos, robos, ejecuciones extrajudiciales, entre otros. Elaboración por los autores.'
+caption_grafo1 <- paste0(
+  'Fuente: Fiscalía General del Estado. Femicidios corresponden al delito de femicidio según el art. 141 del Código Orgánico',
+  '\n',
+  str_wrap('Integral Penal. Las cifras de otras muertes incluyen asesinatos, homicidios intencionales, sicariatos, robos, ejecuciones extrajudiciales, entre otros. Elaboración por los autores.', 121)
+)
 
 # Gráfico
 
@@ -82,10 +85,10 @@ femicidios_col <-
            color = 'black')+
   labs(x = '',
        y = 'Número de muertes',
-       title = 'El gobierno ecuatoriano no conoce con exactitud cuantas mujeres mueren por femicidio cada año',
-       subtitle = 'Los femicidios en Ecuador han caido en los últimos años, pero las mujeres siguen muriendo en contexto delictivo',
+       title = 'El gobierno ecuatoriano no conoce con exactitud\ncuantas mujeres mueren por femicidio cada año',
+       subtitle = 'Los femicidios en Ecuador han caído en los últimos años, pero las mujeres\nsiguen muriendo en contexto delictivo',
        fill = 'Tipo de muerte',
-       caption = str_wrap(caption_grafo1, 160))+
+       caption = caption_grafo1)+
   scale_fill_manual(values = c('Femicidios' = purple_women, 'Otras muertes' = purple_women2),
                     limits = c('Femicidios', 'Otras muertes'))+ # Utilizando el argumento "limits" no tengo que incluir el total en la leyenda 
   scale_y_continuous(breaks = seq(0, 800, 100),
@@ -97,21 +100,24 @@ femicidios_col <-
             size = 2.5,
             fontface = 'bold')+
   theme_women+
-  theme(legend.position = c(0.08,0.9),
-        axis.text.y = element_text(size = 7.5, color = 'black'),
-        axis.text.x = element_text(size = 7.5, color = 'black'),
-        axis.ticks.y = element_line(color = 'black', linewidth = 0.3)) # Mostrar ticks en el eje y
+  theme(legend.position = "bottom",
+        legend.text = element_text(size = 6, color = 'black'),
+        legend.title = element_text(size = 6, color = 'black'),
+        axis.text.y = element_text(size = 6, color = 'black'),
+        axis.text.x = element_text(size = 6, color = 'black'),
+        axis.ticks.y = element_line(color = 'black', linewidth = 0.3),
+        legend.box.spacing = unit(2, 'pt')) # Mostrar ticks en el eje y
 
 # ---- Agregar logo ----
 femicidios_final <- ggdraw() +
   draw_plot(femicidios_col, x = 0, y = 0, width = 1, height = 1) +
   draw_image(
     logo_path,
-    x = 0.90, y = 0.14,
+    x = 0.90, y = 0.07,
     width = 0.10, height = 0.10
   )
 
 femicidios_final
 
 # ---- Guardar ----
-ggsave(out_path, femicidios_final, width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
+ggsave(out_path, femicidios_final, width = 4.5, height = 5.5, units = "in", dpi = 300, device = ragg::agg_png)
