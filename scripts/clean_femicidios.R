@@ -8,7 +8,8 @@
 #   Rscript scripts/clean_femicidios.R
 # ============================================================
 
-library(dplyr)
+source("scripts/packages.R")
+ensure_packages(c("dplyr"))
 
 muertes_fem <- read.csv("data/muertes_fem_fiscalia_2026.csv") %>%
   rename(año = year, cantidad = value, tipo = category) %>%

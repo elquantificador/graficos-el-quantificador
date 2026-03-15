@@ -10,7 +10,8 @@
 # ============================================================
 
 source("scripts/utils.R")
-library(scales)
+source("scripts/packages.R")
+ensure_packages(c("scales", "ragg"))
 
 df <- readRDS("data/processed/san_valentin.rds")
 

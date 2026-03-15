@@ -10,8 +10,8 @@
 # ============================================================
 
 source("scripts/utils.R")
-library(dplyr)
-library(stringr)
+source("scripts/packages.R")
+ensure_packages(c("dplyr", "stringr", "ragg"))
 
 muertes_fem <- readRDS("data/processed/femicidios.rds")
 

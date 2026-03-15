@@ -8,12 +8,8 @@
 #   Rscript scripts/clean_san_valentin.R
 # ============================================================
 
-library(readxl)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(lubridate)
-library(janitor)
+source("scripts/packages.R")
+ensure_packages(c("readxl", "dplyr", "tidyr", "stringr", "lubridate", "janitor"))
 
 # Parsea etiquetas de columna con formato "ene_16", "feb_26", etc.
 parse_month_any <- function(x) {

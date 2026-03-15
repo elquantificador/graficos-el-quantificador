@@ -8,8 +8,8 @@
 #   Rscript scripts/clean_escolaridad_ingreso.R
 # ============================================================
 
-library(dplyr)
-library(haven)
+source("scripts/packages.R")
+ensure_packages(c("dplyr", "haven"))
 
 df_raw <- read_sav("data/enemdu_persona_2026_01.sav")
 

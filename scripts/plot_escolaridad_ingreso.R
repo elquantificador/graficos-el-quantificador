@@ -9,9 +9,8 @@
 # ============================================================
 
 source("scripts/utils.R")
-library(dplyr)
-library(survey)
-library(scales)
+source("scripts/packages.R")
+ensure_packages(c("dplyr", "survey", "scales", "ragg"))
 
 df <- readRDS("data/processed/escolaridad_ingreso.rds")
 

@@ -23,7 +23,20 @@ graficos-el-quantificador/
 ### Requisitos
 
 - R ≥ 4.3
-- Paquetes: `dplyr`, `survey`, `ggplot2`, `scales`, `cowplot`, `haven`, `data.table`, `readxl`, `stringr`, `lubridate`, `ragg`, `janitor`
+
+### Gestión automática de paquetes
+
+Todos los scripts usan `source("scripts/packages.R")` y `ensure_packages(...)` al inicio.
+
+Este helper:
+
+1. Verifica si cada paquete requerido está instalado.
+2. Si no está instalado, lo instala automáticamente desde CRAN.
+3. Carga el paquete silenciosamente.
+
+Por eso, **ya no es necesario instalar manualmente todos los paquetes antes de ejecutar los scripts**.
+
+Si prefieres preinstalarlos de una vez, puedes usar:
 
 ```r
 install.packages(c("dplyr", "survey", "ggplot2", "scales", "cowplot", "haven",

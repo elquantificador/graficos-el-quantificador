@@ -8,7 +8,8 @@
 #   Rscript scripts/clean_evolucion_nini.R
 # ============================================================
 
-library(data.table)
+source("scripts/packages.R")
+ensure_packages(c("data.table"))
 
 vars_interes <- c("p03", "p20", "p21", "p22", "p07", "p09",
                   "area", "p02", "fexp", "estrato", "upm",

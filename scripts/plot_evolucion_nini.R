@@ -10,9 +10,8 @@
 # ============================================================
 
 source("scripts/utils.R")
-library(data.table)
-library(survey)
-library(scales)
+source("scripts/packages.R")
+ensure_packages(c("data.table", "survey", "scales"))
 
 df <- readRDS("data/processed/evolucion_nini.rds")
 

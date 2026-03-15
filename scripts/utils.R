@@ -4,8 +4,8 @@
 # Usar con: source("scripts/utils.R")  (desde la raíz del proyecto)
 # ============================================================
 
-library(ggplot2)
-library(cowplot)
+source("scripts/packages.R")
+ensure_packages(c("ggplot2", "cowplot"))
 
 # ---- Constantes ----
 LOGO_PATH <- "quantificador.png"

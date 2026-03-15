@@ -1,10 +1,5 @@
-library(readxl)
-library(dplyr)
-library(tidyr)
-library(stringr)
-library(ggplot2)
-library(scales)
-library(cowplot)
+source("scripts/packages.R")
+ensure_packages(c("readxl", "dplyr", "tidyr", "stringr", "ggplot2", "scales", "cowplot", "ragg"))
 
 # -----------------------------
 # Files
@@ -107,7 +102,7 @@ p_base <- ggplot(plot_df, aes(x = age_group, y = share, fill = factor(year))) +
     title = "¿Cada vez es más difícil independizarse?",
     subtitle = "La proporción de adultos jóvenes en Ecuador que vive con sus\npadres y abuelos* ha aumentado de 2010 a 2022",
     x = NULL,
-    y = "Porcentaje",
+    y = "Porcentaje de personas que viven con sus padres o abuelos*",
     fill = NULL,
     caption = paste(
       "Fuente: Censo de Población y Vivienda 2010 y 2022, archivo REDATAM.",
