@@ -1,0 +1,17 @@
+# Archivos generados automáticamente
+Rplots.pdf
+figures/*.png
+figures/*.pdf
+
+# Datos procesados (derivados de los datos crudos)
+data/processed/
+
+# Entorno R
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
