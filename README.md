@@ -12,6 +12,7 @@ graficos-el-quantificador/
 │   └── sources/            # Fichas de fuentes de datos, una por gráfico
 ├── figures/                # Figuras generadas (no versionadas)
 ├── scripts/
+│   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
 │   ├── clean_*.R           # Scripts de limpieza y preparación de datos
 │   └── plot_*.R            # Scripts de visualización
@@ -77,6 +78,7 @@ Rscript scripts/plot_escolaridad_ingreso.R
 | Evolución NINI | `clean_evolucion_nini.R` | `plot_evolucion_nini.R` | `data/sources/evolucion_nini.md` |
 | Femicidios 8M | `clean_femicidios.R` | `plot_femicidios.R` | `data/sources/femicidios_8m.md` |
 | IPC San Valentín | `clean_san_valentin.R` | `plot_san_valentin.R` | `data/sources/san_valentin_ipc.md` |
+| Padres e hijos (censo) | `clean_padres_hijos_censo.R` | `plot_padres_hijos_censo.R` | REDATAM Censo 2010 y 2022 |
 
 ## Funciones compartidas (`scripts/utils.R`)
 
