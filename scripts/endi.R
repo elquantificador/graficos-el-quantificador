@@ -63,7 +63,7 @@ p_base <- ggplot(r2_prev_dcronica_etnia, aes(x = fct_reorder(etnia, prev_dcronic
   theme_classic() +
   theme(
     axis.text.y = element_text(colour = "black", size = 8),
-    axis.text.x = element_text(colour = "black", size = 8, angle = 25, margin = margin(t = 10)),
+    axis.text.x = element_text(colour = "black", size = 6, angle = 25, margin = margin(t = 10)),
     axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 1, colour = "black"),
     plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
