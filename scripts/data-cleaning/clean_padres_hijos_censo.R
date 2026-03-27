@@ -11,8 +11,8 @@
 source("scripts/packages.R")
 ensure_packages(c("readxl", "dplyr", "tidyr", "stringr"))
 
-file_2010 <- "data/_tmp_9533641 (1).xlsX"
-file_2022 <- "data/_tmp_8861401.xlsX"
+file_2010 <- "data/censo_padres_hijos_2010.xlsx"
+file_2022 <- "data/censo_padres_hijos_2022.xlsx"
 out_path <- "data/processed/padres_hijos_censo.rds"
 
 age_keep <- c("10 - 19 años", "20 - 29 años", "30 - 39 años", "40 - 49 años")

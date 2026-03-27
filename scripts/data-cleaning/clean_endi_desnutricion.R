@@ -1,5 +1,5 @@
 # ============================================================
-# endi_cleaning.R
+# clean_endi_desnutricion.R
 # Carga y procesa los datos de la ENDI R2 para análisis de
 # prevalencia de desnutrición crónica por etnia.
 # Requiere: data/endi_r2/BDD_ENDI_R2_f1_personas.rds

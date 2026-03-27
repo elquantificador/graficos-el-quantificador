@@ -14,8 +14,8 @@ Portal REDATAM del INEC: <https://redatam.ec/>
 
 Archivos utilizados en este repositorio:
 
-- `data/_tmp_9533641 (1).xlsX` (tabulación censo 2010)
-- `data/_tmp_8861401.xlsX` (tabulación censo 2022)
+- `data/censo_padres_hijos_2010.xlsx` (tabulación censo 2010)
+- `data/censo_padres_hijos_2022.xlsx` (tabulación censo 2022)
 
 ## Estructura usada de los tabulados
 
@@ -48,4 +48,4 @@ Categorías del numerador por año:
 
 - Se excluyen filas vacías, `Total` y valores no numéricos (`-`).
 - La diferencia de etiquetas entre 2010 y 2022 se armoniza en el script de limpieza.
-- Script asociado: `scripts/clean_padres_hijos_censo.R`.
+- Script asociado: `scripts/data-cleaning/clean_padres_hijos_censo.R`.

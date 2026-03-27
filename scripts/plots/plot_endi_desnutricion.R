@@ -1,5 +1,5 @@
 # ============================================================
-# endi_plotting.R
+# plot_endi_desnutricion.R
 # Genera el gráfico de prevalencia de desnutrición crónica
 # por etnia a partir de los datos procesados de la ENDI R2.
 # Requiere: data/processed/endi_r2_prev_dcronica_etnia.rds

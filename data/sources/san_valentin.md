@@ -30,4 +30,4 @@ Inflación = (IPC_ene_2026 − IPC_ene_2016) / IPC_ene_2016
 
 ## Notas
 - Las columnas en el Excel usan abreviaturas de meses en español con año de dos dígitos (e.g., `ene_16`, `ene_26`).
-- La función `parse_month_any()` en `scripts/clean_san_valentin.R` maneja este formato.
+- La función `parse_month_any()` en `scripts/data-cleaning/clean_san_valentin.R` maneja este formato.
