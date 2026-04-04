@@ -71,6 +71,10 @@ add_logo <- function(plot,
                      x = 0.88, y = 0.07,
                      width = 0.10, height = 0.10) {
   ggdraw() +
+    theme(
+      plot.background = element_rect(fill = "white", colour = NA),
+      panel.background = element_rect(fill = "white", colour = NA)
+    ) +
     draw_plot(plot, x = 0, y = 0, width = 1, height = 1) +
     draw_image(logo_path, x = x, y = y, width = width, height = height)
 }
