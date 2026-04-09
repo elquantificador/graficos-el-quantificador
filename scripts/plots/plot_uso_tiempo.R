@@ -57,7 +57,7 @@ p_base <- ggplot(plot_df, aes(x = sexo, y = media, fill = sexo)) +
     subtitle = "Promedio de horas semanales dedicadas a cocinar, por sexo,\nEncuesta Multipropósito 2019",
     x = NULL,
     y = "Horas semanales promedio",
-    caption = "Fuente: INEC, Encuesta Multipropósito 2019. Elaboracion: El Quantificador por Laboratorio LIDE."
+    caption = "Fuente: INEC, Encuesta Multipropósito 2019. Elaboración: El Quantificador por Laboratorio LIDE."
   ) +
   theme_classic() +
   theme(
