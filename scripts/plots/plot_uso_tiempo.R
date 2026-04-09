@@ -56,7 +56,7 @@ p_base <- ggplot(plot_df, aes(x = sexo, y = media, fill = sexo)) +
     title = "La mujer ecuatoriana dedica 4 veces más\ntiempo a cocinar que el hombre",
     subtitle = "Promedio de horas semanales dedicadas a cocinar, por sexo,\nEncuesta Multipropósito 2019",
     x = NULL,
-    y = "Horas semanales",
+    y = "Horas semanales promedio",
     caption = "Fuente: INEC, Encuesta Multipropósito 2019. Elaboracion: El Quantificador por Laboratorio LIDE."
   ) +
   theme_classic() +
