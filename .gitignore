@@ -2,6 +2,7 @@
 Rplots.pdf
 figures/*.png
 figures/*.pdf
+scripts/plots/plot_salario_vs_ipc.R
 
 # Datos procesados (derivados de los datos crudos)
 data/processed/
