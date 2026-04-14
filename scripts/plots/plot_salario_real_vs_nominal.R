@@ -36,12 +36,20 @@ salario_plot <- series$salario_sector_real |>
         "Sueldo privado",
         "Sueldo público"
       )
+    ),
+    line_alpha = dplyr::case_when(
+      serie %in% c("Sueldo privado", "Sueldo público") ~ 0.32,
+      TRUE ~ 0.72
+    ),
+    line_width = dplyr::case_when(
+      serie %in% c("Sueldo privado", "Sueldo público") ~ 0.55,
+      TRUE ~ 0.85
     )
   )
 
 caption_txt <- paste0(
-  "Fuente: INEC, Índice de Precios al Consumidor (IPC),\n",
-  "y Registro Estadístico de Empleo en la Seguridad Social (REESS); Elaboración: El Quantificador de Laboratorio LIDE."
+  "Fuente: INEC, Índice de Precios al Consumidor (IPC) y Registro Estadístico de Empleo en la Seguridad Social\n",
+  "(REESS). Ajuste por inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
 )
 
 p_base <- ggplot2::ggplot(
@@ -50,31 +58,28 @@ p_base <- ggplot2::ggplot(
     x = fecha,
     y = valor,
     color = serie,
-    linetype = serie
+    alpha = line_alpha,
+    linewidth = line_width
   )
 ) +
-  ggplot2::geom_line(linewidth = 1) +
+  ggplot2::geom_line() +
   ggplot2::scale_color_manual(values = c(
     "Sueldo privado ajustado por inflación" = "#ef9f4e",
     "Sueldo público ajustado por inflación" = "#2D7DB3",
-    "Sueldo privado" = "#A9A9A9",
-    "Sueldo público" = "#6F6F6F"
-  )) +
-  ggplot2::scale_linetype_manual(values = c(
-    "Sueldo privado ajustado por inflación" = "solid",
-    "Sueldo público ajustado por inflación" = "solid",
-    "Sueldo privado" = "dotted",
-    "Sueldo público" = "dotted"
+    "Sueldo privado" = "#ef9f4e",
+    "Sueldo público" = "#2D7DB3"
   )) +
   ggplot2::scale_x_date(date_breaks = "1 year", date_labels = "%Y") +
+  ggplot2::scale_alpha_identity() +
+  ggplot2::scale_linewidth_identity() +
   ggplot2::scale_y_continuous(
-    labels = scales::label_number(prefix = "$", accuracy = 1),
+    labels = scales::label_number(big.mark = ".", decimal.mark = ",", prefix = "$", accuracy = 1),
     breaks = scales::breaks_width(100),
     expand = ggplot2::expansion(mult = c(0.02, 0.08))
   ) +
   ggplot2::labs(
     title = "Los empleados públicos ganan más,\npero también pierden más por la inflación",
-    subtitle = "Comparación mensual de sueldos reales y nominales\nen empleo público y privado, desde 2019.",
+    subtitle = "Comparación de sueldos promedio públicos y privados,\ncon ajustes para la inflación, 2019–2026",
     x = "",
     y = "Sueldo promedio (USD)",
     color = "",
@@ -82,6 +87,8 @@ p_base <- ggplot2::ggplot(
   ) +
   theme_quantificador() +
   ggplot2::theme(
+    plot.subtitle = ggplot2::element_text(size = 9.5, lineheight = 1.1, hjust = 0),
+    plot.caption = ggplot2::element_text(size = 5.5, lineheight = 1.05, hjust = 0, margin = ggplot2::margin(t = 3)),
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
     axis.title.y = ggplot2::element_text(
       hjust = 0,
@@ -92,20 +99,19 @@ p_base <- ggplot2::ggplot(
     legend.justification = "left",
     legend.direction = "horizontal",
     legend.byrow = TRUE,
-    legend.text = ggplot2::element_text(size = 6.5),
-    legend.key.width = grid::unit(3, "mm"),
-    legend.key.height = grid::unit(3, "mm"),
+    legend.text = ggplot2::element_text(size = 6.2, colour = "grey20"),
+    legend.key.width = grid::unit(4, "mm"),
+    legend.key.height = grid::unit(4, "mm"),
     legend.spacing.x = grid::unit(3, "mm"),
-    legend.box.margin = ggplot2::margin(-10, 0, 0, -52),
-    plot.margin = ggplot2::margin(12, 32, 6, 16)
+    legend.box.margin = ggplot2::margin(-22, 0, 4, -52),
+    plot.margin = ggplot2::margin(12, 32, 4, 16)
   ) +
   ggplot2::guides(
-    color = ggplot2::guide_legend(nrow = 2, byrow = TRUE),
-    linetype = "none"
+    color = ggplot2::guide_legend(nrow = 2, byrow = TRUE, override.aes = list(linewidth = 1.1, alpha = 1))
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.90, y = 0.22, width = 0.09, height = 0.09)
+p_final <- add_logo(p_base, x = 0.90, y = 0.24, width = 0.09, height = 0.09)
 ggplot2::ggsave(
   "figures/salario_real_vs_nominal.png",
   p_final,
