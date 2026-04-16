@@ -1,4 +1,4 @@
-# Salario promedio e IPC nacional
+# Salarios públicos y privados e IPC nacional
 
 ## Fuente principal
 
@@ -13,12 +13,5 @@
 ## Nota metodológica
 
 - El script `clean_salario_ipc.R` transforma ambas series a formato largo mensual.
-- Para sueldo promedio, toma la fila `Total sueldo corriente medio` de la hoja `4_2_3`.
-- Para el gráfico de sueldo real, el sueldo nominal se deflacta usando el IPC general mensual.
-- Para el gráfico de costo de vida, se calcula la variación interanual de:
-- IPC general
-- alimentos y bebidas no alcohólicas
-- alquileres efectivos del alojamiento
-- transporte
-- combustibles y lubricantes para equipo de transporte personal
-- sueldo promedio nominal
+- Para salarios por sector, toma las filas `1_Privado` y `2_Público` de la hoja `4_2_3`.
+- Para el gráfico de sueldo real vs. nominal, el sueldo nominal se deflacta usando el IPC general mensual.

@@ -63,19 +63,22 @@ label_df <- salario_plot |>
       serie == "Sueldo privado" ~ "Salario privado\nnominal",
       serie == "Sueldo público" ~ "Salario público\nnominal"
     ),
-    fecha_label = fecha - 70,
+    fecha_label = fecha,
+    fecha_label = dplyr::case_when(
+      serie == "Sueldo privado ajustado por inflación" ~ fecha + 20,
+      TRUE ~ fecha
+    ),
     valor_label = dplyr::case_when(
-      serie == "Sueldo privado ajustado por inflación" ~ valor - 55,
-      serie == "Sueldo público ajustado por inflación" ~ valor - 41,
+      serie == "Sueldo privado ajustado por inflación" ~ valor - 12,
+      serie == "Sueldo público ajustado por inflación" ~ valor - 12,
       serie == "Sueldo privado" ~ valor + 22,
-      serie == "Sueldo público" ~ valor - 37
+      serie == "Sueldo público" ~ valor - 14
     )
   )
 
 caption_txt <- paste0(
-  "Fuente: INEC, Índice de Precios al Consumidor (IPC) y Registro Estadístico de Empleo en la\n",
-  "Seguridad Social (REESS). Se ajusta por inflación utilizando la serie del IPC general.\n",
-  "Elaboración: El Quantificador de Laboratorio LIDE."
+  "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por\n",
+  "inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
 )
 
 p_base <- ggplot2::ggplot(
@@ -93,10 +96,10 @@ p_base <- ggplot2::ggplot(
   ggplot2::geom_text(
     data = label_df,
     ggplot2::aes(x = fecha_label, y = valor_label, label = label),
-    hjust = 1,
+    hjust = -0.03,
     vjust = 0.5,
     size = 2.2,
-    fontface = "plain",
+    fontface = "bold",
     lineheight = 1,
     color = "black",
     show.legend = FALSE
@@ -110,7 +113,7 @@ p_base <- ggplot2::ggplot(
   ggplot2::scale_x_date(
     date_breaks = "1 year",
     date_labels = "%Y",
-    expand = ggplot2::expansion(mult = c(0.02, 0.12))
+    expand = ggplot2::expansion(mult = c(0.01, 0.01))
   ) +
   ggplot2::scale_alpha_identity() +
   ggplot2::scale_linewidth_identity() +
@@ -127,10 +130,11 @@ p_base <- ggplot2::ggplot(
     y = "Salario promedio (USD)",
     caption = caption_txt
   ) +
+  ggplot2::coord_cartesian(clip = "off") +
   theme_quantificador() +
   ggplot2::theme(
     plot.subtitle = ggplot2::element_text(size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = ggplot2::element_text(size = 5, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 6)),
+    plot.caption = ggplot2::element_text(size = 6, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 2)),
     axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
     axis.title.y = ggplot2::element_text(
       colour = "grey20",
@@ -138,11 +142,11 @@ p_base <- ggplot2::ggplot(
       vjust = 0.5,
       margin = ggplot2::margin(r = 10, b = 8)
     ),
-    plot.margin = ggplot2::margin(12, 32, 4, 16)
+    plot.margin = ggplot2::margin(10, 78, 0, 12)
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.90, y = 0.12, width = 0.09, height = 0.09)
+p_final <- add_logo(p_base, x = 0.76, y = 0.11, width = 0.075, height = 0.075)
 ggplot2::ggsave(
   "figures/salario_real_vs_nominal.png",
   p_final,
