@@ -6,7 +6,6 @@
 #   - data/processed/exportaciones_eeuu_2024_2025.rds
 # Guarda:
 #   - figures/top10_productos_eeuu_2024_2025.png
-#   - figures/top10_productos_eeuu_2024_2025.pdf
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_exportaciones_eeuu.R
@@ -145,13 +144,4 @@ ggplot2::ggsave(
   device = ragg::agg_png
 )
 
-ggplot2::ggsave(
-  "figures/top10_productos_eeuu_2024_2025.pdf",
-  plot = p_final,
-  width = 4,
-  height = 5,
-  units = "in"
-)
-
 message("Guardado: figures/top10_productos_eeuu_2024_2025.png")
-message("Guardado: figures/top10_productos_eeuu_2024_2025.pdf")
