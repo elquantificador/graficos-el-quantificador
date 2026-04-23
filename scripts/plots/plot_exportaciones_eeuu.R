@@ -73,6 +73,16 @@ top10_long <- top10 |>
     etiqueta = formato_miles(fob_millones)
   )
 
+caption_text <- paste(
+  "Fuente: Banco Central del Ecuador (BCE), Estadísticas de Comercio Exterior de Bienes.",
+  "Nota: FOB significa Free On Board y corresponde al valor de la mercancía puesta a bordo",
+  "en el puerto de salida, sin incluir flete ni seguro internacional.",
+  "*El BCE reporta que, según los registros de Petroecuador y firmas privadas, la mayor parte del crudo",
+  "se declara con destino final Panamá a partir de 2025.",
+  "Elaboración: El Quantificador de Laboratorio LIDE."
+) |>
+  stringr::str_wrap(width = 95)
+
 p_base <- ggplot2::ggplot(
   top10_long,
   ggplot2::aes(x = producto_agrupado, y = fob_millones, fill = anio)
@@ -97,19 +107,11 @@ p_base <- ggplot2::ggplot(
     expand = ggplot2::expansion(mult = c(0, 0.18))
   ) +
   ggplot2::labs(
-    title = "Camarón y petróleo lideran las exportaciones\nde Ecuador hacia Estados Unidos",
-    subtitle = "Top 10 productos según valor FOB acumulado en 2024 y 2025.",
+    title = "El camarón y el petróleo son los productos\nmás exportados a Estados Unidos",
+    subtitle = "Top 10 productos exportados a E.E.U.U., 2024-2025",
     x = NULL,
     y = "Valor FOB (millones de USD)",
-    caption = paste0(
-      "Fuente: Banco Central del Ecuador (BCE), Estadísticas de Comercio Exterior de Bienes.\n",
-      "Nota: FOB significa Free On Board y corresponde al valor de la mercancía puesta a bordo\n",
-      "en el puerto de salida, sin incluir flete ni seguro internacional.\n",
-      "* BCE reporta que, según los registros de Petroecuador y firmas privadas, la mayor parte del crudo\n",
-      "se declara con destino final Panamá. La EIA de Estados Unidos reporta una desaceleración más moderada\n",
-      "de las importaciones estadounidenses de productos petroleros ecuatorianos.\n",
-      "Elaboración: El Quantificador de Laboratorio LIDE."
-    )
+    caption = caption_text
   ) +
   theme_quantificador() +
   ggplot2::theme(
@@ -120,7 +122,7 @@ p_base <- ggplot2::ggplot(
     legend.background = ggplot2::element_blank(),
     legend.box.background = ggplot2::element_blank(),
     plot.subtitle = ggplot2::element_text(size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = ggplot2::element_text(size = 5.5, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 6)),
+    plot.caption = ggplot2::element_text(size = 5.5, lineheight = 1.15, hjust = 0, margin = ggplot2::margin(t = 8)),
     axis.title.y = ggplot2::element_text(
       colour = "grey20",
       hjust = 0.5,
@@ -133,7 +135,7 @@ p_base <- ggplot2::ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.14, width = 0.09, height = 0.09)
+p_final <- add_logo(p_base, x = 0.88, y = 0.18, width = 0.09, height = 0.09)
 ggplot2::ggsave(
   "figures/top10_productos_eeuu_2024_2025.png",
   plot = p_final,
