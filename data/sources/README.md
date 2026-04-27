@@ -15,6 +15,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENEMDU mensual enero 2026 | `enemdu/enemdu_persona_2026_01.sav` | Usado en `clean_escolaridad_ingreso.R` | `escolaridad_ingreso.md` |
 | ENEMDU trimestral 2021–2025 | `enemdu/evolucion/*.csv` | Usado en `clean_evolucion_nini.R` | `evolucion_nini.md` |
 | ENDI R2 | `endi_r2/BDD_ENDI_R2_f1_personas.rds` | Usado en `clean_endi_desnutricion.R` | `endi_desnutricion.md` |
+| ENDI R2 anemia por quintil | `endi_r2/BDD_ENDI_R2_f1_personas.rds` | Usado en `clean_endi_anemia_quintil.R` | `endi_anemia_quintil.md` |
 | Uso del tiempo 2019 | `uso_tiempo/201912_multibdd_*.sav.csv` | Usado en `clean_uso_tiempo.R` | `uso_tiempo.md` |
 | Censo 2010 y 2022 | `censo/censo_padres_hijos_*.xlsx` | Usado en `clean_padres_hijos_censo.R` | `padres_hijos_censo.md` |
 | IPC enero 2026 | `ipc/ipc_ind_nac_reg_ciud_01_2026.xlsx` | Usado en `clean_san_valentin.R` | `san_valentin.md` |
