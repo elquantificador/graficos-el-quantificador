@@ -45,7 +45,7 @@ caption_txt <- stringr::str_wrap(
 )
 
 p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label), y = prev_anemia)) +
-  geom_col(fill = "#EF9F4E", width = 0.65) +
+  geom_col(fill = "#EF9F4E", width = 0.56) +
   geom_text(
     aes(label = percent(prev_anemia, accuracy = 0.1)),
     vjust = -0.2,
@@ -53,8 +53,8 @@ p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label),
   ) +
   scale_y_continuous(
     labels = percent_format(accuracy = 1),
-    limits = c(0, 0.44),
-    breaks = seq(0, 0.40, 0.10),
+    limits = c(0, 0.55),
+    breaks = seq(0, 0.50, 0.10),
     expand = expansion(mult = c(0, 0.02))
   ) +
   labs(
@@ -67,14 +67,14 @@ p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label),
   theme_classic() +
   theme(
     axis.text.y = element_text(colour = "black", size = 8),
-    axis.text.x = element_text(colour = "black", size = 7, margin = margin(t = 8)),
+    axis.text.x = element_text(colour = "black", size = 7, margin = margin(t = 12)),
     axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 0.5, colour = "black"),
     plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 4)),
+    plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     axis.ticks.x = element_blank(),
     axis.line = element_line(colour = "black"),
-    plot.margin = margin(6, 30, 2, 16),
+    plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     panel.grid = element_blank()
