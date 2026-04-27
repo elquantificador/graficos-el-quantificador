@@ -2,7 +2,7 @@
 # clean_endi_desnutricion.R
 # Carga y procesa los datos de la ENDI R2 para análisis de
 # prevalencia de desnutrición crónica por etnia.
-# Requiere: data/endi_r2/BDD_ENDI_R2_f1_personas.rds
+# Requiere: data/raw/endi_r2/BDD_ENDI_R2_f1_personas.rds
 # Guarda:   data/processed/endi_r2_prev_dcronica_etnia.rds
 # ============================================================
 
@@ -12,7 +12,7 @@ library(survey)
 library(srvyr)
 
 # Ruta
-path_rawdata_r2 <- "data/endi_r2"
+path_rawdata_r2 <- "data/raw/endi_r2"
 
 # Cargar datos
 endi_r2_personas <- readRDS(file.path(path_rawdata_r2, "BDD_ENDI_R2_f1_personas.rds"))

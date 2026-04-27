@@ -6,7 +6,7 @@
 # Guarda:   figures/valentines_ipc_ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plot_san_valentin.R
+#   Rscript scripts/plots/plot_san_valentin.R
 # ============================================================
 
 source("scripts/utils.R")

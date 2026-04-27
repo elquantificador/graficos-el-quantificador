@@ -6,7 +6,7 @@
 # Guarda:   figures/femicidios_8m.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plot_femicidios.R
+#   Rscript scripts/plots/plot_femicidios.R
 # ============================================================
 
 source("scripts/utils.R")

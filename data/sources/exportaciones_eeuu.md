@@ -6,7 +6,7 @@
 
 ## Archivo usado
 
-- `data/05. Export. por Producto Principal y País.xlsx` (`Columnas`)
+- `data/raw/exportaciones/05. Export. por Producto Principal y País.xlsx` (`Columnas`)
 
 ## Nota metodológica
 

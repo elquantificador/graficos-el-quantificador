@@ -3,7 +3,7 @@
 # Prepara la tabla de exportaciones de Ecuador hacia Estados
 # Unidos para el gráfico comparativo 2024 vs 2025.
 # Requiere:
-#   - data/05. Export. por Producto Principal y País.xlsx
+#   - data/raw/exportaciones/05. Export. por Producto Principal y País.xlsx
 # Guarda:
 #   - data/processed/exportaciones_eeuu_2024_2025.rds
 # ============================================================
@@ -15,7 +15,7 @@ source("scripts/packages.R")
 ensure_packages(c("readxl", "dplyr", "stringr", "tidyr"))
 
 raw_data <- readxl::read_excel(
-  "data/05. Export. por Producto Principal y País.xlsx",
+  "data/raw/exportaciones/05. Export. por Producto Principal y País.xlsx",
   skip = 5
 )
 

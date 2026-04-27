@@ -7,8 +7,8 @@
 
 ## Archivos usados
 
-- `data/REESS Indicadores Laborales_Empleo_01_2026.xlsx` (`4_2_3`)
-- `data/ipc_ind_nac_reg_ciud_03_2026.xlsx` (`1. NACIONAL`)
+- `data/raw/reess/REESS Indicadores Laborales_Empleo_01_2026.xlsx` (`4_2_3`)
+- `data/raw/ipc/ipc_ind_nac_reg_ciud_03_2026.xlsx` (`1. NACIONAL`)
 
 ## Nota metodológica
 

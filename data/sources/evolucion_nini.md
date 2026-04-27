@@ -10,7 +10,7 @@ Instituto Nacional de Estadística y Censos (INEC), Ecuador
 ## Acceso
 Portal del INEC: https://www.ecuadorencifras.gob.ec/empleo-encuesta-nacional-de-empleo-desempleo-y-subempleo-enemdu/
 
-Archivos utilizados: `data/evolucion/enemdu_persona_YYYY_Q_trimestre.csv`
+Archivos utilizados: `data/raw/enemdu/evolucion/enemdu_persona_YYYY_*_trimestre.csv`
 
 ## Variables utilizadas
 

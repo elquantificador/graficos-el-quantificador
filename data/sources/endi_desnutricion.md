@@ -10,7 +10,7 @@ Instituto Nacional de Estadística y Censos (INEC), Ecuador
 ## Acceso
 Portal del INEC: https://www.ecuadorencifras.gob.ec/encuesta-nacional-sobre-desnutricion-infantil/
 
-Archivo utilizado: `data/endi_r2/BDD_ENDI_R2_f1_personas.rds` (formato RDS, preprocesado desde la base oficial)
+Archivo utilizado: `data/raw/endi_r2/BDD_ENDI_R2_f1_personas.rds` (formato RDS, preprocesado desde la base oficial)
 
 ## Variables utilizadas
 

@@ -7,15 +7,15 @@ Repositorio para la reproducción y publicación de los gráficos de El Quantifi
 ```
 graficos-el-quantificador/
 ├── data/
-│   ├── evolucion/          # Series trimestrales ENEMDU (CSV)
+│   ├── raw/                # Datos crudos organizados por tema/fuente
 │   ├── processed/          # Datos procesados generados por los scripts de limpieza (no versionados)
-│   └── sources/            # Fichas de fuentes de datos, una por gráfico
+│   └── sources/            # Inventario y fichas de fuentes de datos
 ├── figures/                # Figuras generadas (no versionadas)
 ├── scripts/
 │   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
-│   ├── clean_*.R           # Scripts de limpieza y preparación de datos
-│   └── plot_*.R            # Scripts de visualización
+│   ├── data-cleaning/      # Scripts de limpieza y preparación de datos
+│   └── plots/              # Scripts de visualización
 └── quantificador.png       # Logo
 ```
 
@@ -53,8 +53,8 @@ En RStudio, abre el proyecto y verifica que el directorio de trabajo sea la raí
 En línea de comandos:
 ```bash
 cd /ruta/al/repositorio
-Rscript scripts/clean_evolucion_nini.R
-Rscript scripts/plot_evolucion_nini.R
+Rscript scripts/data-cleaning/clean_evolucion_nini.R
+Rscript scripts/plots/plot_evolucion_nini.R
 ```
 
 ### Flujo de trabajo
@@ -66,19 +66,19 @@ Cada gráfico usa dos scripts:
 
 Ejemplo para reproducir el gráfico de ingresos por escolaridad:
 ```bash
-Rscript scripts/clean_escolaridad_ingreso.R
-Rscript scripts/plot_escolaridad_ingreso.R
+Rscript scripts/data-cleaning/clean_escolaridad_ingreso.R
+Rscript scripts/plots/plot_escolaridad_ingreso.R
 ```
 
 ## Gráficos disponibles
 
 | Gráfico | Clean | Plot | Fuente |
 |---|---|---|---|
-| Ingresos por escolaridad | `clean_escolaridad_ingreso.R` | `plot_escolaridad_ingreso.R` | `data/sources/escolaridad_ingreso.md` |
-| Evolución NINI | `clean_evolucion_nini.R` | `plot_evolucion_nini.R` | `data/sources/evolucion_nini.md` |
-| Femicidios 8M | `clean_femicidios.R` | `plot_femicidios.R` | `data/sources/femicidios_8m.md` |
-| IPC San Valentín | `clean_san_valentin.R` | `plot_san_valentin.R` | `data/sources/san_valentin_ipc.md` |
-| Padres e hijos (censo) | `clean_padres_hijos_censo.R` | `plot_padres_hijos_censo.R` | `data/sources/padres_hijos_censo.md` |
+| Ingresos por escolaridad | `scripts/data-cleaning/clean_escolaridad_ingreso.R` | `scripts/plots/plot_escolaridad_ingreso.R` | `data/sources/escolaridad_ingreso.md` |
+| Evolución NINI | `scripts/data-cleaning/clean_evolucion_nini.R` | `scripts/plots/plot_evolucion_nini.R` | `data/sources/evolucion_nini.md` |
+| Femicidios 8M | `scripts/data-cleaning/clean_femicidios.R` | `scripts/plots/plot_femicidios.R` | `data/sources/femicidios.md` |
+| IPC San Valentín | `scripts/data-cleaning/clean_san_valentin.R` | `scripts/plots/plot_san_valentin.R` | `data/sources/san_valentin.md` |
+| Padres e hijos (censo) | `scripts/data-cleaning/clean_padres_hijos_censo.R` | `scripts/plots/plot_padres_hijos_censo.R` | `data/sources/padres_hijos_censo.md` |
 
 ## Funciones compartidas (`scripts/utils.R`)
 
@@ -99,6 +99,6 @@ ggsave("figures/mi_grafico.png", p_final, ...)
 
 ## Notas sobre los datos
 
-Los archivos de datos crudos (`.sav`, `.xlsx`, `.csv` de la Fiscalía) deben obtenerse directamente de las fuentes indicadas en `data/sources/`. No se versionan en git por su tamaño.
+Los archivos de datos crudos (`.sav`, `.xlsx`, `.csv`, `.xls`, `.rds`) viven bajo `data/raw/`, organizados por tema o fuente. El inventario y las fichas metodológicas están en `data/sources/`, empezando por `data/sources/README.md`.
 
 Los archivos procesados (`data/processed/`) tampoco se versionan: son derivados de los datos crudos y pueden regenerarse en cualquier momento ejecutando el script `clean_*.R` correspondiente.

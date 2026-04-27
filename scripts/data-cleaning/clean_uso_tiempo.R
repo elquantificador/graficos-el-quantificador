@@ -11,8 +11,8 @@
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "forcats", "readr", "tibble"))
 
-uso_tiempo_2019_path <- "data/201912_multibdd_uso_del_tiempo.sav.csv"
-personas_2019_path <- "data/201912_multibdd_personas.sav.csv"
+uso_tiempo_2019_path <- "data/raw/uso_tiempo/201912_multibdd_uso_del_tiempo.sav.csv"
+personas_2019_path <- "data/raw/uso_tiempo/201912_multibdd_personas.sav.csv"
 output_path <- "data/processed/S51P2_UT2019_clean.rds"
 
 if (!file.exists(uso_tiempo_2019_path) || !file.exists(personas_2019_path)) {

@@ -12,7 +12,7 @@ Sitio oficial: https://www.ef.com/wwen/epi/
 
 Archivo PDF fuente: `data/sources/ef-epi-fact-sheet-ecuador-english.pdf`
 
-Archivo utilizado: `data/ef_epi_ecuador_extracted.xlsx`, hoja `Job_Functions_Exact`
+Archivo utilizado: `data/raw/ef_epi/ef_epi_ecuador_extracted.xlsx`, hoja `Job_Functions_Exact`
 
 ## Variables utilizadas
 

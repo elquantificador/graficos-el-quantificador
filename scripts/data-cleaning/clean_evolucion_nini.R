@@ -5,7 +5,7 @@
 # Guarda: data/processed/evolucion_nini.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/clean_evolucion_nini.R
+#   Rscript scripts/data-cleaning/clean_evolucion_nini.R
 # ============================================================
 
 source("scripts/packages.R")
@@ -15,8 +15,8 @@ vars_interes <- c("p03", "p20", "p21", "p22", "p07", "p09",
                   "area", "p02", "fexp", "estrato", "upm",
                   "condact", "empleo", "periodo")
 
-archivos <- list.files("data/evolucion", pattern = "\\.csv$", full.names = TRUE)
-if (length(archivos) == 0) stop("No se encontraron archivos CSV en data/evolucion/")
+archivos <- list.files("data/raw/enemdu/evolucion", pattern = "\\.csv$", full.names = TRUE)
+if (length(archivos) == 0) stop("No se encontraron archivos CSV en data/raw/enemdu/evolucion/")
 
 enemdu <- rbindlist(
   lapply(archivos, function(f) fread(f, select = vars_interes)),

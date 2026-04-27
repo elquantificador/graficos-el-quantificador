@@ -5,14 +5,14 @@
 # Guarda: data/processed/padres_hijos_censo.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/clean_padres_hijos_censo.R
+#   Rscript scripts/data-cleaning/clean_padres_hijos_censo.R
 # ============================================================
 
 source("scripts/packages.R")
 ensure_packages(c("readxl", "dplyr", "tidyr", "stringr"))
 
-file_2010 <- "data/censo_padres_hijos_2010.xlsx"
-file_2022 <- "data/censo_padres_hijos_2022.xlsx"
+file_2010 <- "data/raw/censo/censo_padres_hijos_2010.xlsx"
+file_2022 <- "data/raw/censo/censo_padres_hijos_2022.xlsx"
 out_path <- "data/processed/padres_hijos_censo.rds"
 
 age_keep <- c("10 - 19 años", "20 - 29 años", "30 - 39 años", "40 - 49 años")

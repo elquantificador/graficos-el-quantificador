@@ -2,7 +2,7 @@
 # clean_ef_epi_job.R
 # Lee los datos de EF EPI Ecuador (2025) y prepara la tabla
 # de puntajes por función laboral para el gráfico.
-# Requiere: data/ef_epi_ecuador_extracted.xlsx
+# Requiere: data/raw/ef_epi/ef_epi_ecuador_extracted.xlsx
 # Guarda:   data/processed/ef_epi_job.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
@@ -12,7 +12,7 @@
 source("scripts/packages.R")
 ensure_packages(c("readxl", "dplyr"))
 
-df <- read_excel("data/ef_epi_ecuador_extracted.xlsx", sheet = "Job_Functions_Exact") |>
+df <- read_excel("data/raw/ef_epi/ef_epi_ecuador_extracted.xlsx", sheet = "Job_Functions_Exact") |>
   select(job_function, score, proficiency_band) |>
   mutate(
     proficiency_band = factor(

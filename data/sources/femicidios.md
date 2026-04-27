@@ -8,7 +8,7 @@ Datos anuales, 2014–2025
 Fiscalía General del Estado, Ecuador
 
 ## Acceso
-Archivo utilizado: `data/muertes_fem_fiscalia_2026.csv`
+Archivo utilizado: `data/raw/fiscalia/muertes_fem_fiscalia_2026.csv`
 
 Los datos fueron recopilados de los informes públicos de la Fiscalía General del Estado.
 

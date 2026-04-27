@@ -5,13 +5,13 @@
 # Guarda: data/processed/escolaridad_ingreso.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/clean_escolaridad_ingreso.R
+#   Rscript scripts/data-cleaning/clean_escolaridad_ingreso.R
 # ============================================================
 
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "haven"))
 
-df_raw <- read_sav("data/enemdu_persona_2026_01.sav")
+df_raw <- read_sav("data/raw/enemdu/enemdu_persona_2026_01.sav")
 
 df_clean <- df_raw %>%
   mutate(

@@ -10,7 +10,7 @@ Instituto Nacional de Estadística y Censos (INEC), Ecuador
 ## Acceso
 Portal del INEC: https://www.ecuadorencifras.gob.ec/empleo-encuesta-nacional-de-empleo-desempleo-y-subempleo-enemdu/
 
-Archivo utilizado: `data/enemdu_persona_2026_01.sav` (formato SPSS)
+Archivo utilizado: `data/raw/enemdu/enemdu_persona_2026_01.sav` (formato SPSS)
 
 ## Variables utilizadas
 

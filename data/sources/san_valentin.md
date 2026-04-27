@@ -10,7 +10,7 @@ Instituto Nacional de Estadística y Censos (INEC), Ecuador
 ## Acceso
 Portal del INEC: https://www.ecuadorencifras.gob.ec/indice-de-precios-al-consumidor/
 
-Archivo utilizado: `data/ipc_ind_nac_reg_ciud_01_2026.xlsx` (segunda hoja)
+Archivo utilizado: `data/raw/ipc/ipc_ind_nac_reg_ciud_01_2026.xlsx` (segunda hoja)
 
 ## Categorías CCIF utilizadas
 

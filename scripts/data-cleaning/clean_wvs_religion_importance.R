@@ -2,7 +2,7 @@
 # clean_wvs_religion_importance.R
 # Lee la tabulación del World Values Survey sobre la importancia
 # de la religión y prepara una tabla larga para graficar.
-# Requiere: data/wvs_importance_of_religion_in_life.xls
+# Requiere: data/raw/wvs/wvs_importance_of_religion_in_life.xls
 # Guarda:   data/processed/wvs_religion_importance.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
@@ -39,7 +39,7 @@ project_root <- normalizePath(file.path(dirname(script_path), "..", ".."), winsl
 source(file.path(project_root, "scripts", "packages.R"))
 ensure_packages(c("readxl", "dplyr", "tidyr", "stringr"))
 
-file_path <- file.path(project_root, "data", "wvs_importance_of_religion_in_life.xls")
+file_path <- file.path(project_root, "data", "raw", "wvs", "wvs_importance_of_religion_in_life.xls")
 out_path <- file.path(project_root, "data", "processed", "wvs_religion_importance.rds")
 
 response_levels <- c(

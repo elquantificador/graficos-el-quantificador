@@ -5,7 +5,7 @@
 # Guarda:   figures/escolaridad_ingreso.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plot_escolaridad_ingreso.R
+#   Rscript scripts/plots/plot_escolaridad_ingreso.R
 # ============================================================
 
 source("scripts/utils.R")

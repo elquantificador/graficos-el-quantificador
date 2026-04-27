@@ -14,8 +14,8 @@ Portal REDATAM del INEC: <https://redatam.ec/>
 
 Archivos utilizados en este repositorio:
 
-- `data/censo_padres_hijos_2010.xlsx` (tabulación censo 2010)
-- `data/censo_padres_hijos_2022.xlsx` (tabulación censo 2022)
+- `data/raw/censo/censo_padres_hijos_2010.xlsx` (tabulación censo 2010)
+- `data/raw/censo/censo_padres_hijos_2022.xlsx` (tabulación censo 2022)
 
 ## Estructura usada de los tabulados
 

@@ -6,7 +6,7 @@
 # Guarda:   figures/cohab_parents_ecuador_instagram.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plot_padres_hijos_censo.R
+#   Rscript scripts/plots/plot_padres_hijos_censo.R
 # ============================================================
 
 source("scripts/utils.R")

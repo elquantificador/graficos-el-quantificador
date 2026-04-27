@@ -4,8 +4,8 @@
 # y prepara la tabla procesada para el gráfico de sueldo
 # público/privado, real vs. nominal.
 # Requiere:
-#   - data/REESS Indicadores Laborales_Empleo_01_2026.xlsx (hoja 4_2_3)
-#   - data/ipc_ind_nac_reg_ciud_03_2026.xlsx (hoja 1. NACIONAL)
+#   - data/raw/reess/REESS Indicadores Laborales_Empleo_01_2026.xlsx (hoja 4_2_3)
+#   - data/raw/ipc/ipc_ind_nac_reg_ciud_03_2026.xlsx (hoja 1. NACIONAL)
 # Guarda:
 #   - data/processed/salario_ipc_series.rds
 # ============================================================
@@ -37,7 +37,7 @@ repair_blank_names <- function(df) {
 }
 
 salarios_sheet <- readxl::read_excel(
-  "data/REESS Indicadores Laborales_Empleo_01_2026.xlsx",
+  "data/raw/reess/REESS Indicadores Laborales_Empleo_01_2026.xlsx",
   sheet = "4_2_3",
   col_names = FALSE,
   .name_repair = "minimal"
@@ -57,7 +57,7 @@ salarios_raw <- salarios_sheet |>
   repair_blank_names()
 
 ipc_sheet <- readxl::read_excel(
-  "data/ipc_ind_nac_reg_ciud_03_2026.xlsx",
+  "data/raw/ipc/ipc_ind_nac_reg_ciud_03_2026.xlsx",
   sheet = "1. NACIONAL",
   col_names = FALSE,
   .name_repair = "minimal"

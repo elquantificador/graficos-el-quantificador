@@ -5,7 +5,7 @@
 # Guarda: data/processed/san_valentin.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/clean_san_valentin.R
+#   Rscript scripts/data-cleaning/clean_san_valentin.R
 # ============================================================
 
 source("scripts/packages.R")
@@ -27,8 +27,8 @@ parse_month_any <- function(x) {
   out
 }
 
-sheets <- excel_sheets("data/ipc_ind_nac_reg_ciud_01_2026.xlsx")
-raw <- read_xlsx("data/ipc_ind_nac_reg_ciud_01_2026.xlsx", sheet = sheets[2], skip = 4) |>
+sheets <- excel_sheets("data/raw/ipc/ipc_ind_nac_reg_ciud_01_2026.xlsx")
+raw <- read_xlsx("data/raw/ipc/ipc_ind_nac_reg_ciud_01_2026.xlsx", sheet = sheets[2], skip = 4) |>
   clean_names()
 
 df <- raw |>

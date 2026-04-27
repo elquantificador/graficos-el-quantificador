@@ -6,7 +6,7 @@
 # Guarda:   figures/evolucion_nini.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plot_evolucion_nini.R
+#   Rscript scripts/plots/plot_evolucion_nini.R
 # ============================================================
 
 source("scripts/utils.R")

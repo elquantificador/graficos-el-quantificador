@@ -5,13 +5,13 @@
 # Guarda: data/processed/femicidios.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/clean_femicidios.R
+#   Rscript scripts/data-cleaning/clean_femicidios.R
 # ============================================================
 
 source("scripts/packages.R")
 ensure_packages(c("dplyr"))
 
-muertes_fem <- read.csv("data/muertes_fem_fiscalia_2026.csv") %>%
+muertes_fem <- read.csv("data/raw/fiscalia/muertes_fem_fiscalia_2026.csv") %>%
   rename(año = year, cantidad = value, tipo = category) %>%
   filter(año < 2026) %>%
   mutate(tipo = case_when(
