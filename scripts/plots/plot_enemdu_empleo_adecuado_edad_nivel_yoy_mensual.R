@@ -23,7 +23,7 @@ title_txt <- stringr::str_wrap(
 
 subtitle_txt <- stringr::str_wrap(
   "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
-  width = 56
+  width = 50
 )
 
 caption_txt <- stringr::str_wrap(
@@ -33,7 +33,7 @@ caption_txt <- stringr::str_wrap(
     "La serie muestra la variación porcentual del nivel de empleo adecuado frente al mismo mes del año previo.",
     "El grupo 25-44 agrega a personas de 25 a 34 y de 35 a 44 años."
   ),
-  width = 105
+  width = 85
 )
 
 palette <- c(
@@ -58,7 +58,7 @@ label_df <- plot_df %>%
     x_label = fecha + 16,
     y_label = case_when(
       grupo_edad == "15-24" ~ yoy_pct + 0.8,
-      grupo_edad == "25-44" ~ yoy_pct - 0.2,
+      grupo_edad == "25-44" ~ yoy_pct - 1.2,
       grupo_edad == "45-64" ~ yoy_pct - 0.8,
       TRUE ~ yoy_pct + 0.2
     )
@@ -99,7 +99,7 @@ p_base <- ggplot(
     title = title_txt,
     subtitle = subtitle_txt,
     x = NULL,
-    y = "Variación interanual (%)",
+    y = "Variación interanual del empleo adecuado (%)",
     color = NULL,
     caption = caption_txt
   ) +
