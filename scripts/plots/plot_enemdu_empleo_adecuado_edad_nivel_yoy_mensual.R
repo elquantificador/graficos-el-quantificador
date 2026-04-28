@@ -96,7 +96,6 @@ p_base <- ggplot(
     labels = function(x) paste0(scales::number(x, accuracy = 1, decimal.mark = ","), "%"),
     breaks = seq(-20, 20, 10),
     minor_breaks = seq(-25, 25, 5),
-    limits = c(-25, 25),
     expand = expansion(mult = c(0.02, 0.04))
   ) +
   labs(
@@ -107,7 +106,7 @@ p_base <- ggplot(
     color = NULL,
     caption = caption_txt
   ) +
-  coord_cartesian(clip = "off") +
+  coord_cartesian(ylim = c(-25, 25), clip = "off") +
   theme_quantificador() +
   theme(
     axis.text = element_text(colour = "black", size = 8),
