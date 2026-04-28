@@ -26,16 +26,13 @@ subtitle_txt <- stringr::str_wrap(
   width = 50
 )
 
-caption_txt <- paste(
-  stringr::str_wrap(
-    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
-    width = 85
+caption_txt <- stringr::str_wrap(
+  paste(
+    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026.",
+    "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
+    "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia."
   ),
-  stringr::str_wrap(
-    "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia. El grupo 25-44 agrega a personas de 25 a 34 y de 35 a 44 años.",
-    width = 85
-  ),
-  sep = "\n"
+  width = 85
 )
 
 palette <- c(
