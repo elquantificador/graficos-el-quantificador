@@ -21,7 +21,10 @@ title_txt <- stringr::str_wrap(
   width = 44
 )
 
-subtitle_txt <- "Variación interanual del nivel de empleo adecuado por grupo\nde edad, marzo de 2025 a marzo de 2026"
+subtitle_txt <- stringr::str_wrap(
+  "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
+  width = 50
+)
 
 caption_txt <- stringr::str_wrap(
   paste(
@@ -119,7 +122,7 @@ p_base <- ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.89, y = 0.16)
+p_final <- add_logo(p_base, x = 0.87, y = 0.80)
 
 ggsave(
   filename = out_path,
