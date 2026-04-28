@@ -16,8 +16,11 @@ out_path <- "figures/empleo_adecuado_grupo_edad_nivel_yoy_mensual.png"
 plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
   filter(fecha >= as.Date("2025-03-01"))
 
+plot_df <- plot_df %>%
+  mutate(grupo_edad = ifelse(grupo_edad == "Todas las edades", "Total", grupo_edad))
+
 headline_yoy <- plot_df %>%
-  filter(grupo_edad == "Todas las edades", fecha == max(fecha)) %>%
+  filter(grupo_edad == "Total", fecha == max(fecha)) %>%
   pull(yoy_pct) %>%
   round(1)
 
@@ -41,10 +44,10 @@ caption_txt <- paste0(
 )
 
 palette <- c(
-  "Todas las edades" = "#D04A3E",
-  "15-24" = "#00A8CB",
-  "25-44" = "#F0A145",
-  "45-64" = "#7B8D97"
+  "Total"  = "#D04A3E",
+  "15-24"  = "#00A8CB",
+  "25-44"  = "#F0A145",
+  "45-64"  = "#7B8D97"
 )
 
 meses_es <- c(
@@ -90,7 +93,7 @@ p_base <- ggplot(
     data = label_df,
     aes(x = x_label, y = y_label, label = label, color = grupo_edad),
     hjust = 0,
-    size = 2.5,
+    size = 3.2,
     fontface = "bold",
     lineheight = 1,
     show.legend = FALSE
