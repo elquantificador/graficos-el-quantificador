@@ -26,13 +26,11 @@ subtitle_txt <- stringr::str_wrap(
   width = 50
 )
 
-caption_txt <- stringr::str_wrap(
-  paste(
-    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026.",
-    "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
-    "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia."
-  ),
-  width = 65
+caption_txt <- paste0(
+  "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de\n",
+  "marzo de 2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.\n",
+  "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la\n",
+  "jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo."
 )
 
 palette <- c(
@@ -122,7 +120,7 @@ p_base <- ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.87, y = 0.22)
+p_final <- add_logo(p_base, x = 0.84, y = 0.25)
 
 ggsave(
   filename = out_path,
