@@ -23,13 +23,11 @@ title_txt <- stringr::str_wrap(
 
 subtitle_txt <- "Variación interanual del nivel de empleo adecuado por grupo\nde edad, marzo de 2025 a marzo de 2026"
 
-caption_txt <- stringr::str_wrap(
-  paste(
-    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026.",
-    "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
-    "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia."
-  ),
-  width = 72
+caption_txt <- paste0(
+  "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de\n",
+  "marzo de 2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.\n",
+  "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la\n",
+  "jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo."
 )
 
 palette <- c(
