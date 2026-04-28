@@ -23,7 +23,7 @@ title_txt <- stringr::str_wrap(
 
 subtitle_txt <- stringr::str_wrap(
   "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
-  width = 50
+  width = 56
 )
 
 caption_txt <- stringr::str_wrap(
@@ -32,7 +32,7 @@ caption_txt <- stringr::str_wrap(
     "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
     "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia."
   ),
-  width = 85
+  width = 105
 )
 
 palette <- c(
@@ -68,8 +68,7 @@ p_base <- ggplot(
   aes(x = fecha, y = yoy_pct, color = grupo_edad, group = grupo_edad)
 ) +
   geom_hline(yintercept = 0, colour = "black", linetype = "dashed", linewidth = 0.4) +
-  geom_line(linewidth = 1) +
-  geom_point(size = 1.9) +
+  geom_smooth(method = "loess", formula = y ~ x, se = FALSE, linewidth = 1, span = 0.5) +
   geom_text(
     data = label_df,
     aes(x = x_label, y = y_label, label = label, color = grupo_edad),
@@ -123,7 +122,7 @@ p_base <- ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.89, y = 0.18)
+p_final <- add_logo(p_base, x = 0.89, y = 0.16)
 
 ggsave(
   filename = out_path,
