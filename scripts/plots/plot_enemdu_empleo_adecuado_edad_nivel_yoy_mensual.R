@@ -17,7 +17,7 @@ plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
   filter(fecha >= as.Date("2025-03-01"))
 
 title_txt <- stringr::str_wrap(
-  "El empleo adecuado se deterioró sobre todo entre personas de 45 a 64 años en marzo de 2026",
+  "En marzo, el empleo adecuado se desplomó, especialmente para los trabajadores más jóvenes",
   width = 44
 )
 
