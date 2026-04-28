@@ -21,7 +21,7 @@ title_txt <- stringr::str_wrap(
   width = 44
 )
 
-subtitle_txt <- "Variación interanual del nivel de empleo adecuado\npor grupo de edad, marzo de 2025 a marzo de 2026"
+subtitle_txt <- "Variación interanual del nivel de empleo adecuado por grupo\nde edad, marzo de 2025 a marzo de 2026"
 
 caption_txt <- stringr::str_wrap(
   paste(
