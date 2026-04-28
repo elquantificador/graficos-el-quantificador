@@ -119,8 +119,7 @@ p_base <- ggplot(
     legend.position = "none",
     plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
-    plot.caption.position = "plot",
-    axis.ticks.length.minor = rel(0.5)
+    plot.caption.position = "plot"
   )
 
 dir.create("figures", showWarnings = FALSE)
