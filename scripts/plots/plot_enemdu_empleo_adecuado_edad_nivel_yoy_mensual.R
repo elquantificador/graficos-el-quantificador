@@ -122,7 +122,7 @@ p_base <- ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.87, y = 0.80)
+p_final <- add_logo(p_base, x = 0.87, y = 0.22)
 
 ggsave(
   filename = out_path,
