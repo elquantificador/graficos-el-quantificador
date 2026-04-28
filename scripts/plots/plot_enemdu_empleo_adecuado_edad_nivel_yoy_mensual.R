@@ -109,7 +109,7 @@ p_base <- ggplot(
     axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 0.5, colour = "black"),
     plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
+    plot.caption = element_text(colour = "black", size = 6.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     legend.position = "none",
     plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
