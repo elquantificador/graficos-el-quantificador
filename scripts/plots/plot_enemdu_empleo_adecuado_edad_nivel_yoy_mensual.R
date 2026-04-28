@@ -17,7 +17,7 @@ plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
   filter(fecha >= as.Date("2025-03-01"))
 
 title_txt <- stringr::str_wrap(
-  "En marzo, el empleo adecuado se desplomó, especialmente para los trabajadores más jóvenes",
+  "En marzo el empleo adecuado se desplomó, especialmente para los más jóvenes",
   width = 44
 )
 
