@@ -24,7 +24,7 @@ plot_df <- readRDS("data/processed/endi_r2_prev_anemia_quintil.rds") %>%
   )
 
 title_txt <- stringr::str_wrap(
-  "Los niños y niñas de los hogares más pobres tienen la mayor prevalencia de anemia",
+  "La prevalencia de anemia es alta incluso en los hogares más ricos del Ecuador",
   width = 44
 )
 
@@ -53,8 +53,8 @@ p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label),
   ) +
   scale_y_continuous(
     labels = percent_format(accuracy = 1),
-    limits = c(0, 0.55),
-    breaks = seq(0, 0.50, 0.10),
+    limits = c(0, 0.45),
+    breaks = seq(0, 0.45, 0.10),
     expand = expansion(mult = c(0, 0.02))
   ) +
   labs(
