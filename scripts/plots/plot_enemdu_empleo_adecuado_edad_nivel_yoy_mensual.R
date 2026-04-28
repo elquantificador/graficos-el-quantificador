@@ -16,6 +16,11 @@ out_path <- "figures/empleo_adecuado_grupo_edad_nivel_yoy_mensual.png"
 plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
   filter(fecha >= as.Date("2025-03-01"))
 
+headline_yoy <- plot_df %>%
+  filter(grupo_edad == "Todas las edades", fecha == max(fecha)) %>%
+  pull(yoy_pct) %>%
+  round(1)
+
 title_txt <- stringr::str_wrap(
   "Se desploma el empleo adecuado en marzo 2026, impactando a los más jóvenes",
   width = 44
@@ -28,10 +33,11 @@ subtitle_txt <- stringr::str_wrap(
 
 caption_txt <- paste0(
   "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo, tabulados marzo\n",
-  "2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE. Nota: El\n",
-  "empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada\n",
-  "laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo.\n",
-  "Las líneas muestran suavizado LOESS."
+  "2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.\n",
+  "En marzo de 2026, el empleo adecuado cayó ", abs(headline_yoy), "% respecto a marzo de 2025.\n",
+  "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la\n",
+  "jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo.\n",
+  "Las líneas se suavizan mediante LOESS."
 )
 
 palette <- c(
