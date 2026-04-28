@@ -13,7 +13,8 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "stringr"))
 
 out_path <- "figures/empleo_adecuado_grupo_edad_nivel_yoy_mensual.png"
 
-plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds")
+plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
+  filter(fecha >= as.Date("2025-03-01"))
 
 title_txt <- stringr::str_wrap(
   "El empleo adecuado se deterioró sobre todo entre personas de 45 a 64 años en marzo de 2026",
@@ -36,10 +37,10 @@ caption_txt <- stringr::str_wrap(
 )
 
 palette <- c(
-  "Todas las edades" = "#d94f3d",
-  "15-24" = "#2d7db3",
-  "25-44" = "#ef9f4e",
-  "45-64" = "#5ba35b"
+  "Todas las edades" = "#D04A3E",
+  "15-24" = "#00A8CB",
+  "25-44" = "#F0A145",
+  "45-64" = "#7B8D97"
 )
 
 meses_es <- c(
@@ -48,7 +49,6 @@ meses_es <- c(
 )
 
 label_df <- plot_df %>%
-  filter(fecha >= as.Date("2025-03-01")) %>%
   group_by(grupo_edad) %>%
   filter(fecha == max(fecha, na.rm = TRUE)) %>%
   slice_tail(n = 1) %>%
@@ -86,7 +86,6 @@ p_base <- ggplot(
     labels = function(x) {
       paste0(meses_es[as.integer(format(x, "%m"))], "-", substr(format(x, "%Y"), 3, 4))
     },
-    limits = c(as.Date("2025-03-01"), as.Date("2026-03-01")),
     expand = expansion(mult = c(0.02, 0.14))
   ) +
   scale_y_continuous(
