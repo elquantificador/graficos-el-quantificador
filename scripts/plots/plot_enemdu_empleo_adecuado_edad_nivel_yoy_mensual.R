@@ -84,7 +84,7 @@ p_base <- ggplot(
     data = label_df,
     aes(x = x_label, y = y_label, label = label, color = grupo_edad),
     hjust = 0,
-    size = 2,
+    size = 2.5,
     fontface = "bold",
     lineheight = 1,
     show.legend = FALSE
