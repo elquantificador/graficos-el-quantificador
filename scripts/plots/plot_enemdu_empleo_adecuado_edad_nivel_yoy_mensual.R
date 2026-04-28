@@ -104,6 +104,10 @@ p_base <- ggplot(
     caption = caption_txt
   ) +
   coord_cartesian(ylim = c(-25, 25), clip = "off") +
+  guides(
+    x = guide_axis(minor.ticks = TRUE),
+    y = guide_axis(minor.ticks = TRUE)
+  ) +
   theme_quantificador() +
   theme(
     axis.text = element_text(colour = "black", size = 8),
@@ -115,7 +119,8 @@ p_base <- ggplot(
     legend.position = "none",
     plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
-    plot.caption.position = "plot"
+    plot.caption.position = "plot",
+    axis.ticks.length.minor = rel(0.5)
   )
 
 dir.create("figures", showWarnings = FALSE)
