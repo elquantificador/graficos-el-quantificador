@@ -21,7 +21,7 @@ title_txt <- stringr::str_wrap(
 )
 
 subtitle_txt <- stringr::str_wrap(
-  "Variación interanual del nivel de empleo adecuado por grupo de edad, enero de 2025 a marzo de 2026",
+  "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
   width = 56
 )
 
@@ -36,10 +36,10 @@ caption_txt <- stringr::str_wrap(
 )
 
 palette <- c(
-  "Todas las edades" = "#C73E1D",
-  "15-24" = "#2C7FB8",
-  "25-44" = "#F18F01",
-  "45-64" = "#2A9D4B"
+  "Todas las edades" = "#d94f3d",
+  "15-24" = "#2d7db3",
+  "25-44" = "#ef9f4e",
+  "45-64" = "#5ba35b"
 )
 
 meses_es <- c(
@@ -48,6 +48,7 @@ meses_es <- c(
 )
 
 label_df <- plot_df %>%
+  filter(fecha >= as.Date("2025-03-01")) %>%
   group_by(grupo_edad) %>%
   filter(fecha == max(fecha, na.rm = TRUE)) %>%
   slice_tail(n = 1) %>%
@@ -72,21 +73,21 @@ p_base <- ggplot(
   geom_point(size = 1.9) +
   geom_text(
     data = label_df,
-    aes(x = x_label, y = y_label, label = label),
+    aes(x = x_label, y = y_label, label = label, color = grupo_edad),
     hjust = 0,
     size = 2.2,
     fontface = "bold",
     lineheight = 1,
-    color = "black",
     show.legend = FALSE
   ) +
   scale_color_manual(values = palette) +
   scale_x_date(
-    breaks = seq(as.Date("2025-01-01"), as.Date("2026-03-01"), by = "2 months"),
+    breaks = seq(as.Date("2025-03-01"), as.Date("2026-03-01"), by = "2 months"),
     labels = function(x) {
       paste0(meses_es[as.integer(format(x, "%m"))], "-", substr(format(x, "%Y"), 3, 4))
     },
-    expand = expansion(mult = c(0.01, 0.12))
+    limits = c(as.Date("2025-03-01"), as.Date("2026-03-01")),
+    expand = expansion(mult = c(0.02, 0.14))
   ) +
   scale_y_continuous(
     labels = function(x) paste0(scales::number(x, accuracy = 1, decimal.mark = ","), "%"),
@@ -112,11 +113,11 @@ p_base <- ggplot(
     plot.subtitle = element_text(size = 7.6),
     plot.caption = element_text(size = 5.2, lineheight = 1.1, margin = margin(t = 6)),
     legend.position = "none",
-    plot.margin = margin(10, 68, 6, 14)
+    plot.margin = margin(10, 14, 6, 14)
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.86, y = 0.12, width = 0.075, height = 0.075)
+p_final <- add_logo(p_base, x = 0.90, y = 0.12, width = 0.075, height = 0.075)
 
 ggsave(
   filename = out_path,
