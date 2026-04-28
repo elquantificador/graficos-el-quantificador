@@ -34,9 +34,9 @@ subtitle_txt <- stringr::str_wrap(
 caption_txt <- paste0(
   "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo, tabulados marzo\n",
   "2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.\n",
-  "En marzo de 2026, el empleo adecuado cayó ", abs(headline_yoy), "% respecto a marzo de 2025.\n",
-  "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la\n",
-  "jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo.\n",
+  "Nota: En marzo de 2026, el empleo adecuado cayó ", abs(headline_yoy), "% respecto a marzo de 2025.\n",
+  "El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada\n",
+  "laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo.\n",
   "Las líneas se suavizan mediante LOESS."
 )
 
