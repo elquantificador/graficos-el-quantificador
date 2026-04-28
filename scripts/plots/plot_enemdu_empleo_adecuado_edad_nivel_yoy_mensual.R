@@ -51,14 +51,16 @@ label_df <- plot_df %>%
   filter(fecha == max(fecha, na.rm = TRUE)) %>%
   slice_tail(n = 1) %>%
   ungroup() %>%
+  arrange(yoy_pct) %>%
   mutate(
+    rank = row_number(),
     label = grupo_edad,
     x_label = fecha + 16,
-    y_label = case_when(
-      grupo_edad == "15-24" ~ yoy_pct + 0.8,
-      grupo_edad == "25-44" ~ yoy_pct - 1.2,
-      grupo_edad == "45-64" ~ yoy_pct - 0.8,
-      TRUE ~ yoy_pct + 0.2
+    y_label = yoy_pct + case_when(
+      rank == 1 ~ -1.5,
+      rank == 2 ~ -1.0,
+      rank == 3 ~  0.8,
+      TRUE      ~  1.5
     )
   )
 
