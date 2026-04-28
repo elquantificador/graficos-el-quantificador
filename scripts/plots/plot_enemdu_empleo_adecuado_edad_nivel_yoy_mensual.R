@@ -26,14 +26,16 @@ subtitle_txt <- stringr::str_wrap(
   width = 50
 )
 
-caption_txt <- stringr::str_wrap(
-  paste(
-    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026.",
-    "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
-    "La serie muestra la variación porcentual del nivel de empleo adecuado frente al mismo mes del año previo.",
-    "El grupo 25-44 agrega a personas de 25 a 34 y de 35 a 44 años."
+caption_txt <- paste(
+  stringr::str_wrap(
+    "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), tabulados de marzo de 2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
+    width = 85
   ),
-  width = 85
+  stringr::str_wrap(
+    "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia. El grupo 25-44 agrega a personas de 25 a 34 y de 35 a 44 años.",
+    width = 85
+  ),
+  sep = "\n"
 )
 
 palette <- c(
@@ -85,14 +87,16 @@ p_base <- ggplot(
     breaks = seq(as.Date("2025-03-01"), as.Date("2026-03-01"), by = "3 months"),
     minor_breaks = seq(as.Date("2025-03-01"), as.Date("2026-03-01"), by = "1 month"),
     labels = function(x) {
-      paste0(meses_es[as.integer(format(x, "%m"))], "-", substr(format(x, "%Y"), 3, 4))
+      mes <- meses_es[as.integer(format(x, "%m"))]
+      paste0(toupper(substr(mes, 1, 1)), substr(mes, 2, 3), "-", substr(format(x, "%Y"), 3, 4))
     },
     expand = expansion(mult = c(0.02, 0.14))
   ) +
   scale_y_continuous(
     labels = function(x) paste0(scales::number(x, accuracy = 1, decimal.mark = ","), "%"),
-    breaks = seq(-25, 30, 5),
-    limits = c(-25, 31),
+    breaks = seq(-20, 20, 10),
+    minor_breaks = seq(-25, 25, 5),
+    limits = c(-25, 25),
     expand = expansion(mult = c(0.02, 0.04))
   ) +
   labs(
@@ -119,7 +123,7 @@ p_base <- ggplot(
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.89, y = 0.13)
+p_final <- add_logo(p_base, x = 0.89, y = 0.18)
 
 ggsave(
   filename = out_path,
