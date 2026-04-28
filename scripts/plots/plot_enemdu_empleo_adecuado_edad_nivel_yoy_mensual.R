@@ -2,86 +2,18 @@
 # plot_enemdu_empleo_adecuado_edad_nivel_yoy_mensual.R
 # Genera un gráfico de la variación interanual porcentual en el
 # nivel de empleo adecuado por grupo de edad.
-# Requiere: data/raw/enemdu/202603_Tabulados_Mercado_Laboral_EXCEL (2).xlsx
+# Requiere: data/processed/enemdu_empleo_adecuado_edad_yoy.rds
+#           (generado por clean_enemdu_empleo_adecuado_edad.R)
 # Guarda:   figures/empleo_adecuado_grupo_edad_nivel_yoy_mensual.png
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
-ensure_packages(c("readxl", "dplyr", "tidyr", "ggplot2", "scales", "ragg", "stringr"))
+ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "stringr"))
 
 out_path <- "figures/empleo_adecuado_grupo_edad_nivel_yoy_mensual.png"
-input_path <- "data/raw/enemdu/202603_Tabulados_Mercado_Laboral_EXCEL (2).xlsx"
 
-parse_enemdu_period <- function(x) {
-  x <- tolower(trimws(as.character(x)))
-  month_map <- c(
-    ene = 1, feb = 2, mar = 3, abr = 4, may = 5, jun = 6,
-    jul = 7, ago = 8, sep = 9, oct = 10, nov = 11, dic = 12
-  )
-
-  parts <- regmatches(x, regexec("^([a-z]+)-([0-9]{2,4})$", x))[[1]]
-  if (length(parts) < 3 || is.null(month_map[[parts[2]]])) {
-    return(as.Date(NA))
-  }
-
-  year <- as.integer(parts[3])
-  if (year < 100) {
-    year <- 2000 + year
-  }
-
-  as.Date(sprintf("%04d-%02d-01", year, month_map[[parts[2]]]))
-}
-
-pop_df <- readxl::read_xlsx(
-  input_path,
-  sheet = "1. Poblaciones",
-  range = "A2:D2000",
-  col_names = c("encuesta", "periodo", "indicador", "total")
-) %>%
-  filter(indicador == "Empleo Adecuado/Pleno") %>%
-  transmute(
-    periodo,
-    fecha = as.Date(vapply(periodo, parse_enemdu_period, as.Date(NA))),
-    total_nivel = as.numeric(total)
-  ) %>%
-  filter(fecha >= as.Date("2024-01-01"), fecha <= as.Date("2026-03-01"))
-
-char_df <- readxl::read_xlsx(
-  input_path,
-  sheet = "3.2 Caracterización Adec_pleno",
-  range = "A2:DA13",
-  col_names = FALSE
-)
-
-periods <- as.character(unlist(char_df[1, 3:ncol(char_df)]))
-fechas <- as.Date(vapply(periods, parse_enemdu_period, as.Date(NA)))
-keep <- fechas >= as.Date("2024-01-01") & fechas <= as.Date("2026-03-01")
-
-shares_df <- tibble::tibble(
-  periodo = periods[keep],
-  fecha = fechas[keep],
-  `Todas las edades` = 1,
-  `15-24` = as.numeric(unlist(char_df[8, 3:ncol(char_df)]))[keep],
-  `25-44` =
-    as.numeric(unlist(char_df[9, 3:ncol(char_df)]))[keep] +
-    as.numeric(unlist(char_df[10, 3:ncol(char_df)]))[keep],
-  `45-64` = as.numeric(unlist(char_df[11, 3:ncol(char_df)]))[keep]
-) %>%
-  tidyr::pivot_longer(
-    cols = -c(periodo, fecha),
-    names_to = "grupo_edad",
-    values_to = "share"
-  )
-
-plot_df <- shares_df %>%
-  left_join(pop_df, by = c("periodo", "fecha")) %>%
-  mutate(nivel = share * total_nivel) %>%
-  group_by(grupo_edad) %>%
-  arrange(fecha, .by_group = TRUE) %>%
-  mutate(yoy_pct = 100 * (nivel / lag(nivel, 12) - 1)) %>%
-  ungroup() %>%
-  filter(fecha >= as.Date("2025-01-01"), fecha <= as.Date("2026-03-01"))
+plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds")
 
 title_txt <- stringr::str_wrap(
   "El empleo adecuado se deterioró sobre todo entre personas de 45 a 64 años en marzo de 2026",
