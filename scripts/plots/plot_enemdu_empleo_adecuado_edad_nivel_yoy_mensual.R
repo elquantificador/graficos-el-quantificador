@@ -46,17 +46,27 @@ meses_es <- c(
   "jul", "ago", "sep", "oct", "nov", "dic"
 )
 
+last_fecha <- max(plot_df$fecha)
+loess_ends <- plot_df %>%
+  group_by(grupo_edad) %>%
+  summarise(
+    yoy_smooth = predict(loess(yoy_pct ~ as.numeric(fecha), span = 0.5),
+                         newdata = data.frame(fecha = as.numeric(last_fecha))),
+    .groups = "drop"
+  ) %>%
+  arrange(yoy_smooth) %>%
+  mutate(rank = row_number())
+
 label_df <- plot_df %>%
   group_by(grupo_edad) %>%
-  filter(fecha == max(fecha, na.rm = TRUE)) %>%
+  filter(fecha == last_fecha) %>%
   slice_tail(n = 1) %>%
   ungroup() %>%
-  arrange(yoy_pct) %>%
+  left_join(loess_ends, by = "grupo_edad") %>%
   mutate(
-    rank = row_number(),
     label = grupo_edad,
     x_label = fecha + 16,
-    y_label = yoy_pct + case_when(
+    y_label = yoy_smooth + case_when(
       rank == 1 ~ -1.5,
       rank == 2 ~ -1.0,
       rank == 3 ~  0.8,
