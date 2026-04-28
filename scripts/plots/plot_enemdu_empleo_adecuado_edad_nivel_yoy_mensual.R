@@ -21,10 +21,7 @@ title_txt <- stringr::str_wrap(
   width = 44
 )
 
-subtitle_txt <- stringr::str_wrap(
-  "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
-  width = 56
-)
+subtitle_txt <- "Variación interanual del nivel de empleo adecuado\npor grupo de edad, marzo de 2025 a marzo de 2026"
 
 caption_txt <- stringr::str_wrap(
   paste(
@@ -32,7 +29,7 @@ caption_txt <- stringr::str_wrap(
     "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
     "Nota: El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo de referencia."
   ),
-  width = 105
+  width = 72
 )
 
 palette <- c(
@@ -90,8 +87,8 @@ p_base <- ggplot(
   ) +
   scale_y_continuous(
     labels = function(x) paste0(scales::number(x, accuracy = 1, decimal.mark = ","), "%"),
-    breaks = seq(-20, 20, 10),
-    minor_breaks = seq(-25, 25, 5),
+    breaks = seq(-20, 30, 10),
+    minor_breaks = seq(-25, 35, 5),
     expand = expansion(mult = c(0.02, 0.04))
   ) +
   labs(
@@ -102,7 +99,7 @@ p_base <- ggplot(
     color = NULL,
     caption = caption_txt
   ) +
-  coord_cartesian(ylim = c(-25, 25), clip = "off") +
+  coord_cartesian(ylim = c(-25, 35), clip = "off") +
   guides(
     x = guide_axis(minor.ticks = TRUE),
     y = guide_axis(minor.ticks = TRUE)
