@@ -71,17 +71,17 @@ p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label),
     axis.title.y = element_text(size = 7, margin = margin(r = 6), hjust = 0.5, colour = "black"),
     plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 8)),
+    plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 2)),
     axis.ticks.x = element_blank(),
     axis.line = element_line(colour = "black"),
-    plot.margin = margin(6, 30, 10, 16),
+    plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     panel.grid = element_blank()
   )
 
 dir.create("figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.89, y = 0.17)
+p_final <- add_logo(p_base, x = 0.89, y = 0.16)
 
 ggsave(
   filename = out_path,
