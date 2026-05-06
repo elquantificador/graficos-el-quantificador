@@ -3,7 +3,9 @@
 # Carga y procesa los datos de la ENDI R2 para análisis de
 # prevalencia de anemia en niñas/os de 6 a 23 meses por quintil.
 # Requiere: data/raw/endi_r2/BDD_ENDI_R2_f1_personas.rds
-# Guarda:   data/processed/endi_r2_prev_anemia_quintil.rds
+# Guarda:
+#   - data/processed/endi_r2_prev_anemia_quintil.rds
+#   - data/processed/endi_r2_prev_anemia_overall.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/data-cleaning/clean_endi_anemia_quintil.R
@@ -14,7 +16,8 @@ library(dplyr)
 library(survey)
 
 path_rawdata_r2 <- "data/raw/endi_r2"
-out_path <- "data/processed/endi_r2_prev_anemia_quintil.rds"
+out_path_quintil <- "data/processed/endi_r2_prev_anemia_quintil.rds"
+out_path_overall <- "data/processed/endi_r2_prev_anemia_overall.rds"
 
 endi_r2_personas <- readRDS(file.path(path_rawdata_r2, "BDD_ENDI_R2_f1_personas.rds")) %>%
   mutate(
@@ -28,8 +31,19 @@ endi_r2_personas <- readRDS(file.path(path_rawdata_r2, "BDD_ENDI_R2_f1_personas.
 
 options(survey.lonely.psu = "adjust")
 
+endi_r2_personas_overall <- endi_r2_personas %>%
+  filter(!is.na(ane6_23_new))
+
 endi_r2_personas_valid <- endi_r2_personas %>%
   filter(!is.na(ane6_23_new), !is.na(quintil))
+
+endi_r2_design_overall <- svydesign(
+  ids = ~id_upm,
+  strata = ~estrato,
+  weights = ~fexp,
+  data = endi_r2_personas_overall,
+  nest = TRUE
+)
 
 endi_r2_design <- svydesign(
   ids = ~id_upm,
@@ -60,6 +74,23 @@ prev_anemia_quintil <- svyby(
     by = "quintil"
   )
 
+prev_anemia_overall_svy <- svymean(
+  ~ane6_23_new,
+  endi_r2_design_overall,
+  na.rm = TRUE
+)
+
+prev_anemia_overall_ci <- confint(prev_anemia_overall_svy)
+
+prev_anemia_overall <- tibble(
+  prev_anemia = coef(prev_anemia_overall_svy)[["ane6_23_new"]],
+  prev_anemia_low = prev_anemia_overall_ci[1],
+  prev_anemia_upp = prev_anemia_overall_ci[2],
+  n = nrow(endi_r2_personas_overall)
+)
+
 dir.create("data/processed", showWarnings = FALSE, recursive = TRUE)
-saveRDS(prev_anemia_quintil, out_path)
-message("Guardado: ", out_path)
+saveRDS(prev_anemia_quintil, out_path_quintil)
+saveRDS(prev_anemia_overall, out_path_overall)
+message("Guardado: ", out_path_quintil)
+message("Guardado: ", out_path_overall)
