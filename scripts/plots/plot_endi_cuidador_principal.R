@@ -32,7 +32,7 @@ plot_df <- readRDS("data/processed/endi_r2_cuidador_principal.rds") %>%
     )
   )
 
-title_txt <- "La niñez ecuatoriana crece bajo el cuidado,\ncariño y dedicación de sus madres"
+title_txt <- "La infancia ecuatoriana crece bajo el cuidado,\ncariño y dedicación de sus madres"
 
 subtitle_txt <- "Proporción de niños y niñas menores de 5 años, por cuidador\nprincipal, ENDI Ronda 2 2023-2024"
 
