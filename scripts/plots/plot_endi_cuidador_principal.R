@@ -32,7 +32,7 @@ plot_df <- readRDS("data/processed/endi_r2_cuidador_principal.rds") %>%
     )
   )
 
-title_txt <- "La infancia ecuatoriana crece bajo el cuidado,\ncariño y dedicación de sus madres"
+title_txt <- "La infancia ecuatoriana crece bajo el\ncuidado, cariño y dedicación de sus madres"
 
 subtitle_txt <- "Proporción de niños y niñas menores de 5 años, por cuidador\nprincipal, ENDI Ronda 2 2023-2024"
 
@@ -78,11 +78,11 @@ p_base <- ggplot(
     axis.text.x = element_text(colour = "black", size = 7),
     plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(colour = "black", size = 5.8, lineheight = 1.1, hjust = 0, margin = margin(t = 2)),
+    plot.caption = element_text(colour = "black", size = 5.8, lineheight = 1.1, hjust = 0, margin = margin(t = 5)),
     axis.line.y = element_line(colour = "black"),
     axis.ticks.y = element_blank(),
     axis.line.x = element_line(colour = "black"),
-    plot.margin = margin(6, 32, 6, 24),
+    plot.margin = margin(6, 32, 6, 18),
     plot.title.position = "plot",
     plot.caption.position = "plot",
     panel.grid = element_blank()
