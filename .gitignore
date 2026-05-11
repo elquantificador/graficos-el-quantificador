@@ -1,6 +1,5 @@
 # Archivos generados automáticamente
 Rplots.pdf
-figures/*.png
 figures/*.pdf
 scripts/plots/plot_salario_vs_ipc.R
 

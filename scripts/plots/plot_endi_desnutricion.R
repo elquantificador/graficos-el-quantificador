@@ -8,7 +8,7 @@
 
 source("scripts/utils.R")
 source("scripts/packages.R")
-ensure_packages(c("scales", "ragg"))
+ensure_packages(c("forcats", "scales", "ragg"))
 
 out_path <- "figures/prev_dcronica_etnia_endi_r2.png"
 plot_df <- readRDS("data/processed/endi_r2_prev_dcronica_etnia.rds")
