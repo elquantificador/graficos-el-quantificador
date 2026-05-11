@@ -158,7 +158,7 @@ summary_table %>%
   gt() %>%
   fmt_currency(columns = c(Total, Urbana, Rural), currency = "USD", decimals = 2) %>%
   cols_label(
-    estadistico = "Estadístico",
+    estadistico = "Métrica",
     Total = "Total",
     Urbana = "Urbana",
     Rural = "Rural"
@@ -168,7 +168,7 @@ summary_table %>%
     subtitle = "Resumen ponderado del ingreso total de los hogares a nivel nacional y por área"
   ) %>%
   tab_source_note(
-    source_note = "Fuente: ENEMDU, microdatos de marzo de 2026. Cálculos ponderados con fexp de Daniel Sanchez (@daniel_ec18)."
+    source_note = "Fuente: ENEMDU, microdatos marzo 2026. Cálculos ponderados. Por: Daniel Sánchez."
   ) %>%
   gtsave(html_path)
 
