@@ -14,7 +14,7 @@
 # ============================================================
 
 source("scripts/packages.R")
-ensure_packages(c("dplyr", "tidyr", "haven", "readr", "openxlsx", "gt"))
+ensure_packages(c("dplyr", "tidyr", "haven", "readr", "openxlsx", "gt", "Hmisc"))
 
 input_path <- "data/raw/enemdu/enemdu_persona_2026_03.sav"
 xlsx_path <- "tables/enemdu_ingreso_hogar_2026_03_summary.xlsx"
@@ -53,6 +53,7 @@ enemdu_ingreso_hogar <- read_sav(input_path) %>%
   group_by(id_hogar) %>%
   summarise(
     area = first(area),
+    fexp = first(fexp),
     ingreso_laboral_primaria = sum(ingreso_laboral_primaria, na.rm = TRUE),
     ingreso_laboral_secundaria = sum(ingreso_laboral_secundaria, na.rm = TRUE),
     ingreso_laboral_total = sum(ingreso_laboral_total, na.rm = TRUE),
@@ -66,14 +67,14 @@ enemdu_ingreso_hogar <- read_sav(input_path) %>%
 
 summary_total <- enemdu_ingreso_hogar %>%
   summarise(
-    Promedio = mean(ingreso_total_hogar, na.rm = TRUE),
-    `Cuartil 1` = quantile(ingreso_total_hogar, 0.25, na.rm = TRUE, names = FALSE),
-    Mediana = quantile(ingreso_total_hogar, 0.50, na.rm = TRUE, names = FALSE),
-    `Cuartil 3` = quantile(ingreso_total_hogar, 0.75, na.rm = TRUE, names = FALSE),
-    `Quintil 1 (p20)` = quantile(ingreso_total_hogar, 0.20, na.rm = TRUE, names = FALSE),
-    `Quintil 2 (p40)` = quantile(ingreso_total_hogar, 0.40, na.rm = TRUE, names = FALSE),
-    `Quintil 3 (p60)` = quantile(ingreso_total_hogar, 0.60, na.rm = TRUE, names = FALSE),
-    `Quintil 4 (p80)` = quantile(ingreso_total_hogar, 0.80, na.rm = TRUE, names = FALSE)
+    Promedio = weighted.mean(ingreso_total_hogar, w = fexp, na.rm = TRUE),
+    `Cuartil 1` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.25, na.rm = TRUE)[[1]],
+    Mediana = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.50, na.rm = TRUE)[[1]],
+    `Cuartil 3` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.75, na.rm = TRUE)[[1]],
+    `Quintil 1 (p20)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.20, na.rm = TRUE)[[1]],
+    `Quintil 2 (p40)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.40, na.rm = TRUE)[[1]],
+    `Quintil 3 (p60)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.60, na.rm = TRUE)[[1]],
+    `Quintil 4 (p80)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.80, na.rm = TRUE)[[1]]
   ) %>%
   pivot_longer(
     cols = everything(),
@@ -92,14 +93,14 @@ summary_area <- enemdu_ingreso_hogar %>%
   ) %>%
   group_by(area) %>%
   summarise(
-    Promedio = mean(ingreso_total_hogar, na.rm = TRUE),
-    `Cuartil 1` = quantile(ingreso_total_hogar, 0.25, na.rm = TRUE, names = FALSE),
-    Mediana = quantile(ingreso_total_hogar, 0.50, na.rm = TRUE, names = FALSE),
-    `Cuartil 3` = quantile(ingreso_total_hogar, 0.75, na.rm = TRUE, names = FALSE),
-    `Quintil 1 (p20)` = quantile(ingreso_total_hogar, 0.20, na.rm = TRUE, names = FALSE),
-    `Quintil 2 (p40)` = quantile(ingreso_total_hogar, 0.40, na.rm = TRUE, names = FALSE),
-    `Quintil 3 (p60)` = quantile(ingreso_total_hogar, 0.60, na.rm = TRUE, names = FALSE),
-    `Quintil 4 (p80)` = quantile(ingreso_total_hogar, 0.80, na.rm = TRUE, names = FALSE),
+    Promedio = weighted.mean(ingreso_total_hogar, w = fexp, na.rm = TRUE),
+    `Cuartil 1` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.25, na.rm = TRUE)[[1]],
+    Mediana = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.50, na.rm = TRUE)[[1]],
+    `Cuartil 3` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.75, na.rm = TRUE)[[1]],
+    `Quintil 1 (p20)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.20, na.rm = TRUE)[[1]],
+    `Quintil 2 (p40)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.40, na.rm = TRUE)[[1]],
+    `Quintil 3 (p60)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.60, na.rm = TRUE)[[1]],
+    `Quintil 4 (p80)` = Hmisc::wtd.quantile(ingreso_total_hogar, weights = fexp, probs = 0.80, na.rm = TRUE)[[1]],
     .groups = "drop"
   ) %>%
   pivot_longer(
@@ -164,10 +165,10 @@ summary_table %>%
   ) %>%
   tab_header(
     title = "ENEMDU marzo 2026",
-    subtitle = "Resumen del ingreso total de los hogares a nivel nacional y por área"
+    subtitle = "Resumen ponderado del ingreso total de los hogares a nivel nacional y por área"
   ) %>%
   tab_source_note(
-    source_note = "Fuente: ENEMDU, microdatos de marzo de 2026. Cálculos de Daniel Sanchez (@daniel_ec18)."
+    source_note = "Fuente: ENEMDU, microdatos de marzo de 2026. Cálculos ponderados con fexp de Daniel Sanchez (@daniel_ec18)."
   ) %>%
   gtsave(html_path)
 
