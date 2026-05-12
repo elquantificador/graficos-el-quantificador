@@ -5,7 +5,8 @@
 # (ocupacion primaria y secundaria), ingresos de capital o
 # inversiones, transferencias y prestaciones, y bonos.
 # Requiere: data/raw/enemdu/enemdu_persona_2026_03.sav
-# Guarda:   tables/enemdu_ingreso_hogar_2026_03_summary.xlsx
+# Guarda:   data/processed/enemdu_ingreso_hogar_2026_03.rds
+#           tables/enemdu_ingreso_hogar_2026_03_summary.xlsx
 #           tables/enemdu_ingreso_hogar_2026_03_summary.html
 # Muestra:  resumen de ingreso_total_hogar
 # ============================================================
@@ -17,29 +18,30 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "tidyr", "haven", "readr", "openxlsx", "gt", "Hmisc"))
 
 input_path <- "data/raw/enemdu/enemdu_persona_2026_03.sav"
+rds_path <- "data/processed/enemdu_ingreso_hogar_2026_03.rds"
 xlsx_path <- "tables/enemdu_ingreso_hogar_2026_03_summary.xlsx"
 html_path <- "tables/enemdu_ingreso_hogar_2026_03_summary.html"
 
 enemdu_ingreso_hogar <- read_sav(input_path) %>%
   mutate(
     across(
-      c(p63, p66, p68b, p69, p71b, p72b, p73b, p74b, p76, p78),
+      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
       ~ as.numeric(zap_labels(.x))
     ),
     across(
-      c(p63, p66, p68b, p69, p71b, p72b, p73b, p74b, p76, p78),
+      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
       ~ na_if(.x, 999999)
     ),
     across(
-      c(p63, p66, p68b, p69, p71b, p72b, p73b, p74b, p76, p78),
+      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
       ~ na_if(.x, -1)
     ),
     across(
-      c(p63, p66, p68b, p69, p71b, p72b, p73b, p74b, p76, p78),
+      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
       ~ replace_na(.x, 0)
     ),
     ingreso_laboral_primaria = p63 + p66 + p68b,
-    ingreso_laboral_secundaria = p69,
+    ingreso_laboral_secundaria = p69 + p70b,
     ingreso_laboral_total = ingreso_laboral_primaria + ingreso_laboral_secundaria,
     ingreso_capital_inversiones = p71b,
     transferencias_prestaciones = p72b + p73b + p74b + p76 + p78,
@@ -115,7 +117,10 @@ summary_table <- bind_rows(summary_total, summary_area) %>%
     values_from = valor
   )
 
+dir.create("data/processed", showWarnings = FALSE, recursive = TRUE)
 dir.create("tables", showWarnings = FALSE, recursive = TRUE)
+
+saveRDS(enemdu_ingreso_hogar, rds_path)
 
 wb <- createWorkbook()
 addWorksheet(wb, "summary")
@@ -173,5 +178,6 @@ summary_table %>%
   gtsave(html_path)
 
 print(summary_table)
+message("Guardado: ", rds_path)
 message("Guardado: ", xlsx_path)
 message("Guardado: ", html_path)
