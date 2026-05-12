@@ -117,16 +117,16 @@ p_base <- ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
     )
   ) +
   scale_x_continuous(
-    labels = label_dollar(big.mark = ",", accuracy = 1),
+    labels = label_dollar(big.mark = ".", decimal.mark = ",", accuracy = 1),
     breaks = seq(0, ceiling(p99_income / 500) * 500, by = 500),
     expand = expansion(mult = c(0, 0.01))
   ) +
   scale_y_continuous(
-    labels = label_number(big.mark = ",", accuracy = 1),
+    labels = label_number(big.mark = ".", decimal.mark = ",", accuracy = 1),
     expand = expansion(mult = c(0, 0.05))
   ) +
   labs(
-    title = "Solo el 14% de hogares ecuatorianos ganan\n$1,500 USD o mas (el 60% solo gana $513)",
+    title = "Solo el 14% de hogares ecuatorianos ganan\n$1.500 o más (el 60% gana $513 o menos)",
     subtitle = subtitle_txt,
     x = "Ingreso total mensual del hogar (USD)",
     y = "Número ponderado de hogares",
