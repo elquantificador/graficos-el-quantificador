@@ -19,7 +19,7 @@ graficos-el-quantificador/
 │   ├── raw/                # Datos crudos organizados por tema/fuente
 │   ├── processed/          # Datos procesados generados por los scripts de limpieza (no versionados)
 │   └── sources/            # Inventario y fichas de fuentes de datos
-├── figures/                # Figuras generadas (no versionadas)
+├── figures/                # Figuras generadas versionadas en el repositorio
 ├── scripts/
 │   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
@@ -79,16 +79,6 @@ Rscript scripts/data-cleaning/clean_escolaridad_ingreso.R
 Rscript scripts/plots/plot_escolaridad_ingreso.R
 ```
 
-## Gráficos disponibles
-
-| Gráfico | Clean | Plot | Fuente |
-|---|---|---|---|
-| Ingresos por escolaridad | `scripts/data-cleaning/clean_escolaridad_ingreso.R` | `scripts/plots/plot_escolaridad_ingreso.R` | `data/sources/escolaridad_ingreso.md` |
-| Evolución NINI | `scripts/data-cleaning/clean_evolucion_nini.R` | `scripts/plots/plot_evolucion_nini.R` | `data/sources/evolucion_nini.md` |
-| Femicidios 8M | `scripts/data-cleaning/clean_femicidios.R` | `scripts/plots/plot_femicidios.R` | `data/sources/femicidios.md` |
-| IPC San Valentín | `scripts/data-cleaning/clean_san_valentin.R` | `scripts/plots/plot_san_valentin.R` | `data/sources/san_valentin.md` |
-| Padres e hijos (censo) | `scripts/data-cleaning/clean_padres_hijos_censo.R` | `scripts/plots/plot_padres_hijos_censo.R` | `data/sources/padres_hijos_censo.md` |
-
 ## Funciones compartidas (`scripts/utils.R`)
 
 `utils.R` se carga automáticamente con `source("scripts/utils.R")` al inicio de cada script de visualización. Define:
@@ -111,3 +101,5 @@ ggsave("figures/mi_grafico.png", p_final, ...)
 Los archivos de datos crudos (`.sav`, `.xlsx`, `.csv`, `.xls`, `.rds`) viven bajo `data/raw/`, organizados por tema o fuente. El inventario y las fichas metodológicas están en `data/sources/`, empezando por `data/sources/README.md`.
 
 Los archivos procesados (`data/processed/`) tampoco se versionan: son derivados de los datos crudos y pueden regenerarse en cualquier momento ejecutando el script `clean_*.R` correspondiente.
+
+Las figuras PNG en `figures/` sí se versionan en este repositorio como salidas publicadas. Los PDF generados se ignoran.

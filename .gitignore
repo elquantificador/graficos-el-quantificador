@@ -15,3 +15,6 @@ data/processed/
 # Sistema operativo
 .DS_Store
 Thumbs.db
+
+# Herramientas locales
+.claude/
