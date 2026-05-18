@@ -2,6 +2,15 @@
 
 Repositorio para la reproducción y publicación de los gráficos de El Quantificador. Cada gráfico tiene sus datos documentados, un script de limpieza y un script de visualización separados.
 
+## Licencias
+
+El repositorio usa un esquema de licencias separadas:
+
+- **Código y scripts**: [MIT](LICENSE)
+- **Imágenes y gráficos del repositorio** (incluyendo `figures/` y `quantificador.png`, salvo nota en contrario): [CC BY-NC 4.0](LICENSE-images)
+
+Los datos crudos, diccionarios, metadatos y otros insumos de terceros dentro de `data/` pueden estar sujetos a sus propias condiciones de uso y no se relicencian automáticamente bajo MIT ni bajo CC BY-NC 4.0.
+
 ## Estructura del proyecto
 
 ```
