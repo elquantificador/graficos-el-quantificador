@@ -21,6 +21,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | IPC enero 2026 | `ipc/ipc_ind_nac_reg_ciud_01_2026.xlsx` | Usado en `clean_san_valentin.R` | `san_valentin.md` |
 | IPC marzo 2026 | `ipc/ipc_ind_nac_reg_ciud_03_2026.xlsx` | Usado en `clean_salario_ipc.R` | `salario_ipc.md` |
 | REESS enero 2026 | `reess/REESS Indicadores Laborales_Empleo_01_2026.xlsx` | Usado en `clean_salario_ipc.R` | `salario_ipc.md` |
+| REESS febrero 2026 | `reess/Indicadores Laborales_Empleo_02_2026.xlsx` | Usado en `clean_reess_salario_industrias.R` | `reess_salario_industrias.md` |
 | Fiscalía muertes de mujeres | `fiscalia/muertes_fem_fiscalia_2026.csv` | Usado en `clean_femicidios.R` | `femicidios.md` |
 | Exportaciones BCE | `exportaciones/05. Export. por Producto Principal y País.xlsx` | Usado en `clean_exportaciones_eeuu.R` | `exportaciones_eeuu.md` |
 | EF EPI Ecuador 2025 | `ef_epi/ef_epi_ecuador_extracted.xlsx` | Usado en `clean_ef_epi_job.R` | `ef_epi_job.md` |
