@@ -79,6 +79,29 @@ Rscript scripts/data-cleaning/clean_escolaridad_ingreso.R
 Rscript scripts/plots/plot_escolaridad_ingreso.R
 ```
 
+## Gráficos actuales
+
+Los PNG actualmente versionados en `figures/` corresponden a estos gráficos:
+
+- `cohab_parents_ecuador_instagram.png`
+- `ef_epi_job_ecuador.png`
+- `empleo_adecuado_grupo_edad_nivel_yoy_mensual_raw.png`
+- `endi_cuidador_principal.png`
+- `enemdu_ingreso_hogar_distribution.png`
+- `escolaridad_ingreso.png`
+- `evolucion_nini.png`
+- `femicidios_8m.png`
+- `post_cocina_2019.png`
+- `prev_anemia_quintil_endi_r2.png`
+- `prev_dcronica_etnia_endi_r2.png`
+- `reess_salario_industrias.png`
+- `salario_real_vs_nominal.png`
+- `top10_productos_eeuu_2024_2025.png`
+- `valentines_ipc_ecuador.png`
+- `wvs_religion_importance.png`
+
+Para un inventario rápido con fechas de archivo, ver `CHART_LOG.md`.
+
 ## Funciones compartidas (`scripts/utils.R`)
 
 `utils.R` se carga automáticamente con `source("scripts/utils.R")` al inicio de cada script de visualización. Define:
