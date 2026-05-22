@@ -45,7 +45,11 @@ label_usd <- function(x) {
 }
 
 label_pct <- function(x) {
-  format(round(x, 0), nsmall = 0, decimal.mark = ",", scientific = FALSE)
+  ifelse(
+    x < 0.1,
+    "<0,1",
+    format(round(x, 1), nsmall = 1, decimal.mark = ",", scientific = FALSE)
+  )
 }
 
 plot_df <- plot_df %>%
@@ -60,7 +64,7 @@ p_base <- ggplot(plot_df, aes(x = industria, y = salario, fill = empleo)) +
   geom_text(
     aes(label = label_barra),
     hjust = -0.08,
-    size = 2.7,
+    size = 2.3,
     colour = "grey20"
   ) +
   coord_flip(clip = "off") +
