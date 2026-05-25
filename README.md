@@ -83,23 +83,23 @@ Rscript scripts/plots/plot_escolaridad_ingreso.R
 
 Los PNG versionados en `figures/` ordenados según la secuencia de publicaciones son:
 
-1. Sin imagen versionada en `figures/` para la publicación `¿Los ecuatorianos más altos ganan más?` (2026-02-13).
-2. `02_san-valentin_inflacion-ecuador.png`
-3. `03_inactividad-juvenil_sexo-ecuador.png`
-4. `04_ingresos_nivel-educativo-ecuador.png`
-5. `05_femicidios_contexto-delictivo-ecuador.png`
-6. `06_jovenes_viven-con-padres-ecuador.png`
-7. `07_desnutricion-cronica_etnia-ecuador.png`
-8. `08_ingles_funcion-laboral-ecuador.png`
-9. `09_religion_importancia_sudamerica.png`
-10. `10_uso-del-tiempo_cocina-sexo-ecuador.png`
-11. `11_salarios_publico-privado_inflacion-ecuador.png`
-12. `12_exportaciones_eeuu_top10_2024-2025.png`
-13. `13_empleo-adecuado_edad_yoy_mar-2026.png`
-14. `14_anemia-infantil_quintil-ecuador.png`
-15. `15_cuidador-principal_infancia-ecuador.png`
-16. `16_ingreso-hogar_distribucion-ecuador.png`
-17. `17_salario-industrias_formal-ecuador.png`
+1. `01_altura-ingresos_ensanut-2018.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ecuatorianos_altos.R)
+2. `02_san-valentin_inflacion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_san_valentin.R)
+3. `03_inactividad-juvenil_sexo-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_evolucion_nini.R)
+4. `04_ingresos_nivel-educativo-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_escolaridad_ingreso.R)
+5. `05_femicidios_contexto-delictivo-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_femicidios.R)
+6. `06_jovenes_viven-con-padres-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_padres_hijos_censo.R)
+7. `07_desnutricion-cronica_etnia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_desnutricion.R)
+8. `08_ingles_funcion-laboral-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ef_epi_job.R)
+9. `09_religion_importancia_sudamerica.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_religion_importance.R)
+10. `10_uso-del-tiempo_cocina-sexo-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_uso_tiempo.R)
+11. `11_salarios_publico-privado_inflacion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_salario_real_vs_nominal.R)
+12. `12_exportaciones_eeuu_top10_2024-2025.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_exportaciones_eeuu.R)
+13. `13_empleo-adecuado_edad_yoy_mar-2026.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_empleo_adecuado_edad_nivel_yoy_mensual_raw.R)
+14. `14_anemia-infantil_quintil-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_anemia_quintil.R)
+15. `15_cuidador-principal_infancia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_cuidador_principal.R)
+16. `16_ingreso-hogar_distribucion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_hogar_distribution.R)
+17. `17_salario-industrias_formal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reess_salario_industrias.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)

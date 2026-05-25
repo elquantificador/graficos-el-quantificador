@@ -13,6 +13,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Tema | Ruta en `data/raw/` | Estado | Fuente |
 |---|---|---|---|
 | ENEMDU mensual enero 2026 | `enemdu/enemdu_persona_2026_01.sav` | Usado en `clean_escolaridad_ingreso.R` | `escolaridad_ingreso.md` |
+| ENSANUT 2018 personas | `ensanut/1_BDD_ENS2018_f1_personas.dta.zip` | Usado en `clean_ecuatorianos_altos.R` | `ecuatorianos_altos.md` |
 | ENEMDU trimestral 2021–2025 | `enemdu/evolucion/*.csv` | Usado en `clean_evolucion_nini.R` | `evolucion_nini.md` |
 | ENDI R2 | `endi_r2/BDD_ENDI_R2_f1_personas.rds` | Usado en `clean_endi_desnutricion.R` | `endi_desnutricion.md` |
 | ENDI R2 anemia por quintil | `endi_r2/BDD_ENDI_R2_f1_personas.rds` | Usado en `clean_endi_anemia_quintil.R` | `endi_anemia_quintil.md` |
