@@ -81,26 +81,26 @@ Rscript scripts/plots/plot_escolaridad_ingreso.R
 
 ## Gráficos actuales
 
-Los PNG actualmente versionados en `figures/` corresponden a estos gráficos:
+Los PNG versionados en `figures/` ordenados según la secuencia de publicaciones son:
 
-- `cohab_parents_ecuador_instagram.png`
-- `ef_epi_job_ecuador.png`
-- `empleo_adecuado_grupo_edad_nivel_yoy_mensual_raw.png`
-- `endi_cuidador_principal.png`
-- `enemdu_ingreso_hogar_distribution.png`
-- `escolaridad_ingreso.png`
-- `evolucion_nini.png`
-- `femicidios_8m.png`
-- `post_cocina_2019.png`
-- `prev_anemia_quintil_endi_r2.png`
-- `prev_dcronica_etnia_endi_r2.png`
-- `reess_salario_industrias.png`
-- `salario_real_vs_nominal.png`
-- `top10_productos_eeuu_2024_2025.png`
-- `valentines_ipc_ecuador.png`
-- `wvs_religion_importance.png`
+1. Sin imagen versionada en `figures/` para la publicación `¿Los ecuatorianos más altos ganan más?` (2026-02-13).
+2. `02_san-valentin_inflacion-ecuador.png`
+3. `03_inactividad-juvenil_sexo-ecuador.png`
+4. `04_ingresos_nivel-educativo-ecuador.png`
+5. `05_femicidios_contexto-delictivo-ecuador.png`
+6. `06_jovenes_viven-con-padres-ecuador.png`
+7. `07_desnutricion-cronica_etnia-ecuador.png`
+8. `08_ingles_funcion-laboral-ecuador.png`
+9. `09_religion_importancia_sudamerica.png`
+10. `10_uso-del-tiempo_cocina-sexo-ecuador.png`
+11. `11_salarios_publico-privado_inflacion-ecuador.png`
+12. `12_exportaciones_eeuu_top10_2024-2025.png`
+13. `13_empleo-adecuado_edad_yoy_mar-2026.png`
+14. `14_anemia-infantil_quintil-ecuador.png`
+15. `15_cuidador-principal_infancia-ecuador.png`
+16. `16_ingreso-hogar_distribucion-ecuador.png`
+17. `17_salario-industrias_formal-ecuador.png`
 
-Para un inventario rápido con fechas de archivo, ver `CHART_LOG.md`.
 
 ## Funciones compartidas (`scripts/utils.R`)
 

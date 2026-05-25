@@ -3,7 +3,7 @@
 # Genera el gráfico de convivencia con padres/abuelos a partir
 # de los datos procesados del censo 2010 y 2022.
 # Requiere: data/processed/padres_hijos_censo.rds
-# Guarda:   figures/cohab_parents_ecuador_instagram.png
+# Guarda:   figures/06_jovenes_viven-con-padres-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_padres_hijos_censo.R
@@ -13,7 +13,7 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("scales", "ragg"))
 
-out_path <- "figures/cohab_parents_ecuador_instagram.png"
+out_path <- "figures/06_jovenes_viven-con-padres-ecuador.png"
 plot_df <- readRDS("data/processed/padres_hijos_censo.rds")
 
 p_base <- ggplot(plot_df, aes(x = age_group, y = share, fill = factor(year))) +

@@ -3,7 +3,7 @@
 # Genera el gráfico del principal cuidador entre semana para
 # niños y niñas en la ENDI R2.
 # Requiere: data/processed/endi_r2_cuidador_principal.rds
-# Guarda:   figures/endi_cuidador_principal.png
+# Guarda:   figures/15_cuidador-principal_infancia-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_endi_cuidador_principal.R
@@ -13,7 +13,7 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "scales", "ragg", "stringr"))
 
-out_path <- "figures/endi_cuidador_principal.png"
+out_path <- "figures/15_cuidador-principal_infancia-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_cuidador_principal.rds") %>%
   mutate(
     cuidador_label = case_when(

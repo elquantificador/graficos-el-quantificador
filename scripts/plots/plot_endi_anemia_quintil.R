@@ -3,7 +3,7 @@
 # Genera el gráfico de prevalencia de anemia en niñas/os de
 # 6 a 23 meses por quintil de bienestar.
 # Requiere: data/processed/endi_r2_prev_anemia_quintil.rds
-# Guarda:   figures/prev_anemia_quintil_endi_r2.png
+# Guarda:   figures/14_anemia-infantil_quintil-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_endi_anemia_quintil.R
@@ -13,7 +13,7 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "scales", "ragg", "stringr"))
 
-out_path <- "figures/prev_anemia_quintil_endi_r2.png"
+out_path <- "figures/14_anemia-infantil_quintil-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_prev_anemia_quintil.rds") %>%
   mutate(
     quintil_label = case_when(

@@ -2,7 +2,7 @@
 # plot_escolaridad_ingreso.R
 # Genera el gráfico de ingreso laboral por nivel educativo.
 # Requiere: data/processed/escolaridad_ingreso.rds
-# Guarda:   figures/escolaridad_ingreso.png
+# Guarda:   figures/04_ingresos_nivel-educativo-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_escolaridad_ingreso.R
@@ -66,6 +66,6 @@ p_base <- ggplot(boxstats, aes(x = escolaridad)) +
 
 dir.create("figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, y = 0.20)
-ggsave("figures/escolaridad_ingreso.png", p_final,
+ggsave("figures/04_ingresos_nivel-educativo-ecuador.png", p_final,
        width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: figures/escolaridad_ingreso.png")
+message("Guardado: figures/04_ingresos_nivel-educativo-ecuador.png")

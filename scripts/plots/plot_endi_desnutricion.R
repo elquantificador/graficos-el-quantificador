@@ -3,14 +3,14 @@
 # Genera el gráfico de prevalencia de desnutrición crónica
 # por etnia a partir de los datos procesados de la ENDI R2.
 # Requiere: data/processed/endi_r2_prev_dcronica_etnia.rds
-# Guarda:   figures/prev_dcronica_etnia_endi_r2.png
+# Guarda:   figures/07_desnutricion-cronica_etnia-ecuador.png
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("forcats", "scales", "ragg"))
 
-out_path <- "figures/prev_dcronica_etnia_endi_r2.png"
+out_path <- "figures/07_desnutricion-cronica_etnia-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_prev_dcronica_etnia.rds")
 
 p_base <- ggplot(plot_df, aes(x = fct_reorder(etnia, prev_dcronica), y = prev_dcronica)) +

@@ -3,7 +3,7 @@
 # Genera el gráfico de femicidios y otras muertes de mujeres
 # por año (Fiscalía General del Estado, 2014–2025).
 # Requiere: data/processed/femicidios.rds
-# Guarda:   figures/femicidios_8m.png
+# Guarda:   figures/05_femicidios_contexto-delictivo-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_femicidios.R
@@ -55,6 +55,6 @@ p_base <- ggplot(muertes_fem, aes(x = as.character(año), y = cantidad, fill = t
 
 dir.create("figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.90, y = 0.07)
-ggsave("figures/femicidios_8m.png", p_final,
+ggsave("figures/05_femicidios_contexto-delictivo-ecuador.png", p_final,
        width = 4.5, height = 5.5, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: figures/femicidios_8m.png")
+message("Guardado: figures/05_femicidios_contexto-delictivo-ecuador.png")

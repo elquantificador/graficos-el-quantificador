@@ -2,7 +2,7 @@
 # plot_salario_real_vs_nominal.R
 # Genera el gráfico de sueldo promedio nominal y real.
 # Requiere: data/processed/salario_ipc_series.rds
-# Guarda:   figures/salario_real_vs_nominal.png
+# Guarda:   figures/11_salarios_publico-privado_inflacion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_salario_real_vs_nominal.R
@@ -148,7 +148,7 @@ p_base <- ggplot2::ggplot(
 dir.create("figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.76, y = 0.11, width = 0.075, height = 0.075)
 ggplot2::ggsave(
-  "figures/salario_real_vs_nominal.png",
+  "figures/11_salarios_publico-privado_inflacion-ecuador.png",
   p_final,
   width = 4,
   height = 5,
@@ -157,4 +157,4 @@ ggplot2::ggsave(
   device = ragg::agg_png
 )
 
-message("Guardado: figures/salario_real_vs_nominal.png")
+message("Guardado: figures/11_salarios_publico-privado_inflacion-ecuador.png")
