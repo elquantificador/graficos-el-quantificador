@@ -3,7 +3,7 @@
 # Genera el grafico del tiempo semanal dedicado a cocinar
 # por sexo usando la encuesta de uso del tiempo 2019.
 # Requiere: data/processed/S51P2_UT2019_clean.rds
-# Guarda:   figures/10_uso-del-tiempo_cocina-sexo-ecuador.png
+# Guarda:   outputs/figures/10_uso-del-tiempo_cocina-sexo-ecuador.png
 # ============================================================
 # Ejecutar desde la raiz del proyecto:
 #   Rscript scripts/plots/plot_uso_tiempo.R
@@ -76,10 +76,10 @@ p_base <- ggplot(plot_df, aes(x = sexo, y = media, fill = sexo)) +
     axis.ticks = element_line(colour = "black")
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.05)
 ggsave(
-  "figures/10_uso-del-tiempo_cocina-sexo-ecuador.png",
+  "outputs/figures/10_uso-del-tiempo_cocina-sexo-ecuador.png",
   p_final,
   width = 4,
   height = 5,
@@ -88,4 +88,5 @@ ggsave(
   device = ragg::agg_png
 )
 
-message("Guardado: figures/10_uso-del-tiempo_cocina-sexo-ecuador.png")
+message("Guardado: outputs/figures/10_uso-del-tiempo_cocina-sexo-ecuador.png")
+

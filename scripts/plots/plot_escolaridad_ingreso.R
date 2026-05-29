@@ -2,7 +2,7 @@
 # plot_escolaridad_ingreso.R
 # Genera el gráfico de ingreso laboral por nivel educativo.
 # Requiere: data/processed/escolaridad_ingreso.rds
-# Guarda:   figures/04_ingresos_nivel-educativo-ecuador.png
+# Guarda:   outputs/figures/04_ingresos_nivel-educativo-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_escolaridad_ingreso.R
@@ -56,7 +56,7 @@ p_base <- ggplot(boxstats, aes(x = escolaridad)) +
     caption  = "Fuente: ENEMDU - INEC, enero 2026. Cálculos por el autor. Caja = p25–p75, línea = mediana, bigotes = p10–p90.\nSe implementan percentiles ponderados por pesos muestrales."
   ) +
   scale_y_continuous(
-    labels = label_dollar(big.mark = ",", accuracy = 1),
+    labels = label_dollar_intl(accuracy = 1),
     breaks = seq(0, 3000, 500),
     expand = expansion(mult = c(0, 0.02))
   ) +
@@ -64,8 +64,9 @@ p_base <- ggplot(boxstats, aes(x = escolaridad)) +
   theme_quantificador() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, y = 0.20)
-ggsave("figures/04_ingresos_nivel-educativo-ecuador.png", p_final,
+ggsave("outputs/figures/04_ingresos_nivel-educativo-ecuador.png", p_final,
        width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: figures/04_ingresos_nivel-educativo-ecuador.png")
+message("Guardado: outputs/figures/04_ingresos_nivel-educativo-ecuador.png")
+

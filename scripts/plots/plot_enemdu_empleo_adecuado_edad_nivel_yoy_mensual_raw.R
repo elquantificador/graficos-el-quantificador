@@ -4,14 +4,14 @@
 # nivel de empleo adecuado por grupo de edad (sin suavizado).
 # Requiere: data/processed/enemdu_empleo_adecuado_edad_yoy.rds
 #           (generado por clean_enemdu_empleo_adecuado_edad.R)
-# Guarda:   figures/13_empleo-adecuado_edad_yoy_mar-2026.png
+# Guarda:   outputs/figures/13_empleo-adecuado_edad_yoy_mar-2026.png
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "stringr"))
 
-out_path <- "figures/13_empleo-adecuado_edad_yoy_mar-2026.png"
+out_path <- "outputs/figures/13_empleo-adecuado_edad_yoy_mar-2026.png"
 
 plot_df <- readRDS("data/processed/enemdu_empleo_adecuado_edad_yoy.rds") %>%
   filter(fecha >= as.Date("2025-03-01"))
@@ -128,7 +128,7 @@ p_base <- ggplot(
     plot.caption.position = "plot"
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.89, y = 0.17)
 
 ggsave(
@@ -142,3 +142,4 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+

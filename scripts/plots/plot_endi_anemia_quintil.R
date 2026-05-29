@@ -3,7 +3,7 @@
 # Genera el gráfico de prevalencia de anemia en niñas/os de
 # 6 a 23 meses por quintil de bienestar.
 # Requiere: data/processed/endi_r2_prev_anemia_quintil.rds
-# Guarda:   figures/14_anemia-infantil_quintil-ecuador.png
+# Guarda:   outputs/figures/14_anemia-infantil_quintil-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_endi_anemia_quintil.R
@@ -13,7 +13,7 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "scales", "ragg", "stringr"))
 
-out_path <- "figures/14_anemia-infantil_quintil-ecuador.png"
+out_path <- "outputs/figures/14_anemia-infantil_quintil-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_prev_anemia_quintil.rds") %>%
   mutate(
     quintil_label = case_when(
@@ -47,7 +47,7 @@ caption_txt <- stringr::str_wrap(
 p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label), y = prev_anemia)) +
   geom_col(fill = "#EF9F4E", width = 0.56) +
   geom_text(
-    aes(label = percent(prev_anemia, accuracy = 0.1)),
+    aes(label = percent_intl(prev_anemia, accuracy = 0.1)),
     vjust = -0.2,
     size = 2.6
   ) +
@@ -80,7 +80,7 @@ p_base <- ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label),
     panel.grid = element_blank()
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.89, y = 0.16)
 
 ggsave(
@@ -92,3 +92,4 @@ ggsave(
   device = ragg::agg_png
 )
 message("Guardado: ", out_path)
+

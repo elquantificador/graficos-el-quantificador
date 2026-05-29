@@ -3,7 +3,7 @@
 # Genera el gráfico de puntaje de inglés EF EPI 2025 por
 # función laboral en Ecuador.
 # Requiere: data/processed/ef_epi_job.rds
-# Guarda:   figures/08_ingles_funcion-laboral-ecuador.png
+# Guarda:   outputs/figures/08_ingles_funcion-laboral-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_ef_epi_job.R
@@ -107,8 +107,9 @@ p_base <- ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
     plot.margin      = margin(14, 42, 14, 16)
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.19, width = 0.09, height = 0.09)
-ggsave("figures/08_ingles_funcion-laboral-ecuador.png", p_final,
+ggsave("outputs/figures/08_ingles_funcion-laboral-ecuador.png", p_final,
        width = 5, height = 6, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: figures/08_ingles_funcion-laboral-ecuador.png")
+message("Guardado: outputs/figures/08_ingles_funcion-laboral-ecuador.png")
+

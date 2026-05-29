@@ -3,7 +3,7 @@
 # Genera un gráfico de barras horizontales con el porcentaje
 # de personas que consideran que la religión es muy importante.
 # Requiere: data/processed/wvs_religion_importance.rds
-# Guarda:   figures/09_religion_importancia_sudamerica.png
+# Guarda:   outputs/figures/09_religion_importancia_sudamerica.png
 # ============================================================
 
 get_script_path <- function() {
@@ -38,7 +38,7 @@ source(file.path(project_root, "scripts", "packages.R"))
 ensure_packages(c("dplyr", "ggplot2", "scales", "forcats", "ragg", "stringr"))
 
 data_path <- file.path(project_root, "data", "processed", "wvs_religion_importance.rds")
-out_path <- file.path(project_root, "figures", "09_religion_importancia_sudamerica.png")
+out_path <- file.path(project_root, "outputs", "figures", "09_religion_importancia_sudamerica.png")
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
@@ -94,7 +94,7 @@ caption_txt <- paste(
 p_base <- ggplot(plot_df, aes(x = country_es, y = share, fill = tier)) +
   geom_col(width = 0.68) +
   geom_text(
-    aes(label = percent(share, accuracy = 0.1)),
+    aes(label = percent_intl(share, accuracy = 0.1)),
     hjust = -0.10,
     size = 2.7,
     colour = "grey20"
@@ -152,3 +152,4 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+

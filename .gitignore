@@ -1,6 +1,6 @@
 # Archivos generados automáticamente
 Rplots.pdf
-figures/*.pdf
+outputs/figures/*.pdf
 scripts/plots/plot_salario_vs_ipc.R
 
 # Datos procesados (derivados de los datos crudos)
@@ -18,3 +18,4 @@ Thumbs.db
 
 # Herramientas locales
 .claude/
+

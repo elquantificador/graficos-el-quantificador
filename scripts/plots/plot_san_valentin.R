@@ -3,7 +3,7 @@
 # Genera el gráfico de inflación acumulada de productos de
 # San Valentín (IPC enero 2016 – enero 2026).
 # Requiere: data/processed/san_valentin.rds
-# Guarda:   figures/02_san-valentin_inflacion-ecuador.png
+# Guarda:   outputs/figures/02_san-valentin_inflacion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_san_valentin.R
@@ -24,7 +24,7 @@ p_base <- ggplot(df, aes(x = reorder(product, inflation_2016_2026, decreasing = 
                          y = inflation_2016_2026)) +
   geom_bar(stat = "identity", width = 0.55, fill = "#ef9f4e") +
   geom_text(
-    aes(label = percent(inflation_2016_2026, accuracy = 0.1)),
+    aes(label = percent_intl(inflation_2016_2026, accuracy = 0.1)),
     hjust = -0.10, vjust = 0.5, size = 2.5
   ) +
   labs(
@@ -46,8 +46,9 @@ p_base <- ggplot(df, aes(x = reorder(product, inflation_2016_2026, decreasing = 
     plot.margin  = margin(14, 36, 14, 16)
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.90, y = 0.14)
-ggsave("figures/02_san-valentin_inflacion-ecuador.png", p_final,
+ggsave("outputs/figures/02_san-valentin_inflacion-ecuador.png", p_final,
        width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: figures/02_san-valentin_inflacion-ecuador.png")
+message("Guardado: outputs/figures/02_san-valentin_inflacion-ecuador.png")
+

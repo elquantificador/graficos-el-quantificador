@@ -3,7 +3,7 @@
 # Genera el grafico de la evolucion del personal del sistema
 # publico de salud en Ecuador a partir de la serie RAS.
 # Requiere: data/processed/ras_personal_salud_nacional.rds
-# Guarda:   figures/18_personal-salud-publica-ecuador.png
+# Guarda:   outputs/figures/18_personal-salud-publica-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   "C:/Program Files/R/R-4.5.2/bin/Rscript.exe" scripts/plots/plot_ras_personal_salud.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 in_path <- "data/processed/ras_personal_salud_nacional.rds"
-out_path <- "figures/18_personal-salud-publica-ecuador.png"
+out_path <- "outputs/figures/18_personal-salud-publica-ecuador.png"
 
 plot_df <- readRDS(in_path)
 max_personal <- max(plot_df$total, na.rm = TRUE)
@@ -102,7 +102,7 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
     expand = expansion(mult = c(0.01, 0.04))
   ) +
   scale_y_continuous(
-    labels = scales::label_comma(),
+    labels = label_number_intl(accuracy = 1),
     breaks = seq(0, ceiling(max_personal / 2500) * 2500, by = 2500),
     expand = expansion(mult = c(0.02, 0.04))
   ) +
@@ -138,7 +138,7 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
     plot.title = element_text(face = "bold", hjust = 0, size = 14.5)
   )
 
-dir.create("figures", showWarnings = FALSE, recursive = TRUE)
+dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.07, width = 0.08, height = 0.08)
 
 ggsave(
@@ -152,3 +152,4 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+

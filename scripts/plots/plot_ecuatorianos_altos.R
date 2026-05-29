@@ -2,7 +2,7 @@
 # plot_ecuatorianos_altos.R
 # Genera el gráfico de estatura e ingresos laborales por sexo.
 # Requiere: data/processed/ecuatorianos_altos_ensanut_2018.rds
-# Guarda:   figures/01_altura-ingresos_ensanut-2018.png
+# Guarda:   outputs/figures/01_altura-ingresos_ensanut-2018.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_ecuatorianos_altos.R
@@ -37,13 +37,14 @@ p_base <- ggplot(df, aes(x = estatura, y = linc, color = sexo, linetype = sexo))
     plot.margin = margin(12, 16, 16, 16)
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.86, y = 0.09, width = 0.10, height = 0.10)
 ggsave(
-  filename = "figures/01_altura-ingresos_ensanut-2018.png",
+  filename = "outputs/figures/01_altura-ingresos_ensanut-2018.png",
   plot = p_final,
   width = 4, height = 5, units = "in",
   dpi = 270,
   device = ragg::agg_png
 )
-message("Guardado: figures/01_altura-ingresos_ensanut-2018.png")
+message("Guardado: outputs/figures/01_altura-ingresos_ensanut-2018.png")
+

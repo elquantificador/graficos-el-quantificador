@@ -60,6 +60,27 @@ theme_women <- function() {
     )
 }
 
+# ---- Formatters ----
+#' Intl-style number formatter with decimal comma and thousands point
+label_number_intl <- function(...) {
+  scales::label_number(big.mark = ".", decimal.mark = ",", ...)
+}
+
+#' Intl-style percent formatter with decimal comma
+label_percent_intl <- function(...) {
+  scales::label_percent(decimal.mark = ",", ...)
+}
+
+#' Intl-style dollar formatter with decimal comma and thousands point
+label_dollar_intl <- function(...) {
+  scales::label_dollar(big.mark = ".", decimal.mark = ",", ...)
+}
+
+#' Intl-style inline percent text
+percent_intl <- function(x, ...) {
+  scales::percent(x, decimal.mark = ",", ...)
+}
+
 # ---- Logo overlay ----
 #' Superpone el logo sobre un ggplot usando cowplot
 #' @param plot      Un objeto ggplot

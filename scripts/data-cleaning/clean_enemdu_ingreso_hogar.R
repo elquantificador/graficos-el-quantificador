@@ -6,8 +6,8 @@
 # inversiones, transferencias y prestaciones, y bonos.
 # Requiere: data/raw/enemdu/enemdu_persona_2026_03.sav
 # Guarda:   data/processed/enemdu_ingreso_hogar_2026_03.rds
-#           tables/enemdu_ingreso_hogar_2026_03_summary.xlsx
-#           tables/enemdu_ingreso_hogar_2026_03_summary.html
+#           outputs/tables/enemdu_ingreso_hogar_2026_03_summary.xlsx
+#           outputs/tables/enemdu_ingreso_hogar_2026_03_summary.html
 # Muestra:  resumen de ingreso_total_hogar
 # ============================================================
 # Ejecutar desde la raiz del proyecto:
@@ -19,8 +19,8 @@ ensure_packages(c("dplyr", "tidyr", "haven", "readr", "openxlsx", "gt", "Hmisc")
 
 input_path <- "data/raw/enemdu/enemdu_persona_2026_03.sav"
 rds_path <- "data/processed/enemdu_ingreso_hogar_2026_03.rds"
-xlsx_path <- "tables/enemdu_ingreso_hogar_2026_03_summary.xlsx"
-html_path <- "tables/enemdu_ingreso_hogar_2026_03_summary.html"
+xlsx_path <- "outputs/tables/enemdu_ingreso_hogar_2026_03_summary.xlsx"
+html_path <- "outputs/tables/enemdu_ingreso_hogar_2026_03_summary.html"
 
 enemdu_ingreso_hogar <- read_sav(input_path) %>%
   mutate(
@@ -118,7 +118,7 @@ summary_table <- bind_rows(summary_total, summary_area) %>%
   )
 
 dir.create("data/processed", showWarnings = FALSE, recursive = TRUE)
-dir.create("tables", showWarnings = FALSE, recursive = TRUE)
+dir.create("outputs/tables", showWarnings = FALSE, recursive = TRUE)
 
 saveRDS(enemdu_ingreso_hogar, rds_path)
 
@@ -181,3 +181,4 @@ print(summary_table)
 message("Guardado: ", rds_path)
 message("Guardado: ", xlsx_path)
 message("Guardado: ", html_path)
+

@@ -3,20 +3,20 @@
 # Genera el gráfico de prevalencia de desnutrición crónica
 # por etnia a partir de los datos procesados de la ENDI R2.
 # Requiere: data/processed/endi_r2_prev_dcronica_etnia.rds
-# Guarda:   figures/07_desnutricion-cronica_etnia-ecuador.png
+# Guarda:   outputs/figures/07_desnutricion-cronica_etnia-ecuador.png
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("forcats", "scales", "ragg"))
 
-out_path <- "figures/07_desnutricion-cronica_etnia-ecuador.png"
+out_path <- "outputs/figures/07_desnutricion-cronica_etnia-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_prev_dcronica_etnia.rds")
 
 p_base <- ggplot(plot_df, aes(x = fct_reorder(etnia, prev_dcronica), y = prev_dcronica)) +
   geom_col(fill = "#EF9F4E", width = 0.65) +
   geom_text(
-    aes(label = percent(prev_dcronica, accuracy = 1)),
+    aes(label = percent_intl(prev_dcronica, accuracy = 1)),
     vjust = -0.2,
     size = 2.6
   ) +
@@ -47,7 +47,7 @@ p_base <- ggplot(plot_df, aes(x = fct_reorder(etnia, prev_dcronica), y = prev_dc
     panel.grid = element_blank()
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.10)
 
 ggsave(
@@ -59,3 +59,4 @@ ggsave(
   device = ragg::agg_png
 )
 message("Guardado: ", out_path)
+

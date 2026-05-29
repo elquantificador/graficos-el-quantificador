@@ -3,7 +3,7 @@
 # Genera un histograma ponderado de la distribución del ingreso
 # total del hogar en la ENEMDU marzo 2026.
 # Requiere: data/processed/enemdu_ingreso_hogar_2026_03.rds
-# Guarda:   figures/16_ingreso-hogar_distribucion-ecuador.png
+# Guarda:   outputs/figures/16_ingreso-hogar_distribucion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_enemdu_ingreso_hogar_distribution.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "scales", "ragg", "Hmisc"))
 
 input_path <- "data/processed/enemdu_ingreso_hogar_2026_03.rds"
-out_path <- "figures/16_ingreso-hogar_distribucion-ecuador.png"
+out_path <- "outputs/figures/16_ingreso-hogar_distribucion-ecuador.png"
 
 df <- readRDS(input_path)
 
@@ -140,7 +140,7 @@ p_base <- ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
     plot.margin = margin(6, 30, 6, 16)
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.895, y = 0.18, width = 0.09, height = 0.09)
 
 ggsave(
@@ -153,3 +153,4 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+

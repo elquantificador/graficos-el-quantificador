@@ -3,7 +3,7 @@
 # Genera el gráfico del principal cuidador entre semana para
 # niños y niñas en la ENDI R2.
 # Requiere: data/processed/endi_r2_cuidador_principal.rds
-# Guarda:   figures/15_cuidador-principal_infancia-ecuador.png
+# Guarda:   outputs/figures/15_cuidador-principal_infancia-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_endi_cuidador_principal.R
@@ -13,7 +13,7 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "scales", "ragg", "stringr"))
 
-out_path <- "figures/15_cuidador-principal_infancia-ecuador.png"
+out_path <- "outputs/figures/15_cuidador-principal_infancia-ecuador.png"
 plot_df <- readRDS("data/processed/endi_r2_cuidador_principal.rds") %>%
   mutate(
     cuidador_label = case_when(
@@ -53,7 +53,7 @@ p_base <- ggplot(
 ) +
   geom_col(fill = "#EF9F4E", width = 0.56) +
   geom_text(
-    aes(label = scales::percent(share, accuracy = 0.1)),
+    aes(label = percent_intl(share, accuracy = 0.1)),
     hjust = -0.10,
     size = 2.6
   ) +
@@ -88,7 +88,7 @@ p_base <- ggplot(
     panel.grid = element_blank()
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.895, y = 0.13, width = 0.09, height = 0.09)
 
 ggsave(
@@ -100,3 +100,4 @@ ggsave(
   device = ragg::agg_png
 )
 message("Guardado: ", out_path)
+

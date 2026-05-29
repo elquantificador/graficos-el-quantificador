@@ -7,7 +7,7 @@ Repositorio para la reproducción y publicación de los gráficos de El Quantifi
 El repositorio usa un esquema de licencias separadas:
 
 - **Código y scripts**: [MIT](LICENSE)
-- **Imágenes y gráficos del repositorio** (incluyendo `figures/` y `quantificador.png`, salvo nota en contrario): [CC BY-NC 4.0](LICENSE-images)
+- **Imágenes y gráficos del repositorio** (incluyendo `outputs/figures/` y `quantificador.png`, salvo nota en contrario): [CC BY-NC 4.0](LICENSE-images)
 
 Los datos crudos, diccionarios, metadatos y otros insumos de terceros dentro de `data/` pueden estar sujetos a sus propias condiciones de uso y no se relicencian automáticamente bajo MIT ni bajo CC BY-NC 4.0.
 
@@ -19,7 +19,9 @@ graficos-el-quantificador/
 │   ├── raw/                # Datos crudos organizados por tema/fuente
 │   ├── processed/          # Datos procesados generados por los scripts de limpieza (no versionados)
 │   └── sources/            # Inventario y fichas de fuentes de datos
-├── figures/                # Figuras generadas versionadas en el repositorio
+├── outputs/
+│   ├── figures/            # Figuras generadas versionadas en el repositorio
+│   └── tables/             # Tablas generadas (Excel/HTML)
 ├── scripts/
 │   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
@@ -55,7 +57,7 @@ install.packages(c("dplyr", "survey", "ggplot2", "scales", "cowplot", "haven",
 
 ### Convención importante
 
-**Todos los scripts deben ejecutarse desde la raíz del repositorio** (el directorio que contiene `scripts/`, `data/`, `figures/`, etc.).
+**Todos los scripts deben ejecutarse desde la raíz del repositorio** (el directorio que contiene `scripts/`, `data/`, `outputs/`, etc.).
 
 En RStudio, abre el proyecto y verifica que el directorio de trabajo sea la raíz con `getwd()`.
 
@@ -71,7 +73,7 @@ Rscript scripts/plots/plot_evolucion_nini.R
 Cada gráfico usa dos scripts:
 
 1. **`clean_*.R`** — Carga los datos crudos, los limpia y guarda el resultado en `data/processed/` como `.rds`.
-2. **`plot_*.R`** — Carga los datos procesados, aplica el diseño muestral si corresponde, y genera la figura en `figures/`.
+2. **`plot_*.R`** — Carga los datos procesados, aplica el diseño muestral si corresponde, y genera la figura en `outputs/figures/`.
 
 Ejemplo para reproducir el gráfico de ingresos por escolaridad:
 ```bash
@@ -81,7 +83,7 @@ Rscript scripts/plots/plot_escolaridad_ingreso.R
 
 ## Gráficos actuales
 
-Los PNG versionados en `figures/` ordenados según la secuencia de publicaciones son:
+Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publicaciones son:
 
 1. `01_altura-ingresos_ensanut-2018.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ecuatorianos_altos.R)
 2. `02_san-valentin_inflacion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_san_valentin.R)
@@ -100,6 +102,7 @@ Los PNG versionados en `figures/` ordenados según la secuencia de publicaciones
 15. `15_cuidador-principal_infancia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_cuidador_principal.R)
 16. `16_ingreso-hogar_distribucion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_hogar_distribution.R)
 17. `17_salario-industrias_formal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reess_salario_industrias.R)
+18. `18_personal-salud-publica-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ras_personal_salud.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)
@@ -116,7 +119,7 @@ source("scripts/utils.R")
 
 p <- ggplot(...) + ... + theme_quantificador()
 p_final <- add_logo(p)
-ggsave("figures/mi_grafico.png", p_final, ...)
+ggsave("outputs/figures/mi_grafico.png", p_final, ...)
 ```
 
 ## Notas sobre los datos
@@ -125,4 +128,7 @@ Los archivos de datos crudos (`.sav`, `.xlsx`, `.csv`, `.xls`, `.rds`) viven baj
 
 Los archivos procesados (`data/processed/`) tampoco se versionan: son derivados de los datos crudos y pueden regenerarse en cualquier momento ejecutando el script `clean_*.R` correspondiente.
 
-Las figuras PNG en `figures/` sí se versionan en este repositorio como salidas publicadas. Los PDF generados se ignoran.
+Las figuras PNG en `outputs/figures/` sí se versionan en este repositorio como salidas publicadas. Los PDF generados se ignoran.
+Las tablas derivadas en Excel/HTML se escriben en `outputs/tables/`.
+
+

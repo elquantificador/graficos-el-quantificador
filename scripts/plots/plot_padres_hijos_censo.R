@@ -3,7 +3,7 @@
 # Genera el gráfico de convivencia con padres/abuelos a partir
 # de los datos procesados del censo 2010 y 2022.
 # Requiere: data/processed/padres_hijos_censo.rds
-# Guarda:   figures/06_jovenes_viven-con-padres-ecuador.png
+# Guarda:   outputs/figures/06_jovenes_viven-con-padres-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_padres_hijos_censo.R
@@ -13,13 +13,13 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("scales", "ragg"))
 
-out_path <- "figures/06_jovenes_viven-con-padres-ecuador.png"
+out_path <- "outputs/figures/06_jovenes_viven-con-padres-ecuador.png"
 plot_df <- readRDS("data/processed/padres_hijos_censo.rds")
 
 p_base <- ggplot(plot_df, aes(x = age_group, y = share, fill = factor(year))) +
   geom_col(position = position_dodge(width = 0.85), width = 0.65) +
   geom_text(
-    aes(label = percent(share, accuracy = 1)),
+    aes(label = percent_intl(share, accuracy = 1)),
     position = position_dodge(width = 0.85),
     vjust = -0.2,
     size = 2.4,
@@ -60,7 +60,7 @@ p_base <- ggplot(plot_df, aes(x = age_group, y = share, fill = factor(year))) +
     panel.grid = element_blank()
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.20)
 
 ggsave(
@@ -72,3 +72,4 @@ ggsave(
   device = ragg::agg_png
 )
 message("Guardado: ", out_path)
+

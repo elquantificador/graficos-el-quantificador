@@ -3,7 +3,7 @@
 # Genera el top 5 de industrias mejor pagadas usando salario
 # promedio del empleo registrado en REESS.
 # Requiere: data/processed/reess_salario_industrias_feb_2025_2026.rds
-# Guarda:   figures/17_salario-industrias_formal-ecuador.png
+# Guarda:   outputs/figures/17_salario-industrias_formal-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_reess_salario_industrias.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "tidyr", "ggplot2", "scales", "stringr", "ragg"))
 
 input_path <- "data/processed/reess_salario_industrias_feb_2025_2026.rds"
-out_path <- "figures/17_salario-industrias_formal-ecuador.png"
+out_path <- "outputs/figures/17_salario-industrias_formal-ecuador.png"
 
 plot_df <- readRDS(input_path)
 total_empleo <- sum(plot_df$empleo_feb_2026, na.rm = TRUE)
@@ -114,7 +114,7 @@ p_base <- ggplot(plot_df, aes(x = industria, y = salario, fill = empleo)) +
   ) +
   guides(fill = guide_colorbar(order = 1, barwidth = unit(3.2, "cm"), barheight = unit(0.18, "cm")))
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.89, y = 0.27, width = 0.09, height = 0.09)
 
 ggsave(
@@ -127,3 +127,4 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+

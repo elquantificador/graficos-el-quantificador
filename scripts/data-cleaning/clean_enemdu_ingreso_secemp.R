@@ -3,8 +3,8 @@
 # Resume ingresos individuales por categoria secemp en la
 # ENEMDU marzo 2026, con ponderacion fexp.
 # Requiere: data/raw/enemdu/enemdu_persona_2026_03.sav
-# Guarda:   tables/enemdu_ingreso_secemp_2026_03_summary.xlsx
-#           tables/enemdu_ingreso_secemp_2026_03_summary.html
+# Guarda:   outputs/tables/enemdu_ingreso_secemp_2026_03_summary.xlsx
+#           outputs/tables/enemdu_ingreso_secemp_2026_03_summary.html
 # ============================================================
 # Ejecutar desde la raiz del proyecto:
 #   Rscript scripts/data-cleaning/clean_enemdu_ingreso_secemp.R
@@ -14,8 +14,8 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "tidyr", "haven", "readr", "openxlsx", "gt", "Hmisc"))
 
 input_path <- "data/raw/enemdu/enemdu_persona_2026_03.sav"
-xlsx_path <- "tables/enemdu_ingreso_secemp_2026_03_summary.xlsx"
-html_path <- "tables/enemdu_ingreso_secemp_2026_03_summary.html"
+xlsx_path <- "outputs/tables/enemdu_ingreso_secemp_2026_03_summary.xlsx"
+html_path <- "outputs/tables/enemdu_ingreso_secemp_2026_03_summary.html"
 
 enemdu_persona <- read_sav(input_path) %>%
   mutate(
@@ -107,7 +107,7 @@ summary_table <- bind_rows(summary_total, summary_secemp) %>%
     values_from = valor
   )
 
-dir.create("tables", showWarnings = FALSE, recursive = TRUE)
+dir.create("outputs/tables", showWarnings = FALSE, recursive = TRUE)
 
 wb <- createWorkbook()
 addWorksheet(wb, "summary")
@@ -174,3 +174,4 @@ print(summary_table)
 message("Hogares distintos en la base: ", n_hogares)
 message("Guardado: ", xlsx_path)
 message("Guardado: ", html_path)
+

@@ -3,7 +3,7 @@
 # Genera el gráfico de evolución mensual del porcentaje NINI
 # (jóvenes que no estudian ni trabajan) por sexo.
 # Requiere: data/processed/evolucion_nini.rds
-# Guarda:   figures/03_inactividad-juvenil_sexo-ecuador.png
+# Guarda:   outputs/figures/03_inactividad-juvenil_sexo-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_evolucion_nini.R
@@ -69,8 +69,9 @@ p_base <- ggplot(nini_mensual_sexo,
     plot.margin        = margin(12, 20, 8, 14)
   )
 
-dir.create("figures", showWarnings = FALSE)
+dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.86, y = 0.14)
-ggsave("figures/03_inactividad-juvenil_sexo-ecuador.png", p_final,
+ggsave("outputs/figures/03_inactividad-juvenil_sexo-ecuador.png", p_final,
        width = 4, height = 5, dpi = 300)
-message("Guardado: figures/03_inactividad-juvenil_sexo-ecuador.png")
+message("Guardado: outputs/figures/03_inactividad-juvenil_sexo-ecuador.png")
+
