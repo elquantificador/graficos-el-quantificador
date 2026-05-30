@@ -100,6 +100,7 @@ Los PNG versionados en `figures/` ordenados según la secuencia de publicaciones
 15. `15_cuidador-principal_infancia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_cuidador_principal.R)
 16. `16_ingreso-hogar_distribucion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_hogar_distribution.R)
 17. `17_salario-industrias_formal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reess_salario_industrias.R)
+18. `18_personal-salud-publica-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ras_personal_salud.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)
