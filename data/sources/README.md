@@ -29,6 +29,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Exportaciones BCE | `exportaciones/05. Export. por Producto Principal y País.xlsx` | Usado en `clean_exportaciones_eeuu.R` | `exportaciones_eeuu.md` |
 | EF EPI Ecuador 2025 | `ef_epi/ef_epi_ecuador_extracted.xlsx` | Usado en `clean_ef_epi_job.R` | `ef_epi_job.md` |
 | WVS religión | `wvs/wvs_importance_of_religion_in_life.xls` | Usado en `clean_wvs_religion_importance.R` | `wvs_religion_importance.md` |
+| RAS nacional MSP | `ras/msp_serie_nac.rds` | Usado en `clean_ras_personal_salud.R` | `ras_personal_salud.md` |
 
 ## Cobertura de documentación
 
