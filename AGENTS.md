@@ -1,0 +1,203 @@
+# AGENTS.md — El Quantificador chart repo
+
+This file describes the repo's conventions for AI coding agents.
+
+## Purpose
+
+This repo contains reproducible data visualizations published by [El Quantificador](https://elquantificador.org). Each chart is a pair of R scripts: one that cleans data and one that renders the figure.
+
+## Repository layout
+
+```
+graficos-el-quantificador/
+├── data/
+│   ├── raw/            # Raw datasets, organized by source (versioned)
+│   ├── processed/      # Derived .rds files from clean_*.R (gitignored)
+│   └── sources/        # Dataset inventory and methodological notes
+├── outputs/
+│   ├── figures/        # Published PNG files (versioned, numbered NN_slug-ecuador.png)
+│   ├── tables/         # Generated Excel/HTML (not versioned)
+│   └── chart_catalog/  # chart_catalog.csv — one row per chart
+├── scripts/
+│   ├── packages.R      # ensure_packages() helper — auto-installs from CRAN
+│   ├── utils.R         # Shared theme, formatters, add_logo()
+│   ├── data-cleaning/  # clean_*.R scripts
+│   └── plots/          # plot_*.R scripts
+└── quantificador.png   # Logo used by add_logo()
+```
+
+## Naming conventions
+
+| Artifact | Pattern | Example |
+|----------|---------|---------|
+| Raw data folder | `data/raw/[source_abbreviation]/` | `data/raw/enighur/` |
+| Processed file | `data/processed/[source]_[topic].rds` | `data/processed/enighur_ingreso_gasto.rds` |
+| Clean script | `scripts/data-cleaning/clean_[source]_[topic].R` | `clean_enighur_ingreso_gasto.R` |
+| Plot script | `scripts/plots/plot_[source]_[topic].R` | `plot_enighur_ingreso_gasto.R` |
+| Output PNG | `outputs/figures/NN_[slug]-ecuador.png` | `20_descomposicion-ingreso-hogar-ecuador.png` |
+
+`NN` is the chart's sequential number in the catalog (zero-padded to 2 digits).
+
+## Script conventions
+
+### Header block (required on every script)
+
+```r
+# ============================================================
+# clean_foo_bar.R  (or plot_foo_bar.R)
+# One-line description of what this script does.
+# Requiere: data/raw/source/file.rds
+# Guarda:   data/processed/foo_bar.rds   (or outputs/figures/NN_slug.png)
+# ============================================================
+# Ejecutar desde la raíz del proyecto:
+#   Rscript scripts/data-cleaning/clean_foo_bar.R
+# ============================================================
+```
+
+### Package management
+
+Always use the shared helper — never `install.packages()` or bare `library()` at the top level:
+
+```r
+source("scripts/packages.R")
+ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
+```
+
+### Paths
+
+All paths are **relative to the repo root**. Scripts must be run from the root:
+
+```r
+# Good
+readRDS("data/raw/enighur/cuadro_2_1_1_ingresos.rds")
+saveRDS(result, "data/processed/enighur_ingreso_gasto.rds")
+
+# Bad — never hardcode absolute paths or use path-detection hacks
+base_dir <- normalizePath(file.path(getwd(), "some_folder"), mustWork = FALSE)
+```
+
+### Clean scripts (`clean_*.R`)
+
+1. Source `scripts/packages.R` and call `ensure_packages()`
+2. Read from `data/raw/[source]/`
+3. Process and save a single `.rds` to `data/processed/`
+4. End with `message("Guardado: ", out_path)`
+
+### Plot scripts (`plot_*.R`)
+
+1. Source `scripts/utils.R` **and** `scripts/packages.R`, call `ensure_packages()`
+2. Read from `data/processed/`
+3. Build plot with `ggplot2`
+4. Apply logo: `p_final <- add_logo(p_base)`
+5. Save with `ragg::agg_png` at 300 dpi to `outputs/figures/`
+6. End with `message("Guardado: ", out_path)`
+
+### Output sizing
+
+The standard canvas is **4 × 5 inches at 300 dpi** (used by 16 of 19 charts). Use 4.5 × 5.5 only for charts with more vertical content (e.g. complex multi-panel or Instagram portrait layouts). Never use other sizes without a specific reason.
+
+```r
+# Standard (default)
+ggsave(out_path, plot = p_final, width = 4, height = 5, dpi = 300, device = ragg::agg_png)
+
+# Instagram portrait variant (4:5 aspect ratio, more vertical room)
+ggsave(out_path, plot = p_final, width = 4.5, height = 5.5, dpi = 300, device = ragg::agg_png)
+```
+
+### Typography
+
+Sizes differ by canvas. Do not mix sizes from different canvas tiers.
+
+| Element | 4 × 5 (standard) | 4.5 × 5.5 (Instagram) |
+|---------|------------------|----------------------|
+| `plot.title` | 12–12.5 pt, bold | 11–12 pt, bold |
+| `plot.subtitle` | 9 pt | 9–11 pt |
+| `plot.caption` | 5.5–6.5 pt | 6.5 pt, lineheight 1.05 |
+| `geom_text` / `annotate` labels | 2.6–3.5 (ggplot units) | 2.8–3.0 (ggplot units) |
+| `theme_classic(base_size)` | default | 9 |
+
+Wrap the entire raw caption as a single string with `stringr::str_wrap(..., width = 97)` — never insert manual `\n` breaks and never split into separate `str_wrap` calls per paragraph:
+
+```r
+# Good — one call, full raw text
+caption_txt <- stringr::str_wrap(
+  "Fuente: ... Elaborado por ... Nota: ... Otros incluye ...",
+  width = 97
+)
+
+# Bad — separate str_wrap per paragraph joined with paste()
+caption_txt <- paste(
+  stringr::str_wrap("Fuente: ...", width = 97),
+  stringr::str_wrap("Nota: ...", width = 97),
+  sep = "\n"
+)
+```
+
+### Logo sizing
+
+House style is fixed: `x = 0.88, width = 0.09, height = 0.09` on every canvas. Only `y` varies per chart — position it just above the caption, without overlapping it. The `utils.R` defaults already encode this house style, so a plain `add_logo(p_base)` call is correct unless a specific chart needs a non-default `y`.
+
+```r
+# Typical call — only override y
+p_final <- add_logo(p_base, x = 0.88, y = 0.18)
+```
+
+If you change the default in `utils.R`, re-render **all** charts that rely on the default.
+
+### Minimal plot script skeleton
+
+```r
+source("scripts/utils.R")
+source("scripts/packages.R")
+ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
+
+out_path <- "outputs/figures/NN_slug-ecuador.png"
+df <- readRDS("data/processed/foo_bar.rds")
+
+p_base <- ggplot(df, aes(...)) + ... + theme_quantificador()
+p_final <- add_logo(p_base)
+
+dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
+ggsave(out_path, plot = p_final, width = 4, height = 5, dpi = 300, device = ragg::agg_png)
+message("Guardado: ", out_path)
+```
+
+## Shared utilities (`scripts/utils.R`)
+
+| Function | Purpose |
+|----------|---------|
+| `theme_quantificador()` | Standard ggplot2 theme (classic, grey text, no grid) |
+| `theme_women()` | Variant for gender/women charts (theme_bw, purple palette) |
+| `label_number_intl(...)` | International number format (. thousands, , decimal) |
+| `label_percent_intl(...)` | International percent format |
+| `label_dollar_intl(...)` | International dollar format |
+| `percent_intl(x, ...)` | Inline percent text formatter |
+| `add_logo(plot, ...)` | Overlays the El Quantificador logo using cowplot |
+
+## How to add a new chart (checklist)
+
+1. Place raw data in `data/raw/[source]/`
+2. Write `scripts/data-cleaning/clean_[source]_[topic].R`
+3. Write `scripts/plots/plot_[source]_[topic].R`
+4. Run both from repo root and verify output at `outputs/figures/NN_slug-ecuador.png`
+5. Add a row to `outputs/chart_catalog/chart_catalog.csv`
+6. Add entry to the chart list in `README.md`
+7. Add a row to `data/sources/README.md`
+
+## Running scripts
+
+Always from the **repo root**:
+
+```bash
+Rscript scripts/data-cleaning/clean_enighur_ingreso_gasto.R
+Rscript scripts/plots/plot_enighur_ingreso_gasto.R
+```
+
+## What not to do
+
+- Do not create self-contained chart subfolders (e.g. `grafico1/`) — all scripts and data live in the centralized layout above.
+- Do not use bare `library()` or `install.packages()` — use `ensure_packages()`.
+- Do not hardcode absolute paths.
+- Do not export SVG to `outputs/figures/` — PNG only.
+- Do not commit files under `data/processed/` (gitignored).
+- Do not add per-chart README files — the central `README.md` and `data/sources/README.md` cover documentation.

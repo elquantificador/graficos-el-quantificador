@@ -38,7 +38,7 @@ p_base <- ggplot(df, aes(x = estatura, y = linc, color = sexo, linetype = sexo))
   )
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.86, y = 0.09, width = 0.10, height = 0.10)
+p_final <- add_logo(p_base, x = 0.88, y = 0.09)
 ggsave(
   filename = "outputs/figures/01_altura-ingresos_ensanut-2018.png",
   plot = p_final,

@@ -70,7 +70,7 @@ p_base <- ggplot(nini_mensual_sexo,
   )
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.86, y = 0.14)
+p_final <- add_logo(p_base, x = 0.88, y = 0.14)
 ggsave("outputs/figures/03_inactividad-juvenil_sexo-ecuador.png", p_final,
        width = 4, height = 5, dpi = 300)
 message("Guardado: outputs/figures/03_inactividad-juvenil_sexo-ecuador.png")

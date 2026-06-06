@@ -139,7 +139,7 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
   )
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.07, width = 0.08, height = 0.08)
+p_final <- add_logo(p_base, x = 0.88, y = 0.07)
 
 ggsave(
   filename = out_path,

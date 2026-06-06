@@ -90,7 +90,7 @@ percent_intl <- function(x, ...) {
 add_logo <- function(plot,
                      logo_path = LOGO_PATH,
                      x = 0.88, y = 0.07,
-                     width = 0.10, height = 0.10) {
+                     width = 0.09, height = 0.09) {
   ggdraw() +
     theme(
       plot.background = element_rect(fill = "white", colour = NA),
