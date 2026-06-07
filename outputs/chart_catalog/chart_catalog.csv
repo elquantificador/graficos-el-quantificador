@@ -132,4 +132,18 @@ Cada una de estas formas de juego abre espacios para explorar, imaginar, aprende
 Feliz Día del Niño!
 
 Gráfico elaborado por: Alonso Quijano-Ruiz y Daniel Sánchez Pazmiño",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_juguetes.R
-¿En qué gasta el hogar ecuatoriano?,"Descomposición del ingreso monetario mensual del hogar promedio, ENIGHUR",,,,20_descomposicion-ingreso-hogar-ecuador.png,,https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R
+¿En qué gasta el hogar ecuatoriano?,"Descomposición del ingreso monetario mensual del hogar promedio, ENIGHUR",2026-06-07,https://www.linkedin.com/feed/update/urn:li:activity:7469096436090068992,20_descomposicion-ingreso-hogar-ecuador.png,"Los nuevos datos de la ENIGHUR 2024-2025 de INEC Ecuador ofrecen una radiografía detallada del presupuesto de los hogares ecuatorianos.
+
+Algunos hallazgos:
+
+📊 El hogar ecuatoriano promedio recibe $889 mensuales de ingreso monetario.
+
+💰 En promedio, los hogares ecuatorianos destinan cerca del 77% de sus ingresos a distintos tipos de gasto.
+
+🍽 Los alimentos y bebidas constituyen el principal rubro de gasto, con el 22,8% del ingreso mensual promedio.
+
+🚌 El transporte representa el 9,2% del ingreso mensual, mientras que la vivienda y los servicios básicos equivalen al 7,8%.
+
+Daniel Sánchez Pazmiño analiza qué revelan los nuevos datos de la ENIGHUR 2024-2025 sobre los ingresos, gastos y prioridades de consumo de los hogares ecuatorianos.
+
+Lee el artículo completo en El Quantificador: https://elquantificador.blog/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R

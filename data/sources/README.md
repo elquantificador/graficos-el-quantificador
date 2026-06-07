@@ -30,7 +30,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | EF EPI Ecuador 2025 | `ef_epi/ef_epi_ecuador_extracted.xlsx` | Usado en `clean_ef_epi_job.R` | `ef_epi_job.md` |
 | WVS religión | `wvs/wvs_importance_of_religion_in_life.xls` | Usado en `clean_wvs_religion_importance.R` | `wvs_religion_importance.md` |
 | RAS nacional MSP | `ras/msp_serie_nac.rds` | Usado en `clean_ras_personal_salud.R` | `ras_personal_salud.md` |
-| ENIGHUR tabulados de ingresos, gastos y promedios | `enighur/cuadro_2_1_1_ingresos.rds`, `cuadro_2_1_3_gastos.rds`, `cuadro_2_2_1_promedios.rds`, `mapeo_categorias_gasto.rds` | Usado en `clean_enighur_ingreso_gasto.R` | — |
+| ENIGHUR tabulados de ingresos, gastos y promedios | `enighur/cuadro_2_1_1_ingresos.rds`, `cuadro_2_1_3_gastos.rds`, `cuadro_2_2_1_promedios.rds`, `mapeo_categorias_gasto.rds` | Usado en `clean_enighur_ingreso_gasto.R` | `enighur_ingreso_gasto.md` |
 
 ## Cobertura de documentación
 
