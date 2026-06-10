@@ -147,3 +147,4 @@ Algunos hallazgos:
 Daniel Sánchez Pazmiño analiza qué revelan los nuevos datos de la ENIGHUR 2024-2025 sobre los ingresos, gastos y prioridades de consumo de los hogares ecuatorianos.
 
 Lee el artículo completo en El Quantificador: https://elquantificador.blog/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R
+"La mediana del ingreso laboral formal es 2,5 veces la del sector informal en Ecuador","Distribución del ingreso laboral mensual de personas ocupadas de 15 años o más, ENEMDU marzo 2026",2026-06-09,,21_ingreso-laboral_sector-formal-informal-ecuador.png,,"https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_sector_laboral.R"

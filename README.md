@@ -105,6 +105,7 @@ Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publi
 18. `18_personal-salud-publica-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ras_personal_salud.R)
 19. `19_juguetes-infancia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_juguetes.R)
 20. `20_descomposicion-ingreso-hogar-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R)
+21. `21_ingreso-laboral_sector-formal-informal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_sector_laboral.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)
