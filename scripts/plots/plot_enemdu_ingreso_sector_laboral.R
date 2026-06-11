@@ -41,13 +41,16 @@ subtitle_txt <- stringr::str_wrap(
   width = 58
 )
 
-caption_txt <- paste0(
-  "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador de ",
-  "Laboratorio LIDE. Se muestran únicamente trabajadores de 15 años o más con ingreso laboral ",
-  "positivo. Los casos sin clasificación de sector se reasignan usando la afiliación a la seguridad social ",
-  "como criterio auxiliar de formalidad. Los percentiles son ponderados por el factor de expansión muestral. La visualización ",
-  "recorta el eje en el percentil 90 del ingreso laboral para mejorar la lectura. Caja = p25-p75; línea = mediana; ",
-  "bigotes = p10-p90."
+caption_txt <- stringr::str_wrap(
+  paste0(
+    "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador de ",
+    "Laboratorio LIDE. Se muestran únicamente trabajadores de 15 años o más con ingreso laboral ",
+    "positivo. Los casos sin clasificación de sector se reasignan usando la afiliación a la seguridad social ",
+    "como criterio auxiliar de formalidad. Los percentiles son ponderados por el factor de expansión muestral. ",
+    "La visualización recorta el eje en el percentil 90 del ingreso laboral para mejorar la lectura. ",
+    "Caja = p25-p75; línea = mediana; bigotes = p10-p90."
+  ),
+  width = 97
 )
 
 palette_fill <- c(
@@ -149,7 +152,7 @@ p_base <- ggplot(
   )
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-p_final <- add_logo(p_base, x = 0.90, y = 0.19)
+p_final <- add_logo(p_base, x = 0.88, y = 0.19)
 
 ggsave(
   filename = out_path,
