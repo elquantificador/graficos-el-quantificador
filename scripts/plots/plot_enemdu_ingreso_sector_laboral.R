@@ -21,8 +21,13 @@ plot_df <- chart_data$summary %>%
   mutate(
     sector = factor(sector, levels = c("Informal", "Formal")),
     ratio_mediana = mediana[sector == "Formal"] / mediana[sector == "Informal"],
-    label_x = p90 + c(38, 28),
-    median_label = paste0("Mediana: ", scales::dollar(mediana, accuracy = 1))
+    label_x = p90 + 18,
+    label_y = if_else(sector == "Formal", 2, 1),
+    median_label = paste0(
+      label_number_intl(accuracy = 0.1, scale_cut = scales::cut_short_scale())(personas_ponderadas),
+      " trabajadores",
+      "\nMediana: ", scales::dollar(mediana, accuracy = 1)
+    )
   )
 
 title_txt <- stringr::str_wrap(
@@ -76,13 +81,15 @@ p_base <- ggplot(
   geom_label(
     aes(
       y = label_x,
+      x = label_y,
       label = median_label,
       color = sector
     ),
     hjust = 0,
+    vjust = 0.5,
     fill = "white",
     fontface = "plain",
-    size = 2.9,
+    size = 2.45,
     label.padding = grid::unit(0.12, "lines"),
     label.r = grid::unit(0.12, "lines"),
     linewidth = 0.2,
@@ -94,7 +101,7 @@ p_base <- ggplot(
   scale_y_continuous(
     labels = label_dollar_intl(accuracy = 1),
     breaks = seq(0, 900, by = 200),
-    limits = c(0, 920),
+    limits = c(0, 980),
     expand = expansion(mult = c(0, 0.02))
   ) +
   labs(
