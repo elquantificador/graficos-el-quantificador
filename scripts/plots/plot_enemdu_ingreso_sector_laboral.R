@@ -19,31 +19,22 @@ out_path <- "outputs/figures/21_ingreso-laboral_sector-formal-informal-ecuador.p
 chart_data <- readRDS(input_path)
 plot_df <- chart_data$summary %>%
   mutate(
+    sector = factor(sector, levels = c("Informal", "Formal")),
     ratio_mediana = mediana[sector == "Formal"] / mediana[sector == "Informal"],
-    label_x = c(610, 730),
-    label_y = c(0.86, 2),
+    label_x = p90 + c(38, 28),
     median_label = paste0("Mediana: ", scales::dollar(mediana, accuracy = 1))
   )
 
-ratio_txt <- scales::number(plot_df$ratio_mediana[[1]], accuracy = 0.1, decimal.mark = ",")
-
 title_txt <- stringr::str_wrap(
-  paste0(
-    "La mediana del ingreso laboral formal es ",
-    ratio_txt,
-    " veces la del sector informal"
-  ),
+  "Los trabajadores formales ganan más del doble que los trabajadores informales",
   width = 42
 )
 
-subtitle_txt <- stringr::str_wrap(
-  "Distribución del ingreso laboral mensual de personas ocupadas de 15 años o más, ENEMDU marzo 2026",
-  width = 58
-)
+subtitle_txt <- "Ingresos laborales mensuales, por sector de ocupación, marzo 2026"
 
 caption_txt <- stringr::str_wrap(
   paste0(
-    "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador de ",
+    "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Eddie Tomalá para El Quantificador de ",
     "Laboratorio LIDE. Se muestran únicamente trabajadores de 15 años o más con ingreso laboral ",
     "positivo. Los casos sin clasificación de sector se reasignan usando la afiliación a la seguridad social ",
     "como criterio auxiliar de formalidad. Los percentiles son ponderados por el factor de expansión muestral. ",
@@ -82,20 +73,9 @@ p_base <- ggplot(
     linewidth = 0.5,
     alpha = 0.98
   ) +
-  geom_segment(
-    aes(
-      xend = sector,
-      y = mediana,
-      yend = label_x - 22,
-      color = sector
-    ),
-    linewidth = 0.35,
-    show.legend = FALSE
-  ) +
   geom_label(
     aes(
       y = label_x,
-      x = label_y,
       label = median_label,
       color = sector
     ),
