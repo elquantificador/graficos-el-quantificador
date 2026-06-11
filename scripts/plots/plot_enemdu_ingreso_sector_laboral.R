@@ -26,7 +26,7 @@ plot_df <- chart_data$summary %>%
   )
 
 title_txt <- stringr::str_wrap(
-  "Los trabajadores formales ganan más del doble que los trabajadores informales",
+  "Los trabajadores informales ganan menos de la mitad que los trabajadores formales",
   width = 42
 )
 
