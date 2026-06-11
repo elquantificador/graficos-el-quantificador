@@ -30,4 +30,5 @@ Encuesta con diseño complejo y ponderación muestral. En este gráfico se usan 
 - Se restringe el universo a personas ocupadas de 15 años o más con ingreso laboral positivo.
 - Se excluyen observaciones con `ingrl = 999999` o `ingrl = -1` por corresponder a no respuesta o valores inválidos.
 - Las observaciones con `secemp` faltante se imputan con base en la tenencia de seguridad social, siguiendo la lógica del script original.
+- Si una observación no tiene clasificación sectorial y tampoco tiene información suficiente en `p05a` y `p05b`, permanece como faltante y se excluye del análisis final.
 - Para la visualización, el eje se recorta en el percentil 90 ponderado del ingreso total observado.
