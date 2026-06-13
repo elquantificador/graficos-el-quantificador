@@ -5,10 +5,27 @@
 # ============================================================
 
 source("scripts/packages.R")
-ensure_packages(c("ggplot2", "cowplot"))
+ensure_packages(c("ggplot2", "cowplot", "stringr"))
 
 # ---- Constantes ----
 LOGO_PATH <- "quantificador.png"
+HOUSE_TITLE_SIZE_PT <- 12.5
+HOUSE_SUBTITLE_SIZE_PT <- 9
+HOUSE_CAPTION_SIZE_PT <- 6.5
+HOUSE_TITLE_WRAP_WIDTH <- 38
+
+house_wrap_width <- function(text_size_pt,
+                             reference_width = HOUSE_TITLE_WRAP_WIDTH,
+                             reference_size_pt = HOUSE_TITLE_SIZE_PT) {
+  round(reference_width * reference_size_pt / text_size_pt)
+}
+
+HOUSE_SUBTITLE_WRAP_WIDTH <- house_wrap_width(HOUSE_SUBTITLE_SIZE_PT)
+HOUSE_CAPTION_WRAP_WIDTH <- house_wrap_width(HOUSE_CAPTION_SIZE_PT)
+HOUSE_SUBTITLE_WRAP_WIDTH <- 60
+HOUSE_CAPTION_WRAP_WIDTH <- round(
+  HOUSE_SUBTITLE_WRAP_WIDTH * HOUSE_SUBTITLE_SIZE_PT / HOUSE_CAPTION_SIZE_PT
+)
 
 # ---- Tema base ----
 #' Tema ggplot2 compartido para todos los gráficos de El Quantificador
@@ -20,7 +37,7 @@ theme_quantificador <- function() {
       axis.title.y          = element_text(size = 7, margin = margin(r = 6), hjust = 1),
       plot.title            = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0),
       plot.subtitle         = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
-      plot.caption          = element_text(colour = "grey30", size = 5, lineheight = 1.1, hjust = 0,
+      plot.caption          = element_text(colour = "grey30", size = 6.5, lineheight = 1.1, hjust = 0,
                                            margin = margin(t = 6, r = 0, b = 0, l = 0)),
       axis.line             = element_line(colour = "grey60"),
       legend.position       = "none",
@@ -38,7 +55,7 @@ theme_women <- function() {
     theme(
       panel.grid             = element_blank(),
       panel.border           = element_blank(),
-      plot.caption           = element_text(hjust = 0, face = "italic", size = 5,
+      plot.caption           = element_text(hjust = 0, size = 6.5,
                                             colour = "grey30", lineheight = 1.1,
                                             margin = margin(t = 6, r = 0, b = 0, l = 0)),
       legend.background      = element_blank(),
@@ -79,6 +96,22 @@ label_dollar_intl <- function(...) {
 #' Intl-style inline percent text
 percent_intl <- function(x, ...) {
   scales::percent(x, decimal.mark = ",", ...)
+}
+
+# ---- Text wrapping ----
+#' Envuelve titulos usando el ancho visual de referencia de la casa
+wrap_title_house <- function(text, width = HOUSE_TITLE_WRAP_WIDTH) {
+  stringr::str_wrap(text, width = width)
+}
+
+#' Envuelve subtitulos para que coincidan visualmente con el ancho del titulo
+wrap_subtitle_house <- function(text, width = HOUSE_SUBTITLE_WRAP_WIDTH) {
+  stringr::str_wrap(text, width = width)
+}
+
+#' Envuelve captions para que coincidan visualmente con el ancho del titulo
+wrap_caption_house <- function(text, width = HOUSE_CAPTION_WRAP_WIDTH) {
+  stringr::str_wrap(text, width = width)
 }
 
 # ---- Logo overlay ----

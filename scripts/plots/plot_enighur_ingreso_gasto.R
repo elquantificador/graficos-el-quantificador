@@ -73,9 +73,8 @@ make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id, alpha
   )
 }
 
-caption_txt <- stringr::str_wrap(
-  "Fuente: INEC, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR), 2024-2025. Elaborado por Daniel Sánchez para El Quantificador. Nota: Todos los valores del gráfico son promedios mensuales de los hogares a nivel nacional en 2025. El tamaño promedio del hogar fue de 3,3 personas. El ahorro se calcula como la diferencia entre el ingreso monetario y los gastos del hogar. La categorización de gastos es nuestra.",
-  width = 58
+caption_txt <- wrap_caption_house(
+  "Fuente: INEC, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR), 2024-2025. Elaborado por Daniel Sánchez para El Quantificador. Nota: Todos los valores del gráfico son promedios mensuales de los hogares a nivel nacional en 2025. El tamaño promedio del hogar fue de 3,3 personas. El ahorro se calcula como la diferencia entre el ingreso monetario y los gastos del hogar. La categorización de gastos es nuestra."
 )
 
 processed     <- readRDS(processed_path)
@@ -224,8 +223,12 @@ p_base <- ggplot() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   labs(x = NULL, y = NULL,
-       title    = "Los hogares ecuatorianos gastan el 77% de su\ningreso",
-       subtitle = "Ingresos y gastos promedio de los hogares, nacional, ENIGHUR 2024-2025",
+       title    = wrap_title_house(
+         "Los hogares ecuatorianos gastan el 77% de su ingreso"
+       ),
+       subtitle = wrap_subtitle_house(
+         "Ingresos y gastos promedio de los hogares, ENIGHUR 2025"
+       ),
        caption  = caption_txt) +
   theme_classic(base_size = 9) +
   theme(
@@ -235,10 +238,10 @@ p_base <- ggplot() +
     axis.title          = element_blank(),
     legend.position     = "none",
     panel.grid          = element_blank(),
-    plot.margin         = margin(8, 66, 6, 12),
-    plot.title          = element_text(colour = "grey20", size = 11.8, face = "bold", hjust = 0, lineheight = 1.02),
-    plot.subtitle       = element_text(colour = "grey30", size = 6.9, lineheight = 1.02, hjust = 0),
-    plot.caption        = element_text(colour = "grey30", size = 5.2, lineheight = 1.05,
+    plot.margin         = margin(8, 60, 6, 12),
+    plot.title          = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
+    plot.subtitle       = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
+    plot.caption        = element_text(colour = "grey30", size = 5.5, lineheight = 1.1,
                                        hjust = 0, margin = margin(t = 6)),
     plot.title.position   = "plot",
     plot.caption.position = "plot"

@@ -95,41 +95,49 @@ base_dir <- normalizePath(file.path(getwd(), "some_folder"), mustWork = FALSE)
 
 ### Output sizing
 
-The standard canvas is **4 × 5 inches at 300 dpi** (used by 16 of 19 charts). Use 4.5 × 5.5 only for charts with more vertical content (e.g. complex multi-panel or Instagram portrait layouts). Never use other sizes without a specific reason.
+The standard canvas is **4 × 5 inches at 300 dpi**. Never use other sizes without a specific reason.
 
 ```r
 # Standard (default)
 ggsave(out_path, plot = p_final, width = 4, height = 5, dpi = 300, device = ragg::agg_png)
 
-# Instagram portrait variant (4:5 aspect ratio, more vertical room)
-ggsave(out_path, plot = p_final, width = 4.5, height = 5.5, dpi = 300, device = ragg::agg_png)
 ```
 
 ### Typography
 
-Sizes differ by canvas. Do not mix sizes from different canvas tiers.
+House typography is fixed for the standard canvas. Do not vary sizes chart by chart unless there is a specific layout reason.
 
-| Element | 4 × 5 (standard) | 4.5 × 5.5 (Instagram) |
-|---------|------------------|----------------------|
-| `plot.title` | 12–12.5 pt, bold | 11–12 pt, bold |
-| `plot.subtitle` | 9 pt | 9–11 pt |
-| `plot.caption` | 5.5–6.5 pt | 6.5 pt, lineheight 1.05 |
-| `geom_text` / `annotate` labels | 2.6–3.5 (ggplot units) | 2.8–3.0 (ggplot units) |
-| `theme_classic(base_size)` | default | 9 |
+| Element | 4 × 5 standard |
+|---------|------------------|
+| `plot.title` | 12–12.5 pt, bold |
+| `plot.subtitle` | 9 pt |
+| `plot.caption` | 5.5–6.5 pt |
+| `geom_text` / `annotate` labels | 2.6–3.5 (ggplot units) |
+| `theme_classic(base_size)` | default |
 
-Wrap the entire raw caption as a single string with `stringr::str_wrap(..., width = 97)` — never insert manual `\n` breaks and never split into separate `str_wrap` calls per paragraph:
+### Line breaking
+
+Line breaks should target a **fixed visual width** anchored on the house title width, not arbitrary per-chart character counts.
+
+- Use `wrap_title_house()` for titles.
+- Use `wrap_subtitle_house()` for subtitles.
+- Use `wrap_caption_house()` for captions.
+- These helpers are calibrated so title, subtitle, and caption lines occupy roughly the same horizontal space on the 4 × 5 canvas, despite different font sizes.
+- Do not use ad hoc `str_wrap()` widths unless a specific chart needs an optical override after rendering.
+- Do not insert manual `\n` line breaks by default. Only use manual breaks when the automatic house wrap still produces visibly unbalanced lines.
+
+Wrap the entire raw caption as a single string — never split into separate wrap calls per paragraph:
 
 ```r
-# Good — one call, full raw text
-caption_txt <- stringr::str_wrap(
+# Good — one call, full raw text using house helper
+caption_txt <- wrap_caption_house(
   "Fuente: ... Elaborado por ... Nota: ... Otros incluye ...",
-  width = 97
 )
 
-# Bad — separate str_wrap per paragraph joined with paste()
+# Bad — separate wrap calls per paragraph joined with paste()
 caption_txt <- paste(
-  stringr::str_wrap("Fuente: ...", width = 97),
-  stringr::str_wrap("Nota: ...", width = 97),
+  wrap_caption_house("Fuente: ..."),
+  wrap_caption_house("Nota: ..."),
   sep = "\n"
 )
 ```
@@ -173,6 +181,9 @@ message("Guardado: ", out_path)
 | `label_percent_intl(...)` | International percent format |
 | `label_dollar_intl(...)` | International dollar format |
 | `percent_intl(x, ...)` | Inline percent text formatter |
+| `wrap_title_house(text, ...)` | Wraps titles to the house visual width |
+| `wrap_subtitle_house(text, ...)` | Wraps subtitles to the house visual width |
+| `wrap_caption_house(text, ...)` | Wraps captions to the house visual width |
 | `add_logo(plot, ...)` | Overlays the El Quantificador logo using cowplot |
 
 ## How to add a new chart (checklist)
