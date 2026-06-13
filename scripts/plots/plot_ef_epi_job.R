@@ -50,10 +50,13 @@ band_colors <- c(
 
 # CEFR zone backgrounds removed
 
-caption_txt <- paste0(
-  "Fuente: EF English Proficiency Index (EF EPI), edición 2025. Education First (EF). ",
-  "Elaboración: El Quantificador de Laboratorio LIDE.\n",
-  "Correspondencia CEFR: A2 <400 · B1 400–499 · B2 500–599 · C1 ≥600."
+caption_txt <- stringr::str_wrap(
+  paste0(
+    "Fuente: EF English Proficiency Index (EF EPI), edición 2025. Education First (EF). ",
+    "Elaboración: El Quantificador de Laboratorio LIDE. ",
+    "Correspondencia CEFR: A2 <400 · B1 400–499 · B2 500–599 · C1 ≥600."
+  ),
+  width = 92
 )
 
 p_base <- ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
@@ -85,7 +88,10 @@ p_base <- ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
   labs(
     x        = "",
     y        = "Puntaje EF EPI (0–800)",
-    title    = "Because they're nice? Los profesionales en Estrategia y\nGestión de Proyectos tienen el mejor inglés del Ecuador",
+    title    = stringr::str_wrap(
+      "Because they're nice? Los profesionales en Estrategia y Gestión de Proyectos tienen el mejor inglés del Ecuador",
+      width = 42
+    ),
     subtitle = "Puntaje EF EPI 2025 por función laboral",
     caption  = caption_txt,
     fill     = "Nivel EF EPI"
@@ -93,23 +99,26 @@ p_base <- ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
   coord_flip(clip = "off") +
   theme_quantificador() +
   theme(
-    legend.position      = "bottom",
-    legend.justification = "left",
-    legend.direction     = "horizontal",
+    legend.position      = c(0.76, 0.18),
+    legend.justification = c(0, 0.5),
+    legend.direction     = "vertical",
     legend.title         = element_text(size = 6.5, face = "bold"),
     legend.text          = element_text(size = 6.5),
     legend.key.width     = unit(3, "mm"),
     legend.key.height    = unit(3, "mm"),
-    legend.box.margin    = margin(0, 0, 0, -55),
+    legend.background    = element_rect(fill = "white", colour = NA),
+    legend.box.background = element_blank(),
+    legend.box.margin    = margin(0, 0, 0, 0),
     axis.text.y      = element_text(hjust = 1),
     axis.title.x     = element_text(hjust = 0),
     plot.title       = element_text(size = 12.5, face = "bold", colour = "grey20", hjust = 0),
-    plot.margin      = margin(14, 42, 14, 16)
+    plot.caption     = element_text(size = 5.6, lineheight = 1.08, colour = "grey30", hjust = 0),
+    plot.margin      = margin(14, 52, 10, 16)
   )
 
 dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.88, y = 0.19, width = 0.09, height = 0.09)
 ggsave("outputs/figures/08_ingles_funcion-laboral-ecuador.png", p_final,
-       width = 5, height = 6, units = "in", dpi = 300, device = ragg::agg_png)
+       width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
 message("Guardado: outputs/figures/08_ingles_funcion-laboral-ecuador.png")
 

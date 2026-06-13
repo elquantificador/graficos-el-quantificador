@@ -53,11 +53,17 @@ enemdu_df <- haven::read_sav(input_path) %>%
 
 overall_p90 <- wtd_q(enemdu_df$ingrl, enemdu_df$fexp, 0.90)
 
+counts_df <- enemdu_df %>%
+  group_by(sector) %>%
+  summarise(
+    personas_ponderadas = sum(fexp, na.rm = TRUE),
+    .groups = "drop"
+  )
+
 summary_df <- enemdu_df %>%
   filter(ingrl <= overall_p90) %>%
   group_by(sector) %>%
   summarise(
-    personas_ponderadas = sum(fexp, na.rm = TRUE),
     p10 = wtd_q(ingrl, fexp, 0.10),
     p25 = wtd_q(ingrl, fexp, 0.25),
     mediana = wtd_q(ingrl, fexp, 0.50),
@@ -65,7 +71,8 @@ summary_df <- enemdu_df %>%
     p90 = wtd_q(ingrl, fexp, 0.90),
     promedio = weighted.mean(ingrl, fexp, na.rm = TRUE),
     .groups = "drop"
-  )
+  ) %>%
+  left_join(counts_df, by = "sector")
 
 chart_data <- list(
   summary = summary_df,

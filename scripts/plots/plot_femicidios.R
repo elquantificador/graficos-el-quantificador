@@ -56,6 +56,6 @@ p_base <- ggplot(muertes_fem, aes(x = as.character(año), y = cantidad, fill = t
 dir.create("outputs/figures", showWarnings = FALSE)
 p_final <- add_logo(p_base, x = 0.90, y = 0.07)
 ggsave("outputs/figures/05_femicidios_contexto-delictivo-ecuador.png", p_final,
-       width = 4.5, height = 5.5, units = "in", dpi = 300, device = ragg::agg_png)
+       width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
 message("Guardado: outputs/figures/05_femicidios_contexto-delictivo-ecuador.png")
 

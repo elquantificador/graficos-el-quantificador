@@ -51,10 +51,13 @@ label_df <- plot_df %>%
     )
   )
 
-caption_txt <- paste0(
-  "Fuente: Registro de Actividades y Recursos de Salud (RAS), 2006-2021. Elaboración: Odalis Clemente\n",
-  "y Alonso Quijano Ruiz para el Quantificador de Laboratorio LIDE. TAPS: Técnicos de Atención Primaria\n",
-  "en Salud, personal comunitario vinculado al primer nivel de atención."
+caption_txt <- stringr::str_wrap(
+  paste0(
+    "Fuente: Registro de Actividades y Recursos de Salud (RAS), 2006-2021. ",
+    "Elaboración: Odalis Clemente y Alonso Quijano Ruiz para el Quantificador de Laboratorio LIDE. ",
+    "TAPS: Técnicos de Atención Primaria en Salud, personal comunitario vinculado al primer nivel de atención."
+  ),
+  width = 82
 )
 
 p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
@@ -124,18 +127,18 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
   coord_cartesian(clip = "off") +
   theme_quantificador() +
   theme(
-    plot.subtitle = element_text(size = 11, lineheight = 1.1, hjust = 0),
-    plot.caption = element_text(size = 6.8, lineheight = 1.1, hjust = 0, margin = margin(t = 7)),
+    plot.subtitle = element_text(size = 8.7, lineheight = 1.05, hjust = 0),
+    plot.caption = element_text(size = 5.6, lineheight = 1.06, hjust = 0, margin = margin(t = 7)),
     axis.title.y = element_text(
       colour = "grey20",
-      size = 8.5,
+      size = 8,
       hjust = 0.5,
       vjust = 0.5,
       margin = margin(r = 10, b = 8)
     ),
-    plot.margin = margin(10, 48, 0, 12),
+    plot.margin = margin(10, 44, 4, 12),
     legend.position = "none",
-    plot.title = element_text(face = "bold", hjust = 0, size = 14.5)
+    plot.title = element_text(face = "bold", hjust = 0, size = 11.1, lineheight = 1.02)
   )
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
@@ -144,8 +147,8 @@ p_final <- add_logo(p_base, x = 0.88, y = 0.07)
 ggsave(
   filename = out_path,
   plot = p_final,
-  width = 4.5,
-  height = 5.5,
+  width = 4,
+  height = 5,
   units = "in",
   dpi = 300,
   device = ragg::agg_png

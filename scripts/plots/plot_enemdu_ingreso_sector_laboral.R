@@ -20,9 +20,7 @@ chart_data <- readRDS(input_path)
 plot_df <- chart_data$summary %>%
   mutate(
     sector = factor(sector, levels = c("Informal", "Formal")),
-    ratio_mediana = mediana[sector == "Formal"] / mediana[sector == "Informal"],
     label_x = p90 + 18,
-    label_y = if_else(sector == "Formal", 2, 1),
     median_label = paste0(
       label_number_intl(accuracy = 0.1, scale_cut = scales::cut_short_scale())(personas_ponderadas),
       " trabajadores",
@@ -81,7 +79,7 @@ p_base <- ggplot(
   geom_label(
     aes(
       y = label_x,
-      x = label_y,
+      x = sector,
       label = median_label,
       color = sector
     ),
@@ -111,16 +109,16 @@ p_base <- ggplot(
     y = "Ingreso laboral mensual (USD)",
     caption = caption_txt
   ) +
-  theme_classic() +
+  theme_quantificador() +
   theme(
-    axis.text.y = element_text(colour = "black", size = 8),
-    axis.text.x = element_text(colour = "black", size = 7),
-    axis.title.x = element_text(size = 7, colour = "black", margin = margin(t = 8)),
-    axis.line = element_line(colour = "black"),
-    plot.title = element_text(colour = "black", size = 12.3, face = "bold", lineheight = 1.02),
-    plot.subtitle = element_text(colour = "black", size = 8.7, lineheight = 1.0),
+    axis.text.y = element_text(colour = "grey20", size = 8),
+    axis.text.x = element_text(colour = "grey20", size = 7),
+    axis.title.x = element_text(size = 7, colour = "grey20", margin = margin(t = 8)),
+    axis.line = element_line(colour = "grey60"),
+    plot.title = element_text(colour = "grey20", size = 12.3, face = "bold", lineheight = 1.02),
+    plot.subtitle = element_text(colour = "grey30", size = 8.7, lineheight = 1.0),
     plot.caption = ggtext::element_textbox_simple(
-      colour = "black",
+      colour = "grey30",
       size = 5.5,
       lineheight = 1.06,
       halign = 0,

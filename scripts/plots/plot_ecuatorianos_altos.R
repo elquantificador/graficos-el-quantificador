@@ -43,7 +43,7 @@ ggsave(
   filename = "outputs/figures/01_altura-ingresos_ensanut-2018.png",
   plot = p_final,
   width = 4, height = 5, units = "in",
-  dpi = 270,
+  dpi = 300,
   device = ragg::agg_png
 )
 message("Guardado: outputs/figures/01_altura-ingresos_ensanut-2018.png")

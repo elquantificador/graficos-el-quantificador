@@ -142,7 +142,7 @@ ggplot2::ggsave(
   width = 4,
   height = 5,
   units = "in",
-  dpi = 320,
+  dpi = 300,
   device = ragg::agg_png
 )
 
