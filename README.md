@@ -20,11 +20,13 @@ graficos-el-quantificador/
 │   ├── processed/          # Datos procesados generados por los scripts de limpieza (no versionados)
 │   └── sources/            # Inventario y fichas de fuentes de datos
 ├── outputs/
-│   ├── figures/            # Figuras generadas versionadas en el repositorio
-│   └── tables/             # Tablas generadas (Excel/HTML)
+│   ├── figures/            # Figuras publicadas versionadas en el repositorio
+│   ├── tables/             # Tablas generadas (Excel/HTML)
+│   └── chart_catalog/      # Fuente estructurada y export CSV consumido por el sitio
 ├── scripts/
 │   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
+│   ├── generate_chart_catalog.R # Genera outputs/chart_catalog/chart_catalog.csv
 │   ├── data-cleaning/      # Scripts de limpieza y preparación de datos
 │   └── plots/              # Scripts de visualización
 └── quantificador.png       # Logo
@@ -79,6 +81,34 @@ Ejemplo para reproducir el gráfico de ingresos por escolaridad:
 ```bash
 Rscript scripts/data-cleaning/clean_escolaridad_ingreso.R
 Rscript scripts/plots/plot_escolaridad_ingreso.R
+```
+
+## Catálogo de visualizaciones
+
+El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv` para crear o actualizar páginas bajo `content/visualizaciones` y referenciar las imágenes publicadas.
+
+- Las imágenes publicadas viven en `outputs/figures/`.
+- `outputs/chart_catalog/chart_catalog_source.csv` es la fuente estructurada que se edita manualmente.
+- `outputs/chart_catalog/chart_catalog.csv` es un artefacto generado por `scripts/generate_chart_catalog.R`.
+
+### Esquema del catálogo exportado
+
+`chart_catalog.csv` expone estas columnas estables:
+
+- `Chart Name`
+- `Subtitle`
+- `Date`
+- `LinkedIn Link`
+- `Image Filename`
+- `Image Path` — ruta relativa al repo, por ejemplo `outputs/figures/21_ingreso-laboral_sector-formal-informal-ecuador.png`
+- `Author` — nombre de despliegue del autor o autores de la visualización
+- `Description`
+- `Script Link`
+
+Para regenerar el catálogo:
+
+```bash
+Rscript scripts/generate_chart_catalog.R
 ```
 
 ## Gráficos actuales

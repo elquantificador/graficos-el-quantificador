@@ -1,0 +1,158 @@
+"Chart Name","Subtitle","Date","LinkedIn Link","Image Filename","Author","Description","Script Link"
+"¿Los ecuatorianos más altos ganan más?","Un aumento de 1 cm se relaciona con ~3% más ingresos para mujeres y ~2% más para hombres","2026-02-13","https://www.linkedin.com/posts/elquantificador_ser-m%C3%A1s-alto-ganar-m%C3%A1s-en-ecuador-activity-7428098168682381312-lp-e?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","01_altura-ingresos_ensanut-2018.png","El Quantificador","¿Ser más alto = ganar más? 📏💰
+ En Ecuador, +1 cm se asocia con:
+ 👩 ~3% más ingresos
+ 👨 ~2% más ingresos
+
+Lee el análisis completo de Leonel Borja Plaza 👇
+https://lnkd.in/gsbVwrBW","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ecuatorianos_altos.R"
+"El amor no es gratis (y cada vez cuesta más)","En 10 años, los productos de San Valentin cuestan hasta 37% más","2026-02-14","https://www.linkedin.com/posts/elquantificador_la-inflaci%C3%B3n-tambi%C3%A9n-lleg%C3%B3-al-romance-en-activity-7428497177766776832-Yf7s?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","02_san-valentin_inflacion-ecuador.png","El Quantificador","La inflación también llegó al romance.
+
+En Ecuador, salir a comer, comprar chocolates, ir al cine o regalar flores cuesta entre un 7% y 37% más que en 2016.
+
+Si te interesa saber como se hizo el gráfico, consulta nuestro repositorio en GitHub.
+
+https://lnkd.in/gFVr2pQ2","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_san_valentin.R"
+"La inactividad juvenil es mucho más alta entre las mujeres que entre los hombres","Evolución mensual del porcentaje de inactividad laboral y educativa (15-34 años) por sexo en Ecuador, desde enero 2024","2026-02-25","https://www.linkedin.com/posts/elquantificador_conoces-a-alguien-que-hoy-no-est%C3%A9-trabajando-activity-7432062013708668928-6sYJ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","03_inactividad-juvenil_sexo-ecuador.png","El Quantificador","¿Conoces a alguien que hoy no esté trabajando ni estudiando? A estas personas se les conoce como NINI, o NEET por sus siglas en inglés. No es solo desempleo: es estar fuera tanto del mercado laboral como del sistema educativo 📊
+
+En Ecuador, esta condición afecta mucho más a las mujeres jóvenes que a los hombres. Entre otras razones, la carga de cuidados y tareas del hogar recae de forma desproporcionada sobre ellas, lo que limita sus oportunidades de estudiar o trabajar.
+ 
+Entérate más sobre este gráfico en GitHub: https://lnkd.in/gFVr2pQ2","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_evolucion_nini.R"
+"Solo los trabajadores con posgrados tienden a ganar más de USD 1,000 al mes","Ingresos por nivel educativo, enero 2026, personas de 15+ años","2026-02-28","https://www.linkedin.com/posts/elquantificador_ecuador-inec-datos-activity-7433215491592052737-4ae7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","04_ingresos_nivel-educativo-ecuador.png","El Quantificador","La ministra de Ministerio de Educación, Ecuador, Guilda Alcívar, aseguró que bachilleres con tecnología tienen un sueldo promedio de $1,200 ¿Qué dicen los datos?
+
+Segun ENEMDU, la mediana de ingresos para trabajadores con tecnología es $660. Solo posgrados superan $1,000 (mediana $1,413).
+
+En promedio, un trabajador con tecnología gana $879 y uno con posgrado $1,675. La trayectoria salarial con posgrado es más rápida que con tecnología.
+
+Link a la entrevista: https://lnkd.in/euWJQnBw
+
+Link a nuestros cálculos: https://lnkd.in/gFVr2pQ2
+
+hashtag#ecuador hashtag#inec hashtag#datos hashtag#Educación hashtag#trabajo","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_escolaridad_ingreso.R"
+"El gobierno ecuatoriano no conoce con exactitud cuantas mujeres mueren por femicidio cada año","Los femicidios en Ecuador han caído en los últimos años, pero las mujeres siguen muriendo en contexto delictivo","2026-03-08","https://www.linkedin.com/posts/elquantificador_8m-activity-7436395492579799040-vEBm?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","05_femicidios_contexto-delictivo-ecuador.png","El Quantificador","En este hashtag#8M recordamos nuestra investigación sobre femicidios en Ecuador. En su artículo en El Quantificador, Alejandra Marchán y Daniel Sánchez Pazmiño identificaron tres problemas clave para el análisis cuantitativo de los femicidios en Ecuador con base en cifras oficiales del Gobierno ecuatoriano. Años después, esos problemas persisten. Cifras claras y transparentes son también parte de la lucha por la justicia.
+
+https://lnkd.in/e4XRkpFh","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_femicidios.R"
+"¿Cada vez es más difícil independizarse?","La proporción de adultos jóvenes en Ecuador que vive con sus padres y abuelos* ha aumentado de 2010 a 2022","2026-03-16","https://www.linkedin.com/posts/elquantificador_ecuador-datos-censo-activity-7439014638308110337-idp5?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","06_jovenes_viven-con-padres-ecuador.png","El Quantificador","¿Salir de la casa de tus padres cada vez tarda más? 🏠
+
+Estudios sugieren que la salida del hogar parental depende de las oportunidades de empleo 💼, el costo de vida 💸 y las normas culturales.
+
+En hashtag#Ecuador esta situación se ha vuelto más frecuente entre adultos jóvenes. En 2010, alrededor del 40% de los adultos entre 20 y 29 años vivía con sus padres. Doce años después, esa proporción subió al 51% 📈
+
+¿Qué creen que ha cambiado?
+hashtag#datos hashtag#censo hashtag#estadística hashtag#jóvenes hashtag#salirdecasa","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_padres_hijos_censo.R"
+"Casi uno de cada tres niños indígenas padece de desnutrición en Ecuador","Prevalencia de desnutrición crónica por etnia, niños y niñas en Ecuador (Ronda 2 ENDI 2023-2024","2026-03-23","https://www.linkedin.com/posts/elquantificador_en-ecuador-uno-de-cada-cinco-ni%C3%B1os-padece-activity-7441573280886571008-x5_t?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","07_desnutricion-cronica_etnia-ecuador.png","El Quantificador","En Ecuador, uno de cada cinco niños padece desnutrición crónica ⚠️ 
+
+Sin embargo, esta problemática no afecta por igual a toda la población. Existen profundas inequidades: los niños de pueblos indígenas enfrentan una situación mucho más crítica, con tasas que superan el 30% 📊 
+
+Esto evidencia brechas estructurales persistentes y la necesidad de políticas focalizadas que atiendan a las poblaciones más vulnerables.","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_desnutricion.R"
+"Because they're nice? Los profesionales en Estrategia y Gestión de Proyectos tienen el mejor inglés del Ecuador","Puntaje EF EPI 2025 por función laboral","2026-03-29","https://www.linkedin.com/posts/elquantificador_ecuador-ingles-universidad-activity-7443729974655762433-C2ZG?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","08_ingles_funcion-laboral-ecuador.png","El Quantificador","Ecuador se ubica por debajo del promedio mundial en dominio del inglés.
+
+De acuerdo con EF, los profesionales con mejor inglés son quienes trabajan en el área de Estrategia y Gestión de Proyectos.
+
+En el otro extremo, los puntajes más bajos corresponden a estudiantes, personas desempleadas o sin categoría específica y técnicos y personal de mantenimiento.
+
+Y tú, ¿cómo calificarías tu nivel de inglés?
+
+hashtag#ecuador hashtag#ingles hashtag#universidad hashtag#educacion hashtag#datos hashtag#estadistica","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ef_epi_job.R"
+"Colombia, Bolivia y Ecuador son los países más religiosos de Sudamérica","Porcentaje de personas para cada país que respondió que la religión es ""Muy importante"" en su vida. Encuesta Mundial de Valores (Ronda 7, 2017-2022)","2026-04-03","https://www.linkedin.com/posts/elquantificador_comiendo-fanesca-este-plato-forma-parte-activity-7445944067328356352-zUQX?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","09_religion_importancia_sudamerica.png","El Quantificador","¿Comiendo fanesca? 🍲
+
+Este plato forma parte de una tradición histórica compartida entre ecuatorianos de todas las provincias, especialmente durante Semana Santa 🗓️🌿
+
+Más de la mitad del país considera la religión como “muy importante” en su vida 📊, lo que explica por qué estas tradiciones siguen tan presentes en la cultura cotidiana 🌎
+
+Hoy, la fanesca se disfruta más allá de creencias personales, como un punto de encuentro entre historia, costumbre y comunidad 🤝","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_religion_importance.R"
+"La mujer ecuatoriana dedica 4 veces más tiempo a cocinar que el hombre","Promedio de horas semanales dedicadas a cocinar, por sexo, Encuesta Multipropósito 2019","2026-04-09","https://www.linkedin.com/posts/elquantificador_ecuador-desigualdaddegaeznero-usodeltiempo-activity-7448061768872034305-IFwL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","10_uso-del-tiempo_cocina-sexo-ecuador.png","Santiago Guamán","En Ecuador, el tiempo dedicado a cocinar sigue siendo desigual 🍳📊
+
+Las mujeres destinan más de 6 horas semanales a esta actividad, mientras que los hombres dedican mucho menos ⏱️. Aunque la participación masculina ha aumentado, la brecha persiste en todos los grupos 📉
+
+Entre 2012 y 2019, el tiempo que los hombres dedican a cocinar más que se duplicó 📈. La diferencia se redujo, pero no desapareció ⚖️
+
+Gráfico por Santiago Guamán🎨
+Lee más en nuestro artículo, por Christian Salas.
+https://lnkd.in/eBebB5fq
+hashtag#Ecuador hashtag#DesigualdadDeGénero hashtag#UsoDelTiempo hashtag#Datos 📊🍳📉📚","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_uso_tiempo.R"
+"Los empleados públicos ganan más, pero también pierden más por la inflación","Comparación de sueldos promedio públicos y privados, con ajustes para la inflación, 2019-2026","2026-04-17","https://www.linkedin.com/posts/elquantificador_ecuador-inflaciaejn-salarios-activity-7450913466736955393-4pta?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","11_salarios_publico-privado_inflacion-ecuador.png","Dayanna Córdova Buitrón","Según datos del INEC, los empleados públicos consistentemente ganan más que los del sector privado, con una brecha que supera los $300 en promedio. ¿Cómo se desempeñan estos salarios frente a la inflación?
+
+📊 Enero 2026:
+• Sector público: $1,140.12 | ajustado: $992.48
+• Sector privado: $774.15 | ajustado: $673.90
+
+💡 Tras ajustar por inflación, los empleados públicos siguen ganando más. Sin embargo, nuestro análisis temporal indica que su poder adquisitivo se erosiona más rápido que el de los empleados privados. 
+
+Esto se debe a que el salario privado incrementa más rápido, ajustándose con mayor flexibilidad a las condiciones económicas.
+
+Elaboración del gráfico por Dayanna Córdova 💻 
+hashtag#Ecuador hashtag#Inflación hashtag#Salarios hashtag#INEC hashtag#Economía hashtag#Datos","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_salario_real_vs_nominal.R"
+"El camarón y el petróleo son los productos más exportados a Estados Unidos","Top 10 productos exportados a E.E.U.U., 2024-2025","2026-04-24","https://www.linkedin.com/posts/elquantificador_ecuador-export%C3%B3-usd-683-mil-millones-a-eeuu-activity-7453431310284681217-ZsEj?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","12_exportaciones_eeuu_top10_2024-2025.png","Guido Astudillo","Ecuador exportó USD 6.83 mil millones a EE.UU. en 2025, frente a USD 6.97 mil millones en 2024 🌎 
+
+🦐🍫 Camarón (USD 2.072 mil millones) y cacao (USD 905 millones) concentraron cerca del 44% del total. 
+
+⚠️ En un mundo con más aranceles y más presión sobre el comercio, el acuerdo con EE.UU. puede ser decisivo para sostener y ampliar ese mercado. 🤝
+
+Gráfico elaborado por Guido Astudillo 💻","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_exportaciones_eeuu.R"
+"Se desploma el empleo adecuado en marzo 2026, impactando a los más jóvenes","Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026","2026-04-28","https://www.linkedin.com/posts/elquantificador_ecuador-trabajo-economaeda-activity-7454948651027836928-58V3?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","13_empleo-adecuado_edad_yoy_mar-2026.png","Daniel Sánchez Pazmiño","En marzo de 2026, las cifras de la ENEMDU muestran un deterioro importante del empleo adecuado en Ecuador. Respecto a marzo de 2025, el empleo adecuado cayó 6,2%, la contracción interanual más fuerte del último año. 
+
+El golpe fue particularmente marcado entre jóvenes y trabajadores de mayor edad: 
+• 15-24 años: caída interanual de alrededor de 10,4% 
+• 25-44 años: crecimiento interanual nulo 
+• 45-64 años: caída interanual de alrededor de 13,4% 
+
+En períodos de deterioro económico, los grupos más vulnerables suelen absorber con mayor fuerza el ajuste del mercado laboral. Los jóvenes enfrentan mayores barreras de inserción laboral, mientras que los trabajadores de 45 a 64 años pueden enfrentar más dificultades de estabilidad o reinserción cuando se deterioran las condiciones del mercado.
+
+Elaborado por: Daniel Sánchez Pazmiño.
+
+hashtag#Ecuador hashtag#trabajo hashtag#economía hashtag#inec hashtag#datos hashtag#enemdu","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_empleo_adecuado_edad_nivel_yoy_mensual_raw.R"
+"La prevalencia de anemia es alta incluso en los hogares más ricos del Ecuador","Prevalencia de anemia en niños y niñas de 6 a 23 meses, por quintil de ingreso, ENDI Ronda 2 2023-2024","2026-05-06","https://www.linkedin.com/posts/elquantificador_ecuador-primerainfancia-anemiainfantil-activity-7457811653661724672-YGDh?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","14_anemia-infantil_quintil-ecuador.png","Daniel Sánchez Pazmiño","La anemia infantil no es un problema exclusivo de los hogares más pobres.  En Ecuador, el 31,1% de los niños y niñas menores de 2 años en el quintil más pobre presenta anemia. En el quintil más rico, la cifra es menor, pero sigue siendo alta: 23,9%.  La diferencia existe, pero no es tan amplia como podría esperarse. La anemia en la primera infancia tiene múltiples causas: alimentación deficiente, infecciones recurrentes, prácticas de cuidado, condiciones ambientales y el acceso efectivo a los servicios de salud.
+
+Elaboración del gráfico: Daniel Sánchez
+
+hashtag#Ecuador hashtag#PrimeraInfancia hashtag#AnemiaInfantil hashtag#Nutrición hashtag#PolíticaPública hashtag#Datos hashtag#ENDI hashtag#INEC","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_anemia_quintil.R"
+"La infancia ecuatoriana crece bajo el cuidado, cariño y dedicación de sus madres","Proporción de niños y niñas menores de 5 años, por cuidador principal, ENDI Ronda 2 2023-2024","2026-05-10","https://www.linkedin.com/posts/elquantificador_el-cuidado-diario-de-la-infancia-ecuatoriana-activity-7459240898141437952-NF0L?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","15_cuidador-principal_infancia-ecuador.png","Daniel Sánchez Pazmiño","El cuidado diario de la infancia ecuatoriana sigue teniendo rostro de madre.  Según la ENDI 2023-2024, el 80,3% de niños y niñas menores de 5 años pasa la mayor parte del tiempo entre semana bajo el cuidado principal de su madre. Muy por detrás aparecen el padre o los abuelos (9,2%), los Centros de Desarrollo Infantil (5,9%) y otras opciones de cuidado (4,6%).  Detrás de estas cifras hay tiempo, trabajo, dedicación y una enorme carga de cuidado que sigue recayendo principalmente en las madres ecuatorianas.
+
+Elaboración del gráfico: Daniel Sánchez Pazmiño.
+
+hashtag#Ecuador hashtag#PrimeraInfancia hashtag#Cuidados hashtag#ENDI hashtag#Datos hashtag#PolíticaPública","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_cuidador_principal.R"
+"Solo el 14% de hogares ecuatorianos ganan $1500 o más (el 60% gana $513 o menos)","Distribución del ingreso mensual de los hogares, ENEMDU 2026","2026-05-12","https://www.linkedin.com/posts/elquantificador_inec-ecuador-salarios-activity-7460023786357252096-TDYE?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","16_ingreso-hogar_distribucion-ecuador.png","El Quantificador","En los últimos días ha habido debate sobre las posibilidades de que un hogar ecuatoriano alcance un ingreso mensual de $1.500. Desde El Quantificador, revisamos los datos.  Según nuestro análisis de los microdatos de la ENEMDU a marzo de 2026, el percentil 40 del ingreso mensual del hogar es aproximadamente $513. Es decir, el 60% de hogares gana apenas $513 o más al mes.  La mediana del ingreso del hogar es $630, lo que significa que el 50% de los hogares ganan hasta $630 mensuales.  El dato de $1.500 se ubica en el percentil 86: solo alrededor del 14% de los hogares supera ese umbral.  En un país tan desigual, entender la distribución del ingreso ayuda a poner en contexto qué tan lejos o cerca están ciertos niveles de vida para la mayoría de hogares. 
+
+Gráfico elaborado por: El Quantificador","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_hogar_distribution.R"
+"Los sectores mejor pagados del Ecuador apenas concentran 7% del empleo formal","Top 5 industrias por salario mensual promedio, feb. 2026","2026-05-22","https://www.linkedin.com/posts/elquantificador_en-ecuador-los-sectores-que-mejor-pagan-activity-7463616291627651072-UMr-?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEdyHpgBsFTRSCYH4gXRCh9cyLd2dzqZFcQ","17_salario-industrias_formal-ecuador.png","Dayanna Córdova Buitrón","En Ecuador, los sectores que mejor pagan no son necesariamente los que más empleo generan.  Con base en nuestro análisis de los datos del REESS a febrero de 2026, el sector de organizaciones y órganos extraterritoriales es el mejor pagado del país, con un sueldo promedio de $2.224, muy por encima del promedio nacional del mercado formal de $844. Solo 479 personas trabajan en este sector en todo el Ecuador, lo que representa apenas el 0,02% del empleo formal nacional.  Minería, finanzas, electricidad y organismos internacionales completan el top 5 de actividades mejor remuneradas. Juntas, estas cinco ramas concentran apenas 159 mil afiliados, cerca del 7% del empleo formal.  Esta estructura deja ver una tensión importante: los empleos mejor pagados están concentrados en sectores pequeños. La mayoría del trabajo formal sigue estando en ramas con sueldos por debajo del promedio.  Gráfico por: Dayanna Córdova Buitrón.  #Ecuador #Salarios #TrabajoFormal #REESS #INEC #MercadoLaboral #Datos","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reess_salario_industrias.R"
+"El mayor crecimiento de personal de salud fue después de la reforma de salud de 2011","Evolución del personal del MSP en Ecuador, 2006-2021","2026-05-28","https://www.linkedin.com/feed/update/urn:li:activity:7466179098231619584","18_personal-salud-publica-ecuador.png","Odalis Clemente Pincay y Alonso Quijano-Ruiz","Después de la reforma de salud de 2011, Ecuador vivió la mayor expansión de personal sanitario de su historia. Médicos, enfermeros y TAPS crecieron rápidamente junto con la expansión del primer nivel de atención y la estrategia MAIS.
+
+También muestra que la reforma no fue solo normativa: implicó más capacidad instalada para acercar servicios públicos de salud a la población, especialmente desde el primer nivel de atención.
+
+Gráfico elaborado por: Odalis Clemente Pincay y Alonso Quijano-Ruiz","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ras_personal_salud.R"
+"¿Con qué juegan los niños y niñas en Ecuador?","Porcentaje de niños menores a 5 años, por tipo de juguete, ENDI R2","2026-06-01","https://www.linkedin.com/posts/en-este-d%C3%ADa-del-ni%C3%B1o-desde-el-quantificador-share-7467305375982145536-W-Mi/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADKOKmABJqp1SyO8Z3JuVg8xD5xqFvSEKv0","19_juguetes-infancia-ecuador.png","Alonso Quijano-Ruiz y Daniel Sánchez Pazmiño","En este Día del Niño, desde El Quantificador y Laboratorio LIDE celebramos a la niñez ecuatoriana y recordamos la importancia del juego en los primeros años de vida.
+
+En Ecuador, la mayoría de niños y niñas cuenta con oportunidades de juego dentro de sus hogares. Casi todos (97,2%) juegan con juguetes comprados en almacenes o mercados, pero el juego también ocurre con objetos del hogar y de la naturaleza (69,4%), con materiales para reconocer formas, colores y texturas (59,2%), con piezas para armar y construir (58,0%), y con juegos de roles o fantasía (54,8%).
+
+También hay espacio para otras formas de juego: 26,7% juega con tablets, celulares o consolas, y 26,6% con juguetes hechos en casa.
+
+Cada una de estas formas de juego abre espacios para explorar, imaginar, aprender y compartir.
+
+Feliz Día del Niño!
+
+Gráfico elaborado por: Alonso Quijano-Ruiz y Daniel Sánchez Pazmiño","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_juguetes.R"
+"¿En qué gasta el hogar ecuatoriano?","Descomposición del ingreso monetario mensual del hogar promedio, ENIGHUR","2026-06-07","https://www.linkedin.com/feed/update/urn:li:activity:7469096436090068992","20_descomposicion-ingreso-hogar-ecuador.png","El Quantificador","Los nuevos datos de la ENIGHUR 2024-2025 de INEC Ecuador ofrecen una radiografía detallada del presupuesto de los hogares ecuatorianos.
+
+Algunos hallazgos:
+
+📊 El hogar ecuatoriano promedio recibe $889 mensuales de ingreso monetario.
+
+💰 En promedio, los hogares ecuatorianos destinan cerca del 77% de sus ingresos a distintos tipos de gasto.
+
+🍽 Los alimentos y bebidas constituyen el principal rubro de gasto, con el 22,8% del ingreso mensual promedio.
+
+🚌 El transporte representa el 9,2% del ingreso mensual, mientras que la vivienda y los servicios básicos equivalen al 7,8%.
+
+Daniel Sánchez Pazmiño analiza qué revelan los nuevos datos de la ENIGHUR 2024-2025 sobre los ingresos, gastos y prioridades de consumo de los hogares ecuatorianos.
+
+Lee el artículo completo en El Quantificador: https://elquantificador.blog/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R"
+"Los trabajadores informales ganan menos de la mitad que los trabajadores formales","Ingresos laborales mensuales, por sector de ocupación, marzo 2026","2026-06-09","https://www.linkedin.com/posts/en-ecuador-la-brecha-de-ingresos-entre-trabajadores-share-7471222814444777473-kqaE/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEoPdE8BQw9Ky-A64i24fQ7c136mPye_U24","21_ingreso-laboral_sector-formal-informal-ecuador.png","Eddie Bryan Tomalá Figueroa","En Ecuador, la brecha de ingresos entre trabajadores formales e informales sigue siendo amplia.
+
+Según la ENEMDU de marzo de 2026, había 3,6 millones de trabajadores informales y 2,5 millones de trabajadores formales con ingreso laboral positivo. La mediana del ingreso laboral mensual fue de USD 200 entre los informales, frente a USD 500 entre los formales.
+
+La diferencia también se observa en la parte alta de la distribución. Nueve de cada diez trabajadores informales ganan USD 480 o menos, un monto ligeramente inferior al Salario Básico Unificado de 2026, fijado en USD 482. Entre los trabajadores formales, nueve de cada diez ganan USD 700 o menos.
+
+De acuerdo con la Organización Internacional del Trabajo (OIT), la informalidad suele estar asociada con déficits de trabajo decente, reflejados en menores ingresos, menor acceso a la seguridad social y mayor vulnerabilidad económica.
+
+Gráfico elaborado por: Eddie Bryan Tomalá Figueroa","https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_sector_laboral.R"
