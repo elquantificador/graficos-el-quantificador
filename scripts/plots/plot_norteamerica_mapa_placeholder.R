@@ -20,9 +20,9 @@ portrait_path <- "outputs/figures/22_mapa-valores_norteamerica.png"
 
 values_df <- tibble::tribble(
   ~admin,                     ~country_label,            ~value,  ~fill_group,
-  "Canada",                   "Canadá\n16.320",          16320,   "yellow",
-  "United States of America", "Estados Unidos\n440.337", 440337,  "blue",
-  "Mexico",                   "México\n4.615",            4615,   "red"
+  "Canada",                   "Canadá\n16.320 (2021)",          16320,   "yellow",
+  "United States of America", "Estados Unidos\n621.915 (2024)", 621915,  "blue",
+  "Mexico",                   "México\n4.615 (2020)",            4615,   "red"
 )
 
 map_df <- rnaturalearth::ne_countries(
@@ -30,7 +30,18 @@ map_df <- rnaturalearth::ne_countries(
   returnclass = "sf"
 ) |>
   dplyr::filter(admin %in% values_df$admin) |>
-  dplyr::left_join(values_df, by = "admin")
+  suppressWarnings(sf::st_cast("POLYGON")) |>
+  dplyr::mutate(
+    centroid = sf::st_centroid(geometry),
+    centroid_x = sf::st_coordinates(centroid)[, "X"],
+    centroid_y = sf::st_coordinates(centroid)[, "Y"]
+  ) |>
+  dplyr::filter(!(admin == "United States of America" & centroid_y < 24)) |>
+  dplyr::filter(!(admin == "United States of America" & centroid_x < -150 & centroid_y < 30)) |>
+  dplyr::select(-centroid, -centroid_x, -centroid_y) |>
+  dplyr::left_join(values_df, by = "admin") |>
+  dplyr::group_by(admin, country_label, value, fill_group) |>
+  dplyr::summarise(geometry = sf::st_union(geometry), .groups = "drop")
 
 label_points <- suppressWarnings(
   map_df |>
@@ -44,31 +55,42 @@ label_df <- cbind(
   sf::st_coordinates(label_points)
 )
 
-title_raw <- "Cerca de medio millón de ecuatorianos apoyan a la Tricolor desde Norteamérica"
+title_txt <- "Más de 640 mil ecuatorianos apoyan a la Tricolor\ndesde Norteamérica"
 subtitle_raw <- paste(
   "Ecuatorianos viviendo en Norteamérica,",
-  "por país, estimados censales"
+  "por país"
 )
 caption_raw <- paste(
   "Fuentes: Statistics Canada, Census of Population 2021, tabla 98-10-0349-01;",
-  "U.S. Census Bureau, tabla B05006 (2020); INEGI, Censos de Población y Vivienda 2020.",
-  "Los datos de Estados Unidos y México corresponden al mismo año; Statistics Canada considera población en 2021.",
-  "Se utilizan los censos más recientes al momento de elaboración.",
+  "U.S. Census Bureau (2024), American Community Survey, tabla B05006; Instituto Nacional de Estadística y Geografía (INEGI), Censos de Población y Vivienda 2020.",
+  "Notas:",
+  "Se utilizan los estimados censales de Canadá y México más recientes.",
+  "Para Estados Unidos, se utilizó la American Community Survey (2024).",
+  "* Se considera a personas nacidas en territorio ecuatoriano solamente.",
+  "Debido a los flujos irregulares masivos hacia EE.UU. desde 2020, las cifras deben interpretarse con cautela.",
   "Base cartográfica: Natural Earth.",
   "Elaboración: Daniel Sánchez para el Quantificador de Laboratorio LIDE."
 )
 
 build_chart <- function() {
   label_size <- 2.55
-  title_width <- 54
-  caption_width <- 118
-  subtitle_txt <- "Ecuatorianos viviendo en Norteamérica, por país, estimados censales"
+  caption_width <- 132
+  subtitle_txt <- "Estimados más recientes de ecuatorianos* viviendo en Norteamérica, por país"
 
   ggplot2::ggplot(map_df) +
     ggplot2::geom_sf(
       ggplot2::aes(fill = fill_group),
       colour = "white",
       linewidth = 0.5
+    ) +
+    ggplot2::annotate(
+      "rect",
+      xmin = -162,
+      xmax = -146,
+      ymin = 14,
+      ymax = 24,
+      fill = "white",
+      colour = NA
     ) +
     ggplot2::geom_text(
       data = label_df,
@@ -92,7 +114,7 @@ build_chart <- function() {
       datum = NA
     ) +
     ggplot2::labs(
-      title = wrap_title_house(title_raw, width = title_width),
+      title = title_txt,
       subtitle = subtitle_txt,
       caption = wrap_caption_house(caption_raw, width = caption_width),
       x = NULL,
@@ -117,9 +139,9 @@ build_chart <- function() {
       ),
       plot.caption = ggplot2::element_text(
         size = 4.5, colour = "grey30", lineheight = 1.05,
-        hjust = 0, margin = ggplot2::margin(t = 2)
+        hjust = 0, margin = ggplot2::margin(t = 1)
       ),
-      plot.margin = ggplot2::margin(0, 14, 2, 8)
+      plot.margin = ggplot2::margin(0, 10, 0, 6)
     )
 }
 
@@ -129,7 +151,7 @@ p_final <- house_apply_logo(
   build_chart(),
   "portrait",
   x = 0.88,
-  y = 0.10,
+  y = 0.14,
   width = 0.09,
   height = 0.09
 )
