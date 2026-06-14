@@ -43,15 +43,33 @@ y_max <- max(bin_df$weighted_count, na.rm = TRUE)
 
 subtitle_txt <- "Distribución del ingreso mensual de los hogares, ENEMDU 2026"
 
-caption_txt <- paste0(
+title_raw <- "Solo el 14% de hogares ecuatorianos ganan $1.500 o más (el 60% gana $513 o menos)"
+caption_portrait <- paste0(
   "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador\n",
   "de Laboratorio LIDE. Ingreso total del hogar = suma del ingreso laboral primario y secundario,\n",
   "ingresos de capital, transferencias, pensiones y bonos de todos los miembros del hogar.\n",
   "Histograma ponderado por pesos de muestra con intervalos de USD 100. Visualización hasta\n",
   "el percentil 99. Línea punteada = umbral de $1,500."
 )
+caption_raw <- paste0(
+  "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador ",
+  "de Laboratorio LIDE. Ingreso total del hogar = suma del ingreso laboral primario y secundario, ",
+  "ingresos de capital, transferencias, pensiones y bonos de todos los miembros del hogar. ",
+  "Histograma ponderado por pesos de muestra con intervalos de USD 100. Visualización hasta ",
+  "el percentil 99. Línea punteada = umbral de $1,500."
+)
 
-p_base <- ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  if (orientation == "landscape") {
+    title_txt   <- stringr::str_wrap(title_raw, width = spec$title_wrap)
+    caption_txt <- stringr::str_wrap(caption_raw, width = spec$caption_wrap)
+  } else {
+    title_txt   <- "Solo el 14% de hogares ecuatorianos ganan\n$1.500 o más (el 60% gana $513 o menos)"
+    caption_txt <- caption_portrait
+  }
+
+  ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
   geom_histogram(
     aes(fill = tramo_1500),
     binwidth = 100,
@@ -126,31 +144,37 @@ p_base <- ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
     expand = expansion(mult = c(0, 0.05))
   ) +
   labs(
-    title = "Solo el 14% de hogares ecuatorianos ganan\n$1.500 o más (el 60% gana $513 o menos)",
+    title = title_txt,
     subtitle = subtitle_txt,
     x = "Ingreso total mensual del hogar (USD)",
     y = "Número ponderado de hogares",
     caption = caption_txt
   ) +
-  theme_quantificador() +
+  theme_quantificador(orientation) +
   theme(
     axis.text.x = element_text(angle = 35, hjust = 1),
     plot.caption = element_text(colour = "black", size = 6.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     legend.position = "none",
-    plot.margin = margin(6, 30, 6, 16)
+    plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 30, 6, 16)
   )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.895, y = 0.18, width = 0.09, height = 0.09)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-ggsave(
-  filename = out_path,
-  plot = p_final,
-  width = 4,
-  height = 5,
-  dpi = 300,
-  device = ragg::agg_png
-)
-
-message("Guardado: ", out_path)
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.895, y = 0.18, width = 0.09, height = 0.09)
+  dest <- house_out_path(out_path, orientation)
+  ggsave(
+    filename = dest,
+    plot = p_final,
+    width = spec$width,
+    height = spec$height,
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}
 

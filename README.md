@@ -101,6 +101,7 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 - `LinkedIn Link`
 - `Image Filename`
 - `Image Path` — ruta relativa al repo, por ejemplo `outputs/figures/21_ingreso-laboral_sector-formal-informal-ecuador.png`
+- `Landscape Image Path` — ruta a la versión apaisada (16:9), por ejemplo `outputs/figures/landscape/21_ingreso-laboral_sector-formal-informal-ecuador.png`
 - `Author` — nombre de despliegue del autor o autores de la visualización
 - `Description`
 - `Script Link`

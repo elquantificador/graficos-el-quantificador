@@ -46,12 +46,21 @@ if (any(blank_required)) {
 }
 
 catalog[["Image Path"]] <- gsub("\\\\", "/", file.path("outputs", "figures", catalog[["Image Filename"]]))
+catalog[["Landscape Image Path"]] <- gsub("\\\\", "/", file.path("outputs", "figures", "landscape", catalog[["Image Filename"]]))
 
 missing_images <- catalog[!file.exists(catalog[["Image Path"]]), c("Chart Name", "Image Path"), drop = FALSE]
 if (nrow(missing_images) > 0) {
   stop(
     "No se encontraron estas imágenes publicadas en outputs/figures/: ",
     paste(missing_images[["Image Path"]], collapse = ", ")
+  )
+}
+
+missing_landscape <- catalog[!file.exists(catalog[["Landscape Image Path"]]), c("Chart Name", "Landscape Image Path"), drop = FALSE]
+if (nrow(missing_landscape) > 0) {
+  stop(
+    "No se encontraron estas imágenes apaisadas en outputs/figures/landscape/: ",
+    paste(missing_landscape[["Landscape Image Path"]], collapse = ", ")
   )
 }
 
@@ -72,6 +81,7 @@ output_cols <- c(
   "LinkedIn Link",
   "Image Filename",
   "Image Path",
+  "Landscape Image Path",
   "Author",
   "Description",
   "Script Link"

@@ -37,41 +37,65 @@ nini_mensual_sexo <- nini_mensual_sexo[fecha >= as.Date("2024-01-01")]
 meses_es <- c("enero", "febrero", "marzo", "abril", "mayo", "junio",
               "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre")
 
-p_base <- ggplot(nini_mensual_sexo,
-  aes(x = fecha, y = pct_nini, color = sexo, fill = sexo, group = sexo)) +
-  geom_line(linewidth = 1.1) +
-  geom_point(size = 2) +
-  labs(
-    title    = "La inactividad juvenil es mucho más alta entre las mujeres\nque entre los hombres",
-    subtitle = "Evolución mensual del porcentaje de inactividad laboral y educativa (15-34 años)\npor sexo en Ecuador, desde enero 2024",
-    x        = "",
-    y        = "Porcentaje de jovenes que no estudian ni trabajan (%)",
-    color    = "Sexo",
-    fill     = "Sexo",
-    caption  = "Fuente: ENEMDU - INEC. Cálculos por el autor.\nNINI = 1 si la persona no trabaja y no estudia ni está en nivelación SENESCYT."
-  ) +
-  scale_y_continuous(labels = percent_format(scale = 1)) +
-  scale_x_date(
-    date_breaks = "3 months",
-    labels = function(x) paste(meses_es[as.integer(format(x, "%m"))], format(x, "%Y"))
-  ) +
-  theme_quantificador() +
-  theme(
-    axis.text          = element_text(size = 6.5),
-    axis.text.x        = element_text(angle = 45, hjust = 1),
-    axis.title.y       = element_text(hjust = 0),
-    plot.title         = element_text(size = 9.5),
-    plot.subtitle      = element_text(size = 7.5),
-    legend.position    = "bottom",
-    legend.title       = element_text(size = 6.5),
-    legend.text        = element_text(size = 6.5),
-    legend.box.margin  = margin(t = -8, r = 0, b = 0, l = 0),
-    plot.margin        = margin(12, 20, 8, 14)
-  )
+portrait_path <- "outputs/figures/03_inactividad-juvenil_sexo-ecuador.png"
+
+title_raw <- "La inactividad juvenil es mucho más alta entre las mujeres que entre los hombres"
+subtitle_raw <- "Evolución mensual del porcentaje de inactividad laboral y educativa (15-34 años) por sexo en Ecuador, desde enero 2024"
+caption_raw <- "Fuente: ENEMDU - INEC. Cálculos por el autor. NINI = 1 si la persona no trabaja y no estudia ni está en nivelación SENESCYT."
+
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  if (orientation == "landscape") {
+    title_txt    <- stringr::str_wrap(title_raw, width = landscape_wrap_for_size(9.5))
+    subtitle_txt <- stringr::str_wrap(subtitle_raw, width = landscape_wrap_for_size(7.5))
+    caption_txt  <- stringr::str_wrap(caption_raw, width = spec$caption_wrap)
+  } else {
+    title_txt    <- "La inactividad juvenil es mucho más alta entre las mujeres\nque entre los hombres"
+    subtitle_txt <- "Evolución mensual del porcentaje de inactividad laboral y educativa (15-34 años)\npor sexo en Ecuador, desde enero 2024"
+    caption_txt  <- "Fuente: ENEMDU - INEC. Cálculos por el autor.\nNINI = 1 si la persona no trabaja y no estudia ni está en nivelación SENESCYT."
+  }
+
+  ggplot(nini_mensual_sexo,
+    aes(x = fecha, y = pct_nini, color = sexo, fill = sexo, group = sexo)) +
+    geom_line(linewidth = 1.1) +
+    geom_point(size = 2) +
+    labs(
+      title    = title_txt,
+      subtitle = subtitle_txt,
+      x        = "",
+      y        = "Porcentaje de jovenes que no estudian ni trabajan (%)",
+      color    = "Sexo",
+      fill     = "Sexo",
+      caption  = caption_txt
+    ) +
+    scale_y_continuous(labels = percent_format(scale = 1)) +
+    scale_x_date(
+      date_breaks = "3 months",
+      labels = function(x) paste(meses_es[as.integer(format(x, "%m"))], format(x, "%Y"))
+    ) +
+    theme_quantificador(orientation) +
+    theme(
+      axis.text          = element_text(size = 6.5),
+      axis.text.x        = element_text(angle = 45, hjust = 1),
+      axis.title.y       = element_text(hjust = 0),
+      plot.title         = element_text(size = 9.5),
+      plot.subtitle      = element_text(size = 7.5),
+      legend.position    = "bottom",
+      legend.title       = element_text(size = 6.5),
+      legend.text        = element_text(size = 6.5),
+      legend.box.margin  = margin(t = -8, r = 0, b = 0, l = 0),
+      plot.margin        = if (orientation == "landscape") margin(12, 16, 8, 14) else margin(12, 20, 8, 14)
+    )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.14)
-ggsave("outputs/figures/03_inactividad-juvenil_sexo-ecuador.png", p_final,
-       width = 4, height = 5, dpi = 300)
-message("Guardado: outputs/figures/03_inactividad-juvenil_sexo-ecuador.png")
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
+
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.14)
+  dest <- house_out_path(portrait_path, orientation)
+  ggsave(dest, p_final, width = spec$width, height = spec$height, dpi = spec$dpi, bg = "white")
+  message("Guardado: ", dest)
+}
 

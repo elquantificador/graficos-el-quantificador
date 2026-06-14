@@ -73,9 +73,7 @@ make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id, alpha
   )
 }
 
-caption_txt <- wrap_caption_house(
-  "Fuente: INEC, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR), 2024-2025. Elaborado por Daniel Sánchez para El Quantificador. Nota: Todos los valores del gráfico son promedios mensuales de los hogares a nivel nacional en 2025. El tamaño promedio del hogar fue de 3,3 personas. El ahorro se calcula como la diferencia entre el ingreso monetario y los gastos del hogar. La categorización de gastos es nuestra."
-)
+caption_raw <- "Fuente: INEC, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR), 2024-2025. Elaborado por Daniel Sánchez para El Quantificador. Nota: Todos los valores del gráfico son promedios mensuales de los hogares a nivel nacional en 2025. El tamaño promedio del hogar fue de 3,3 personas. El ahorro se calcula como la diferencia entre el ingreso monetario y los gastos del hogar. La categorización de gastos es nuestra."
 
 processed     <- readRDS(processed_path)
 category_rows <- processed$category_rows
@@ -175,88 +173,100 @@ right_stage <- right_stage |>
 
 root_label <- paste0("Ingreso\nmonetario\n", fmt_usd(avg_ing_mon_cor))
 
-p_base <- ggplot() +
-  geom_polygon(
-    data = root_flows,
-    aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
-    colour = NA
-  ) +
-  geom_polygon(
-    data = category_flows,
-    aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
-    colour = NA
-  ) +
-  geom_rect(
-    data = node_rects,
-    aes(xmin = .data$xmin, xmax = .data$xmax, ymin = .data$ymin, ymax = .data$ymax),
-    fill      = "#F8F9FA",
-    colour    = "#495057",
-    linewidth = 0.3
-  ) +
-  annotate(
-    "text",
-    x         = 0.06,
-    y         = root_stage$ymid[[1]],
-    label     = root_label,
-    size      = 3.0,
-    lineheight = 1.05,
-    colour    = "#212529"
-  ) +
-  geom_text(
-    data = mid_stage,
-    aes(x = mid_label_x, y = .data$ymid, label = .data$label_text),
-    size       = 2.9,
-    lineheight = 1.02,
-    colour     = "#212529"
-  ) +
-  geom_text(
-    data = right_stage,
-    aes(x = right_label_x, y = .data$ymid, label = .data$label_text),
-    hjust      = 0,
-    size       = 2.8,
-    lineheight = 1.02,
-    colour     = "#212529"
-  ) +
-  coord_cartesian(xlim = c(-0.28, 3.55), ylim = c(0, plot_height), clip = "off") +
-  scale_fill_identity() +
-  scale_alpha_identity() +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(expand = c(0, 0)) +
-  labs(x = NULL, y = NULL,
-       title    = wrap_title_house(
-         "Los hogares ecuatorianos gastan el 77% de su ingreso"
-       ),
-       subtitle = wrap_subtitle_house(
-         "Ingresos y gastos promedio de los hogares, ENIGHUR 2025"
-       ),
-       caption  = caption_txt) +
-  theme_classic(base_size = 9) +
-  theme(
-    axis.text           = element_blank(),
-    axis.ticks          = element_blank(),
-    axis.line           = element_blank(),
-    axis.title          = element_blank(),
-    legend.position     = "none",
-    panel.grid          = element_blank(),
-    plot.margin         = margin(8, 60, 6, 12),
-    plot.title          = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
-    plot.subtitle       = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption        = element_text(colour = "grey30", size = 5.5, lineheight = 1.1,
-                                       hjust = 0, margin = margin(t = 6)),
-    plot.title.position   = "plot",
-    plot.caption.position = "plot"
-  )
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  title_txt    <- wrap_title_house("Los hogares ecuatorianos gastan el 77% de su ingreso", width = spec$title_wrap)
+  subtitle_txt <- wrap_subtitle_house("Ingresos y gastos promedio de los hogares, ENIGHUR 2025", width = spec$subtitle_wrap)
+  caption_txt  <- if (orientation == "landscape") {
+    stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.5))
+  } else {
+    wrap_caption_house(caption_raw)
+  }
 
-p_final <- add_logo(p_base, x = 0.88, y = 0.14)
+  ggplot() +
+    geom_polygon(
+      data = root_flows,
+      aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
+      colour = NA
+    ) +
+    geom_polygon(
+      data = category_flows,
+      aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
+      colour = NA
+    ) +
+    geom_rect(
+      data = node_rects,
+      aes(xmin = .data$xmin, xmax = .data$xmax, ymin = .data$ymin, ymax = .data$ymax),
+      fill      = "#F8F9FA",
+      colour    = "#495057",
+      linewidth = 0.3
+    ) +
+    annotate(
+      "text",
+      x         = 0.06,
+      y         = root_stage$ymid[[1]],
+      label     = root_label,
+      size      = 3.0,
+      lineheight = 1.05,
+      colour    = "#212529"
+    ) +
+    geom_text(
+      data = mid_stage,
+      aes(x = mid_label_x, y = .data$ymid, label = .data$label_text),
+      size       = 2.9,
+      lineheight = 1.02,
+      colour     = "#212529"
+    ) +
+    geom_text(
+      data = right_stage,
+      aes(x = right_label_x, y = .data$ymid, label = .data$label_text),
+      hjust      = 0,
+      size       = 2.8,
+      lineheight = 1.02,
+      colour     = "#212529"
+    ) +
+    coord_cartesian(xlim = c(-0.28, 3.55), ylim = c(0, plot_height), clip = "off") +
+    scale_fill_identity() +
+    scale_alpha_identity() +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_continuous(expand = c(0, 0)) +
+    labs(x = NULL, y = NULL,
+         title    = title_txt,
+         subtitle = subtitle_txt,
+         caption  = caption_txt) +
+    theme_classic(base_size = 9) +
+    theme(
+      axis.text           = element_blank(),
+      axis.ticks          = element_blank(),
+      axis.line           = element_blank(),
+      axis.title          = element_blank(),
+      legend.position     = "none",
+      panel.grid          = element_blank(),
+      plot.margin         = if (orientation == "landscape") margin(8, 16, 6, 12) else margin(8, 60, 6, 12),
+      plot.title          = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
+      plot.subtitle       = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
+      plot.caption        = element_text(colour = "grey30", size = 5.5, lineheight = 1.1,
+                                         hjust = 0, margin = margin(t = 6)),
+      plot.title.position   = "plot",
+      plot.caption.position = "plot"
+    )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-ggsave(
-  filename = out_path,
-  plot     = p_final,
-  width    = 4,
-  height   = 5,
-  dpi      = 300,
-  device   = ragg::agg_png,
-  bg       = "white"
-)
-message("Guardado: ", out_path)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
+
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.14)
+  dest <- house_out_path(out_path, orientation)
+  ggsave(
+    filename = dest,
+    plot     = p_final,
+    width    = spec$width,
+    height   = spec$height,
+    dpi      = spec$dpi,
+    device   = ragg::agg_png,
+    bg       = "white"
+  )
+  message("Guardado: ", dest)
+}

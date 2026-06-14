@@ -24,21 +24,20 @@ headline_yoy <- plot_df %>%
   pull(yoy_pct) %>%
   round(1)
 
-title_txt <- stringr::str_wrap(
-  "Se desploma el empleo adecuado en marzo 2026, impactando a los más jóvenes",
-  width = 44
-)
-
-subtitle_txt <- stringr::str_wrap(
-  "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026",
-  width = 67
-)
-
-caption_txt <- paste0(
+title_raw <- "Se desploma el empleo adecuado en marzo 2026, impactando a los más jóvenes"
+subtitle_raw <- "Variación interanual del nivel de empleo adecuado por grupo de edad, marzo de 2025 a marzo de 2026"
+caption_portrait <- paste0(
   "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo, tabulados marzo\n",
   "2026. Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE.\n",
   "Nota: En marzo de 2026, el empleo adecuado cayó ", abs(headline_yoy), "% respecto a marzo de 2025.\n",
   "El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada\n",
+  "laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo."
+)
+caption_raw <- paste0(
+  "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo, tabulados marzo 2026. ",
+  "Cálculos de Daniel Sánchez para El Quantificador de Laboratorio LIDE. ",
+  "Nota: En marzo de 2026, el empleo adecuado cayó ", abs(headline_yoy), "% respecto a marzo de 2025. ",
+  "El empleo adecuado comprende a las personas ocupadas que trabajan al menos la jornada ",
   "laboral legal y perciben ingresos laborales iguales o superiores al salario mínimo."
 )
 
@@ -70,10 +69,16 @@ label_df <- plot_df %>%
     )
   )
 
-p_base <- ggplot(
-  plot_df,
-  aes(x = fecha, y = yoy_pct, color = grupo_edad, group = grupo_edad)
-) +
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  title_txt    <- stringr::str_wrap(title_raw, width = if (orientation == "landscape") spec$title_wrap else 44)
+  subtitle_txt <- stringr::str_wrap(subtitle_raw, width = if (orientation == "landscape") spec$subtitle_wrap else 67)
+  caption_txt  <- if (orientation == "landscape") stringr::str_wrap(caption_raw, width = spec$caption_wrap) else caption_portrait
+
+  ggplot(
+    plot_df,
+    aes(x = fecha, y = yoy_pct, color = grupo_edad, group = grupo_edad)
+  ) +
   geom_hline(yintercept = 0, colour = "black", linetype = "dashed", linewidth = 0.4) +
   geom_line(linewidth = 1) +
   geom_text(
@@ -114,7 +119,7 @@ p_base <- ggplot(
     x = guide_axis(minor.ticks = TRUE),
     y = guide_axis(minor.ticks = TRUE)
   ) +
-  theme_quantificador() +
+  theme_quantificador(orientation) +
   theme(
     axis.text = element_text(colour = "black", size = 8),
     axis.text.x = element_text(angle = 40, hjust = 1),
@@ -123,23 +128,29 @@ p_base <- ggplot(
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
     plot.caption = element_text(colour = "black", size = 6.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     legend.position = "none",
-    plot.margin = margin(6, 30, 6, 16),
+    plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 30, 6, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot"
   )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.89, y = 0.17)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-ggsave(
-  filename = out_path,
-  plot = p_final,
-  width = 4,
-  height = 5,
-  units = "in",
-  dpi = 300,
-  device = ragg::agg_png
-)
-
-message("Guardado: ", out_path)
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.89, y = 0.17)
+  dest <- house_out_path(out_path, orientation)
+  ggsave(
+    filename = dest,
+    plot = p_final,
+    width = spec$width,
+    height = spec$height,
+    units = "in",
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}
 

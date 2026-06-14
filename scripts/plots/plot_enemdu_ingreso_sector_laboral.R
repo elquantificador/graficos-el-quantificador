@@ -28,24 +28,19 @@ plot_df <- chart_data$summary %>%
     )
   )
 
-title_txt <- stringr::str_wrap(
-  "Los trabajadores informales ganan menos de la mitad que los trabajadores formales",
-  width = 42
-)
+title_raw <- "Los trabajadores informales ganan menos de la mitad que los trabajadores formales"
 
 subtitle_txt <- "Ingresos laborales mensuales, por sector de ocupación, marzo 2026"
 
-caption_txt <- stringr::str_wrap(
-  paste0(
-    "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Eddie Tomalá para El Quantificador de ",
-    "Laboratorio LIDE. Se muestran únicamente trabajadores de 15 años o más con ingreso laboral ",
-    "positivo. Los casos sin clasificación de sector se reasignan usando la afiliación a la seguridad social ",
-    "como criterio auxiliar de formalidad. Los percentiles son ponderados por el factor de expansión muestral. ",
-    "La visualización recorta el eje en el percentil 90 del ingreso laboral para mejorar la lectura. ",
-    "Caja = p25-p75; línea = mediana; bigotes = p10-p90."
-  ),
-  width = 97
+caption_raw <- paste0(
+  "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Eddie Tomalá para El Quantificador de ",
+  "Laboratorio LIDE. Se muestran únicamente trabajadores de 15 años o más con ingreso laboral ",
+  "positivo. Los casos sin clasificación de sector se reasignan usando la afiliación a la seguridad social ",
+  "como criterio auxiliar de formalidad. Los percentiles son ponderados por el factor de expansión muestral. ",
+  "La visualización recorta el eje en el percentil 90 del ingreso laboral para mejorar la lectura. ",
+  "Caja = p25-p75; línea = mediana; bigotes = p10-p90."
 )
+caption_txt <- stringr::str_wrap(caption_raw, width = 97)
 
 palette_fill <- c(
   "Formal" = "#EF9F4E",
@@ -57,18 +52,25 @@ palette_text <- c(
   "Informal" = "#5E7E84"
 )
 
-p_base <- ggplot(
-  plot_df,
-  aes(
-    x = sector,
-    fill = sector,
-    ymin = p10,
-    lower = p25,
-    middle = mediana,
-    upper = p75,
-    ymax = p90
-  )
-) +
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  title_txt <- stringr::str_wrap(title_raw, width = if (orientation == "landscape") spec$title_wrap else 42)
+  # El caption usa element_textbox_simple, que reajusta el ancho solo: en
+  # landscape se le pasa el texto sin cortar para que llene el lienzo ancho.
+  caption_use <- if (orientation == "landscape") caption_raw else caption_txt
+
+  ggplot(
+    plot_df,
+    aes(
+      x = sector,
+      fill = sector,
+      ymin = p10,
+      lower = p25,
+      middle = mediana,
+      upper = p75,
+      ymax = p90
+    )
+  ) +
   geom_boxplot(
     stat = "identity",
     width = 0.48,
@@ -107,9 +109,9 @@ p_base <- ggplot(
     subtitle = subtitle_txt,
     x = NULL,
     y = "Ingreso laboral mensual (USD)",
-    caption = caption_txt
+    caption = caption_use
   ) +
-  theme_quantificador() +
+  theme_quantificador(orientation) +
   theme(
     axis.text.y = element_text(colour = "grey20", size = 8),
     axis.text.x = element_text(colour = "grey20", size = 7),
@@ -135,17 +137,23 @@ p_base <- ggplot(
     plot.caption.position = "plot",
     panel.grid = element_blank()
   )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.19)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-ggsave(
-  filename = out_path,
-  plot = p_final,
-  width = 4,
-  height = 5,
-  dpi = 300,
-  device = ragg::agg_png
-)
-
-message("Guardado: ", out_path)
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.19)
+  dest <- house_out_path(out_path, orientation)
+  ggsave(
+    filename = dest,
+    plot = p_final,
+    width = spec$width,
+    height = spec$height,
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}

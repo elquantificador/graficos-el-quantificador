@@ -50,75 +50,92 @@ band_colors <- c(
 
 # CEFR zone backgrounds removed
 
-caption_txt <- stringr::str_wrap(
-  paste0(
-    "Fuente: EF English Proficiency Index (EF EPI), edición 2025. Education First (EF). ",
-    "Elaboración: El Quantificador de Laboratorio LIDE. ",
-    "Correspondencia CEFR: A2 <400 · B1 400–499 · B2 500–599 · C1 ≥600."
-  ),
-  width = 92
+caption_raw <- paste0(
+  "Fuente: EF English Proficiency Index (EF EPI), edición 2025. Education First (EF). ",
+  "Elaboración: El Quantificador de Laboratorio LIDE. ",
+  "Correspondencia CEFR: A2 <400 · B1 400–499 · B2 500–599 · C1 ≥600."
 )
 
-p_base <- ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
-                          fill = proficiency_band)) +
-  geom_col(width = 0.65) +
-  # CEFR boundary lines (shifted)
-  geom_hline(yintercept = c(5, 105, 205),
-             linetype = "dotted", colour = "grey55", linewidth = 0.25) +
-  # CEFR level labels above top bar (midpoints of zones, shifted)
-  annotate("text",
-    x     = 14.75,
-    y     = c(55, 155, 220),
-    label = c("B1", "B2", "C1"),
-    size = 3.2, colour = "grey30", hjust = 0.5, fontface = "bold") +
-  geom_text(
-    aes(label = score),
-    hjust = -0.15, vjust = 0.5, size = 2.5, colour = "grey20"
-  ) +
-  scale_fill_manual(
-    values = band_colors,
-    labels = c("Very low" = "Muy bajo", "Low" = "Bajo",
-               "Moderate" = "Moderado", "High" = "Alto")
-  ) +
-  scale_y_continuous(
-    breaks = c(5, 55, 105, 155, 205),
-    labels = c("400", "450", "500", "550", "600"),
-    expand = expansion(mult = c(0, 0.12))
-  ) +
-  labs(
-    x        = "",
-    y        = "Puntaje EF EPI (0–800)",
-    title    = stringr::str_wrap(
-      "Because they're nice? Los profesionales en Estrategia y Gestión de Proyectos tienen el mejor inglés del Ecuador",
-      width = 42
-    ),
-    subtitle = "Puntaje EF EPI 2025 por función laboral",
-    caption  = caption_txt,
-    fill     = "Nivel EF EPI"
-  ) +
-  coord_flip(clip = "off") +
-  theme_quantificador() +
-  theme(
-    legend.position      = c(0.76, 0.18),
-    legend.justification = c(0, 0.5),
-    legend.direction     = "vertical",
-    legend.title         = element_text(size = 6.5, face = "bold"),
-    legend.text          = element_text(size = 6.5),
-    legend.key.width     = unit(3, "mm"),
-    legend.key.height    = unit(3, "mm"),
-    legend.background    = element_rect(fill = "white", colour = NA),
-    legend.box.background = element_blank(),
-    legend.box.margin    = margin(0, 0, 0, 0),
-    axis.text.y      = element_text(hjust = 1),
-    axis.title.x     = element_text(hjust = 0),
-    plot.title       = element_text(size = 12.5, face = "bold", colour = "grey20", hjust = 0),
-    plot.caption     = element_text(size = 5.6, lineheight = 1.08, colour = "grey30", hjust = 0),
-    plot.margin      = margin(14, 52, 10, 16)
-  )
+title_raw <- "Because they're nice? Los profesionales en Estrategia y Gestión de Proyectos tienen el mejor inglés del Ecuador"
+
+portrait_path <- "outputs/figures/08_ingles_funcion-laboral-ecuador.png"
+
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  # Portrait conserva sus anchos históricos (título 42, caption 92) para no
+  # alterar el PNG publicado; landscape usa los anchos apaisados de la casa.
+  title_w   <- if (orientation == "landscape") spec$title_wrap else 42
+  # El caption se renderiza a 5,6 pt: en landscape se envuelve para llenar el
+  # lienzo a ese tamaño (más caracteres que el ancho de la casa a 6,5 pt).
+  caption_w <- if (orientation == "landscape") landscape_wrap_for_size(5.6) else 92
+
+  ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
+                 fill = proficiency_band)) +
+    geom_col(width = 0.65) +
+    # CEFR boundary lines (shifted)
+    geom_hline(yintercept = c(5, 105, 205),
+               linetype = "dotted", colour = "grey55", linewidth = 0.25) +
+    # CEFR level labels above top bar (midpoints of zones, shifted)
+    annotate("text",
+      x     = 14.75,
+      y     = c(55, 155, 220),
+      label = c("B1", "B2", "C1"),
+      size = 3.2, colour = "grey30", hjust = 0.5, fontface = "bold") +
+    geom_text(
+      aes(label = score),
+      hjust = -0.15, vjust = 0.5, size = 2.5, colour = "grey20"
+    ) +
+    scale_fill_manual(
+      values = band_colors,
+      labels = c("Very low" = "Muy bajo", "Low" = "Bajo",
+                 "Moderate" = "Moderado", "High" = "Alto")
+    ) +
+    scale_y_continuous(
+      breaks = c(5, 55, 105, 155, 205),
+      labels = c("400", "450", "500", "550", "600"),
+      expand = expansion(mult = c(0, 0.12))
+    ) +
+    labs(
+      x        = "",
+      y        = "Puntaje EF EPI (0–800)",
+      title    = stringr::str_wrap(title_raw, width = title_w),
+      subtitle = "Puntaje EF EPI 2025 por función laboral",
+      caption  = stringr::str_wrap(caption_raw, width = caption_w),
+      fill     = "Nivel EF EPI"
+    ) +
+    coord_flip(clip = "off") +
+    theme_quantificador(orientation) +
+    theme(
+      legend.position      = if (orientation == "landscape") c(0.84, 0.30) else c(0.76, 0.18),
+      legend.justification = c(0, 0.5),
+      legend.direction     = "vertical",
+      legend.title         = element_text(size = 6.5, face = "bold"),
+      legend.text          = element_text(size = 6.5),
+      legend.key.width     = unit(3, "mm"),
+      legend.key.height    = unit(3, "mm"),
+      legend.background    = element_rect(fill = "white", colour = NA),
+      legend.box.background = element_blank(),
+      legend.box.margin    = margin(0, 0, 0, 0),
+      axis.text.y      = element_text(hjust = 1),
+      axis.title.x     = element_text(hjust = 0),
+      plot.title       = element_text(size = 12.5, face = "bold", colour = "grey20", hjust = 0),
+      plot.caption     = element_text(size = 5.6, lineheight = 1.08, colour = "grey30", hjust = 0),
+      plot.margin      = if (orientation == "landscape") margin(14, 24, 10, 16) else margin(14, 52, 10, 16)
+    )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.19, width = 0.09, height = 0.09)
-ggsave("outputs/figures/08_ingles_funcion-laboral-ecuador.png", p_final,
-       width = 4, height = 5, units = "in", dpi = 300, device = ragg::agg_png)
-message("Guardado: outputs/figures/08_ingles_funcion-laboral-ecuador.png")
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
+
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  # Sin logo en landscape; portrait mantiene el logo en su posición de la casa.
+  p_final <- house_apply_logo(build_chart(orientation), orientation,
+                              x = 0.88, y = 0.19, width = 0.09, height = 0.09)
+  out_path <- house_out_path(portrait_path, orientation)
+  ggsave(out_path, p_final,
+         width = spec$width, height = spec$height, units = "in",
+         dpi = spec$dpi, device = ragg::agg_png, bg = "white")
+  message("Guardado: ", out_path)
+}
 

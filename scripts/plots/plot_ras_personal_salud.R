@@ -51,16 +51,26 @@ label_df <- plot_df %>%
     )
   )
 
-caption_txt <- stringr::str_wrap(
-  paste0(
-    "Fuente: Registro de Actividades y Recursos de Salud (RAS), 2006-2021. ",
-    "Elaboración: Odalis Clemente y Alonso Quijano Ruiz para el Quantificador de Laboratorio LIDE. ",
-    "TAPS: Técnicos de Atención Primaria en Salud, personal comunitario vinculado al primer nivel de atención."
-  ),
-  width = 82
+portrait_path <- out_path
+
+title_raw <- "El mayor crecimiento de personal de salud fue después de la reforma de salud de 2011"
+caption_raw <- paste0(
+  "Fuente: Registro de Actividades y Recursos de Salud (RAS), 2006-2021. ",
+  "Elaboración: Odalis Clemente y Alonso Quijano Ruiz para el Quantificador de Laboratorio LIDE. ",
+  "TAPS: Técnicos de Atención Primaria en Salud, personal comunitario vinculado al primer nivel de atención."
 )
 
-p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  if (orientation == "landscape") {
+    title_txt   <- stringr::str_wrap(title_raw, width = landscape_wrap_for_size(11.1))
+    caption_txt <- stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.6))
+  } else {
+    title_txt   <- "El mayor crecimiento de personal de salud\nfue después de la reforma de salud de 2011"
+    caption_txt <- stringr::str_wrap(caption_raw, width = 82)
+  }
+
+  ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
   geom_vline(
     xintercept = c(2008, 2011),
     linetype = "dashed",
@@ -118,14 +128,14 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
     )
   ) +
   labs(
-    title = "El mayor crecimiento de personal de salud\nfue después de la reforma de salud de 2011",
+    title = title_txt,
     subtitle = "Evolución del personal del MSP en Ecuador, 2006-2021",
     x = NULL,
     y = "Número de profesionales",
     caption = caption_txt
   ) +
   coord_cartesian(clip = "off") +
-  theme_quantificador() +
+  theme_quantificador(orientation) +
   theme(
     plot.subtitle = element_text(size = 8.7, lineheight = 1.05, hjust = 0),
     plot.caption = element_text(size = 5.6, lineheight = 1.06, hjust = 0, margin = margin(t = 7)),
@@ -140,19 +150,25 @@ p_base <- ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
     legend.position = "none",
     plot.title = element_text(face = "bold", hjust = 0, size = 11.1, lineheight = 1.02)
   )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.07)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-ggsave(
-  filename = out_path,
-  plot = p_final,
-  width = 4,
-  height = 5,
-  units = "in",
-  dpi = 300,
-  device = ragg::agg_png
-)
-
-message("Guardado: ", out_path)
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.07)
+  dest <- house_out_path(portrait_path, orientation)
+  ggsave(
+    filename = dest,
+    plot = p_final,
+    width = spec$width,
+    height = spec$height,
+    units = "in",
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}
 

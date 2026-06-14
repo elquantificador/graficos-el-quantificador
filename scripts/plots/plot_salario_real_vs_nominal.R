@@ -76,86 +76,112 @@ label_df <- salario_plot |>
     )
   )
 
-caption_txt <- paste0(
-  "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por\n",
-  "inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
-)
+portrait_path <- "outputs/figures/11_salarios_publico-privado_inflacion-ecuador.png"
 
-p_base <- ggplot2::ggplot(
-  salario_plot,
-  ggplot2::aes(
-    x = fecha,
-    y = valor,
-    color = serie,
-    alpha = line_alpha,
-    linewidth = line_width,
-    linetype = line_type
-  )
-) +
-  ggplot2::geom_line() +
-  ggplot2::geom_text(
-    data = label_df,
-    ggplot2::aes(x = fecha_label, y = valor_label, label = label),
-    hjust = -0.03,
-    vjust = 0.5,
-    size = 2.2,
-    fontface = "bold",
-    lineheight = 1,
-    color = "black",
-    show.legend = FALSE
+title_raw <- "Los empleados públicos ganan más, pero también pierden más por la inflación"
+subtitle_raw <- "Comparación de sueldos promedio públicos y privados, con ajustes para la inflación, 2019-2026"
+caption_raw <- "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
+
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  # Margen derecho amplio en ambas orientaciones: las etiquetas al final de las
+  # líneas necesitan ese espacio. Por eso los anchos de envoltura se reducen un
+  # poco respecto al ancho usable estándar.
+  if (orientation == "landscape") {
+    title_txt    <- stringr::str_wrap(title_raw, width = 78)
+    subtitle_txt <- stringr::str_wrap(subtitle_raw, width = 109)
+    caption_txt  <- stringr::str_wrap(caption_raw, width = 160)
+  } else {
+    title_txt    <- "Los empleados públicos ganan más,\npero también pierden más por la inflación"
+    subtitle_txt <- "Comparación de sueldos promedio públicos y privados,\ncon ajustes para la inflación, 2019-2026"
+    caption_txt  <- paste0(
+      "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por\n",
+      "inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
+    )
+  }
+
+  ggplot2::ggplot(
+    salario_plot,
+    ggplot2::aes(
+      x = fecha,
+      y = valor,
+      color = serie,
+      alpha = line_alpha,
+      linewidth = line_width,
+      linetype = line_type
+    )
   ) +
-  ggplot2::scale_color_manual(values = c(
-    "Sueldo privado ajustado por inflación" = "#ef9f4e",
-    "Sueldo público ajustado por inflación" = "#2D7DB3",
-    "Sueldo privado" = "#ef9f4e",
-    "Sueldo público" = "#2D7DB3"
-  )) +
-  ggplot2::scale_x_date(
-    date_breaks = "1 year",
-    date_labels = "%Y",
-    expand = ggplot2::expansion(mult = c(0.01, 0.01))
-  ) +
-  ggplot2::scale_alpha_identity() +
-  ggplot2::scale_linewidth_identity() +
-  ggplot2::scale_linetype_identity() +
-  ggplot2::scale_y_continuous(
-    labels = scales::label_number(big.mark = ".", decimal.mark = ",", prefix = "$", accuracy = 1),
-    breaks = scales::breaks_width(100),
-    expand = ggplot2::expansion(mult = c(0.02, 0.08))
-  ) +
-  ggplot2::labs(
-    title = "Los empleados públicos ganan más,\npero también pierden más por la inflación",
-    subtitle = "Comparación de sueldos promedio públicos y privados,\ncon ajustes para la inflación, 2019-2026",
-    x = "",
-    y = "Salario promedio (USD)",
-    caption = caption_txt
-  ) +
-  ggplot2::coord_cartesian(clip = "off") +
-  theme_quantificador() +
-  ggplot2::theme(
-    plot.subtitle = ggplot2::element_text(size = 9, lineheight = 1.1, hjust = 0),
-    plot.caption = ggplot2::element_text(size = 6, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 2)),
-    axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
-    axis.title.y = ggplot2::element_text(
-      colour = "grey20",
-      hjust = 0.5,
+    ggplot2::geom_line() +
+    ggplot2::geom_text(
+      data = label_df,
+      ggplot2::aes(x = fecha_label, y = valor_label, label = label),
+      hjust = -0.03,
       vjust = 0.5,
-      margin = ggplot2::margin(r = 10, b = 8)
-    ),
-    plot.margin = ggplot2::margin(10, 78, 0, 12)
-  )
+      size = 2.2,
+      fontface = "bold",
+      lineheight = 1,
+      color = "black",
+      show.legend = FALSE
+    ) +
+    ggplot2::scale_color_manual(values = c(
+      "Sueldo privado ajustado por inflación" = "#ef9f4e",
+      "Sueldo público ajustado por inflación" = "#2D7DB3",
+      "Sueldo privado" = "#ef9f4e",
+      "Sueldo público" = "#2D7DB3"
+    )) +
+    ggplot2::scale_x_date(
+      date_breaks = "1 year",
+      date_labels = "%Y",
+      expand = ggplot2::expansion(mult = c(0.01, 0.01))
+    ) +
+    ggplot2::scale_alpha_identity() +
+    ggplot2::scale_linewidth_identity() +
+    ggplot2::scale_linetype_identity() +
+    ggplot2::scale_y_continuous(
+      labels = scales::label_number(big.mark = ".", decimal.mark = ",", prefix = "$", accuracy = 1),
+      breaks = scales::breaks_width(100),
+      expand = ggplot2::expansion(mult = c(0.02, 0.08))
+    ) +
+    ggplot2::labs(
+      title = title_txt,
+      subtitle = subtitle_txt,
+      x = "",
+      y = "Salario promedio (USD)",
+      caption = caption_txt
+    ) +
+    ggplot2::coord_cartesian(clip = "off") +
+    theme_quantificador(orientation) +
+    ggplot2::theme(
+      plot.subtitle = ggplot2::element_text(size = 9, lineheight = 1.1, hjust = 0),
+      plot.caption = ggplot2::element_text(size = 6, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 2)),
+      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
+      axis.title.y = ggplot2::element_text(
+        colour = "grey20",
+        hjust = 0.5,
+        vjust = 0.5,
+        margin = ggplot2::margin(r = 10, b = 8)
+      ),
+      plot.margin = ggplot2::margin(10, 78, 0, 12)
+    )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.11)
-ggplot2::ggsave(
-  "outputs/figures/11_salarios_publico-privado_inflacion-ecuador.png",
-  p_final,
-  width = 4,
-  height = 5,
-  units = "in",
-  dpi = 300,
-  device = ragg::agg_png
-)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-message("Guardado: outputs/figures/11_salarios_publico-privado_inflacion-ecuador.png")
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.11)
+  dest <- house_out_path(portrait_path, orientation)
+  ggplot2::ggsave(
+    dest,
+    p_final,
+    width = spec$width,
+    height = spec$height,
+    units = "in",
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}
 

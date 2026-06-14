@@ -228,12 +228,23 @@ outcome_labels <- outcome_df %>%
 outcome_stage <- outcome_stage %>%
   left_join(outcome_labels, by = "label")
 
-caption_txt <- wrap_caption_house(
-  "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: El Quantificador de Laboratorio LIDE. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. La población que salió de la fuerza laboral no trabaja y no está disponible para trabajar por cualquier motivo. El gráfico muestra la transición de quienes estaban desempleados en 2022, desagregada por zona de residencia.",
-  width = 82
-)
+caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: El Quantificador de Laboratorio LIDE. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. La población que salió de la fuerza laboral no trabaja y no está disponible para trabajar por cualquier motivo. El gráfico muestra la transición de quienes estaban desempleados en 2022, desagregada por zona de residencia."
 
-p_base <- ggplot() +
+build_chart <- function(orientation) {
+  spec <- house_spec(orientation)
+  title_txt <- if (orientation == "landscape") {
+    wrap_title_house("La mayoría de desempleados no encuentra trabajo después de un año", width = spec$title_wrap)
+  } else {
+    "La mayoría de desempleados no encuentra\ntrabajo después de un año"
+  }
+  subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, por zona, 2022-2023", width = spec$subtitle_wrap)
+  caption_txt  <- if (orientation == "landscape") {
+    stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.5))
+  } else {
+    wrap_caption_house(caption_raw, width = 82)
+  }
+
+  ggplot() +
   geom_polygon(
     data = root_flows,
     aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
@@ -281,8 +292,8 @@ p_base <- ggplot() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
   labs(
-    title = "La mayoría de desempleados no encuentra\ntrabajo después de un año",
-    subtitle = wrap_subtitle_house("Transiciones desde el desempleo, por zona, 2022-2023"),
+    title = title_txt,
+    subtitle = subtitle_txt,
     x = NULL,
     y = NULL,
     caption = caption_txt
@@ -295,25 +306,30 @@ p_base <- ggplot() +
     axis.title = element_blank(),
     panel.grid = element_blank(),
     legend.position = "none",
-    plot.margin = margin(8, 60, 6, 12),
+    plot.margin = if (orientation == "landscape") margin(8, 16, 6, 12) else margin(8, 60, 6, 12),
     plot.title = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
     plot.subtitle = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
     plot.caption = element_text(colour = "grey30", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 6)),
     plot.title.position = "plot",
     plot.caption.position = "plot"
   )
+}
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-p_final <- add_logo(p_base, y = 0.15)
+dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-ggsave(
-  filename = out_path,
-  plot = p_final,
-  width = 4,
-  height = 5,
-  dpi = 300,
-  device = ragg::agg_png,
-  bg = "white"
-)
-
-message("Guardado: ", out_path)
+for (orientation in c("portrait", "landscape")) {
+  spec <- house_spec(orientation)
+  p_final <- house_apply_logo(build_chart(orientation), orientation, y = 0.15)
+  dest <- house_out_path(out_path, orientation)
+  ggsave(
+    filename = dest,
+    plot = p_final,
+    width = spec$width,
+    height = spec$height,
+    dpi = spec$dpi,
+    device = ragg::agg_png,
+    bg = "white"
+  )
+  message("Guardado: ", dest)
+}
