@@ -3,7 +3,7 @@
 # Genera un Sankey de transición laboral de personas
 # desempleadas por zona de residencia en la ENEMDU.
 # Requiere: data/processed/enemdu_transicion_laboral_desempleo_zona_2022_2023.rds
-# Guarda:   outputs/figures/22_transicion-laboral_desempleo-zona-ecuador.png
+# Guarda:   outputs/figures/transicion-laboral_desempleo-zona-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_enemdu_transicion_laboral_desempleo_zona.R
@@ -19,7 +19,7 @@ suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(ggplot2))
 
 input_path <- "data/processed/enemdu_transicion_laboral_desempleo_zona_2022_2023.rds"
-out_path <- "outputs/figures/22_transicion-laboral_desempleo-zona-ecuador.png"
+out_path <- "outputs/figures/transicion-laboral_desempleo-zona-ecuador.png"
 
 fmt_n <- function(x) {
   label_number_intl(accuracy = 1)(round(x))
