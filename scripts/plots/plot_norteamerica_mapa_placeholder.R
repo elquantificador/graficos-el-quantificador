@@ -19,10 +19,10 @@ ensure_packages(c(
 portrait_path <- "outputs/figures/22_mapa-valores_norteamerica.png"
 
 values_df <- tibble::tribble(
-  ~admin,                     ~country_label,            ~value,
-  "Canada",                   "Canadá\n16.320",          16320,
-  "United States of America", "Estados Unidos\n440.337", 440337,
-  "Mexico",                   "México\n4.615",            4615
+  ~admin,                     ~country_label,            ~value,  ~fill_group,
+  "Canada",                   "Canadá\n16.320",          16320,   "yellow",
+  "United States of America", "Estados Unidos\n440.337", 440337,  "blue",
+  "Mexico",                   "México\n4.615",            4615,   "red"
 )
 
 map_df <- rnaturalearth::ne_countries(
@@ -44,7 +44,7 @@ label_df <- cbind(
   sf::st_coordinates(label_points)
 )
 
-title_raw <- "Cerca de medio millón de ecuatorianos apoyan a la tricolor desde Norteamérica"
+title_raw <- "Cerca de medio millón de ecuatorianos apoyan a la Tricolor desde Norteamérica"
 subtitle_raw <- paste(
   "Ecuatorianos viviendo en Norteamérica,",
   "por país, estimados censales"
@@ -66,7 +66,7 @@ build_chart <- function() {
 
   ggplot2::ggplot(map_df) +
     ggplot2::geom_sf(
-      ggplot2::aes(fill = value),
+      ggplot2::aes(fill = fill_group),
       colour = "white",
       linewidth = 0.5
     ) +
@@ -78,13 +78,12 @@ build_chart <- function() {
       lineheight = 0.9,
       fontface = "bold"
     ) +
-    ggplot2::scale_fill_gradientn(
-      colours = c("#e9f3fb", "#c9e1f2", "#8fc0df", "#4d94c2", "#1696b5"),
-      values = scales::rescale(c(4615, 20000, 100000, 250000, 440337)),
-      limits = c(4615, 440337),
-      labels = label_number_intl(accuracy = 1),
-      breaks = c(4615, 150000, 300000, 440337),
-      na.value = "grey90"
+    ggplot2::scale_fill_manual(
+      values = c(
+        "yellow" = "#FFD100",
+        "blue" = "#0072CE",
+        "red" = "#EF3340"
+      )
     ) +
     ggplot2::coord_sf(
       xlim = c(-162, -58),
@@ -96,9 +95,9 @@ build_chart <- function() {
       title = wrap_title_house(title_raw, width = title_width),
       subtitle = subtitle_txt,
       caption = wrap_caption_house(caption_raw, width = caption_width),
-      fill = NULL,
       x = NULL,
-      y = NULL
+      y = NULL,
+      fill = NULL
     ) +
     theme_quantificador("portrait") +
     ggplot2::theme(
@@ -106,16 +105,7 @@ build_chart <- function() {
       axis.title = ggplot2::element_blank(),
       axis.ticks = ggplot2::element_blank(),
       axis.line = ggplot2::element_blank(),
-      legend.position = c(0.075, 0.30),
-      legend.justification = c(0, 0.5),
-      legend.direction = "vertical",
-      legend.background = ggplot2::element_blank(),
-      legend.box.background = ggplot2::element_blank(),
-      legend.box.margin = ggplot2::margin(t = 0, r = 0, b = 0, l = 0),
-      legend.margin = ggplot2::margin(t = 0, r = 0, b = 0, l = 0),
-      legend.key.width = grid::unit(3.2, "mm"),
-      legend.title = ggplot2::element_text(size = 6.1, face = "bold", colour = "grey20"),
-      legend.text = ggplot2::element_text(size = 5.8, colour = "grey20"),
+      legend.position = "none",
       plot.title = ggplot2::element_text(
         size = 11.1, face = "bold", colour = "grey20",
         hjust = 0, lineheight = 1.01,
@@ -130,17 +120,6 @@ build_chart <- function() {
         hjust = 0, margin = ggplot2::margin(t = 2)
       ),
       plot.margin = ggplot2::margin(0, 14, 2, 8)
-    ) +
-    ggplot2::guides(
-      fill = ggplot2::guide_colorbar(
-        title = "Número de ecuatorianos\nen el año censal",
-        title.position = "top",
-        title.hjust = 0,
-        label.position = "right",
-        barheight = grid::unit(22, "mm"),
-        barwidth = grid::unit(3.2, "mm"),
-        ticks = FALSE
-      )
     )
 }
 
