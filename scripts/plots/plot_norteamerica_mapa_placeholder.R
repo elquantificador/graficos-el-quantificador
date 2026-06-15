@@ -55,7 +55,7 @@ label_df <- cbind(
   sf::st_coordinates(label_points)
 )
 
-title_txt <- "Más de 640 mil ecuatorianos apoyan a la Tricolor\ndesde Norteamérica"
+title_txt <- "Más de 640 mil ecuatorianos apoyan a la Tricolor\ndesde Norteamérica, en las buenas y en las malas"
 subtitle_raw <- paste(
   "Ecuatorianos viviendo en Norteamérica,",
   "por país"
