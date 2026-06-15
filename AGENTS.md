@@ -36,7 +36,6 @@ graficos-el-quantificador/
 | Clean script | `scripts/data-cleaning/clean_[source]_[topic].R` | `clean_enighur_ingreso_gasto.R` |
 | Plot script | `scripts/plots/plot_[source]_[topic].R` | `plot_enighur_ingreso_gasto.R` |
 | Output PNG (portrait) | `outputs/figures/NN_[slug]-ecuador.png` | `20_descomposicion-ingreso-hogar-ecuador.png` |
-| Output PNG (landscape) | `outputs/figures/landscape/NN_[slug]-ecuador.png` | `20_descomposicion-ingreso-hogar-ecuador.png` |
 
 `NN` is the chart's sequential number in the catalog (zero-padded to 2 digits).
 
@@ -103,51 +102,6 @@ The standard canvas is **4 × 5 inches at 300 dpi**. Never use other sizes witho
 ggsave(out_path, plot = p_final, width = 4, height = 5, dpi = 300, device = ragg::agg_png)
 
 ```
-
-### Dual orientation (portrait + landscape)
-
-Each chart is published in **two** orientations from a single plot script:
-
-- **Portrait** — `4 × 5 in @ 300 dpi`, written to `outputs/figures/NN_slug-ecuador.png`.
-- **Landscape** — `8 × 4.5 in @ 300 dpi` (16:9, 2400 × 1350 px), written to
-  `outputs/figures/landscape/NN_slug-ecuador.png` (same filename, landscape subfolder).
-
-Do not hardcode these numbers. Get them from `house_spec(orientation)` in `scripts/utils.R`,
-which returns `width`, `height`, `dpi`, `dir`, and the three wrap widths. Wrap the plot
-construction in a `build_chart(orientation)` function and loop over both orientations. **Landscape
-versions carry no logo** — apply it with `house_apply_logo()`, which adds the logo for portrait
-and returns the bare plot for landscape (save with `bg = "white"`). Captions rendered at a size
-other than the house 6.5 pt should wrap with `landscape_wrap_for_size(pt)` so they fill the width.
-
-```r
-portrait_path <- "outputs/figures/NN_slug-ecuador.png"
-
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  ggplot(df, aes(...)) + ... +
-    labs(
-      title    = wrap_title_house(title_raw,       width = spec$title_wrap),
-      subtitle = wrap_subtitle_house(subtitle_raw, width = spec$subtitle_wrap),
-      caption  = wrap_caption_house(caption_raw,   width = spec$caption_wrap)
-    ) +
-    theme_quantificador(orientation) +
-    theme(plot.margin = if (orientation == "landscape") margin(...) else margin(...))
-}
-
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p    <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.10)  # logo: portrait only
-  out  <- house_out_path(portrait_path, orientation)
-  ggsave(out, p, width = spec$width, height = spec$height, dpi = spec$dpi,
-         device = ragg::agg_png, bg = "white")
-  message("Guardado: ", out)
-}
-```
-
-The portrait branch must reproduce the chart's existing layout exactly so the published
-`outputs/figures/NN_*.png` stays byte-identical; only landscape-specific values (canvas, wrap
-widths, margins, legend position) may differ.
 
 ### Typography
 
@@ -250,7 +204,6 @@ The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 - `chart_catalog_source.csv` is the structured source of truth that must include `Author`.
 - `chart_catalog.csv` is generated and must preserve `Image Filename` for backward compatibility.
 - `Image Path` must always point to the true published PNG under `outputs/figures/`.
-- `Landscape Image Path` is generated (same filename under `outputs/figures/landscape/`) and points to the 16:9 version.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
 
 ## Running scripts

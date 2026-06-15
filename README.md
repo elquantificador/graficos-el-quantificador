@@ -101,7 +101,6 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 - `LinkedIn Link`
 - `Image Filename`
 - `Image Path` — ruta relativa al repo, por ejemplo `outputs/figures/21_ingreso-laboral_sector-formal-informal-ecuador.png`
-- `Landscape Image Path` — ruta a la versión apaisada (16:9), por ejemplo `outputs/figures/landscape/21_ingreso-laboral_sector-formal-informal-ecuador.png`
 - `Author` — nombre de despliegue del autor o autores de la visualización
 - `Description`
 - `Script Link`
@@ -137,6 +136,7 @@ Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publi
 19. `19_juguetes-infancia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_endi_juguetes.R)
 20. `20_descomposicion-ingreso-hogar-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_ingreso_gasto.R)
 21. `21_ingreso-laboral_sector-formal-informal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_sector_laboral.R)
+22. `22_mapa-valores_norteamerica.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_norteamerica_mapa_placeholder.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)

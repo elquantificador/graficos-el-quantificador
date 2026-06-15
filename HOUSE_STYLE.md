@@ -14,20 +14,6 @@ For Codex or any other agent:
 - Resolution: `300 dpi`
 - Output format: `PNG`
 
-### Landscape (second version)
-
-Every chart also ships a landscape (16:9) version for wide formats (slides / social).
-
-- Export: `8 × 4.5 inches` at `300 dpi` = `2400 × 1350 px` (exact 16:9). Downscale to
-  `1200 × 675` when delivering if a platform requires it.
-- Output path: `outputs/figures/landscape/` with the **same filename** as the portrait PNG.
-- House point sizes are unchanged; only the wrap widths and margins adapt.
-- Logo: **landscape versions carry no logo.** Only the portrait PNG shows the El Quantificador
-  logo. Apply it via `house_apply_logo(plot, orientation, ...)`, which adds the logo for portrait
-  and returns the bare plot for landscape (save landscape with `bg = "white"`).
-- These numbers live in `scripts/utils.R` (`LANDSCAPE_*` constants and `house_spec()`); never
-  hardcode them per chart. The portrait PNG under `outputs/figures/` must stay byte-identical.
-
 ## Typography
 
 - `plot.title`: `12.5 pt`, bold
@@ -71,22 +57,6 @@ Wrap to a fixed visual width anchored on the title width.
 - Title wrap width: `38`
 - Subtitle wrap width: `60`
 - Caption wrap width: `83`
-
-Landscape follows the **same principle, scaled to the available width**: title and subtitle
-should use the canvas width and stay on **one line wherever possible**, breaking to the next line
-only when the text exceeds the usable width. The title wrap is scaled by the ratio of usable
-widths (canvas minus default margins): portrait ≈ 3.28 in vs landscape 7.5 in, so `38 × 7.5 /
-3.28 ≈ 87`. Subtitle/caption are then derived from the title via the house font-size rule
-(`house_wrap_width()`), so they fill the width too. Exposed via `house_spec("landscape")`:
-
-- Title wrap width: `87`
-- Subtitle wrap width: `121`  (= 87 × 12.5 / 9)
-- Caption wrap width: `167`  (= 87 × 12.5 / 6.5, for a house 6.5 pt caption)
-
-When a chart renders its caption (or any text) at a size **other** than the house size — several
-charts use a 5.5–5.8 pt caption, and a few smaller — wrap it with `landscape_wrap_for_size(pt)`
-so it still fills the full width at its own size (smaller font ⇒ more characters). Example: a
-5.5 pt caption wraps at ≈198, a 3.9 pt caption at ≈279.
 
 These widths correspond to the shared helpers in `scripts/utils.R`:
 
