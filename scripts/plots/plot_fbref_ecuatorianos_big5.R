@@ -34,17 +34,25 @@ player_order <- df |>
   dplyr::arrange(dplyr::desc(total_minutos), jugador) |>
   dplyr::pull(jugador_key)
 
+legend_breaks <- df |>
+  dplyr::group_by(jugador_key) |>
+  dplyr::summarise(total_minutos = sum(minutos), .groups = "drop") |>
+  dplyr::mutate(share_total = total_minutos / sum(total_minutos)) |>
+  dplyr::filter(share_total >= 0.05) |>
+  dplyr::arrange(dplyr::desc(total_minutos)) |>
+  dplyr::pull(jugador_key)
+
 player_colors <- c(
   "Moises Caicedo" = "#D04A3E",
   "Pervis Estupinan" = "#00A8CB",
-  "Piero Hincapie" = "#F0A145",
+  "Piero Hincapie" = "#6A4C93",
   "Willian Pacho" = "#7B8D97",
   "Gonzalo Plata" = "#BFD9DE",
-  "Jackson Porozo" = "#EF9F4E",
-  "John Yeboah" = "#5E7E84",
-  "Kendry Paez" = "#F2B36A",
-  "Nilson Angulo" = "#9FC3DE",
-  "Jeremy Arevalo" = "#C9D3D8"
+  "Jackson Porozo" = "#F28E2B",
+  "John Yeboah" = "#2F6F7E",
+  "Kendry Paez" = "#EDC948",
+  "Nilson Angulo" = "#86B6D8",
+  "Jeremy Arevalo" = "#C7CDD4"
 )
 
 player_labels <- c(
@@ -73,7 +81,9 @@ caption_raw <- paste(
   "Nota: el gráfico muestra únicamente a futbolistas ecuatorianos convocados a la selección nacional",
   "que registraron minutos en alguna de las cinco grandes ligas europeas",
   "durante el período analizado: Premier League (Inglaterra), La Liga (España),",
-  "Serie A (Italia), Bundesliga (Alemania) y Ligue 1 (Francia)."
+  "Serie A (Italia), Bundesliga (Alemania) y Ligue 1 (Francia).",
+  "Otros futbolistas con participaciones menores: Jackson Porozo, John Yeboah,",
+  "Kendry Páez, Nilson Angulo y Jeremy Arévalo."
 )
 
 build_chart <- function(orientation) {
@@ -81,8 +91,12 @@ build_chart <- function(orientation) {
 
   ggplot(df_plot, aes(x = temporada, y = minutos, fill = jugador_key)) +
     geom_col(width = 0.68, color = "white", linewidth = 0.2) +
-    scale_fill_manual(values = player_colors, labels = player_labels) +
-    guides(fill = guide_legend(nrow = 2, byrow = TRUE)) +
+    scale_fill_manual(
+      values = player_colors,
+      labels = player_labels[legend_breaks],
+      breaks = legend_breaks
+    ) +
+    guides(fill = guide_legend(nrow = 1, byrow = TRUE)) +
     scale_y_continuous(
       labels = label_number_intl(),
       expand = expansion(mult = c(0, 0.12))
@@ -101,12 +115,12 @@ build_chart <- function(orientation) {
       legend.justification = c(0.5, 1),
       legend.direction = "horizontal",
       legend.title = element_blank(),
-      legend.text = element_text(size = 5.0, colour = "grey20"),
-      legend.key.height = unit(2.0, "mm"),
-      legend.key.width = unit(2.0, "mm"),
+      legend.text = element_text(size = 5.4, colour = "grey20"),
+      legend.key.height = unit(2.5, "mm"),
+      legend.key.width = unit(2.5, "mm"),
       legend.key = element_blank(),
       legend.margin = margin(0, 0, 2, 0),
-      legend.spacing.x = unit(1.0, "mm"),
+      legend.spacing.x = unit(0.8, "mm"),
       legend.background = element_blank(),
       legend.box.background = element_blank(),
       legend.box.margin = margin(0, 0, 0, 0),
