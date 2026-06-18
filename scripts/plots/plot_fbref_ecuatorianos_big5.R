@@ -82,8 +82,9 @@ caption_raw <- paste(
   "que registraron minutos en alguna de las cinco grandes ligas europeas",
   "durante el período analizado: Premier League (Inglaterra), La Liga (España),",
   "Serie A (Italia), Bundesliga (Alemania) y Ligue 1 (Francia).",
-  "Otros futbolistas con participaciones menores: Jackson Porozo, John Yeboah,",
-  "Kendry Páez, Nilson Angulo y Jeremy Arévalo."
+  "Colores de futbolistas con participaciones menores omitidos de la leyenda:",
+  "naranja = Jackson Porozo; verde petróleo = John Yeboah; amarillo = Kendry Páez;",
+  "celeste = Nilson Angulo; gris claro = Jeremy Arévalo."
 )
 
 build_chart <- function(orientation) {
