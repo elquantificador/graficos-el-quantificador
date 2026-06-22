@@ -138,6 +138,7 @@ Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publi
 21. `21_ingreso-laboral_sector-formal-informal-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_ingreso_sector_laboral.R)
 22. `22_mapa-valores_norteamerica.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_norteamerica_mapa_placeholder.R)
 23. `23_ecuatorianos-big5_minutos-europa.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_fbref_ecuatorianos_big5.R)
+24. `24_menores-padre-hogar-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ensanut_menores_padre_hogar.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)
@@ -165,4 +166,3 @@ Los archivos procesados (`data/processed/`) tampoco se versionan: son derivados 
 
 Las figuras PNG en `outputs/figures/` sí se versionan en este repositorio como salidas publicadas. Los PDF generados se ignoran.
 Las tablas derivadas en Excel/HTML se escriben en `outputs/tables/`.
-

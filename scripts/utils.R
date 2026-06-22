@@ -5,7 +5,7 @@
 # ============================================================
 
 source("scripts/packages.R")
-ensure_packages(c("ggplot2", "cowplot", "stringr"))
+ensure_packages(c("ggplot2", "cowplot", "stringr", "png"))
 
 # ---- Constantes ----
 LOGO_PATH <- "quantificador.png"
@@ -243,11 +243,21 @@ add_logo <- function(plot,
                      logo_path = LOGO_PATH,
                      x = 0.88, y = 0.07,
                      width = 0.09, height = 0.09) {
+  logo_layer <- if (requireNamespace("magick", quietly = TRUE)) {
+    draw_image(logo_path, x = x, y = y, width = width, height = height)
+  } else {
+    logo_img <- png::readPNG(logo_path)
+    draw_grob(
+      grid::rasterGrob(logo_img, interpolate = TRUE),
+      x = x, y = y, width = width, height = height
+    )
+  }
+
   ggdraw() +
     theme(
       plot.background = element_rect(fill = "white", colour = NA),
       panel.background = element_rect(fill = "white", colour = NA)
     ) +
     draw_plot(plot, x = 0, y = 0, width = 1, height = 1) +
-    draw_image(logo_path, x = x, y = y, width = width, height = height)
+    logo_layer
 }
