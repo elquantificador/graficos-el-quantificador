@@ -199,10 +199,11 @@ Los datos sugieren avances en la aceptación social, aunque una proporción impo
 📊 Elaboración: Alonso Quijano-Ruiz para El Quantificador.
 
 🏆 Además, te recordamos que el concurso Ecuador Quantificado 2026 cierra este 27 de junio. Si te apasionan los datos y quieres contar historias sobre la realidad ecuatoriana mediante visualizaciones, aún estás a tiempo de participar por una de las tres becas de DataCamp.",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_vecinos.R
-La mayoría de ecuatorianos discrepa con que las parejas homosexuales sean tan buenos padres,"Respuesta a la afirmación ""Las parejas homosexuales son tan buenos padres como otras parejas"", WVS Ecuador 2018",2026-06-23,https://www.linkedin.com/company/elquantificador/,26_homoparentalidad-opinion-ecuador.png,outputs/figures/26_homoparentalidad-opinion-ecuador.png,Alonso Quijano-Ruiz,"En la Encuesta Mundial de Valores de 2018, las opiniones sobre homoparentalidad en Ecuador muestran un predominio claro del desacuerdo. Más de cuatro de cada diez personas respondieron estar en desacuerdo o totalmente en desacuerdo con la idea de que las parejas homosexuales pueden ser tan buenos padres como otras parejas.
+La mayoría de ecuatorianos discrepa con que las parejas homosexuales sean tan buenos padres,"Respuesta a la afirmación ""Las parejas homosexuales son tan buenos padres como otras parejas"", WVS Ecuador 2018",2026-06-23,https://www.linkedin.com/company/elquantificador/,26_homoparentalidad-opinion-ecuador.png,outputs/figures/26_homoparentalidad-opinion-ecuador.png,Alonso Quijano-Ruiz,"🏳🌈 En la Semana del Orgullo, compartimos datos sobre las actitudes de los ecuatorianos hacia las familias diversas.
 
 
-Las respuestas favorables fueron bastante menores, mientras que una parte importante de la población se ubicó en posiciones intermedias o dijo no saber. El resultado evidencia que los prejuicios hacia las familias diversas siguen presentes.
+Según la World Values Survey de 2018, el 44% de los ecuatorianos estaba en desacuerdo con la afirmación de que las parejas homosexuales son tan buenos padres como otras parejas. En contraste, el 29% se mostró de acuerdo, mientras que un 19% se declaró indiferente y un 9% no tuvo una posición definida.
 
-Elaboración: Alonso Quijano-Ruiz
-hashtag#Ecuador hashtag#LGBTQ hashtag#Datos",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_padres.R
+Los datos reflejan que, aunque existe una proporción importante de ecuatorianos que respalda la igualdad de las familias homoparentales, las opiniones contrarias seguían siendo predominantes en el país en 2018.
+
+📊 Elaboración: Alonso Quijano-Ruiz para El Quantificador.",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_padres.R
