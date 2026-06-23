@@ -3,7 +3,7 @@
 # Genera el gráfico sobre el porcentaje de personas que
 # preferirían no tener a un homosexual como vecino.
 # Requiere: data/processed/wvs_homosexualidad_vecinos.rds
-# Guarda:   outputs/figures/25_a_homosexualidad-vecinos-ecuador.png
+# Guarda:   outputs/figures/25_homosexualidad-vecinos-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_wvs_homosexualidad_vecinos.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 input_path <- "data/processed/wvs_homosexualidad_vecinos.rds"
-out_path <- "outputs/figures/25_a_homosexualidad-vecinos-ecuador.png"
+out_path <- "outputs/figures/25_homosexualidad-vecinos-ecuador.png"
 
 plot_df <- readRDS(input_path)
 
@@ -71,7 +71,7 @@ p_base <- ggplot2::ggplot(
     plot.margin = ggplot2::margin(6, 14, 6, 12)
   )
 
-p_final <- add_logo(p_base, x = 0.88, y = 0.13)
+p_final <- add_logo(p_base, x = 0.88, y = 0.18)
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 ggplot2::ggsave(

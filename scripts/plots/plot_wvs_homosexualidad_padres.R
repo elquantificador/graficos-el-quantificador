@@ -3,7 +3,7 @@
 # Genera el gráfico sobre opiniones acerca de si las parejas
 # homosexuales son tan buenos padres como otras parejas.
 # Requiere: data/processed/wvs_homosexualidad_padres.rds
-# Guarda:   outputs/figures/25_b_homoparentalidad-opinion-ecuador.png
+# Guarda:   outputs/figures/26_homoparentalidad-opinion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_wvs_homosexualidad_padres.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 input_path <- "data/processed/wvs_homosexualidad_padres.rds"
-out_path <- "outputs/figures/25_b_homoparentalidad-opinion-ecuador.png"
+out_path <- "outputs/figures/26_homoparentalidad-opinion-ecuador.png"
 
 plot_df <- readRDS(input_path) |>
   dplyr::mutate(
@@ -87,7 +87,7 @@ p_base <- ggplot2::ggplot(
     plot.margin = ggplot2::margin(6, 22, 6, 12)
   )
 
-p_final <- add_logo(p_base, x = 0.88, y = 0.125)
+p_final <- add_logo(p_base, x = 0.88, y = 0.17)
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 ggplot2::ggsave(
