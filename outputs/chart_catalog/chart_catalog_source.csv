@@ -189,3 +189,17 @@ A medida que crecen, aumenta la probabilidad de que vivan sin la presencia del p
 
 Elaboración: Alonso Quijano-Ruiz 
 hashtag#DíaDelPadre hashtag#EcuadorEnDatos",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ensanut_menores_padre_hogar.R
+"Uno de cada tres ecuatorianos preferiría no tener a un homosexual como vecino","Porcentaje de hombres y mujeres que preferirían no tener a un homosexual como vecino, WVS Ecuador 2013 y 2018",2026-06-23,https://www.linkedin.com/company/elquantificador/,25_a_homosexualidad-vecinos-ecuador.png,Alonso Quijano-Ruiz,"Las actitudes hacia la homosexualidad en Ecuador siguen mostrando niveles altos de rechazo social abierto. En la Encuesta Mundial de Valores, alrededor de uno de cada tres ecuatorianos dice que preferiría no tener a un homosexual como vecino.
+
+
+La comparación entre 2013 y 2018 muestra una mejora entre las mujeres, pero cambios mucho menores entre los hombres. Incluso con esa reducción, el prejuicio sigue siendo socialmente extendido.
+
+Elaboración: Alonso Quijano-Ruiz
+hashtag#Ecuador hashtag#LGBTQ hashtag#Datos",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_vecinos.R
+"La mayoría de ecuatorianos discrepa con que las parejas homosexuales sean tan buenos padres","Respuesta a la afirmación ""Las parejas homosexuales son tan buenos padres como otras parejas"", WVS Ecuador 2018",2026-06-23,https://www.linkedin.com/company/elquantificador/,25_b_homoparentalidad-opinion-ecuador.png,Alonso Quijano-Ruiz,"En la Encuesta Mundial de Valores de 2018, las opiniones sobre homoparentalidad en Ecuador muestran un predominio claro del desacuerdo. Más de cuatro de cada diez personas respondieron estar en desacuerdo o totalmente en desacuerdo con la idea de que las parejas homosexuales pueden ser tan buenos padres como otras parejas.
+
+
+Las respuestas favorables fueron bastante menores, mientras que una parte importante de la población se ubicó en posiciones intermedias o dijo no saber. El resultado evidencia que los prejuicios hacia las familias diversas siguen presentes.
+
+Elaboración: Alonso Quijano-Ruiz
+hashtag#Ecuador hashtag#LGBTQ hashtag#Datos",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_padres.R
