@@ -25,8 +25,8 @@ subtitle_raw <- paste(
 )
 caption_raw <- paste(
   "Fuente: World Values Survey (WVS), Ecuador, 2013 y 2018. Elaboración:",
-  "Alonso Quijano-Ruiz para El Quantificador. Nota: Los porcentajes",
-  "están ponderados usando el factor muestral de la encuesta."
+  "Alonso Quijano-Ruiz para El Quantificador. Nota: La encuesta",
+  "es autoponderada."
 )
 
 palette_year <- c("2013" = "#4F669C", "2018" = "#D1495B")
