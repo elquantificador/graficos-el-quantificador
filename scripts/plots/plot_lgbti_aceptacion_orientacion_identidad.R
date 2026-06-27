@@ -18,15 +18,9 @@ out_path <- "outputs/figures/27_aceptacion-orientacion-identidad-lgbti-ecuador.p
 
 plot_df <- readRDS(input_path) |>
   dplyr::mutate(
-    grupo = factor(
+    grupo = dplyr::recode(
       grupo,
-      levels = c(
-        "Madre",
-        "Padre",
-        "Hermanas/os",
-        "Amigas/os",
-        "Compañeras/os de estudio/trabajo"
-      )
+      "Compañeras/os de estudio/trabajo" = "Comp. estudio/trabajo"
     ),
     respuesta = factor(
       respuesta,
@@ -34,15 +28,27 @@ plot_df <- readRDS(input_path) |>
     )
   )
 
-title_raw <- "La aceptación de la orientación sexual o identidad de género es más alta entre amistades y hermanas/os"
+order_levels <- plot_df |>
+  dplyr::filter(respuesta == "Aceptación total") |>
+  dplyr::arrange(dplyr::desc(porcentaje)) |>
+  dplyr::pull(grupo)
+
+plot_df <- plot_df |>
+  dplyr::mutate(grupo = factor(grupo, levels = order_levels))
+
+title_raw <- "La aceptación paterna es la más difícil de\nconseguir para la población LGBTI+"
 subtitle_raw <- paste(
-  "Distribución de respuestas sobre aceptación entre madre, padre, hermanas/os,",
-  "amigas/os y compañeras/os de estudio o trabajo, ENCV LGBTI+ 2025"
+  "Aceptación de la orientación sexual o identidad de",
+  "género, por tipo de relación, ENCV LGBTI+ 2025",
+  sep = "\n"
 )
 caption_raw <- paste(
-  "Fuente: Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+), 2025.",
-  "Elaboración: Alonso Quijano-Ruiz para El Quantificador. Nota: Los porcentajes usan el factor",
-  "de expansión de la encuesta y excluyen respuestas \"No aplica\" y \"No sabe\"."
+  "Fuente: Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+),",
+  "2025. Elaboración: Alonso Quijano-Ruiz para El Quantificador. Nota: La variable mide",
+  "aceptación de la identidad de género u orientación sexual. La encuesta considera a la",
+  "población LGBTI+ con 6.657 observaciones. Los porcentajes usan el factor",
+  "de expansión de la encuesta y excluyen respuestas \"No aplica\" y \"No sabe\".",
+  sep = "\n"
 )
 
 palette_response <- c(
@@ -72,29 +78,31 @@ p_base <- ggplot2::ggplot(
   ) +
   ggplot2::coord_flip() +
   ggplot2::labs(
-    title = wrap_title_house(title_raw),
-    subtitle = wrap_subtitle_house(subtitle_raw),
+    title = title_raw,
+    subtitle = subtitle_raw,
     x = NULL,
-    y = "Porcentaje",
+    y = "Porcentaje (%)",
     fill = NULL,
-    caption = wrap_caption_house(caption_raw)
+    caption = caption_raw
   ) +
-  ggplot2::guides(fill = ggplot2::guide_legend(nrow = 2, byrow = TRUE)) +
+  ggplot2::guides(fill = ggplot2::guide_legend(nrow = 1, byrow = TRUE)) +
   theme_quantificador() +
   ggplot2::theme(
-    legend.position = "top",
+    legend.position = "bottom",
     legend.justification = "left",
+    legend.box.just = "left",
     legend.direction = "horizontal",
-    legend.text = ggplot2::element_text(size = 6.5, colour = "grey20"),
-    legend.key.size = grid::unit(10, "pt"),
-    legend.spacing.x = grid::unit(4, "pt"),
+    legend.text = ggplot2::element_text(size = 6.4, colour = "grey20"),
+    legend.key.size = grid::unit(8, "pt"),
+    legend.spacing.x = grid::unit(2, "pt"),
+    legend.margin = ggplot2::margin(t = 2, r = 0, b = 2, l = -14),
     axis.line.y = ggplot2::element_blank(),
     axis.ticks.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_text(size = 8, colour = "grey20"),
-    plot.margin = ggplot2::margin(6, 18, 6, 12)
+    axis.text.y = ggplot2::element_text(size = 7.2, colour = "grey20"),
+    plot.margin = ggplot2::margin(6, 18, 6, 8)
   )
 
-p_final <- add_logo(p_base, x = 0.88, y = 0.15)
+p_final <- add_logo(p_base, x = 0.89, y = 0.155)
 
 png_device <- if (requireNamespace("ragg", quietly = TRUE)) ragg::agg_png else "png"
 
