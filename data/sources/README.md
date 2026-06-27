@@ -36,6 +36,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENEMDU matriz de transición laboral IV 2022-IV 2023 | `enemdu/Trimestre_IV_2022_2023_tabulados_matriz.xlsx` | Usado en `clean_enemdu_transicion_laboral_desempleo_zona.R` | `enemdu_transicion_laboral_desempleo_zona.md` |
 | FBref minutos de ecuatorianos en Big Five 2019/20-2025/26 | `fbref/ecuatorianos_big5_minutos_2019_2026.csv` | Usado en `clean_fbref_ecuatorianos_big5.R` | `fbref_ecuatorianos_big5.md` |
 | ENSANUT 2018 padre en hogar de menores | `ensanut/1_BDD_ENS2018_f1_personas.dta.zip` | Usado en `clean_ensanut_menores_padre_hogar.R` | `ensanut_menores_padre_hogar.md` |
+| ENCV LGBTI+ 2025 aceptación de orientación o identidad | `lgbti/7. Base_datos_ENCV_LGBTI+_2025_tratada_fexp_VF_V3.xlsx` | Usado en `clean_lgbti_aceptacion_orientacion_identidad.R` | `lgbti_aceptacion_orientacion_identidad.md` |
 
 ## Cobertura de documentación
 
