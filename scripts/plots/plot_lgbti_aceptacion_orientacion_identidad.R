@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales"))
 
 input_path <- "data/processed/lgbti_aceptacion_orientacion_identidad_2025.rds"
-out_path <- "outputs/figures/27_aceptacion-orientacion-identidad-lgbti-ecuador.png"
+out_path <- "outputs/figures/27_a_aceptacion-orientacion-identidad-lgbti-ecuador.png"
 
 plot_df <- readRDS(input_path) |>
   dplyr::mutate(
@@ -39,11 +39,11 @@ plot_df <- plot_df |>
 title_raw <- "La aceptación paterna es la más difícil de\nconseguir para la población LGBTI+"
 subtitle_raw <- paste(
   "Aceptación de la orientación sexual o identidad de",
-  "género, por tipo de relación, ENCV LGBTI+ 2025",
+  "género, por tipo de relación, Ecuador, ENCV LGBTI+ 2025",
   sep = "\n"
 )
 caption_raw <- paste(
-  "Fuente: Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+), 2025.",
+  "Fuente: INEC, Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+), 2025.",
   "Elaboración: Alonso Quijano-Ruiz para El Quantificador. Nota: La variable mide",
   "aceptación de la identidad de género u orientación sexual. La encuesta considera a la",
   "población LGBTI+ con 6.657 observaciones. Los porcentajes usan el factor de expansión",
