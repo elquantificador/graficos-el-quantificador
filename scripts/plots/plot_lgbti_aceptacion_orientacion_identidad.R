@@ -43,12 +43,11 @@ subtitle_raw <- paste(
   sep = "\n"
 )
 caption_raw <- paste(
-  "Fuente: Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+),",
-  "2025. Elaboración: Alonso Quijano-Ruiz para El Quantificador. Nota: La variable mide",
+  "Fuente: Encuesta Nacional de Condiciones de Vida de la Población LGBTI+ (ECV LGBTI+), 2025.",
+  "Elaboración: Alonso Quijano-Ruiz para El Quantificador. Nota: La variable mide",
   "aceptación de la identidad de género u orientación sexual. La encuesta considera a la",
-  "población LGBTI+ con 6.657 observaciones. Los porcentajes usan el factor",
-  "de expansión de la encuesta y excluyen respuestas \"No aplica\" y \"No sabe\".",
-  sep = "\n"
+  "población LGBTI+ con 6.657 observaciones. Los porcentajes usan el factor de expansión",
+  "de la encuesta y excluyen respuestas \"No aplica\" y \"No sabe\"."
 )
 
 palette_response <- c(
@@ -83,7 +82,7 @@ p_base <- ggplot2::ggplot(
     x = NULL,
     y = "Porcentaje (%)",
     fill = NULL,
-    caption = caption_raw
+    caption = wrap_caption_house(caption_raw, width = 90)
   ) +
   ggplot2::guides(fill = ggplot2::guide_legend(nrow = 1, byrow = TRUE)) +
   theme_quantificador() +
