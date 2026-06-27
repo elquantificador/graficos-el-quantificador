@@ -74,7 +74,7 @@ p_base <- ggplot2::ggplot(
     plot.margin  = ggplot2::margin(6, 18, 6, 8)
   )
 
-p_final <- add_logo(p_base, x = 0.89, y = 0.23)
+p_final <- add_logo(p_base, x = 0.89, y = 0.155)
 
 # 5. Export ----
 png_device <- if (requireNamespace("ragg", quietly = TRUE)) ragg::agg_png else "png"
