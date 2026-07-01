@@ -172,10 +172,7 @@ caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trim
 
 build_chart <- function() {
   spec <- house_spec("portrait")
-  title_txt <- wrap_title_house(
-    "La mayoría de desempleados no encuentra empleo después de un año",
-    width = 46
-  )
+  title_txt <- "La mayoría de desempleados no encuentra\nempleo después de un año"
   subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, 2022-2023", width = spec$subtitle_wrap)
   caption_txt <- wrap_caption_house(caption_raw, width = 110)
 
