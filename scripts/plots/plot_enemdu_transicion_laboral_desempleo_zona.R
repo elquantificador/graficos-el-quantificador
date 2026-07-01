@@ -1,7 +1,7 @@
 # ============================================================
 # plot_enemdu_transicion_laboral_desempleo_zona.R
 # Genera un Sankey de transición laboral de personas
-# desempleadas por zona de residencia en la ENEMDU.
+# desempleadas en la ENEMDU.
 # Requiere: data/processed/enemdu_transicion_laboral_desempleo_zona_2022_2023.rds
 # Guarda:   outputs/figures/28_transicion-laboral_desempleo-zona-ecuador.png
 # ============================================================
@@ -82,131 +82,69 @@ make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id, alpha
 chart_data <- readRDS(input_path)
 flows_df <- chart_data$flows %>%
   mutate(
-    zona = factor(.data$zona, levels = c("Urbano", "Rural")),
     destino = factor(
       .data$destino,
       levels = c(
         "Obtuvo empleo en 2023",
         "Continuó desempleado en 2023",
-        "Salió de la fuerza laboral en 2023"
+        "Ya no busca trabajo en 2023"
       )
     )
-  )
+  ) %>%
+  arrange(.data$destino)
 
 root_count <- chart_data$root$count[[1]]
-zone_df <- chart_data$zones %>% arrange(match(.data$zona, c("Urbano", "Rural")))
 outcome_df <- chart_data$outcomes %>%
   arrange(match(.data$destino, c(
     "Obtuvo empleo en 2023",
     "Continuó desempleado en 2023",
-    "Salió de la fuerza laboral en 2023"
+    "Ya no busca trabajo en 2023"
   )))
 
-zone_gap <- root_count * 0.03
 outcome_gap <- root_count * 0.02
 plot_height <- max(
   root_count,
-  sum(zone_df$count) + zone_gap * (nrow(zone_df) - 1),
   sum(outcome_df$count) + outcome_gap * (nrow(outcome_df) - 1)
 ) * 1.03
 
 root_stage <- stack_stage("Desempleados 2022", root_count, gap = 0, total_height = plot_height, node_type = "root")
-zone_stage <- stack_stage(zone_df$zona, zone_df$count, gap = zone_gap, total_height = plot_height, node_type = "zone")
 outcome_stage <- stack_stage(outcome_df$destino, outcome_df$count, gap = outcome_gap, total_height = plot_height, node_type = "outcome")
 
-root_allocs <- allocate_within(root_stage$ymin[[1]], root_stage$ymax[[1]], zone_df$count)
-zone_targets <- lapply(seq_len(nrow(zone_stage)), function(i) list(ymin = zone_stage$ymin[[i]], ymax = zone_stage$ymax[[i]]))
-zone_splits <- lapply(zone_df$zona, function(z) {
-  values <- flows_df %>%
-    filter(.data$zona == z) %>%
-    arrange(.data$destino) %>%
-    pull(.data$count)
-  y_min <- zone_stage$ymin[[which(zone_stage$label == z)]]
-  y_max <- zone_stage$ymax[[which(zone_stage$label == z)]]
-  allocate_within(y_min, y_max, values)
-})
-names(zone_splits) <- zone_df$zona
-
-outcome_allocs <- lapply(outcome_df$destino, function(dest) {
-  values <- flows_df %>%
-    filter(.data$destino == dest) %>%
-    arrange(.data$zona) %>%
-    pull(.data$count)
-  y_min <- outcome_stage$ymin[[which(outcome_stage$label == dest)]]
-  y_max <- outcome_stage$ymax[[which(outcome_stage$label == dest)]]
-  allocate_within(y_min, y_max, values)
-})
-names(outcome_allocs) <- outcome_df$destino
+root_allocs <- allocate_within(root_stage$ymin[[1]], root_stage$ymax[[1]], outcome_df$count)
+outcome_targets <- lapply(seq_len(nrow(outcome_stage)), function(i) list(ymin = outcome_stage$ymin[[i]], ymax = outcome_stage$ymax[[i]]))
 
 x_shift <- 0.18
 
-root_xmin <- 1.22 + x_shift
-root_xmax <- 1.60 + x_shift
-zone_xmin <- 3.22 + x_shift
-zone_xmax <- 3.60 + x_shift
-outcome_xmin <- 6.06 + x_shift
-outcome_xmax <- 6.44 + x_shift
-outcome_label_x <- 6.48 + x_shift
+root_xmin <- 1.70 + x_shift
+root_xmax <- 2.08 + x_shift
+outcome_xmin <- 5.55 + x_shift
+outcome_xmax <- 5.93 + x_shift
+outcome_label_x <- 5.97 + x_shift
 
-zone_palette <- c("Urbano" = "#9FC3DE", "Rural" = "#F2B36A")
 outcome_palette <- c(
   "Obtuvo empleo en 2023" = "#F0A145",
   "Continuó desempleado en 2023" = "#5AA6D6",
-  "Salió de la fuerza laboral en 2023" = "#77B37A"
+  "Ya no busca trabajo en 2023" = "#77B37A"
 )
 
-root_flows <- dplyr::bind_rows(lapply(seq_len(nrow(zone_df)), function(i) {
+root_flows <- dplyr::bind_rows(lapply(seq_len(nrow(outcome_df)), function(i) {
+  dest <- as.character(outcome_df$destino[[i]])
   make_flow_polygon(
     x0 = root_xmax,
-    x1 = zone_xmin,
+    x1 = outcome_xmin,
     from_range = root_allocs[[i]],
-    to_range = zone_targets[[i]],
-    fill = unname(zone_palette[[zone_df$zona[[i]]]]),
+    to_range = outcome_targets[[i]],
+    fill = unname(outcome_palette[[dest]]),
     flow_id = paste0("root-", i)
   )
 }))
 
-zone_to_outcome_flows <- dplyr::bind_rows(lapply(levels(flows_df$zona), function(z) {
-  zone_rows <- flows_df %>%
-    filter(.data$zona == z) %>%
-    arrange(.data$destino)
-
-  dplyr::bind_rows(lapply(seq_len(nrow(zone_rows)), function(i) {
-    dest <- as.character(zone_rows$destino[[i]])
-    target_index <- which(levels(flows_df$zona) == z)
-    outcome_index <- which(levels(flows_df$zona) == z)
-    alloc_index <- which(levels(flows_df$destino) == dest)
-
-    make_flow_polygon(
-      x0 = zone_xmax,
-      x1 = outcome_xmin,
-      from_range = zone_splits[[z]][[i]],
-      to_range = outcome_allocs[[dest]][[which(levels(flows_df$zona) == z)]],
-      fill = unname(outcome_palette[[dest]]),
-      flow_id = paste0("zone-", z, "-", i)
-    )
-  }))
-}))
-
 node_rects <- dplyr::bind_rows(
   dplyr::mutate(root_stage, xmin = root_xmin, xmax = root_xmax),
-  dplyr::mutate(zone_stage, xmin = zone_xmin, xmax = zone_xmax),
   dplyr::mutate(outcome_stage, xmin = outcome_xmin, xmax = outcome_xmax)
 )
 
-root_label <- paste0(
-  "Desempleados\n",
-  fmt_n(root_count), " | 100%"
-)
-
-zone_labels <- zone_df %>%
-  transmute(
-    label = .data$zona,
-    label_text = paste0(.data$zona, "\n", fmt_n(.data$count), "\n", fmt_pct(.data$share_total))
-  )
-
-zone_stage <- zone_stage %>%
-  left_join(zone_labels, by = "label")
+root_label <- paste0("Desempleados\n", fmt_n(root_count), " | 100%")
 
 outcome_labels <- outcome_df %>%
   transmute(
@@ -221,7 +159,7 @@ outcome_labels <- outcome_df %>%
         fmt_n(.data$count), " | ", fmt_pct(.data$share_total)
       ),
       TRUE ~ paste0(
-        "Salió de la fuerza laboral\n",
+        "Ya no busca trabajo\n",
         fmt_n(.data$count), " | ", fmt_pct(.data$share_total)
       )
     )
@@ -230,7 +168,7 @@ outcome_labels <- outcome_df %>%
 outcome_stage <- outcome_stage %>%
   left_join(outcome_labels, by = "label")
 
-caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: Angel Alava para el Quantificador. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. La población que salió de la fuerza laboral no trabaja y no está disponible para trabajar por cualquier motivo. El gráfico muestra la transición de quienes estaban desempleados en 2022, desagregada por zona de residencia."
+caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: Angel Alava para el Quantificador. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. Ya no busca trabajo incluye a quienes dejaron de buscar empleo y salieron de la fuerza laboral. El gráfico muestra la transición de quienes estaban desempleados en 2022."
 
 build_chart <- function() {
   spec <- house_spec("portrait")
@@ -238,17 +176,12 @@ build_chart <- function() {
     "La mayoría de desempleados no encuentra trabajo después de un año",
     width = 46
   )
-  subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, por zona, 2022-2023", width = spec$subtitle_wrap)
+  subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, 2022-2023", width = spec$subtitle_wrap)
   caption_txt <- wrap_caption_house(caption_raw, width = 110)
 
   ggplot() +
   geom_polygon(
     data = root_flows,
-    aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
-    colour = NA
-  ) +
-  geom_polygon(
-    data = zone_to_outcome_flows,
     aes(x = .data$x, y = .data$y, group = .data$flow_id, fill = .data$fill, alpha = .data$alpha),
     colour = NA
   ) +
@@ -269,13 +202,6 @@ build_chart <- function() {
     colour = "#212529"
   ) +
   geom_text(
-    data = zone_stage,
-    aes(x = (zone_xmin + zone_xmax) / 2, y = .data$ymid, label = .data$label_text),
-    size = 2.9,
-    lineheight = 1.02,
-    colour = "#212529"
-  ) +
-  geom_text(
     data = outcome_stage,
     aes(x = outcome_label_x, y = .data$ymid, label = .data$label_text),
     hjust = 0,
@@ -283,7 +209,7 @@ build_chart <- function() {
     lineheight = 1.02,
     colour = "#212529"
   ) +
-  coord_cartesian(xlim = c(0.80, 8.02), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(1.10, 7.50), ylim = c(0, plot_height), clip = "off") +
   scale_fill_identity() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
