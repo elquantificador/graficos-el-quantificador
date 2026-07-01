@@ -68,12 +68,8 @@ caption_raw <- paste0(
   "empleo formal registrado. Los datos de febrero son preliminares y están sujetos a revisión."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  if (orientation == "landscape") {
-    title_txt   <- stringr::str_wrap(title_raw, width = spec$title_wrap)
-    caption_txt <- stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.9))
-  } else {
+build_chart <- function() {
+  spec <- house_spec("portrait")
     title_txt <- paste0(
       "Los sectores mejor pagados del Ecuador\n",
       "apenas concentran ", format(round(share_top5, 0), decimal.mark = ","), "% del empleo formal"
@@ -84,7 +80,6 @@ build_chart <- function(orientation) {
       "registrado por rama de actividad económica CIIU Rev. 4.1 nivel 1. El color más oscuro indica más\n",
       "empleo formal registrado. Los datos de febrero son preliminares y están sujetos a revisión."
     )
-  }
 
   ggplot(plot_df, aes(x = industria, y = salario, fill = empleo)) +
     geom_col(
@@ -114,7 +109,7 @@ build_chart <- function(orientation) {
       y = "Salario mensual promedio",
       caption = caption_txt
     ) +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     theme(
       legend.position = "bottom",
       legend.justification = "left",
@@ -131,18 +126,16 @@ build_chart <- function(orientation) {
       axis.text.x = element_text(angle = 25, hjust = 0.68, vjust = 0.82),
       axis.title.x = element_text(size = 7),
       plot.caption = element_text(colour = "grey30", size = 5.9, lineheight = 1.12, hjust = 0, margin = margin(t = 8)),
-      plot.margin = if (orientation == "landscape") margin(8, 16, 6, 6) else margin(8, 38, 6, 6)
+      plot.margin = margin(8, 38, 6, 6)
     ) +
     guides(fill = guide_colorbar(order = 1, barwidth = unit(3.2, "cm"), barheight = unit(0.18, "cm")))
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.89, y = 0.27, width = 0.09, height = 0.09)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.89, y = 0.27, width = 0.09, height = 0.09)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -153,5 +146,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

@@ -19,10 +19,10 @@ subtitle_txt <- "Un aumento de 1 cm se relaciona con aproximadamente 3% más ing
 
 portrait_path <- "outputs/figures/01_altura-ingresos_ensanut-2018.png"
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  subtitle_w <- if (orientation == "landscape") spec$subtitle_wrap else 58
-  caption_w  <- if (orientation == "landscape") spec$caption_wrap else 64
+build_chart <- function() {
+  spec <- house_spec("portrait")
+  subtitle_w <- 58
+  caption_w  <- 64
 
   ggplot(df, aes(x = estatura, y = linc, color = sexo, linetype = sexo)) +
     geom_point(alpha = 0.25, size = 0.9, show.legend = FALSE) +
@@ -38,7 +38,7 @@ build_chart <- function(orientation) {
       color = "Sexo",
       linetype = "Sexo"
     ) +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     theme(
       legend.position = "bottom",
       plot.margin = margin(12, 16, 16, 16)
@@ -46,12 +46,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.09)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.09)
+  dest <- portrait_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -61,5 +59,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

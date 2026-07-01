@@ -59,15 +59,10 @@ caption_raw <- paste0(
   "el percentil 99. Línea punteada = umbral de $1,500."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  if (orientation == "landscape") {
-    title_txt   <- stringr::str_wrap(title_raw, width = spec$title_wrap)
-    caption_txt <- stringr::str_wrap(caption_raw, width = spec$caption_wrap)
-  } else {
+build_chart <- function() {
+  spec <- house_spec("portrait")
     title_txt   <- "Solo el 14% de hogares ecuatorianos ganan\n$1.500 o más (el 60% gana $513 o menos)"
     caption_txt <- caption_portrait
-  }
 
   ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
   geom_histogram(
@@ -150,22 +145,20 @@ build_chart <- function(orientation) {
     y = "Número ponderado de hogares",
     caption = caption_txt
   ) +
-  theme_quantificador(orientation) +
+  theme_quantificador() +
   theme(
     axis.text.x = element_text(angle = 35, hjust = 1),
     plot.caption = element_text(colour = "black", size = 6.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     legend.position = "none",
-    plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 30, 6, 16)
+    plot.margin = margin(6, 30, 6, 16)
   )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.895, y = 0.18, width = 0.09, height = 0.09)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.895, y = 0.18, width = 0.09, height = 0.09)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -176,5 +169,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

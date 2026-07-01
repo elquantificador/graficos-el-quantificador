@@ -173,15 +173,11 @@ right_stage <- right_stage |>
 
 root_label <- paste0("Ingreso\nmonetario\n", fmt_usd(avg_ing_mon_cor))
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
   title_txt    <- wrap_title_house("Los hogares ecuatorianos gastan el 77% de su ingreso", width = spec$title_wrap)
   subtitle_txt <- wrap_subtitle_house("Ingresos y gastos promedio de los hogares, ENIGHUR 2025", width = spec$subtitle_wrap)
-  caption_txt  <- if (orientation == "landscape") {
-    stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.5))
-  } else {
-    wrap_caption_house(caption_raw)
-  }
+  caption_txt  <- wrap_caption_house(caption_raw)
 
   ggplot() +
     geom_polygon(
@@ -242,7 +238,7 @@ build_chart <- function(orientation) {
       axis.title          = element_blank(),
       legend.position     = "none",
       panel.grid          = element_blank(),
-      plot.margin         = if (orientation == "landscape") margin(8, 16, 6, 12) else margin(8, 60, 6, 12),
+      plot.margin         = margin(8, 60, 6, 12),
       plot.title          = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
       plot.subtitle       = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
       plot.caption        = element_text(colour = "grey30", size = 5.5, lineheight = 1.1,
@@ -253,12 +249,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.14)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.14)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot     = p_final,
@@ -269,4 +263,3 @@ for (orientation in c("portrait", "landscape")) {
     bg       = "white"
   )
   message("Guardado: ", dest)
-}

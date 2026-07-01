@@ -35,13 +35,12 @@ caption_raw <- paste(
   "Las proporciones son ponderadas por el peso de muestra proporcionado por INEC."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  # Portrait conserva sus anchos históricos; landscape llena el ancho apaisado
+build_chart <- function() {
+  spec <- house_spec("portrait")
   # (caption a 5,5 pt con su propio ancho).
-  title_w    <- if (orientation == "landscape") spec$title_wrap else 44
-  subtitle_w <- if (orientation == "landscape") spec$subtitle_wrap else 56
-  caption_w  <- if (orientation == "landscape") landscape_wrap_for_size(5.5) else 105
+  title_w    <- 44
+  subtitle_w <- 56
+  caption_w  <- 105
 
   ggplot(plot_df, aes(x = factor(quintil_label, levels = quintil_label), y = prev_anemia)) +
     geom_col(fill = "#EF9F4E", width = 0.56) +
@@ -73,7 +72,7 @@ build_chart <- function(orientation) {
       plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 2)),
       axis.ticks.x = element_blank(),
       axis.line = element_line(colour = "black"),
-      plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 30, 6, 16),
+      plot.margin = margin(6, 30, 6, 16),
       plot.title.position = "plot",
       plot.caption.position = "plot",
       panel.grid = element_blank()
@@ -81,12 +80,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.89, y = 0.16)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.89, y = 0.16)
+  dest <- portrait_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -97,5 +94,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

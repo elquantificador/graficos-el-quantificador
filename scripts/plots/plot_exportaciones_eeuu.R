@@ -86,18 +86,12 @@ title_raw <- "El camarón y el petróleo son los productos más exportados a Est
 
 portrait_path <- "outputs/figures/12_exportaciones_eeuu_top10_2024-2025.png"
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
   # Portrait conserva el título de dos líneas (salto manual) y el caption a 95
-  # para no alterar el PNG publicado; landscape reacomoda al ancho apaisado.
-  title_txt <- if (orientation == "landscape") {
-    stringr::str_wrap(title_raw, width = spec$title_wrap)
-  } else {
-    "El camarón y el petróleo son los productos\nmás exportados a Estados Unidos"
-  }
+  title_txt <- "El camarón y el petróleo son los productos\nmás exportados a Estados Unidos"
   # El caption se renderiza a 5,5 pt (más pequeño que la casa), así que en
-  # landscape se envuelve a un ancho que llena el lienzo a ese tamaño.
-  caption_w <- if (orientation == "landscape") landscape_wrap_for_size(5.5) else 95
+  caption_w <- 95
 
   ggplot2::ggplot(
     top10_long,
@@ -129,9 +123,9 @@ build_chart <- function(orientation) {
       y = "Valor FOB (millones de USD)",
       caption = stringr::str_wrap(caption_raw, width = caption_w)
     ) +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     ggplot2::theme(
-      legend.position = if (orientation == "landscape") c(0.86, 0.22) else c(0.78, 0.17),
+      legend.position = c(0.78, 0.17),
       legend.justification = c(0, 0.5),
       legend.title = ggplot2::element_blank(),
       legend.text = ggplot2::element_text(size = 7),
@@ -147,19 +141,16 @@ build_chart <- function(orientation) {
       ),
       legend.key.width = grid::unit(4, "mm"),
       legend.key.height = grid::unit(4, "mm"),
-      plot.margin = if (orientation == "landscape") ggplot2::margin(10, 24, 8, 16) else ggplot2::margin(10, 46, 8, 16)
+      plot.margin = ggplot2::margin(10, 46, 8, 16)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  # Sin logo en landscape; portrait mantiene el logo en su posición de la casa.
-  p_final <- house_apply_logo(build_chart(orientation), orientation,
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait",
                               x = 0.88, y = 0.18, width = 0.09, height = 0.09)
-  out_path <- house_out_path(portrait_path, orientation)
+  out_path <- portrait_path
   ggplot2::ggsave(
     out_path,
     plot = p_final,
@@ -171,5 +162,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", out_path)
-}
 

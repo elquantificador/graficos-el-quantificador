@@ -60,14 +60,12 @@ title_raw <- "Because they're nice? Los profesionales en Estrategia y Gestión d
 
 portrait_path <- "outputs/figures/08_ingles_funcion-laboral-ecuador.png"
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
   # Portrait conserva sus anchos históricos (título 42, caption 92) para no
-  # alterar el PNG publicado; landscape usa los anchos apaisados de la casa.
-  title_w   <- if (orientation == "landscape") spec$title_wrap else 42
-  # El caption se renderiza a 5,6 pt: en landscape se envuelve para llenar el
+  title_w   <- 42
   # lienzo a ese tamaño (más caracteres que el ancho de la casa a 6,5 pt).
-  caption_w <- if (orientation == "landscape") landscape_wrap_for_size(5.6) else 92
+  caption_w <- 92
 
   ggplot(df, aes(x = fct_reorder(job_function, score), y = score_plot,
                  fill = proficiency_band)) +
@@ -104,9 +102,9 @@ build_chart <- function(orientation) {
       fill     = "Nivel EF EPI"
     ) +
     coord_flip(clip = "off") +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     theme(
-      legend.position      = if (orientation == "landscape") c(0.84, 0.30) else c(0.76, 0.18),
+      legend.position      = c(0.76, 0.18),
       legend.justification = c(0, 0.5),
       legend.direction     = "vertical",
       legend.title         = element_text(size = 6.5, face = "bold"),
@@ -120,22 +118,18 @@ build_chart <- function(orientation) {
       axis.title.x     = element_text(hjust = 0),
       plot.title       = element_text(size = 12.5, face = "bold", colour = "grey20", hjust = 0),
       plot.caption     = element_text(size = 5.6, lineheight = 1.08, colour = "grey30", hjust = 0),
-      plot.margin      = if (orientation == "landscape") margin(14, 24, 10, 16) else margin(14, 52, 10, 16)
+      plot.margin      = margin(14, 52, 10, 16)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  # Sin logo en landscape; portrait mantiene el logo en su posición de la casa.
-  p_final <- house_apply_logo(build_chart(orientation), orientation,
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait",
                               x = 0.88, y = 0.19, width = 0.09, height = 0.09)
-  out_path <- house_out_path(portrait_path, orientation)
+  out_path <- portrait_path
   ggsave(out_path, p_final,
          width = spec$width, height = spec$height, units = "in",
          dpi = spec$dpi, device = ragg::agg_png, bg = "white")
   message("Guardado: ", out_path)
-}
 

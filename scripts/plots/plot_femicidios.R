@@ -33,17 +33,11 @@ caption_raw <- paste(
   "Elaboración por los autores."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  if (orientation == "landscape") {
-    title_txt    <- str_wrap(title_raw, width = spec$title_wrap)
-    subtitle_txt <- str_wrap(subtitle_raw, width = spec$subtitle_wrap)
-    caption_txt  <- str_wrap(caption_raw, width = spec$caption_wrap)
-  } else {
+build_chart <- function() {
+  spec <- house_spec("portrait")
     title_txt    <- "El gobierno ecuatoriano no conoce con exactitud\ncuantas mujeres mueren por femicidio cada año"
     subtitle_txt <- "Los femicidios en Ecuador han caído en los últimos años, pero las mujeres\nsiguen muriendo en contexto delictivo"
     caption_txt  <- caption_grafo1
-  }
 
   ggplot(muertes_fem, aes(x = as.character(año), y = cantidad, fill = tipo)) +
     geom_col(width = 0.7, position = "stack", color = "black") +
@@ -72,19 +66,16 @@ build_chart <- function(orientation) {
       axis.text.x        = element_text(size = 6, color = "black"),
       axis.ticks.y       = element_line(color = "black", linewidth = 0.3),
       legend.box.spacing = unit(2, "pt"),
-      plot.margin        = if (orientation == "landscape") margin(14, 16, 4, 16) else margin(14, 36, 4, 16)
+      plot.margin        = margin(14, 36, 4, 16)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.90, y = 0.07)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.90, y = 0.07)
+  dest <- portrait_path
   ggsave(dest, p_final, width = spec$width, height = spec$height, units = "in",
          dpi = spec$dpi, device = ragg::agg_png, bg = "white")
   message("Guardado: ", dest)
-}
 

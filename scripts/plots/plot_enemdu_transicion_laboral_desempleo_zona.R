@@ -3,7 +3,7 @@
 # Genera un Sankey de transición laboral de personas
 # desempleadas por zona de residencia en la ENEMDU.
 # Requiere: data/processed/enemdu_transicion_laboral_desempleo_zona_2022_2023.rds
-# Guarda:   outputs/figures/transicion-laboral_desempleo-zona-ecuador.png
+# Guarda:   outputs/figures/28_transicion-laboral_desempleo-zona-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_enemdu_transicion_laboral_desempleo_zona.R
@@ -19,7 +19,7 @@ suppressPackageStartupMessages(library(dplyr))
 suppressPackageStartupMessages(library(ggplot2))
 
 input_path <- "data/processed/enemdu_transicion_laboral_desempleo_zona_2022_2023.rds"
-out_path <- "outputs/figures/transicion-laboral_desempleo-zona-ecuador.png"
+out_path <- "outputs/figures/28_transicion-laboral_desempleo-zona-ecuador.png"
 
 fmt_n <- function(x) {
   label_number_intl(accuracy = 1)(round(x))
@@ -138,13 +138,15 @@ outcome_allocs <- lapply(outcome_df$destino, function(dest) {
 })
 names(outcome_allocs) <- outcome_df$destino
 
-root_xmin <- 1.22
-root_xmax <- 1.60
-zone_xmin <- 3.22
-zone_xmax <- 3.60
-outcome_xmin <- 6.06
-outcome_xmax <- 6.44
-outcome_label_x <- 6.48
+x_shift <- 0.18
+
+root_xmin <- 1.22 + x_shift
+root_xmax <- 1.60 + x_shift
+zone_xmin <- 3.22 + x_shift
+zone_xmax <- 3.60 + x_shift
+outcome_xmin <- 6.06 + x_shift
+outcome_xmax <- 6.44 + x_shift
+outcome_label_x <- 6.48 + x_shift
 
 zone_palette <- c("Urbano" = "#9FC3DE", "Rural" = "#F2B36A")
 outcome_palette <- c(
@@ -228,21 +230,16 @@ outcome_labels <- outcome_df %>%
 outcome_stage <- outcome_stage %>%
   left_join(outcome_labels, by = "label")
 
-caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: El Quantificador de Laboratorio LIDE. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. La población que salió de la fuerza laboral no trabaja y no está disponible para trabajar por cualquier motivo. El gráfico muestra la transición de quienes estaban desempleados en 2022, desagregada por zona de residencia."
+caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: Angel Alava para el Quantificador. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. La población que salió de la fuerza laboral no trabaja y no está disponible para trabajar por cualquier motivo. El gráfico muestra la transición de quienes estaban desempleados en 2022, desagregada por zona de residencia."
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  title_txt <- if (orientation == "landscape") {
-    wrap_title_house("La mayoría de desempleados no encuentra trabajo después de un año", width = spec$title_wrap)
-  } else {
-    "La mayoría de desempleados no encuentra\ntrabajo después de un año"
-  }
+build_chart <- function() {
+  spec <- house_spec("portrait")
+  title_txt <- wrap_title_house(
+    "La mayoría de desempleados no encuentra trabajo después de un año",
+    width = 46
+  )
   subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, por zona, 2022-2023", width = spec$subtitle_wrap)
-  caption_txt  <- if (orientation == "landscape") {
-    stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.5))
-  } else {
-    wrap_caption_house(caption_raw, width = 82)
-  }
+  caption_txt <- wrap_caption_house(caption_raw, width = 110)
 
   ggplot() +
   geom_polygon(
@@ -286,7 +283,7 @@ build_chart <- function(orientation) {
     lineheight = 1.02,
     colour = "#212529"
   ) +
-  coord_cartesian(xlim = c(0.80, 7.92), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(0.80, 8.02), ylim = c(0, plot_height), clip = "off") +
   scale_fill_identity() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
@@ -306,7 +303,7 @@ build_chart <- function(orientation) {
     axis.title = element_blank(),
     panel.grid = element_blank(),
     legend.position = "none",
-    plot.margin = if (orientation == "landscape") margin(8, 16, 6, 12) else margin(8, 60, 6, 12),
+    plot.margin = margin(8, 60, 6, 12),
     plot.title = element_text(colour = "grey20", size = 12.5, face = "bold", hjust = 0, lineheight = 1.02),
     plot.subtitle = element_text(colour = "grey30", size = 9, lineheight = 1.1, hjust = 0),
     plot.caption = element_text(colour = "grey30", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 6)),
@@ -316,20 +313,15 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
-
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, y = 0.15)
-  dest <- house_out_path(out_path, orientation)
-  ggsave(
-    filename = dest,
-    plot = p_final,
-    width = spec$width,
-    height = spec$height,
-    dpi = spec$dpi,
-    device = ragg::agg_png,
-    bg = "white"
-  )
-  message("Guardado: ", dest)
-}
+spec <- house_spec("portrait")
+p_final <- house_apply_logo(build_chart(), "portrait", y = 0.15)
+ggsave(
+  filename = out_path,
+  plot = p_final,
+  width = spec$width,
+  height = spec$height,
+  dpi = spec$dpi,
+  device = ragg::agg_png,
+  bg = "white"
+)
+message("Guardado: ", out_path)

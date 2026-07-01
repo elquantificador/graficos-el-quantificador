@@ -19,17 +19,11 @@ title_raw <- "Casi uno de cada tres niños indígenas padece de desnutrición en
 subtitle_raw <- "Prevalencia de desnutrición crónica por etnia, niños y niñas en Ecuador (Ronda 2 ENDI 2023-2024)"
 caption_raw <- "Fuente: Encuesta Nacional de Desnutrición Infantil, Ronda 2 2023-2024. Cálculos propios. Proporciones son ponderadas de acuerdo a pesos muestrales. La desnutrición presentada es para niños menores de 2 años."
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  if (orientation == "landscape") {
-    title_txt    <- stringr::str_wrap(title_raw, width = spec$title_wrap)
-    subtitle_txt <- stringr::str_wrap(subtitle_raw, width = spec$subtitle_wrap)
-    caption_txt  <- stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.5))
-  } else {
+build_chart <- function() {
+  spec <- house_spec("portrait")
     title_txt    <- "Casi uno de cada tres niños indígenas\npadece de desnutrición en Ecuador"
     subtitle_txt <- "Prevalencia de desnutrición crónica por etnia, niños y niñas\nen Ecuador (Ronda 2 ENDI 2023-2024)"
     caption_txt  <- "Fuente: Encuesta Nacional de Desnutrición Infantil, Ronda 2 2023-2024. Cálculos propios. Proporciones son\nponderadas de acuerdo a pesos muestrales. La desnutrición presentada es para niños menores de 2 años."
-  }
 
   ggplot(plot_df, aes(x = fct_reorder(etnia, prev_dcronica), y = prev_dcronica)) +
     geom_col(fill = "#EF9F4E", width = 0.65) +
@@ -59,7 +53,7 @@ build_chart <- function(orientation) {
       plot.caption = element_text(colour = "black", size = 5.5, lineheight = 1.1, hjust = 0, margin = margin(t = 4)),
       axis.ticks.x = element_blank(),
       axis.line = element_line(colour = "black"),
-      plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 36, 6, 16),
+      plot.margin = margin(6, 36, 6, 16),
       plot.title.position = "plot",
       plot.caption.position = "plot",
       panel.grid = element_blank()
@@ -67,12 +61,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.10)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.10)
+  dest <- portrait_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -83,5 +75,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

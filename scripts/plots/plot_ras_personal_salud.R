@@ -60,15 +60,10 @@ caption_raw <- paste0(
   "TAPS: Técnicos de Atención Primaria en Salud, personal comunitario vinculado al primer nivel de atención."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  if (orientation == "landscape") {
-    title_txt   <- stringr::str_wrap(title_raw, width = landscape_wrap_for_size(11.1))
-    caption_txt <- stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(5.6))
-  } else {
+build_chart <- function() {
+  spec <- house_spec("portrait")
     title_txt   <- "El mayor crecimiento de personal de salud\nfue después de la reforma de salud de 2011"
     caption_txt <- stringr::str_wrap(caption_raw, width = 82)
-  }
 
   ggplot(plot_df, aes(x = anio, y = total, color = ocupacion)) +
   geom_vline(
@@ -135,7 +130,7 @@ build_chart <- function(orientation) {
     caption = caption_txt
   ) +
   coord_cartesian(clip = "off") +
-  theme_quantificador(orientation) +
+  theme_quantificador() +
   theme(
     plot.subtitle = element_text(size = 8.7, lineheight = 1.05, hjust = 0),
     plot.caption = element_text(size = 5.6, lineheight = 1.06, hjust = 0, margin = margin(t = 7)),
@@ -153,12 +148,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.07)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.07)
+  dest <- portrait_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -170,5 +163,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

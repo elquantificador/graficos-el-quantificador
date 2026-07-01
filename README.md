@@ -141,7 +141,9 @@ Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publi
 24. `24_menores-padre-hogar-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ensanut_menores_padre_hogar.R)
 25. `25_homosexualidad-vecinos-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_vecinos.R)
 26. `26_homoparentalidad-opinion-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wvs_homosexualidad_padres.R)
-27. `27_aceptacion-orientacion-identidad-lgbti-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_lgbti_aceptacion_orientacion_identidad.R)
+27. `27_a_aceptacion-orientacion-identidad-lgbti-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_lgbti_aceptacion_orientacion_identidad.R)
+27. `27_b_quienes-conocen-orientacion-identidad-lgbti-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_lgbti_conocen_orientacion_identidad.R)
+28. `28_transicion-laboral_desempleo-zona-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_transicion_laboral_desempleo_zona.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)

@@ -69,11 +69,11 @@ label_df <- plot_df %>%
     )
   )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  title_txt    <- stringr::str_wrap(title_raw, width = if (orientation == "landscape") spec$title_wrap else 44)
-  subtitle_txt <- stringr::str_wrap(subtitle_raw, width = if (orientation == "landscape") spec$subtitle_wrap else 67)
-  caption_txt  <- if (orientation == "landscape") stringr::str_wrap(caption_raw, width = spec$caption_wrap) else caption_portrait
+build_chart <- function() {
+  spec <- house_spec("portrait")
+  title_txt    <- stringr::str_wrap(title_raw, width = 44)
+  subtitle_txt <- stringr::str_wrap(subtitle_raw, width = 67)
+  caption_txt  <- caption_portrait
 
   ggplot(
     plot_df,
@@ -119,7 +119,7 @@ build_chart <- function(orientation) {
     x = guide_axis(minor.ticks = TRUE),
     y = guide_axis(minor.ticks = TRUE)
   ) +
-  theme_quantificador(orientation) +
+  theme_quantificador() +
   theme(
     axis.text = element_text(colour = "black", size = 8),
     axis.text.x = element_text(angle = 40, hjust = 1),
@@ -128,19 +128,17 @@ build_chart <- function(orientation) {
     plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
     plot.caption = element_text(colour = "black", size = 6.5, lineheight = 1.1, hjust = 0, margin = margin(t = 10)),
     legend.position = "none",
-    plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 30, 6, 16),
+    plot.margin = margin(6, 30, 6, 16),
     plot.title.position = "plot",
     plot.caption.position = "plot"
   )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.89, y = 0.17)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.89, y = 0.17)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -152,5 +150,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

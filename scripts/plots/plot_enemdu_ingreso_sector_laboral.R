@@ -52,12 +52,11 @@ palette_text <- c(
   "Informal" = "#5E7E84"
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  title_txt <- stringr::str_wrap(title_raw, width = if (orientation == "landscape") spec$title_wrap else 42)
+build_chart <- function() {
+  spec <- house_spec("portrait")
+  title_txt <- stringr::str_wrap(title_raw, width = 42)
   # El caption usa element_textbox_simple, que reajusta el ancho solo: en
-  # landscape se le pasa el texto sin cortar para que llene el lienzo ancho.
-  caption_use <- if (orientation == "landscape") caption_raw else caption_txt
+  caption_use <- caption_txt
 
   ggplot(
     plot_df,
@@ -111,7 +110,7 @@ build_chart <- function(orientation) {
     y = "Ingreso laboral mensual (USD)",
     caption = caption_use
   ) +
-  theme_quantificador(orientation) +
+  theme_quantificador() +
   theme(
     axis.text.y = element_text(colour = "grey20", size = 8),
     axis.text.x = element_text(colour = "grey20", size = 7),
@@ -140,12 +139,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.19)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.19)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -156,4 +153,3 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}

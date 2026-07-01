@@ -3,7 +3,7 @@
 # Genera el gráfico sobre aceptación de la orientación sexual
 # o identidad de género entre personas cercanas.
 # Requiere: data/processed/lgbti_aceptacion_orientacion_identidad_2025.rds
-# Guarda:   outputs/figures/27_aceptacion-orientacion-identidad-lgbti-ecuador.png
+# Guarda:   outputs/figures/27_a_aceptacion-orientacion-identidad-lgbti-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_lgbti_aceptacion_orientacion_identidad.R

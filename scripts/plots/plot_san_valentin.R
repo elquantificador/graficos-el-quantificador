@@ -23,19 +23,14 @@ caption_raw <- paste0(
 
 portrait_path <- "outputs/figures/02_san-valentin_inflacion-ecuador.png"
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
 
   # Portrait conserva el caption histórico (con su salto manual) para que el PNG
-  # 4x5 publicado no cambie ni un pixel; landscape reacomoda al ancho apaisado.
-  caption_txt <- if (orientation == "landscape") {
-    wrap_caption_house(caption_raw, width = spec$caption_wrap)
-  } else {
-    paste0(
+  caption_txt <- paste0(
       "Fuente: Instituto Nacional de Estadística y Censos (INEC) - Índice de Precios al Consumidor (IPC). Elaboración:\n",
       "El Quantificador. La inflación se calcula como el cambio porcentual del índice entre enero de 2016 y enero de 2026."
     )
-  }
 
   ggplot(df, aes(x = reorder(product, inflation_2016_2026, decreasing = FALSE),
                  y = inflation_2016_2026)) +
@@ -56,25 +51,21 @@ build_chart <- function(orientation) {
       expand = expansion(mult = c(0, 0.18))
     ) +
     coord_flip(clip = "off") +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     theme(
       axis.text.y  = element_text(hjust = 0),
       axis.title.y = element_text(hjust = 0),
-      plot.margin  = if (orientation == "landscape") margin(14, 20, 14, 16) else margin(14, 36, 14, 16)
+      plot.margin  = margin(14, 36, 14, 16)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  # Sin logo en landscape; portrait mantiene el logo en su posición de la casa.
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.90, y = 0.14)
-  out_path <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.90, y = 0.14)
+  out_path <- portrait_path
   ggsave(out_path, p_final,
          width = spec$width, height = spec$height, units = "in",
          dpi = spec$dpi, device = ragg::agg_png, bg = "white")
   message("Guardado: ", out_path)
-}
 

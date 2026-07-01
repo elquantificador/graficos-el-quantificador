@@ -87,8 +87,8 @@ caption_raw <- paste(
   "celeste = Nilson Angulo; gris claro = Jeremy Arévalo."
 )
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
 
   ggplot(df_plot, aes(x = temporada, y = minutos, fill = jugador_key)) +
     geom_col(width = 0.68, color = "white", linewidth = 0.2) +
@@ -110,9 +110,9 @@ build_chart <- function(orientation) {
       caption = wrap_caption_house(caption_raw, width = spec$caption_wrap),
       fill = NULL
     ) +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     theme(
-      legend.position = if (orientation == "landscape") c(0.48, 0.997) else c(0.48, 0.983),
+      legend.position = c(0.48, 0.983),
       legend.justification = c(0.5, 1),
       legend.direction = "horizontal",
       legend.title = element_blank(),
@@ -129,21 +129,19 @@ build_chart <- function(orientation) {
       axis.text.y = element_text(size = 7.2, colour = "grey20"),
       axis.title.x = element_text(size = 7, colour = "grey30", hjust = 0.5),
       axis.title.y = element_text(size = 7, colour = "grey30", hjust = 0.5),
-      plot.margin = if (orientation == "landscape") margin(14, 28, 8, 16) else margin(14, 36, 8, 16)
+      plot.margin = margin(14, 36, 8, 16)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
+  spec <- house_spec("portrait")
   p_final <- house_apply_logo(
-    build_chart(orientation),
-    orientation,
+    build_chart(),
+    "portrait",
     x = 0.88, y = 0.14, width = 0.09, height = 0.09
   )
-  dest <- house_out_path(out_path, orientation)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -155,4 +153,3 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}

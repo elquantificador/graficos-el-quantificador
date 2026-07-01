@@ -45,17 +45,11 @@ title_raw <- "La mujer ecuatoriana dedica 4 veces más tiempo a cocinar que el h
 subtitle_raw <- "Promedio de horas semanales dedicadas a cocinar, por sexo, Encuesta Multipropósito 2019"
 caption_txt <- "Fuente: INEC, Encuesta Multipropósito 2019. Elaboración: El Quantificador por Laboratorio LIDE."
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  # Portrait conserva los saltos manuales; landscape reacomoda al ancho apaisado
+build_chart <- function() {
+  spec <- house_spec("portrait")
   # (el título usa 13,5 pt, así que su ancho se ajusta a ese tamaño).
-  if (orientation == "landscape") {
-    title_txt    <- stringr::str_wrap(title_raw, width = landscape_wrap_for_size(13.5))
-    subtitle_txt <- stringr::str_wrap(subtitle_raw, width = spec$subtitle_wrap)
-  } else {
     title_txt    <- "La mujer ecuatoriana dedica 4 veces más\ntiempo a cocinar que el hombre"
     subtitle_txt <- "Promedio de horas semanales dedicadas a cocinar, por sexo,\nEncuesta Multipropósito 2019"
-  }
 
   ggplot(plot_df, aes(x = sexo, y = media, fill = sexo)) +
     geom_col(width = 0.6) +
@@ -87,7 +81,7 @@ build_chart <- function(orientation) {
       plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
       plot.caption = element_text(colour = "black", size = 6.2, lineheight = 1.1, hjust = 0, margin = margin(t = 6)),
       axis.line = element_line(colour = "black"),
-      plot.margin = if (orientation == "landscape") margin(6, 16, 6, 16) else margin(6, 36, 6, 16),
+      plot.margin = margin(6, 36, 6, 16),
       plot.title.position = "plot",
       plot.caption.position = "plot",
       panel.grid = element_blank(),
@@ -96,12 +90,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.05)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.05)
+  dest <- portrait_path
   ggsave(
     dest,
     p_final,
@@ -113,5 +105,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 

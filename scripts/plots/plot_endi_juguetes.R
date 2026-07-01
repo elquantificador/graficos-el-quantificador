@@ -45,13 +45,9 @@ caption_txt <- paste(
 )
 caption_raw <- paste(caption_line1, caption_line2, caption_line3)
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
-  caption_use <- if (orientation == "landscape") {
-    stringr::str_wrap(caption_raw, width = landscape_wrap_for_size(6.8))
-  } else {
-    caption_txt
-  }
+build_chart <- function() {
+  spec <- house_spec("portrait")
+  caption_use <- caption_txt
 
   ggplot(
     plot_df,
@@ -88,7 +84,7 @@ build_chart <- function(orientation) {
       axis.line.y = element_line(colour = "black"),
       axis.ticks.y = element_blank(),
       axis.line.x = element_line(colour = "black"),
-      plot.margin = if (orientation == "landscape") margin(3, 16, 3, 3) else margin(3, 20, 3, 3),
+      plot.margin = margin(3, 20, 3, 3),
       plot.title.position = "plot",
       plot.caption.position = "plot",
       panel.grid = element_blank()
@@ -96,12 +92,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.905, y = 0.14, width = 0.09, height = 0.09)
-  dest <- house_out_path(out_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.905, y = 0.14, width = 0.09, height = 0.09)
+  dest <- out_path
   ggsave(
     filename = dest,
     plot = p_final,
@@ -112,4 +106,3 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}

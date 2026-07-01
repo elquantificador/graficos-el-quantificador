@@ -82,23 +82,17 @@ title_raw <- "Los empleados públicos ganan más, pero también pierden más por
 subtitle_raw <- "Comparación de sueldos promedio públicos y privados, con ajustes para la inflación, 2019-2026"
 caption_raw <- "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
 
-build_chart <- function(orientation) {
-  spec <- house_spec(orientation)
+build_chart <- function() {
+  spec <- house_spec("portrait")
   # Margen derecho amplio en ambas orientaciones: las etiquetas al final de las
   # líneas necesitan ese espacio. Por eso los anchos de envoltura se reducen un
   # poco respecto al ancho usable estándar.
-  if (orientation == "landscape") {
-    title_txt    <- stringr::str_wrap(title_raw, width = 78)
-    subtitle_txt <- stringr::str_wrap(subtitle_raw, width = 109)
-    caption_txt  <- stringr::str_wrap(caption_raw, width = 160)
-  } else {
     title_txt    <- "Los empleados públicos ganan más,\npero también pierden más por la inflación"
     subtitle_txt <- "Comparación de sueldos promedio públicos y privados,\ncon ajustes para la inflación, 2019-2026"
     caption_txt  <- paste0(
       "Fuente: INEC (IPC) y Registro Estadístico de Empleo en la Seguridad Social (REESS). Ajuste por\n",
       "inflación con IPC general. Elaboración: El Quantificador de Laboratorio LIDE."
     )
-  }
 
   ggplot2::ggplot(
     salario_plot,
@@ -150,7 +144,7 @@ build_chart <- function(orientation) {
       caption = caption_txt
     ) +
     ggplot2::coord_cartesian(clip = "off") +
-    theme_quantificador(orientation) +
+    theme_quantificador() +
     ggplot2::theme(
       plot.subtitle = ggplot2::element_text(size = 9, lineheight = 1.1, hjust = 0),
       plot.caption = ggplot2::element_text(size = 6, lineheight = 1.1, hjust = 0, margin = ggplot2::margin(t = 2)),
@@ -166,12 +160,10 @@ build_chart <- function(orientation) {
 }
 
 dir.create("outputs/figures", showWarnings = FALSE)
-dir.create(LANDSCAPE_DIR, showWarnings = FALSE, recursive = TRUE)
 
-for (orientation in c("portrait", "landscape")) {
-  spec <- house_spec(orientation)
-  p_final <- house_apply_logo(build_chart(orientation), orientation, x = 0.88, y = 0.11)
-  dest <- house_out_path(portrait_path, orientation)
+  spec <- house_spec("portrait")
+  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.11)
+  dest <- portrait_path
   ggplot2::ggsave(
     dest,
     p_final,
@@ -183,5 +175,4 @@ for (orientation in c("portrait", "landscape")) {
     bg = "white"
   )
   message("Guardado: ", dest)
-}
 
