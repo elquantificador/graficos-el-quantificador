@@ -87,7 +87,7 @@ flows_df <- chart_data$flows %>%
       levels = c(
         "Obtuvo empleo en 2023",
         "Continuó desempleado en 2023",
-        "Ya no busca trabajo en 2023"
+        "Ya no busca empleo en 2023"
       )
     )
   ) %>%
@@ -98,7 +98,7 @@ outcome_df <- chart_data$outcomes %>%
   arrange(match(.data$destino, c(
     "Obtuvo empleo en 2023",
     "Continuó desempleado en 2023",
-    "Ya no busca trabajo en 2023"
+    "Ya no busca empleo en 2023"
   )))
 
 outcome_gap <- root_count * 0.02
@@ -124,7 +124,7 @@ outcome_label_x <- 5.97 + x_shift
 outcome_palette <- c(
   "Obtuvo empleo en 2023" = "#F0A145",
   "Continuó desempleado en 2023" = "#5AA6D6",
-  "Ya no busca trabajo en 2023" = "#77B37A"
+  "Ya no busca empleo en 2023" = "#77B37A"
 )
 
 root_flows <- dplyr::bind_rows(lapply(seq_len(nrow(outcome_df)), function(i) {
@@ -159,7 +159,7 @@ outcome_labels <- outcome_df %>%
         fmt_n(.data$count), " | ", fmt_pct(.data$share_total)
       ),
       TRUE ~ paste0(
-        "Ya no busca trabajo\n",
+        "Ya no busca empleo\n",
         fmt_n(.data$count), " | ", fmt_pct(.data$share_total)
       )
     )
@@ -168,12 +168,12 @@ outcome_labels <- outcome_df %>%
 outcome_stage <- outcome_stage %>%
   left_join(outcome_labels, by = "label")
 
-caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: Angel Alava para el Quantificador. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. Ya no busca trabajo incluye a quienes dejaron de buscar empleo y salieron de la fuerza laboral. El gráfico muestra la transición de quienes estaban desempleados en 2022."
+caption_raw <- "Fuente: INEC, Matrices de Transición Laboral de la ENEMDU, trimestre IV 2022 y trimestre IV 2023. Elaboración: Angel Alava para el Quantificador. Nota: El ancho de los flujos representa la cantidad de personas que transitaron entre estados laborales. Ya no busca empleo se refiere a personas que en 2023 no trabajaron, no buscaron empleo y pasaron a estar fuera de la fuerza laboral. El gráfico muestra la transición de quienes estaban desempleados en 2022."
 
 build_chart <- function() {
   spec <- house_spec("portrait")
   title_txt <- wrap_title_house(
-    "La mayoría de desempleados no encuentra trabajo después de un año",
+    "La mayoría de desempleados no encuentra empleo después de un año",
     width = 46
   )
   subtitle_txt <- wrap_subtitle_house("Transiciones desde el desempleo, 2022-2023", width = spec$subtitle_wrap)

@@ -58,7 +58,7 @@ flows_df <- dplyr::bind_rows(
   ),
   tibble::tibble(
     origen = "Desempleados 2022",
-    destino = "Ya no busca trabajo en 2023",
+    destino = "Ya no busca empleo en 2023",
     count = nacional_row$pei_2023
   )
 ) %>%
