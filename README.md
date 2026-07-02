@@ -144,6 +144,7 @@ Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publi
 27. `27_a_aceptacion-orientacion-identidad-lgbti-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_lgbti_aceptacion_orientacion_identidad.R)
 27. `27_b_quienes-conocen-orientacion-identidad-lgbti-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_lgbti_conocen_orientacion_identidad.R)
 28. `28_transicion-laboral_desempleo-zona-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_transicion_laboral_desempleo_zona.R)
+29. `29_actividad-fisica-insuficiente_area-edad-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_actividad_fisica_insuficiente.R)
 
 
 ## Funciones compartidas (`scripts/utils.R`)
