@@ -31,7 +31,7 @@ plot_df <- readRDS("data/processed/enemdu_actividad_fisica_insuficiente.rds") |>
     )
   )
 
-title_raw <- "El Ecuador rural hace menos actividad física que el Ecuador urbano"
+title_raw <- "El Ecuador rural hace menos actividad física\nque el Ecuador urbano"
 subtitle_raw <- "Prevalencia de actividad física insuficiente, por zona de residencia\n y tres grupos de edad, diciembre 2024"
 caption_raw <- paste(
   "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), módulo de actividad",
