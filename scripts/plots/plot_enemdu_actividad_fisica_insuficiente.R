@@ -1,7 +1,7 @@
 # ============================================================
 # plot_enemdu_actividad_fisica_insuficiente.R
 # Genera el gráfico de actividad física insuficiente por área
-# de residencia y grupo etario, ENEMDU 2024.
+# de residencia y grupos de edad, ENEMDU 2024.
 # Requiere: data/processed/enemdu_actividad_fisica_insuficiente.rds
 # Guarda:   outputs/figures/29_actividad-fisica-insuficiente_area-edad-ecuador.png
 # ============================================================
@@ -16,13 +16,13 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "stringr"))
 out_path <- "outputs/figures/29_actividad-fisica-insuficiente_area-edad-ecuador.png"
 
 plot_df <- readRDS("data/processed/enemdu_actividad_fisica_insuficiente.rds") |>
-  filter(anio == 2024) |>
   mutate(
     grupo_edad = factor(
       grupo_edad,
       levels = c(
-        "8-17 años",
-        "18-69 años"
+        "18-29 años",
+        "30-44 años",
+        "45-69 años"
       )
     ),
     area_residencia = factor(
@@ -31,64 +31,84 @@ plot_df <- readRDS("data/processed/enemdu_actividad_fisica_insuficiente.rds") |>
     )
   )
 
-title_raw <- "La actividad física insuficiente es mucho más alta entre niños y adolescentes"
-subtitle_raw <- "Prevalencia por grupo etario y área de residencia, ENEMDU módulo de actividad física, diciembre 2024"
-caption_raw <- paste0(
-  "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), módulos de actividad física ",
-  "de diciembre 2024. Cálculos de Joan Mogro Ponce para El Quantificador. ",
-  "Nota: Para niñas, niños y adolescentes, se considera actividad física insuficiente cuando reportan menos de 7 días ",
-  "de actividad física en la última semana. Para personas de 18 a 69 años, se usa el umbral semanal de 150 minutos ",
-  "moderados equivalentes, sumando caminata y actividad moderada, y ponderando la actividad vigorosa por dos."
+title_raw <- "Menos movimiento, más sedentarismo: la brecha\nen la ciudad y el campo ecuatoriano"
+subtitle_raw <- "Prevalencia de actividad física insuficiente, por zona de residencia\n y tres grupos de edad, diciembre 2024"
+caption_raw <- paste(
+  "Fuente: INEC, Encuesta Nacional de Empleo, Desempleo y Subempleo (ENEMDU), módulo de actividad",
+  "física de diciembre de 2024. Elaboración de Joan Mogro Ponce para El Quantificador de Laboratorio",
+  "LIDE. Nota: Se muestra únicamente población de 18 a 69 años. Actividad insuficiente = menos de",
+  "150 minutos moderados equivalentes semanales. La actividad vigorosa pondera por dos, según la OMS",
+  "en adultos.",
+  sep = "\n"
 )
 
 palette <- c(
-  "Entorno urbano" = "#4D79E6",
-  "Entorno rural" = "#A282E8"
+  "18-29 años" = "#2F6DB3",
+  "30-44 años" = "#F0A145",
+  "45-69 años" = "#7B8D97"
 )
 
 build_chart <- function() {
-  ggplot(plot_df, aes(x = grupo_edad, y = prevalencia, fill = area_residencia)) +
+  ggplot(
+    plot_df,
+    aes(
+      x = area_residencia,
+      y = prevalencia,
+      fill = grupo_edad
+    )
+  ) +
     geom_col(
-      position = position_dodge(width = 0.72),
-      width = 0.62
+      position = position_dodge(width = 0.82),
+      width = 0.58
+    ) +
+    geom_text(
+      aes(label = paste0(
+        number(prevalencia, accuracy = 0.1, decimal.mark = ","),
+        "%"
+      )),
+      position = position_dodge(width = 0.82),
+      vjust = -0.35,
+      size = 2.5,
+      colour = "black"
     ) +
     scale_fill_manual(values = palette) +
     scale_y_continuous(
       labels = label_percent(scale = 1, accuracy = 1),
-      limits = c(0, 100),
-      breaks = seq(0, 100, 20),
+      limits = c(0, 30),
+      breaks = seq(0, 30, 10),
       expand = expansion(mult = c(0, 0.02))
     ) +
+    coord_cartesian(ylim = c(0, 32), clip = "off") +
     labs(
-      title = wrap_title_house(title_raw),
-      subtitle = wrap_subtitle_house(subtitle_raw),
+      title = title_raw,
+      subtitle = subtitle_raw,
       x = NULL,
-      y = "Prevalencia de actividad física insuficiente",
+      y = "Prevalencia (%)",
       fill = NULL,
-      caption = wrap_caption_house(caption_raw)
+      caption = caption_raw
     ) +
     guides(fill = guide_legend(nrow = 1, byrow = TRUE)) +
     theme_quantificador() +
     theme(
       axis.text = element_text(colour = "black", size = 8),
       axis.text.x = element_text(size = 7, lineheight = 0.9),
-      axis.title.y = element_text(size = 7, margin = margin(r = 6), colour = "black"),
-      plot.title = element_text(colour = "black", size = 12.5, face = "bold", hjust = 0),
+      axis.title.y = element_text(size = 7.5, margin = margin(r = 8), colour = "black"),
+      plot.title = element_text(colour = "black", size = 11.5, face = "bold", hjust = 0),
       plot.subtitle = element_text(colour = "black", size = 9, lineheight = 1.1, hjust = 0),
-      plot.caption = element_text(colour = "grey30", size = 5.8, lineheight = 1.1, hjust = 0, margin = margin(t = 8)),
+      plot.caption = element_text(colour = "grey30", size = 5.8, lineheight = 1.12, hjust = 0, margin = margin(t = 8)),
       legend.position = "bottom",
       legend.justification = "center",
-      legend.text = element_text(size = 7),
-      legend.key.width = unit(10, "pt"),
-      legend.spacing.x = unit(4, "pt"),
+      legend.text = element_text(size = 6.4),
+      legend.key.width = unit(8, "pt"),
+      legend.spacing.x = unit(2, "pt"),
       legend.box = "horizontal",
-      plot.margin = margin(6, 18, 6, 16)
+      plot.margin = margin(6, 14, 6, 14)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 spec <- house_spec("portrait")
-p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.13)
+p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.18)
 
 ggsave(
   filename = out_path,

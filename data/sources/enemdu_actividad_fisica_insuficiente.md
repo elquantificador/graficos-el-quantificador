@@ -24,6 +24,6 @@ Archivo utilizado:
 ## Notas
 
 - El gráfico publicado se restringe a diciembre de 2024.
-- Para la población de 8 a 17 años, el gráfico usa como aproximación de actividad física insuficiente reportar menos de 7 días de actividad en la última semana.
-- Para la población de 18 a 69 años, el gráfico usa minutos moderados equivalentes semanales: actividad moderada + caminata + 2 x actividad vigorosa.
+- El gráfico final muestra únicamente población de 18 a 69 años.
+- La población adulta se divide en seis grupos etarios: 18-24, 25-34, 35-44, 45-54, 55-64 y 65-69 años.
 - Se considera actividad física insuficiente cuando el total semanal es menor a 150 minutos moderados equivalentes.

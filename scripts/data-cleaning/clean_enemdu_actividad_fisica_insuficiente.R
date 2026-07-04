@@ -1,7 +1,7 @@
 # ============================================================
 # clean_enemdu_actividad_fisica_insuficiente.R
 # Prepara la prevalencia 2024 de actividad física insuficiente
-# por área de residencia y grupo etario usando el módulo de
+# por área de residencia y grupos de edad usando el módulo de
 # actividad física de la ENEMDU.
 # Requiere: data/raw/actividad_fisica_joan/2024_12/2_BDD_DATOS_ABIERTOS_ACTIVIDAD_FISICA_2024_12_CSV.csv
 # Guarda:   data/processed/enemdu_actividad_fisica_insuficiente.rds
@@ -24,15 +24,6 @@ enemdu_df <- fread(
 )
 
 enemdu_df[, area_residencia := fifelse(area == 1, "Entorno urbano", "Entorno rural")]
-
-ninos_df <- enemdu_df[
-  p03 >= 8 & p03 <= 17 & !is.na(fexp),
-  .(
-    prevalencia = 100 * weighted.mean(af101 < 7, fexp, na.rm = TRUE)
-  ),
-  by = .(area_residencia)
-]
-ninos_df[, `:=`(anio = year_num, grupo_edad = "8-17 años")]
 
 adultos_df <- copy(enemdu_df[p03 >= 18 & p03 <= 69 & !is.na(fexp)])
 adultos_df[
@@ -63,17 +54,24 @@ adultos_df[
   ,
   actividad_insuficiente := minutos_moderada + minutos_caminata + 2 * minutos_vigorosa < 150
 ]
+adultos_df[
+  ,
+  grupo_edad := fifelse(
+    p03 <= 29, "18-29 años",
+    fifelse(p03 <= 44, "30-44 años", "45-69 años")
+  )
+]
 
 adultos_resumen <- adultos_df[
   ,
   .(
     prevalencia = 100 * weighted.mean(actividad_insuficiente, fexp, na.rm = TRUE)
   ),
-  by = .(area_residencia)
+  by = .(grupo_edad, area_residencia)
 ]
-adultos_resumen[, `:=`(anio = year_num, grupo_edad = "18-69 años")]
+adultos_resumen[, anio := year_num]
 
-activity_series <- rbindlist(list(ninos_df, adultos_resumen), use.names = TRUE)
+activity_series <- adultos_resumen
 
 setcolorder(activity_series, c("anio", "grupo_edad", "area_residencia", "prevalencia"))
 setorder(activity_series, grupo_edad, area_residencia, anio)
