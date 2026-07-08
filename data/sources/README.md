@@ -38,6 +38,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENSANUT 2018 padre en hogar de menores | `ensanut/1_BDD_ENS2018_f1_personas.dta.zip` | Usado en `clean_ensanut_menores_padre_hogar.R` | `ensanut_menores_padre_hogar.md` |
 | ENCV LGBTI+ 2025 aceptación de orientación o identidad | `lgbti/7. Base_datos_ENCV_LGBTI+_2025_tratada_fexp_VF_V3.xlsx` | Usado en `clean_lgbti_aceptacion_orientacion_identidad.R` | `lgbti_aceptacion_orientacion_identidad.md` |
 | ENEMDU módulo de actividad física diciembre 2024 | `actividad_fisica_joan/2024_12/2_BDD_DATOS_ABIERTOS_ACTIVIDAD_FISICA_2024_12_CSV.csv` | Usado en `clean_enemdu_actividad_fisica_insuficiente.R` | `enemdu_actividad_fisica_insuficiente.md` |
+| Aranceles aplicados a importaciones desde Colombia | `aranceles_colombia/COL_completo_con_arancel.xlsx`, `aranceles_colombia/lista-de-ecuador.xlsx` | Usado en `clean_aranceles_colombia.R` | `aranceles_colombia.md` |
 
 ## Cobertura de documentación
 
