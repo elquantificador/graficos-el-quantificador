@@ -127,10 +127,10 @@ build_chart <- function() {
       legend.justification = "center",
       legend.box = "horizontal",
       legend.title = element_text(size = 7),
-      legend.text = element_text(size = 6.4),
+      legend.text = element_text(size = 6.4, margin = margin(l = 1)),
       legend.key.size = unit(8, "pt"),
-      legend.key.width = unit(10, "pt"),
-      legend.spacing.x = unit(5, "pt"),
+      legend.key.width = unit(8, "pt"),
+      legend.spacing.x = unit(3, "pt"),
       legend.margin = margin(t = 3, r = 0, b = 1, l = 0),
       plot.margin = margin(6, 24, 6, 16)
     )
