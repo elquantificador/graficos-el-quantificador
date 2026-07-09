@@ -200,8 +200,11 @@ message("Guardado: ", out_path)
 The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 
 - `chart_catalog.csv` is the single manually maintained source of truth for the website sync.
+- Do not reintroduce `chart_catalog_source.csv` or a separate catalog-generation step.
 - `Image Filename` must be preserved for backward compatibility.
 - `Image Path` must be filled manually and point to the true published PNG under `outputs/figures/`.
+- Copy mechanical fields from the plot script when possible: `Chart Name`, `Subtitle`, `Image Filename`, `Image Path`, `Author`, and `Script Link`.
+- Fill editorial fields manually from the publication context: `Date`, `LinkedIn Link`, and `Description`.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
 
 ## Running scripts

@@ -105,6 +105,18 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 
 Edita este archivo directamente cuando publiques o corrijas una visualización. Mantén `Image Path` sincronizado con `Image Filename`, usando el formato `outputs/figures/[archivo.png]`.
 
+### Flujo manual del catálogo
+
+Cuando publiques una visualización:
+
+1. Corre el script `plot_*.R` y confirma que el PNG existe en `outputs/figures/`.
+2. Agrega o actualiza una fila en `outputs/chart_catalog/chart_catalog.csv`.
+3. Copia desde el script R los campos mecánicos: `Chart Name`, `Subtitle`, `Image Filename`, `Image Path`, `Author` y `Script Link`.
+4. Completa manualmente los campos editoriales: `Date`, `LinkedIn Link` y `Description`.
+5. Valida que `Image Path` apunte al PNG publicado y que `Script Link` apunte al script real.
+
+No mantengas un segundo catálogo, no agregues un `chart_catalog_source.csv` y no uses un paso de generación separado. El CSV consumido por el sitio es el mismo archivo que se edita manualmente.
+
 ## Gráficos actuales
 
 Los PNG versionados en `outputs/figures/` ordenados según la secuencia de publicaciones son:
