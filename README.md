@@ -22,11 +22,10 @@ graficos-el-quantificador/
 ├── outputs/
 │   ├── figures/            # Figuras publicadas versionadas en el repositorio
 │   ├── tables/             # Tablas generadas (Excel/HTML)
-│   └── chart_catalog/      # Fuente estructurada y export CSV consumido por el sitio
+│   └── chart_catalog/      # Catálogo CSV manual consumido por el sitio
 ├── scripts/
 │   ├── packages.R          # Helper para instalar y cargar paquetes automáticamente
 │   ├── utils.R             # Funciones compartidas: tema, logo overlay
-│   ├── generate_chart_catalog.R # Genera outputs/chart_catalog/chart_catalog.csv
 │   ├── data-cleaning/      # Scripts de limpieza y preparación de datos
 │   └── plots/              # Scripts de visualización
 └── quantificador.png       # Logo
@@ -88,12 +87,11 @@ Rscript scripts/plots/plot_escolaridad_ingreso.R
 El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv` para crear o actualizar páginas bajo `content/visualizaciones` y referenciar las imágenes publicadas.
 
 - Las imágenes publicadas viven en `outputs/figures/`.
-- `outputs/chart_catalog/chart_catalog_source.csv` es la fuente estructurada que se edita manualmente.
-- `outputs/chart_catalog/chart_catalog.csv` es un artefacto generado por `scripts/generate_chart_catalog.R`.
+- `outputs/chart_catalog/chart_catalog.csv` es el único catálogo de visualizaciones y se edita manualmente.
 
-### Esquema del catálogo exportado
+### Esquema del catálogo
 
-`chart_catalog.csv` expone estas columnas estables:
+`chart_catalog.csv` mantiene estas columnas estables:
 
 - `Chart Name`
 - `Subtitle`
@@ -105,11 +103,7 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 - `Description`
 - `Script Link`
 
-Para regenerar el catálogo:
-
-```bash
-Rscript scripts/generate_chart_catalog.R
-```
+Edita este archivo directamente cuando publiques o corrijas una visualización. Mantén `Image Path` sincronizado con `Image Filename`, usando el formato `outputs/figures/[archivo.png]`.
 
 ## Gráficos actuales
 

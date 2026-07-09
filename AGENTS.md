@@ -17,10 +17,9 @@ graficos-el-quantificador/
 ├── outputs/
 │   ├── figures/        # Published PNG files (versioned, numbered NN_slug-ecuador.png)
 │   ├── tables/         # Generated Excel/HTML (not versioned)
-│   └── chart_catalog/  # chart_catalog_source.csv (edited) + chart_catalog.csv (generated export)
+│   └── chart_catalog/  # chart_catalog.csv (manual catalog consumed by the website)
 ├── scripts/
 │   ├── packages.R      # ensure_packages() helper — auto-installs from CRAN
-│   ├── generate_chart_catalog.R  # Generates the website-facing chart catalog export
 │   ├── utils.R         # Shared theme, formatters, add_logo()
 │   ├── data-cleaning/  # clean_*.R scripts
 │   └── plots/          # plot_*.R scripts
@@ -192,18 +191,17 @@ message("Guardado: ", out_path)
 2. Write `scripts/data-cleaning/clean_[source]_[topic].R`
 3. Write `scripts/plots/plot_[source]_[topic].R`
 4. Run both from repo root and verify output at `outputs/figures/NN_slug-ecuador.png`
-5. Add a row to `outputs/chart_catalog/chart_catalog_source.csv`
-6. Regenerate `outputs/chart_catalog/chart_catalog.csv` with `Rscript scripts/generate_chart_catalog.R`
-7. Add entry to the chart list in `README.md`
-8. Add a row to `data/sources/README.md`
+5. Add a row to `outputs/chart_catalog/chart_catalog.csv`
+6. Add entry to the chart list in `README.md`
+7. Add a row to `data/sources/README.md`
 
 ## Chart catalog schema
 
 The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 
-- `chart_catalog_source.csv` is the structured source of truth that must include `Author`.
-- `chart_catalog.csv` is generated and must preserve `Image Filename` for backward compatibility.
-- `Image Path` must always point to the true published PNG under `outputs/figures/`.
+- `chart_catalog.csv` is the single manually maintained source of truth for the website sync.
+- `Image Filename` must be preserved for backward compatibility.
+- `Image Path` must be filled manually and point to the true published PNG under `outputs/figures/`.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
 
 ## Running scripts
