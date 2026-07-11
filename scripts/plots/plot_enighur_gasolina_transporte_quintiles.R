@@ -3,7 +3,7 @@
 # Genera el grafico del gasto mensual promedio en gasolina y
 # transporte publico por quintil de ingreso del hogar.
 # Requiere: data/processed/enighur_gasolina_transporte_quintiles_2025.rds
-# Guarda:   outputs/figures/31_a_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png
+# Guarda:   outputs/figures/31_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png
 # ============================================================
 
 source("scripts/utils.R")
@@ -11,7 +11,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 input_path <- "data/processed/enighur_gasolina_transporte_quintiles_2025.rds"
-out_path <- "outputs/figures/31_a_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png"
+out_path <- "outputs/figures/31_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png"
 
 chart_data <- readRDS(input_path)
 plot_df <- chart_data$summary |>
@@ -27,14 +27,18 @@ plot_df <- chart_data$summary |>
     )
   )
 
-title_raw <- "En los hogares pobres pesa más el transporte publico; en los ricos, la gasolina"
+title_raw <- paste(
+  "En hogares pobres pesa más",
+  "el transporte público;",
+  "en hogares ricos, la gasolina",
+  sep = "\n"
+)
 subtitle_raw <- "Gasto mensual promedio por hogar en gasolina y transporte público, por quintil de ingreso, ENIGHUR 2024-2025"
 caption_raw <- paste(
   "Fuente: ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sánchez para El Quantificador.",
   "Nota: Las barras muestran el gasto mensual promedio por hogar en cada rubro. Las etiquetas indican el valor en dólares y su peso dentro del gasto monetario total del hogar.",
   "Los quintiles dividen a los hogares en cinco grupos de 20%, ordenados por ingreso monetario del hogar. El quintil 1 corresponde al 20% con menores ingresos y el quintil 5 al 20% con mayores ingresos."
 )
-
 palette <- c(
   "Gasolina" = "#1F618D",
   "Transporte publico" = "#6BB7C9"
@@ -61,7 +65,7 @@ build_chart <- function() {
     ) +
     coord_cartesian(clip = "off") +
     labs(
-      title = wrap_title_house(title_raw),
+      title = title_raw,
       subtitle = wrap_subtitle_house(subtitle_raw),
       x = "Gasto mensual promedio por hogar",
       y = "Quintiles de ingreso",
@@ -71,7 +75,7 @@ build_chart <- function() {
     theme_quantificador() +
     theme(
       legend.position = "bottom",
-      plot.margin = margin(6, 44, 6, 16),
+      plot.margin = margin(8, 30, 8, 16),
       axis.title.y = element_blank(),
       axis.ticks.y = element_blank()
     )
@@ -79,7 +83,7 @@ build_chart <- function() {
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 spec <- house_spec("portrait")
-p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.12)
+p_final <- house_apply_logo(build_chart(), "portrait", x = 0.90, y = 0.035, width = 0.072, height = 0.072)
 
 ggsave(
   filename = out_path,
@@ -92,6 +96,12 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+
+
+
+
+
+
 
 
 
