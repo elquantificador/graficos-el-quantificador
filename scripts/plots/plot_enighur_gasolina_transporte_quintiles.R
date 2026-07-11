@@ -28,9 +28,8 @@ plot_df <- chart_data$summary |>
   )
 
 title_raw <- paste(
-  "En hogares pobres pesa más",
-  "el transporte público;",
-  "en hogares ricos, la gasolina",
+  "La gasolina es fundamentalmente",
+  "un gasto de hogares ricos",
   sep = "\n"
 )
 subtitle_raw <- "Gasto mensual promedio por hogar en gasolina y transporte público, por quintil de ingreso, ENIGHUR 2024-2025"
@@ -96,6 +95,7 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+
 
 
 
