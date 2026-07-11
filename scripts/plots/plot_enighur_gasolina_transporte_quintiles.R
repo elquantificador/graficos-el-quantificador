@@ -19,7 +19,7 @@ plot_df <- chart_data$summary |>
     quintil_ingreso = factor(
       .data$quintil_ingreso,
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
-      labels = c("Q1 (mas pobre)", "Q2", "Q3", "Q4", "Q5 (mas rico)")
+      labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
     ),
     etiqueta = paste0(
       "$", formatC(round(.data$gasto_promedio, 1), format = "f", digits = 1),
@@ -27,11 +27,11 @@ plot_df <- chart_data$summary |>
     )
   )
 
-title_raw <- "En los hogares pobres pesa mas el transporte publico; en los ricos, la gasolina"
-subtitle_raw <- "Gasto mensual promedio por hogar en gasolina y transporte publico, por quintil de ingreso, ENIGHUR 2024-2025"
+title_raw <- "En los hogares pobres pesa más el transporte publico; en los ricos, la gasolina"
+subtitle_raw <- "Gasto mensual promedio por hogar en gasolina y transporte público, por quintil de ingreso, ENIGHUR 2024-2025"
 caption_raw <- paste(
-  "Fuente: ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sanchez para El Quantificador.",
-  "Nota: Las barras muestran el gasto mensual promedio por hogar en cada rubro. Las etiquetas indican el valor en dolares y su peso dentro del gasto monetario total del hogar.",
+  "Fuente: ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sánchez para El Quantificador.",
+  "Nota: Las barras muestran el gasto mensual promedio por hogar en cada rubro. Las etiquetas indican el valor en dólares y su peso dentro del gasto monetario total del hogar.",
   "Los quintiles dividen a los hogares en cinco grupos de 20%, ordenados por ingreso monetario del hogar. El quintil 1 corresponde al 20% con menores ingresos y el quintil 5 al 20% con mayores ingresos."
 )
 
@@ -92,5 +92,6 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+
 
 

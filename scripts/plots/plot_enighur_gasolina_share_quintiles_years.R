@@ -19,16 +19,16 @@ plot_df <- chart_data$summary |>
     quintil_ingreso = factor(
       .data$quintil_ingreso,
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
-      labels = c("Q1 (mas pobre)", "Q2", "Q3", "Q4", "Q5 (mas rico)")
+      labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
     ),
     etiqueta = percent_intl(.data$share_gasto_monetario, accuracy = 0.1)
   )
 
-title_raw <- "El peso de la gasolina en el presupuesto del hogar cambio mucho entre 2012 y 2025"
+title_raw <- "El peso de la gasolina en el presupuesto del hogar cambió mucho entre 2012 y 2025"
 subtitle_raw <- "Gasolina como porcentaje del gasto monetario del hogar, por quintil de ingreso, ENIGHUR 2011-2012 y 2024-2025"
 caption_raw <- paste(
-  "Fuente: ENIGHUR 2011-2012 y ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sanchez para El Quantificador.",
-  "Nota: Las barras muestran la participacion de la gasolina dentro del gasto monetario total del hogar en cada quintil.",
+  "Fuente: ENIGHUR 2011-2012 y ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sánchez para El Quantificador.",
+  "Nota: Las barras muestran la participación de la gasolina dentro del gasto monetario total del hogar en cada quintil.",
   "En cada encuesta, los quintiles dividen a los hogares en cinco grupos de 20%, ordenados por ingreso monetario del hogar dentro de esa misma ronda. El quintil 1 corresponde al 20% con menores ingresos y el quintil 5 al 20% con mayores ingresos."
 )
 
@@ -89,5 +89,6 @@ ggsave(
 )
 
 message("Guardado: ", out_path)
+
 
 
