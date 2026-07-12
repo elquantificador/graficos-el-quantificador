@@ -21,6 +21,11 @@ plot_df <- chart_data$summary |>
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
       labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
     ),
+    rubro = factor(
+      .data$rubro,
+      levels = c("Gasolina", "Transporte publico"),
+      labels = c("Gasolina", "Transporte público")
+    ),
     etiqueta = paste0(
       "$", formatC(round(.data$gasto_promedio, 1), format = "f", digits = 1),
       " | ", percent_intl(.data$share_gasto_monetario, accuracy = 0.1)
@@ -28,19 +33,24 @@ plot_df <- chart_data$summary |>
   )
 
 title_raw <- paste(
-  "La gasolina es fundamentalmente",
-  "un gasto de hogares ricos",
+  "La gasolina es, fundamentalmente, un gasto",
+  "de los hogares más ricos",
   sep = "\n"
 )
 subtitle_raw <- "Gasto mensual promedio por hogar en gasolina y transporte público, por quintil de ingreso, ENIGHUR 2024-2025"
-caption_raw <- paste(
-  "Fuente: ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sánchez para El Quantificador.",
-  "Nota: Las barras muestran el gasto mensual promedio por hogar en cada rubro. Las etiquetas indican el valor en dólares y su peso dentro del gasto monetario total del hogar.",
-  "Los quintiles dividen a los hogares en cinco grupos de 20%, ordenados por ingreso monetario del hogar. El quintil 1 corresponde al 20% con menores ingresos y el quintil 5 al 20% con mayores ingresos."
+caption_txt <- paste(
+  "Fuente: ENIGHUR 2024-2025, INEC. Elaboración: Daniel Sánchez para El Quantificador.",
+  "Las etiquetas indican el valor en dólares y su participación dentro del gasto total monetario",
+  "del hogar. Gasolina incluye eco país, extra y súper. Transporte público corresponde al",
+  "agregado de servicios de transporte de pasajeros: buses, taxi, Uber/Didi, metro, tren, tranvía",
+  "y otros servicios contratados. Los quintiles dividen a los hogares en cinco grupos de 20%,",
+  "ordenados por ingreso monetario del hogar. El quintil 1 corresponde al 20% con menores",
+  "ingresos y el quintil 5 al 20% con mayores ingresos.",
+  sep = "\n"
 )
 palette <- c(
   "Gasolina" = "#1F618D",
-  "Transporte publico" = "#6BB7C9"
+  "Transporte público" = "#6BB7C9"
 )
 
 dodge <- position_dodge(width = 0.72)
@@ -69,11 +79,13 @@ build_chart <- function() {
       x = "Gasto mensual promedio por hogar",
       y = "Quintiles de ingreso",
       fill = NULL,
-      caption = wrap_caption_house(caption_raw)
+      caption = caption_txt
     ) +
     theme_quantificador() +
     theme(
       legend.position = "bottom",
+      legend.justification = c(0.52, 0.5),
+      legend.box.margin = margin(0, 72, 0, 0),
       plot.margin = margin(8, 30, 8, 16),
       axis.title.y = element_blank(),
       axis.ticks.y = element_blank()
@@ -82,7 +94,7 @@ build_chart <- function() {
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 spec <- house_spec("portrait")
-p_final <- house_apply_logo(build_chart(), "portrait", x = 0.90, y = 0.035, width = 0.072, height = 0.072)
+p_final <- house_apply_logo(build_chart(), "portrait", x = 0.89, y = 0.235, width = 0.066, height = 0.066)
 
 ggsave(
   filename = out_path,
