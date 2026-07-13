@@ -9,9 +9,10 @@
 ## Next charts
 
 - `31_b` - comparación de shares de gasolina entre encuestas.
-  - Status sugerido: `draft`
+  - Status actual: `draft`
   - Serie: `enighur-gasolina`
   - Script ya disponible: `scripts/plots/plot_enighur_gasolina_share_quintiles_years.R`
+  - Archivo draft: `outputs/figures/31_b_gasolina-share_quintil-ingreso-2012-2025.png`
   - Pendiente: decidir título final, nota sobre quintiles y fecha de publicación.
 
 ## Archive / hold
