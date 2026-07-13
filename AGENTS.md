@@ -21,6 +21,8 @@ graficos-el-quantificador/
 ├── scripts/
 │   ├── packages.R      # ensure_packages() helper — auto-installs from CRAN
 │   ├── utils.R         # Shared theme, formatters, add_logo()
+│   ├── validate_chart_catalog.py  # Catalog QA checks before publish
+│   ├── templates/      # Reusable clean_/plot_ skeletons
 │   ├── data-cleaning/  # clean_*.R scripts
 │   └── plots/          # plot_*.R scripts
 └── quantificador.png   # Logo used by add_logo()
@@ -192,8 +194,9 @@ message("Guardado: ", out_path)
 3. Write `scripts/plots/plot_[source]_[topic].R`
 4. Run both from repo root and verify output at `outputs/figures/NN_slug-ecuador.png`
 5. Add a row to `outputs/chart_catalog/chart_catalog.csv`
-6. Add entry to the chart list in `README.md`
-7. Add a row to `data/sources/README.md`
+6. Run `python scripts/validate_chart_catalog.py` and fix any catalog errors before commit
+7. Add entry to the chart list in `README.md`
+8. Add a row to `data/sources/README.md`
 
 ## Chart catalog schema
 
@@ -201,11 +204,16 @@ The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 
 - `chart_catalog.csv` is the single manually maintained source of truth for the website sync.
 - Do not reintroduce `chart_catalog_source.csv` or a separate catalog-generation step.
+- Required catalog columns now include `Chart ID`, `Status`, `Series`, and `Notes` in addition to the legacy website fields.
+- `Chart ID` is the stable production identifier. Keep it stable even if `Chart Name` changes.
+- Allowed `Status` values are `published`, `draft`, `supplementary`, `archived`, and `hold`.
 - `Image Filename` must be preserved for backward compatibility.
 - `Image Path` must be filled manually and point to the true published PNG under `outputs/figures/`.
 - Copy mechanical fields from the plot script when possible: `Chart Name`, `Subtitle`, `Image Filename`, `Image Path`, `Author`, and `Script Link`.
-- Fill editorial fields manually from the publication context: `Date`, `LinkedIn Link`, and `Description`.
+- Fill editorial fields manually from the publication context: `Date`, `LinkedIn Link`, `Description`, and any brief `Notes`.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
+- `Description` must stay free of markdown image syntax, inline links, or hashtag residue.
+- Run `python scripts/validate_chart_catalog.py` before commit or push.
 
 ## Running scripts
 

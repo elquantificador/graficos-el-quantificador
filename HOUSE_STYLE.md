@@ -99,6 +99,12 @@ Rules:
 - Default y-position in the helper: `y = 0.07`
 - Only `y` may vary by chart, and only when the user decides
 
+## Editorial consistency
+
+- Catalog titles, subtitles and descriptions should match the rendered chart and the publication copy.
+- Do not leave markdown image syntax, inline links or social-media residue inside catalog descriptions.
+- For recurring concepts such as quintiles, keep the explanatory note stable across related charts unless the user decides otherwise.
+
 ## Enforcement
 
 - Use the shared utilities in `scripts/utils.R`.

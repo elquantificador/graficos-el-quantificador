@@ -24,6 +24,8 @@ graficos-el-quantificador/
 ├── scripts/
 │   ├── packages.R
 │   ├── utils.R
+│   ├── validate_chart_catalog.py
+│   ├── templates/
 │   ├── data-cleaning/
 │   └── plots/
 └── quantificador.png
@@ -35,6 +37,33 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 
 - Las imagenes publicadas viven en `outputs/figures/`.
 - `outputs/chart_catalog/chart_catalog.csv` es el unico catalogo de visualizaciones y se edita manualmente.
+- Cada fila debe tener un `Chart ID` canonico y un `Status` explicito.
+- La documentacion del catalogo vive en `outputs/chart_catalog/README.md`.
+- Antes de commit o push, corre `python scripts/validate_chart_catalog.py`.
+
+## Lifecycle de graficos
+
+Estados permitidos en `Status`:
+
+- `published`: grafico ya publicado y sincronizable al sitio.
+- `draft`: grafico en preparacion, todavia no publico.
+- `supplementary`: variante o pieza complementaria asociada a una principal.
+- `archived`: pieza guardada para referencia, no destinada a publicacion actual.
+- `hold`: idea o artefacto congelado temporalmente.
+
+## Flujo recomendado para un grafico nuevo
+
+1. Colocar datos crudos en `data/raw/[source]/`.
+2. Crear `scripts/data-cleaning/clean_[source]_[topic].R`.
+3. Crear `scripts/plots/plot_[source]_[topic].R`.
+4. Generar el `.png` en `outputs/figures/`.
+5. Registrar o actualizar la fila en `outputs/chart_catalog/chart_catalog.csv`.
+6. Validar con `python scripts/validate_chart_catalog.py`.
+7. Actualizar `README.md`, `TODO.md` y `data/sources/README.md` cuando haga falta.
+
+## Plantillas reutilizables
+
+Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_template.R` y `scripts/templates/plot_template.R`.
 
 ## Graficos actuales
 
@@ -44,5 +73,3 @@ El sitio de El Quantificador sincroniza `outputs/chart_catalog/chart_catalog.csv
 ## Notas sobre los datos
 
 Los archivos de datos crudos viven bajo `data/raw/`, organizados por tema o fuente. El inventario y las fichas metodologicas estan en `data/sources/`, empezando por `data/sources/README.md`.
-
-
