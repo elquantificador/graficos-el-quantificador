@@ -40,6 +40,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENCV LGBTI+ 2025 aceptacion de orientacion o identidad | `lgbti/7. Base_datos_ENCV_LGBTI+_2025_tratada_fexp_VF_V3.xlsx` | Usado en `clean_lgbti_aceptacion_orientacion_identidad.R` | `lgbti_aceptacion_orientacion_identidad.md` |
 | ENEMDU modulo de actividad fisica diciembre 2024 | `actividad_fisica_joan/2024_12/2_BDD_DATOS_ABIERTOS_ACTIVIDAD_FISICA_2024_12_CSV.csv` | Usado en `clean_enemdu_actividad_fisica_insuficiente.R` | `enemdu_actividad_fisica_insuficiente.md` |
 | Aranceles aplicados a importaciones desde Colombia | `aranceles_colombia/COL_completo_con_arancel.xlsx`, `aranceles_colombia/lista-de-ecuador.xlsx` | Usado en `clean_aranceles_colombia.R` | `aranceles_colombia.md` |
+| Ofertas de empleo de datos y tecnología, junio-julio 2026 | `jobs_scrape/jobs_20260617_043911.csv`, `jobs_scrape/jobs_20260716_013707.csv` | Usado en `clean_jobs_habilidades_mensuales.R` | `jobs_habilidades_demandadas.md` |
 
 ## Cobertura de documentacion
 

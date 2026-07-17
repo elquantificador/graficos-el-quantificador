@@ -8,6 +8,12 @@
 
 ## Next charts
 
+- `32` - herramientas técnicas más demandadas en ofertas de empleo de datos y tecnología.
+  - Status actual: `draft`
+  - Serie: `mercado-laboral-datos`
+  - Archivo draft: `outputs/figures/32_habilidades-demandadas-ecuador.png`
+  - Pendiente: revisión editorial, fecha y enlace de publicación.
+
 - `31_b` - comparación de shares de gasolina entre encuestas.
   - Status actual: `draft`
   - Serie: `enighur-gasolina`
