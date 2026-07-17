@@ -70,6 +70,7 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 1. `30_aranceles-colombia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_aranceles_colombia.R)
 2. `31_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_gasolina_transporte_quintiles.R)
 3. `31_b_gasolina-share_quintil-ingreso-2012-2025.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_gasolina_share_quintiles_years.R)
+4. `32_habilidades-demandadas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_jobs_habilidades_mensuales.R)
 
 ## Notas sobre los datos
 
