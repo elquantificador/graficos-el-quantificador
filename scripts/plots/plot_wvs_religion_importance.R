@@ -6,43 +6,16 @@
 # Guarda:   outputs/figures/09_religion_importancia_sudamerica.png
 # ============================================================
 
-get_script_path <- function() {
-  frame_files <- vapply(
-    sys.frames(),
-    function(frame) {
-      if (!is.null(frame$ofile)) frame$ofile else NA_character_
-    },
-    character(1)
-  )
-  frame_files <- frame_files[!is.na(frame_files)]
-
-  if (length(frame_files) > 0) {
-    return(normalizePath(frame_files[length(frame_files)], winslash = "/", mustWork = FALSE))
-  }
-
-  cmd_args <- commandArgs(trailingOnly = FALSE)
-  file_arg <- grep("^--file=", cmd_args, value = TRUE)
-
-  if (length(file_arg) > 0) {
-    return(normalizePath(sub("^--file=", "", file_arg[1]), winslash = "/", mustWork = FALSE))
-  }
-
-  normalizePath(getwd(), winslash = "/", mustWork = FALSE)
-}
-
-script_path <- get_script_path()
-project_root <- normalizePath(file.path(dirname(script_path), "..", ".."), winslash = "/", mustWork = FALSE)
-
-source(file.path(project_root, "scripts", "utils.R"))
-source(file.path(project_root, "scripts", "packages.R"))
+source("scripts/utils.R")
+source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "forcats", "ragg", "stringr"))
 
-data_path <- file.path(project_root, "data", "processed", "wvs_religion_importance.rds")
-out_path <- file.path(project_root, "outputs", "figures", "09_religion_importancia_sudamerica.png")
+data_path <- "data/processed/wvs_religion_importance.rds"
+out_path <- "outputs/figures/09_religion_importancia_sudamerica.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
-  source(file.path(project_root, "scripts", "data-cleaning", "clean_wvs_religion_importance.R"))
+  source("scripts/data-cleaning/clean_wvs_religion_importance.R")
 }
 
 if (!file.exists(data_path)) {
@@ -150,7 +123,7 @@ dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
   p_final <- house_apply_logo(
     build_chart(),
     "portrait",
-    logo_path = file.path(project_root, "quantificador.png"),
+    logo_path = "quantificador.png",
     x = 0.892,
     y = 0.122,
     width = 0.085,

@@ -9,38 +9,11 @@
 #   Rscript scripts/data-cleaning/clean_wvs_religion_importance.R
 # ============================================================
 
-get_script_path <- function() {
-  frame_files <- vapply(
-    sys.frames(),
-    function(frame) {
-      if (!is.null(frame$ofile)) frame$ofile else NA_character_
-    },
-    character(1)
-  )
-  frame_files <- frame_files[!is.na(frame_files)]
-
-  if (length(frame_files) > 0) {
-    return(normalizePath(frame_files[length(frame_files)], winslash = "/", mustWork = FALSE))
-  }
-
-  cmd_args <- commandArgs(trailingOnly = FALSE)
-  file_arg <- grep("^--file=", cmd_args, value = TRUE)
-
-  if (length(file_arg) > 0) {
-    return(normalizePath(sub("^--file=", "", file_arg[1]), winslash = "/", mustWork = FALSE))
-  }
-
-  normalizePath(getwd(), winslash = "/", mustWork = FALSE)
-}
-
-script_path <- get_script_path()
-project_root <- normalizePath(file.path(dirname(script_path), "..", ".."), winslash = "/", mustWork = FALSE)
-
-source(file.path(project_root, "scripts", "packages.R"))
+source("scripts/packages.R")
 ensure_packages(c("readxl", "dplyr", "tidyr", "stringr"))
 
-file_path <- file.path(project_root, "data", "raw", "wvs", "wvs_importance_of_religion_in_life.xls")
-out_path <- file.path(project_root, "data", "processed", "wvs_religion_importance.rds")
+file_path <- "data/raw/wvs/wvs_importance_of_religion_in_life.xls"
+out_path <- "data/processed/wvs_religion_importance.rds"
 
 response_levels <- c(
   "Very important",

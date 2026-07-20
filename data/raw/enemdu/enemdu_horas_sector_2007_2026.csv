@@ -1,0 +1,161 @@
+anio,sexo,sector_desc,horas_promedio
+2019,Hombres,Empleo Doméstico,39.138888888888886
+2019,Hombres,No clasificados por sector,38.06086956521739
+2019,Hombres,Sector Formal,43.449349980692496
+2019,Hombres,Sector Informal,35.09097071583514
+2019,Mujeres,Empleo Doméstico,34.50991501416431
+2019,Mujeres,No clasificados por sector,34.85576923076923
+2019,Mujeres,Sector Formal,40.192371783003146
+2019,Mujeres,Sector Informal,28.017835069751015
+2020,Hombres,Empleo Doméstico,37.64
+2020,Hombres,No clasificados por sector,34.11726384364821
+2020,Hombres,Sector Formal,41.03751617076326
+2020,Hombres,Sector Informal,32.56371263765076
+2020,Mujeres,Empleo Doméstico,30.87062937062937
+2020,Mujeres,No clasificados por sector,32.77018633540373
+2020,Mujeres,Sector Formal,38.48016164584864
+2020,Mujeres,Sector Informal,25.758644299897295
+2021,Hombres,Empleo Doméstico,42.285714285714285
+2021,Hombres,No clasificados por sector,38.10315186246418
+2021,Hombres,Sector Formal,43.11626281453868
+2021,Hombres,Sector Informal,32.76887608069164
+2021,Mujeres,Empleo Doméstico,33.0466472303207
+2021,Mujeres,No clasificados por sector,32.716981132075475
+2021,Mujeres,Sector Formal,40.10511966070887
+2021,Mujeres,Sector Informal,24.804214819850444
+2022,Hombres,Empleo Doméstico,40.05
+2022,Hombres,No clasificados por sector,35.740112994350284
+2022,Hombres,Sector Formal,42.32244995233556
+2022,Hombres,Sector Informal,33.04478474429356
+2022,Mujeres,Empleo Doméstico,33.060344827586206
+2022,Mujeres,No clasificados por sector,35.4
+2022,Mujeres,Sector Formal,39.481087839949986
+2022,Mujeres,Sector Informal,25.3075117370892
+2023,Hombres,Empleo Doméstico,41.285714285714285
+2023,Hombres,No clasificados por sector,36.26744186046512
+2023,Hombres,Sector Formal,42.0884388618303
+2023,Hombres,Sector Informal,33.43600562587904
+2023,Mujeres,Empleo Doméstico,32.897590361445786
+2023,Mujeres,No clasificados por sector,29.194444444444443
+2023,Mujeres,Sector Formal,39.91529875246225
+2023,Mujeres,Sector Informal,25.402077151335313
+2024,Hombres,Empleo Doméstico,29.75
+2024,Hombres,No clasificados por sector,40.54782608695652
+2024,Hombres,Sector Formal,41.96248004257584
+2024,Hombres,Sector Informal,32.97040409789414
+2024,Mujeres,Empleo Doméstico,31.963380281690142
+2024,Mujeres,No clasificados por sector,35.26086956521739
+2024,Mujeres,Sector Formal,39.64249748237663
+2024,Mujeres,Sector Informal,25.892965204236006
+2025,Hombres,Empleo Doméstico,36.611111111111114
+2025,Hombres,No clasificados por sector,37.51476793248945
+2025,Hombres,Sector Formal,41.90453834115806
+2025,Hombres,Sector Informal,33.33752927400469
+2025,Mujeres,Empleo Doméstico,32.13662790697674
+2025,Mujeres,No clasificados por sector,31.989473684210527
+2025,Mujeres,Sector Formal,39.05205930807249
+2025,Mujeres,Sector Informal,26.82565130260521
+2026,Hombres,Empleo Doméstico,33.578947368421055
+2026,Hombres,No clasificados por sector,40.05597014925373
+2026,Hombres,Sector Formal,41.39301772017985
+2026,Hombres,Sector Informal,32.15783308931186
+2026,Mujeres,Empleo Doméstico,32.325648414985594
+2026,Mujeres,No clasificados por sector,32.89247311827957
+2026,Mujeres,Sector Formal,38.834724540901504
+2026,Mujeres,Sector Informal,24.624392220421395
+2007,Hombres,Empleo Doméstico,45.610169491525426
+2007,Hombres,No clasificados por sector,42.34517933530767
+2007,Hombres,Sector Formal,48.71069681343382
+2007,Hombres,Sector Informal,40.00535137318255
+2007,Mujeres,Empleo Doméstico,41.58177570093458
+2007,Mujeres,No clasificados por sector,33.9313824419778
+2007,Mujeres,Sector Formal,43.40774439272112
+2007,Mujeres,Sector Informal,31.980996930273353
+2008,Hombres,Empleo Doméstico,45.62162162162162
+2008,Hombres,No clasificados por sector,42.0445652173913
+2008,Hombres,Sector Formal,48.10652333251893
+2008,Hombres,Sector Informal,40.97446630389284
+2008,Mujeres,Empleo Doméstico,40.27147766323024
+2008,Mujeres,No clasificados por sector,34.80093131548312
+2008,Mujeres,Sector Formal,42.90218664584147
+2008,Mujeres,Sector Informal,33.43533870203695
+2009,Hombres,Empleo Doméstico,49.779661016949156
+2009,Hombres,No clasificados por sector,40.87302676733013
+2009,Hombres,Sector Formal,47.44580308240988
+2009,Hombres,Sector Informal,39.81234987990392
+2009,Mujeres,Empleo Doméstico,39.72371364653244
+2009,Mujeres,No clasificados por sector,35.982880161127895
+2009,Mujeres,Sector Formal,42.36638688268592
+2009,Mujeres,Sector Informal,33.03483473752431
+2010,Hombres,Empleo Doméstico,43.027027027027025
+2010,Hombres,No clasificados por sector,41.438385573207384
+2010,Hombres,Sector Formal,46.62741573033708
+2010,Hombres,Sector Informal,40.015575154813284
+2010,Mujeres,Empleo Doméstico,39.22153465346535
+2010,Mujeres,No clasificados por sector,37.078034682080926
+2010,Mujeres,Sector Formal,42.20932277924362
+2010,Mujeres,Sector Informal,33.50138820839458
+2011,Hombres,Empleo Doméstico,45.54347826086956
+2011,Hombres,No clasificados por sector,41.55367231638418
+2011,Hombres,Sector Formal,45.73591045164649
+2011,Hombres,Sector Informal,40.304948624069915
+2011,Mujeres,Empleo Doméstico,39.63089430894309
+2011,Mujeres,No clasificados por sector,36.458770614692654
+2011,Mujeres,Sector Formal,41.774557165861516
+2011,Mujeres,Sector Informal,32.62329832749903
+2012,Hombres,Empleo Doméstico,43.86486486486486
+2012,Hombres,No clasificados por sector,40.34663442160419
+2012,Hombres,Sector Formal,44.82591141194632
+2012,Hombres,Sector Informal,39.32372093023256
+2012,Mujeres,Empleo Doméstico,37.767019667170956
+2012,Mujeres,No clasificados por sector,35.432153392330385
+2012,Mujeres,Sector Formal,41.63134738771769
+2012,Mujeres,Sector Informal,32.9441391941392
+2013,Hombres,Empleo Doméstico,45.148936170212764
+2013,Hombres,No clasificados por sector,40.32996894409938
+2013,Hombres,Sector Formal,45.55396896784349
+2013,Hombres,Sector Informal,39.149994718495826
+2013,Mujeres,Empleo Doméstico,37.324561403508774
+2013,Mujeres,No clasificados por sector,34.36758893280632
+2013,Mujeres,Sector Formal,41.441563119034754
+2013,Mujeres,Sector Informal,32.14511201629328
+2014,Hombres,Empleo Doméstico,38.21739130434783
+2014,Hombres,No clasificados por sector,39.89428263214671
+2014,Hombres,Sector Formal,44.720187276232444
+2014,Hombres,Sector Informal,37.77530442875979
+2014,Mujeres,Empleo Doméstico,35.984600577478346
+2014,Mujeres,No clasificados por sector,33.30483271375465
+2014,Mujeres,Sector Formal,41.160771361602386
+2014,Mujeres,Sector Informal,29.918507157464212
+2015,Hombres,Empleo Doméstico,39.891304347826086
+2015,Hombres,No clasificados por sector,39.08137292711145
+2015,Hombres,Sector Formal,44.27581837381204
+2015,Hombres,Sector Informal,36.80824459503066
+2015,Mujeres,Empleo Doméstico,35.32441113490364
+2015,Mujeres,No clasificados por sector,31.595549738219894
+2015,Mujeres,Sector Formal,40.821870995301154
+2015,Mujeres,Sector Informal,29.036569987389658
+2016,Hombres,Empleo Doméstico,41.04651162790697
+2016,Hombres,No clasificados por sector,38.423539901917074
+2016,Hombres,Sector Formal,44.38318947219471
+2016,Hombres,Sector Informal,35.619415617870025
+2016,Mujeres,Empleo Doméstico,34.26493256262042
+2016,Mujeres,No clasificados por sector,31.038216560509554
+2016,Mujeres,Sector Formal,40.22119135477069
+2016,Mujeres,Sector Informal,28.04881550610194
+2017,Hombres,Empleo Doméstico,44.76923076923077
+2017,Hombres,No clasificados por sector,38.3939223410242
+2017,Hombres,Sector Formal,44.357350901525656
+2017,Hombres,Sector Informal,36.05091324200913
+2017,Mujeres,Empleo Doméstico,34.93650793650794
+2017,Mujeres,No clasificados por sector,31.868217054263567
+2017,Mujeres,Sector Formal,40.40996091792765
+2017,Mujeres,Sector Informal,28.087642744406278
+2018,Hombres,Empleo Doméstico,40.857142857142854
+2018,Hombres,No clasificados por sector,38.32817037754114
+2018,Hombres,Sector Formal,43.469437340153455
+2018,Hombres,Sector Informal,35.97016323253947
+2018,Mujeres,Empleo Doméstico,35.608695652173914
+2018,Mujeres,No clasificados por sector,33.34674922600619
+2018,Mujeres,Sector Formal,40.17996636142777
+2018,Mujeres,Sector Informal,27.996541681834728
