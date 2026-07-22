@@ -3,7 +3,7 @@
 # Evolución de la composición etaria de la población ecuatoriana,
 # proyectada de 1950 a 2050, por grandes grupos de edad.
 # Requiere: data/processed/inec_proyecciones_edades.rds
-# Guarda:   outputs/figures/34_composicion-edad-poblacion-2050-ecuador.png
+# Guarda:   outputs/figures/composicion-edad-poblacion-2050-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_inec_proyecciones_edades.R
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "stringr"))
 
 data_path <- "data/processed/inec_proyecciones_edades.rds"
-out_path <- "outputs/figures/34_composicion-edad-poblacion-2050-ecuador.png"
+out_path <- "outputs/figures/composicion-edad-poblacion-2050-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
