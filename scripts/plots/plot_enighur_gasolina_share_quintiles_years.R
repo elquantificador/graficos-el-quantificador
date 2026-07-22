@@ -11,7 +11,10 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 input_path <- "data/processed/enighur_gasolina_share_quintiles_years.rds"
-out_path <- "outputs/figures/31_b_gasolina-share_quintil-ingreso-2012-2025.png"
+out_path <- Sys.getenv(
+  "OUT_PATH",
+  unset = "outputs/figures/31_b_gasolina-share_quintil-ingreso-2012-2025.png"
+)
 
 chart_data <- readRDS(input_path)
 plot_df <- chart_data$summary |>
@@ -20,6 +23,11 @@ plot_df <- chart_data$summary |>
       .data$quintil_ingreso,
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
       labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
+    ),
+    encuesta = factor(
+      .data$encuesta,
+      levels = c("ENIGHUR 2011-2012", "ENIGHUR 2024-2025"),
+      labels = c("2011-2012", "2024-2025")
     ),
     etiqueta = percent_intl(.data$share_gasto_monetario, accuracy = 0.1)
   )
@@ -33,50 +41,53 @@ caption_raw <- paste(
 )
 
 palette <- c(
-  "ENIGHUR 2011-2012" = "#A7C7DC",
-  "ENIGHUR 2024-2025" = "#1F618D"
+  "2011-2012" = "#A7C7DC",
+  "2024-2025" = "#1F618D"
 )
 
 dodge <- position_dodge(width = 0.72)
 
 build_chart <- function() {
-  ggplot(plot_df, aes(x = .data$share_gasto_monetario, y = .data$quintil_ingreso, fill = .data$encuesta)) +
+  ggplot(plot_df, aes(x = .data$quintil_ingreso, y = .data$share_gasto_monetario, fill = .data$encuesta)) +
     geom_col(position = dodge, width = 0.62, alpha = 0.94, colour = NA) +
     geom_text(
       aes(label = .data$etiqueta),
       position = dodge,
-      hjust = -0.08,
-      size = 2.9,
+      vjust = -0.32,
+      size = 2.45,
       colour = "grey20"
     ) +
     scale_fill_manual(values = palette) +
-    scale_x_continuous(
+    scale_y_continuous(
       labels = label_percent_intl(accuracy = 1),
-      breaks = seq(0, 0.09, by = 0.01),
-      limits = c(0, 0.092),
+      breaks = seq(0, 0.10, by = 0.02),
+      limits = c(0, 0.10),
       expand = expansion(mult = c(0, 0.18))
     ) +
     coord_cartesian(clip = "off") +
     labs(
       title = wrap_title_house(title_raw),
       subtitle = wrap_subtitle_house(subtitle_raw),
-      x = "Gasolina como porcentaje del gasto monetario del hogar",
-      y = "Quintiles de ingreso",
+      x = NULL,
+      y = "Gasolina como porcentaje del gasto monetario del hogar",
       fill = NULL,
       caption = wrap_caption_house(caption_raw)
     ) +
     theme_quantificador() +
     theme(
-      legend.position = "bottom",
-      plot.margin = margin(6, 44, 6, 16),
-      axis.title.y = element_blank(),
-      axis.ticks.y = element_blank()
+      legend.position = c(0.48, 0.86),
+      legend.direction = "horizontal",
+      legend.background = element_blank(),
+      legend.box.background = element_blank(),
+      plot.margin = margin(6, 32, 6, 16),
+      axis.ticks.x = element_blank(),
+      axis.text.x = element_text(size = 7.5, lineheight = 0.9)
     )
 }
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 spec <- house_spec("portrait")
-p_final <- house_apply_logo(build_chart(), "portrait", x = 0.88, y = 0.12)
+p_final <- house_apply_logo(build_chart(), "portrait", x = 0.91, y = 0.145, width = 0.08, height = 0.08)
 
 ggsave(
   filename = out_path,
