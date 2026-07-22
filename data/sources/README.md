@@ -13,6 +13,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Tema | Ruta en `data/raw/` | Estado | Fuente |
 |---|---|---|---|
 | ENEMDU mensual enero 2026 | `enemdu/enemdu_persona_2026_01.sav` | Usado en `clean_escolaridad_ingreso.R` | `escolaridad_ingreso.md` |
+| ENEMDU horas promedio por sector 2018-2026 | `enemdu/ENEMDU_PERSONAS_2018_12_hom.sav`, `enemdu/enemdu_persona_201912.sav`, `enemdu/enemdu_persona_2020_12.sav`, `enemdu/enemdu_persona_2021_12.sav`, `enemdu/enemdu_persona_2022_12.sav`, `enemdu/enemdu_persona_2023_12.sav`, `enemdu/enemdu_persona_2024_12.sav`, `enemdu/enemdu_persona_2025_12.sav`, `enemdu/enemdu_persona_2026_l_trimestre.sav` | Usado en `clean_enemdu_horas_sector_lineas.R` | `enemdu_horas_sector_lineas.md` |
 | ENSANUT 2018 personas | `ensanut/1_BDD_ENS2018_f1_personas.dta.zip` | Usado en `clean_ecuatorianos_altos.R` | `ecuatorianos_altos.md` |
 | ENEMDU trimestral 2021-2025 | `enemdu/evolucion/*.csv` | Usado en `clean_evolucion_nini.R` | `evolucion_nini.md` |
 | ENDI R2 | `endi_r2/BDD_ENDI_R2_f1_personas.rds` | Usado en `clean_endi_desnutricion.R` | `endi_desnutricion.md` |

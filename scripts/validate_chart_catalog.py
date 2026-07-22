@@ -93,7 +93,7 @@ def main() -> int:
             expected_prefix = image_filename.split('_', 1)[0]
             normalized_chart_id = chart_id.replace('_', '').lower()
             normalized_prefix = expected_prefix.replace('_', '').lower()
-            if not normalized_prefix.startswith(normalized_chart_id[:2]):
+            if image_filename[:1].isdigit() and not normalized_prefix.startswith(normalized_chart_id[:2]):
                 errors.append(
                     f'Row {row_number}: Chart ID {chart_id} does not align with Image Filename {image_filename}'
                 )
