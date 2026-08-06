@@ -27,7 +27,7 @@ plot_data <- result$top_skills |>
   mutate(skill = factor(skill, levels = rev(skill)))
 
 title_txt <- wrap_title_house(
-  "Comunicación y organización son las competencias más solicitadas"
+  "Las habilidades en comunicación y organización son las competencias más solicitadas por empleadores ecuatorianos"
 )
 subtitle_txt <- wrap_subtitle_house(
   "Porcentaje de ofertas que menciona cada competencia; cinco principales, Ecuador, junio-julio de 2026"
