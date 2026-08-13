@@ -8,6 +8,20 @@
 
 ## Next charts
 
+- `37` - razones para no estudiar ni trabajar entre jóvenes NINI, por sexo y nivel educativo.
+  - Status actual: `draft`
+  - Serie: `ecuador-quantificado-2026`
+  - Autora: Valeria Lizeth Marcayata Ojeda
+  - Archivo draft: `outputs/figures/37_ninis-dos-realidades-ecuador.png`
+  - Pendiente: aprobación editorial, fecha y enlace de publicación.
+
+- `36_a` - ranking provincial de informalidad frente a la tasa nacional.
+- `36_b` - informalidad y empleo no remunerado por provincia.
+  - Status actual: `draft`
+  - Serie: `ecuador-quantificado-2026`
+  - Autor: Juan Diego Sotomayor Jiménez
+  - Pendiente: fecha y enlace de publicación.
+
 - `32` - herramientas técnicas más demandadas en ofertas de empleo de datos y tecnología.
   - Status actual: `draft`
   - Serie: `mercado-laboral-datos`
