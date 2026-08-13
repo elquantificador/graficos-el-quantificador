@@ -42,6 +42,8 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENEMDU modulo de actividad fisica diciembre 2024 | `actividad_fisica_joan/2024_12/2_BDD_DATOS_ABIERTOS_ACTIVIDAD_FISICA_2024_12_CSV.csv` | Usado en `clean_enemdu_actividad_fisica_insuficiente.R` | `enemdu_actividad_fisica_insuficiente.md` |
 | Aranceles aplicados a importaciones desde Colombia | `aranceles_colombia/COL_completo_con_arancel.xlsx`, `aranceles_colombia/lista-de-ecuador.xlsx` | Usado en `clean_aranceles_colombia.R` | `aranceles_colombia.md` |
 | Ofertas de empleo de datos y tecnología, junio-julio 2026 | `jobs_scrape/jobs_20260617_043911.csv`, `jobs_scrape/jobs_20260716_013707.csv` | Usado en `clean_jobs_habilidades_mensuales.R` | `jobs_habilidades_demandadas.md` |
+| ENEMDU anual 2025, informalidad y empleo no remunerado por provincia | `enemdu/enemdu_anual_2025_provincial.csv` | Usado en `clean_enemdu_informalidad_provincial.R` | `enemdu_informalidad_provincial.md` |
+| ENEMDU anual 2025, razones para no estudiar ni trabajar entre jóvenes NINI | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_nini_razones_sexo.R` | `enemdu_nini_razones_sexo.md` |
 
 ## Cobertura de documentacion
 
