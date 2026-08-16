@@ -215,14 +215,6 @@ The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 - `Description` stores the publication copy, including LinkedIn copy when available. The website sync strips hashtag residue and author-credit lines when creating the public page.
 - Run `python scripts/validate_chart_catalog.py` before commit or push.
 
-## Quality reports
-
-`quality_reports/` contains optional archival notes from earlier reviews. They are not part of the chart production workflow.
-
-- Do not create, regenerate, or update quality reports during normal chart work.
-- Validate charts through the rendered PNGs and the chart catalog validator instead.
-- Only create or edit a quality report when the user explicitly requests an audit report.
-
 ## Running scripts
 
 Always from the **repo root**:
