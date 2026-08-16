@@ -1,8 +1,9 @@
 # Fuente de datos: razones de inactividad juvenil por sexo
 
-## Gráfico
+## Gráficos
 
-- `37_ninis-dos-realidades-ecuador.png`
+- `37_a_ninis-razones-estudio-ecuador.png`: razones para no estudiar.
+- `37_b_ninis-razones-trabajo-ecuador.png`: razones para no trabajar.
 
 ## Fuente oficial
 
@@ -19,7 +20,7 @@ El ZIP también contiene los diccionarios de personas y vivienda y los archivos 
 
 ## Entrega original
 
-La visualización y el script originales fueron presentados por Valeria Lizeth Marcayata Ojeda al concurso Ecuador Quantificado 2026. El paquete recibido incluía el gráfico final en PNG y un script de R, pero no la base cruda. La adaptación conserva la comparación entre hombres y mujeres y la desagregación por nivel educativo.
+La visualización y el script originales fueron presentados por Valeria Lizeth Marcayata Ojeda al concurso Ecuador Quantificado 2026. El paquete recibido incluía el gráfico final en PNG y un script de R, pero no la base cruda. La adaptación conserva la comparación entre hombres y mujeres y la desagregación por nivel educativo. La salida se separa en dos piezas para que cada pregunta tenga espacio suficiente en el lienzo vertical.
 
 ## Universo analítico
 
@@ -60,4 +61,3 @@ Desde la raíz del repositorio:
 Rscript scripts/data-cleaning/clean_enemdu_nini_razones_sexo.R
 Rscript scripts/plots/plot_enemdu_nini_razones_sexo.R
 ```
-

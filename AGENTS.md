@@ -212,8 +212,16 @@ The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 - Copy mechanical fields from the plot script when possible: `Chart Name`, `Subtitle`, `Image Filename`, `Image Path`, `Author`, and `Script Link`.
 - Fill editorial fields manually from the publication context: `Date`, `LinkedIn Link`, `Description`, and any brief `Notes`.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
-- `Description` must stay free of markdown image syntax, inline links, or hashtag residue.
+- `Description` stores the publication copy, including LinkedIn copy when available. The website sync strips hashtag residue and author-credit lines when creating the public page.
 - Run `python scripts/validate_chart_catalog.py` before commit or push.
+
+## Quality reports
+
+`quality_reports/` contains optional archival notes from earlier reviews. They are not part of the chart production workflow.
+
+- Do not create, regenerate, or update quality reports during normal chart work.
+- Validate charts through the rendered PNGs and the chart catalog validator instead.
+- Only create or edit a quality report when the user explicitly requests an audit report.
 
 ## Running scripts
 

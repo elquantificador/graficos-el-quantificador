@@ -8,11 +8,12 @@
 
 ## Next charts
 
-- `37` - razones para no estudiar ni trabajar entre jóvenes NINI, por sexo y nivel educativo.
+- `37_a` - razones para no estudiar entre jóvenes NINI, por sexo y nivel educativo.
+- `37_b` - razones para no trabajar entre jóvenes NINI, por sexo y nivel educativo.
   - Status actual: `draft`
   - Serie: `ecuador-quantificado-2026`
   - Autora: Valeria Lizeth Marcayata Ojeda
-  - Archivo draft: `outputs/figures/37_ninis-dos-realidades-ecuador.png`
+  - Archivos draft: `outputs/figures/37_a_ninis-razones-estudio-ecuador.png` y `outputs/figures/37_b_ninis-razones-trabajo-ecuador.png`
   - Pendiente: aprobación editorial, fecha y enlace de publicación.
 
 - `36_a` - ranking provincial de informalidad frente a la tasa nacional.

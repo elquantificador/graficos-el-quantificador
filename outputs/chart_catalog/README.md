@@ -11,7 +11,7 @@
 - `Image Filename`: nombre del PNG publicado.
 - `Image Path`: ruta relativa al repo bajo `outputs/figures/`.
 - `Author`: nombre visible del autor o autores.
-- `Description`: copy editorial limpio, sin markdown de imagenes ni enlaces.
+- `Description`: copy de publicacion, incluido el texto de LinkedIn cuando exista. La sincronizacion del sitio limpia hashtags y lineas de creditos al crear la pagina.
 - `Script Link`: URL al script de ploteo en GitHub.
 
 ## Columnas de gestion
@@ -25,6 +25,6 @@
 
 - `Image Filename` debe coincidir con el PNG realmente publicado.
 - `Image Path` debe apuntar al archivo correcto dentro de `outputs/figures/`.
-- `Description` no debe incluir markdown de imagenes, enlaces, hashtags o residuos de copy para redes.
+- `Description` no debe incluir markdown de imagenes ni enlaces. Puede conservar el copy original de LinkedIn; la sincronizacion del sitio limpia hashtags y creditos antes de publicar.
 - Los cambios fuertes de titulo pueden cambiar el slug downstream, asi que `Chart ID` debe ser estable aunque cambie el copy.
 - Corre `python scripts/validate_chart_catalog.py` antes de commit o push.

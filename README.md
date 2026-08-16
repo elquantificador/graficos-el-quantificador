@@ -75,7 +75,8 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 6. `33_b_horas-promedio_sector-informal-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_horas_sector_informal_linea.R)
 7. `36_a_ranking-informalidad_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_informalidad_provincial.R)
 8. `36_b_informalidad-empleo-no-remunerado_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_informalidad_provincial.R)
-9. `37_ninis-dos-realidades-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
+9. `37_a_ninis-razones-estudio-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
+10. `37_b_ninis-razones-trabajo-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
 
 ## Notas sobre los datos
 
