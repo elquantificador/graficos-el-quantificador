@@ -38,12 +38,23 @@ first_reason_y <- 13.6
 sex_header_y <- 14.75
 bar_half_height <- 0.36
 
+normalize_utf8 <- function(x) {
+  iconv(as.character(x), from = "UTF-8", to = "UTF-8")
+}
+
 education_palette <- c(
   "Ninguno / Alfabetización" = "#D9E8EB",
   "Educación básica" = "#8CCFE3",
   "Bachillerato" = "#2D7DB3",
   "Superior" = "#2F4B7C"
 )
+names(education_palette) <- normalize_utf8(names(education_palette))
+education_legend_labels <- normalize_utf8(c(
+  "Sin nivel / alfab.",
+  "Educación básica",
+  "Bachillerato",
+  "Superior"
+))
 
 sex_colours <- c(
   "Hombres" = "#2D7DB3",
@@ -63,9 +74,11 @@ chart_data <- readRDS(data_path)
 # en "Otra razón" para mantener legible el gráfico vertical.
 study_data <- chart_data$razones_estudio |>
   mutate(
+    nivel_educativo = normalize_utf8(nivel_educativo),
+    razon = normalize_utf8(razon),
     razon = if_else(
-      razon == "Recursos tecnológicos",
-      "Otra razón",
+      razon == normalize_utf8("Recursos tecnológicos"),
+      normalize_utf8("Otra razón"),
       razon
     )
   ) |>
@@ -75,6 +88,10 @@ study_data <- chart_data$razones_estudio |>
   )
 
 work_data <- chart_data$razones_trabajo |>
+  mutate(
+    nivel_educativo = normalize_utf8(nivel_educativo),
+    razon = normalize_utf8(razon)
+  ) |>
   select(sexo, nivel_educativo, razon, porcentaje)
 
 study_order <- study_data |>
@@ -122,9 +139,9 @@ build_nini_plot <- function(plot_data,
   ) |>
     mutate(
       razon_etiqueta = case_when(
-        razon == "Enfermedad o discapacidad" ~ "Enferm./discap.",
+        razon == "Enfermedad o discapacidad" ~ "Enfermedad o\ndiscapacidad",
         razon == "Sin deseos o necesidad" ~ "Sin deseos o\nnecesidad",
-        razon == "Enfermedad o incapacidad" ~ "Enferm./incap.",
+        razon == "Enfermedad o incapacidad" ~ "Enfermedad o\nincapacidad",
         razon == "Quehaceres del hogar" ~ "Quehaceres",
         TRUE ~ razon
       )
@@ -234,12 +251,7 @@ build_nini_plot <- function(plot_data,
     scale_fill_manual(
       values = education_palette,
       breaks = names(education_palette),
-      labels = c(
-        "Sin nivel / alfab.",
-        "Educación básica",
-        "Bachillerato",
-        "Superior"
-      ),
+      labels = education_legend_labels,
       name = "Nivel educativo alcanzado",
       drop = FALSE
     ) +
