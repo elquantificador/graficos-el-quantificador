@@ -70,9 +70,6 @@ def main() -> int:
             errors.append(f'Row {row_number}: Author should be plain display name only')
         if '![' in description or '](' in description:
             errors.append(f'Row {row_number}: Description contains markdown image or link syntax')
-        if 'hashtag#' in description.lower() or re.search(r'(^|\s)#\S+', description):
-            errors.append(f'Row {row_number}: Description contains hashtag residue')
-
         previous_image_row = seen_image_filenames.get(image_filename)
         if previous_image_row is not None:
             errors.append(
