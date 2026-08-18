@@ -1,18 +1,35 @@
-# Fuente de datos: Personal público de salud por provincia (RAS)
+# Fuentes de datos: personal del MSP, atenciones y población provincial
 
 ## Dataset
 
-**Registro de Actividades y Recursos de Salud (RAS), serie del Ministerio de Salud Pública**
+1. **Registro de Actividades y Recursos de Salud (RAS), serie del Ministerio de Salud Pública.**
+2. **Estimaciones y Proyecciones de Población de Ecuador, Revisión 2024, INEC.**
+
+La búsqueda de población se realizó con el MCP de datos de Ecuador. El catálogo
+ANDA del INEC confirmó la disponibilidad de estadísticas poblacionales oficiales.
+Para mantener el mismo año del RAS, se usó el tabulado provincial de la Revisión
+2024, que contiene estimaciones para 1990-2022 y proyecciones posteriores.
 
 ## Archivos usados
 
-El gráfico provincial usa la serie `msp_serie_prov.rds` en el último año disponible. Antes de graficar, el script valida que las sumas de las cuatro categorías de personal coincidan con la serie nacional y con las series agregadas por cantón, parroquia y área:
+El gráfico usa la serie provincial del RAS y una tabla pequeña con la estimación
+provincial de población para 2021. Antes de graficar, el script valida que las
+sumas de las cuatro categorías de personal coincidan con la serie nacional y con
+las series agregadas por cantón, parroquia y área:
 
 - `data/raw/ras/msp_serie_nac.rds`
 - `data/raw/ras/msp_serie_prov.rds`
 - `data/raw/ras/msp_serie_cant.rds`
 - `data/raw/ras/msp_serie_parr.rds`
 - `data/raw/ras/msp_serie_area.rds`
+- `data/raw/inec/estimaciones_poblacion_provincial_2021.csv`
+
+Archivo original del INEC:
+
+- `Provincial.zip`: https://www.ecuadorencifras.gob.ec/documentos/web-inec/Poblacion_y_Demografia/Proyecciones_Poblacionales/censo_2022/revision_2024_areas/Provincial.zip
+- Libro usado: `Tabulado_provincial_edad_quinquenal_1990-2035.xlsx`
+- Hojas usadas: las 24 hojas provinciales con sufijo `_n` (población total).
+- Celda usada en cada hoja: total provincial del año 2021.
 
 ## Variables graficadas
 
@@ -22,13 +39,24 @@ El gráfico provincial usa la serie `msp_serie_prov.rds` en el último año disp
 | `tenf` | Enfermeros |
 | `tobst` | Obstetrices |
 | `ttaps` | Técnicos de Atención Primaria en Salud (TAPS) |
+| `taten` | Total de atenciones registradas |
+| `poblacion_2021` | Población provincial estimada al 30 de junio de 2021 |
 
 ## Notas metodológicas
 
-- El año graficado es el último año disponible en la serie nacional, 2021.
-- Las provincias se ordenan por el total de las cuatro categorías de personal.
-- El gráfico muestra la composición provincial mediante barras horizontales apiladas.
-- Las cifras de referencia se muestran redondeadas al entero más cercano.
+- El año común de las dos fuentes es 2021.
+- El indicador principal suma médicos, enfermeros, obstetrices y TAPS y lo divide
+  para la población provincial estimada; se expresa por cada 10.000 habitantes.
+- Las provincias se ordenan de mayor a menor disponibilidad de personal.
+- El panel derecho divide las atenciones registradas para el total de las cuatro
+  categorías de personal. Es una relación descriptiva y no una medida de
+  productividad individual: una atención puede involucrar otras categorías y una
+  misma persona puede recibir varias atenciones durante el año.
+- La correlación de rangos de Spearman entre personal por 10.000 habitantes y
+  atenciones por integrante es de -0,60. Se presenta como asociación descriptiva,
+  sin atribuir causalidad.
+- Las estimaciones de población de la Revisión 2024 están referidas al 30 de junio
+  de cada año.
 
 ## Scripts y figura
 
