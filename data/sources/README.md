@@ -44,6 +44,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Ofertas de empleo de datos y tecnología, junio-julio 2026 | `jobs_scrape/jobs_20260617_043911.csv`, `jobs_scrape/jobs_20260716_013707.csv` | Usado en `clean_jobs_habilidades_mensuales.R` | `jobs_habilidades_demandadas.md` |
 | ENEMDU anual 2025, informalidad y empleo no remunerado por provincia | `enemdu/enemdu_anual_2025_provincial.csv` | Usado en `clean_enemdu_informalidad_provincial.R` | `enemdu_informalidad_provincial.md` |
 | ENEMDU anual 2025, razones para no estudiar ni trabajar entre jóvenes NINI | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_nini_razones_sexo.R` | `enemdu_nini_razones_sexo.md` |
+| Muertes violentas por hora, 2014–mayo 2026 | `homicidios/mdi_homicidiosintencionales_pm_2014_2026.xlsx` | Usado en `clean_homicidios_hora.R` | `homicidios_hora.md` |
 
 ## Cobertura de documentacion
 
