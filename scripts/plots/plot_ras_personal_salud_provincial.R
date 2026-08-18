@@ -1,7 +1,6 @@
 # ============================================================
 # plot_ras_personal_salud_provincial.R
-# Compara la disponibilidad provincial de personal del MSP y
-# las atenciones registradas por integrante del grupo analizado.
+# Compara la disponibilidad provincial de personal del MSP.
 #
 # Entradas:
 #   data/raw/ras/msp_serie_*.rds
@@ -23,7 +22,6 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 
 ensure_packages(c(
-  "cowplot",
   "dplyr",
   "ggplot2",
   "ragg",
@@ -37,8 +35,6 @@ out_path <- "outputs/figures/38_personal-salud_provincia-ecuador.png"
 
 occupation_cols <- c("tmedicos", "tenf", "tobst", "ttaps")
 blue <- "#00A8CB"
-orange <- "#F0A145"
-light_grey <- "#D9E0E3"
 target_year <- 2021
 
 
@@ -132,8 +128,7 @@ plot_df <- province_ras |>
   dplyr::select(
     prov_cod,
     prov_nom_ras = prov_nom,
-    dplyr::all_of(occupation_cols),
-    taten
+    dplyr::all_of(occupation_cols)
   ) |>
   dplyr::left_join(
     population,
@@ -142,12 +137,11 @@ plot_df <- province_ras |>
   ) |>
   dplyr::mutate(
     personal = rowSums(dplyr::pick(dplyr::all_of(occupation_cols))),
-    personal_10k = .data$personal / .data$poblacion_2021 * 10000,
-    atenciones_personal = .data$taten / .data$personal
+    personal_10k = .data$personal / .data$poblacion_2021 * 10000
   ) |>
   dplyr::arrange(dplyr::desc(.data$personal_10k))
 
-if (anyNA(plot_df$personal_10k) || anyNA(plot_df$atenciones_personal)) {
+if (anyNA(plot_df$personal_10k)) {
   stop("Los indicadores calculados contienen valores faltantes.")
 }
 
@@ -166,34 +160,24 @@ plot_df <- plot_df |>
     prov_nom = factor(.data$prov_nom, levels = province_levels)
   )
 
-availability_ratio <- max(plot_df$personal_10k) / min(plot_df$personal_10k)
-rank_correlation <- stats::cor(
-  plot_df$personal_10k,
-  plot_df$atenciones_personal,
-  method = "spearman"
+title_raw <- paste0(
+  "Guayas tenía 59 miembros del personal médico por cada 10 mil habitantes, ",
+  "mientras que Pichincha solo 19"
 )
-highest_pressure <- plot_df |>
-  dplyr::slice_max(.data$atenciones_personal, n = 1, with_ties = FALSE)
 
-title_raw <- "Menos personal suele coincidir con más atenciones por integrante"
-
-subtitle_raw <- paste0(
-  "La disponibilidad de personal del MSP varía ",
-  label_number_intl(accuracy = 0.1)(availability_ratio),
-  " veces entre provincias, ", target_year
-)
+subtitle_raw <- "Personal del MSP por cada 10.000 habitantes, por provincia, 2021"
 
 caption_raw <- paste0(
   "Fuentes: INEC, RAS y Estimaciones y Proyecciones de Población, Revisión 2024. ",
   "Elaboración: Odalis Clemente y Alonso Quijano Ruiz para El Quantificador de Laboratorio LIDE. ",
-  "Nota: personal incluye médicos, enfermeros, obstetrices y TAPS. La razón de atenciones es descriptiva ",
-  "y no mide productividad individual. TAPS: Técnicos de Atención Primaria en Salud."
+  "Nota: personal incluye médicos, enfermeros, obstetrices y TAPS. Las cifras son integrantes ",
+  "por cada 10.000 habitantes. TAPS: Técnicos de Atención Primaria en Salud."
 )
 
 
 # 5. Visualización ---------------------------------------------------------
 
-staff_panel <- ggplot2::ggplot(
+chart <- ggplot2::ggplot(
   plot_df,
   ggplot2::aes(x = .data$personal_10k, y = .data$prov_nom)
 ) +
@@ -207,131 +191,24 @@ staff_panel <- ggplot2::ggplot(
     colour = "grey20"
   ) +
   ggplot2::scale_x_continuous(
-    breaks = NULL,
-    expand = ggplot2::expansion(mult = c(0, 0.32))
+    labels = label_number_intl(accuracy = 10),
+    expand = ggplot2::expansion(mult = c(0, 0.14))
   ) +
   ggplot2::coord_cartesian(clip = "off") +
   ggplot2::labs(
     x = NULL,
     y = NULL,
-    title = "Personal por 10.000 habitantes"
+    title = wrap_title_house(title_raw),
+    subtitle = wrap_subtitle_house(subtitle_raw, width = 100),
+    caption = wrap_caption_house(caption_raw)
   ) +
   theme_quantificador() +
   ggplot2::theme(
     axis.line.y = ggplot2::element_blank(),
     axis.ticks.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_text(size = 6.8),
-    axis.line.x = ggplot2::element_blank(),
-    axis.ticks.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    plot.title = ggplot2::element_text(
-      size = 7.8,
-      face = "bold",
-      colour = blue
-    ),
-    plot.margin = ggplot2::margin(4, 12, 4, 16)
-  )
-
-attention_panel <- ggplot2::ggplot(
-  plot_df,
-  ggplot2::aes(y = .data$prov_nom)
-) +
-  ggplot2::geom_segment(
-    ggplot2::aes(
-      x = 0,
-      xend = .data$atenciones_personal,
-      yend = .data$prov_nom
-    ),
-    linewidth = 0.55,
-    colour = light_grey
-  ) +
-  ggplot2::geom_point(
-    ggplot2::aes(x = .data$atenciones_personal),
-    size = 2.1,
-    colour = orange
-  ) +
-  ggplot2::geom_text(
-    ggplot2::aes(
-      x = .data$atenciones_personal,
-      label = label_number_intl(accuracy = 1)(.data$atenciones_personal)
-    ),
-    hjust = -0.28,
-    size = 2.25,
-    colour = "grey20"
-  ) +
-  ggplot2::scale_x_continuous(
-    breaks = NULL,
-    expand = ggplot2::expansion(mult = c(0, 0.36))
-  ) +
-  ggplot2::coord_cartesian(clip = "off") +
-  ggplot2::labs(
-    x = NULL,
-    y = NULL,
-    title = "Atenciones por integrante"
-  ) +
-  theme_quantificador() +
-  ggplot2::theme(
-    axis.line.y = ggplot2::element_blank(),
-    axis.ticks.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_blank(),
-    axis.line.x = ggplot2::element_blank(),
-    axis.ticks.x = ggplot2::element_blank(),
-    axis.text.x = ggplot2::element_blank(),
-    plot.title = ggplot2::element_text(
-      size = 7.8,
-      face = "bold",
-      colour = orange
-    ),
-    plot.margin = ggplot2::margin(4, 36, 4, 0)
-  )
-
-panel_grid <- cowplot::plot_grid(
-  staff_panel,
-  attention_panel,
-  nrow = 1,
-  rel_widths = c(1.55, 1),
-  align = "h",
-  axis = "tb"
-)
-
-combined_chart <- cowplot::ggdraw() +
-  cowplot::draw_label(
-    wrap_title_house(title_raw),
-    x = 0.04,
-    y = 0.975,
-    hjust = 0,
-    vjust = 1,
-    size = HOUSE_TITLE_SIZE_PT,
-    fontface = "bold",
-    colour = "grey20",
-    lineheight = 0.95
-  ) +
-  cowplot::draw_label(
-    wrap_subtitle_house(subtitle_raw),
-    x = 0.04,
-    y = 0.875,
-    hjust = 0,
-    vjust = 1,
-    size = HOUSE_SUBTITLE_SIZE_PT,
-    colour = "grey30",
-    lineheight = 1.05
-  ) +
-  cowplot::draw_plot(
-    panel_grid,
-    x = 0,
-    y = 0.21,
-    width = 1,
-    height = 0.54
-  ) +
-  cowplot::draw_label(
-    wrap_caption_house(caption_raw),
-    x = 0.04,
-    y = 0.175,
-    hjust = 0,
-    vjust = 1,
-    size = HOUSE_CAPTION_SIZE_PT,
-    colour = "grey30",
-    lineheight = 1.05
+    axis.text.y = ggplot2::element_text(size = 7.2),
+    plot.subtitle = ggplot2::element_text(size = 8),
+    plot.margin = ggplot2::margin(10, 42, 6, 16)
   )
 
 
@@ -343,7 +220,7 @@ spec <- house_spec("portrait")
 ggplot2::ggsave(
   filename = out_path,
   plot = house_apply_logo(
-    combined_chart,
+    chart,
     "portrait",
     x = 0.89,
     y = 0.085,
@@ -359,18 +236,6 @@ ggplot2::ggsave(
 )
 
 message("Guardado: ", out_path)
-message(
-  "Mayor razón de atenciones: ",
-  as.character(highest_pressure$prov_nom),
-  " (",
-  label_number_intl(accuracy = 1)(highest_pressure$atenciones_personal),
-  ")."
-)
-message(
-  "Correlación de rangos entre disponibilidad y atenciones: ",
-  label_number_intl(accuracy = 0.01)(rank_correlation),
-  "."
-)
 
 
 # 7. Información de sesión -------------------------------------------------

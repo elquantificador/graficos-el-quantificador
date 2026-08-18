@@ -1,4 +1,4 @@
-# Fuentes de datos: personal del MSP, atenciones y población provincial
+# Fuentes de datos: personal del MSP y población provincial
 
 ## Dataset
 
@@ -39,7 +39,6 @@ Archivo original del INEC:
 | `tenf` | Enfermeros |
 | `tobst` | Obstetrices |
 | `ttaps` | Técnicos de Atención Primaria en Salud (TAPS) |
-| `taten` | Total de atenciones registradas |
 | `poblacion_2021` | Población provincial estimada al 30 de junio de 2021 |
 
 ## Notas metodológicas
@@ -48,13 +47,8 @@ Archivo original del INEC:
 - El indicador principal suma médicos, enfermeros, obstetrices y TAPS y lo divide
   para la población provincial estimada; se expresa por cada 10.000 habitantes.
 - Las provincias se ordenan de mayor a menor disponibilidad de personal.
-- El panel derecho divide las atenciones registradas para el total de las cuatro
-  categorías de personal. Es una relación descriptiva y no una medida de
-  productividad individual: una atención puede involucrar otras categorías y una
-  misma persona puede recibir varias atenciones durante el año.
-- La correlación de rangos de Spearman entre personal por 10.000 habitantes y
-  atenciones por integrante es de -0,60. Se presenta como asociación descriptiva,
-  sin atribuir causalidad.
+- La figura muestra un único ranking de barras horizontales, ordenado de mayor a
+  menor disponibilidad de personal.
 - Las estimaciones de población de la Revisión 2024 están referidas al 30 de junio
   de cada año.
 
