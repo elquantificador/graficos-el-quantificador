@@ -1,10 +1,9 @@
 # ============================================================
 # plot_ras_personal_salud_provincial.R
-# Compara la disponibilidad provincial de personal del MSP.
+# Compara la presencia rural de obstetrices y TAPS.
 #
 # Entradas:
 #   data/raw/ras/msp_serie_*.rds
-#   data/raw/inec/estimaciones_poblacion_provincial_2021.csv
 #
 # Salida:
 #   outputs/figures/38_personal-salud_provincia-ecuador.png
@@ -25,17 +24,17 @@ ensure_packages(c(
   "dplyr",
   "ggplot2",
   "ragg",
-  "readr",
-  "scales"
+  "scales",
+  "tidyr"
 ))
 
 raw_dir <- "data/raw/ras"
-population_path <- "data/raw/inec/estimaciones_poblacion_provincial_2021.csv"
 out_path <- "outputs/figures/38_personal-salud_provincia-ecuador.png"
 
-occupation_cols <- c("tmedicos", "tenf", "tobst", "ttaps")
-blue <- "#00A8CB"
+occupation_cols <- c("tobst", "ttaps")
 target_year <- 2021
+start_year <- 2013
+occupation_colors <- c(Obstetrices = "#D96C2C", TAPS = "#00A8CB")
 
 
 # 2. Lectura de datos ------------------------------------------------------
@@ -49,17 +48,6 @@ ras <- setNames(
   ),
   c("nac", "prov", "cant", "parr", "area")
 )
-
-population <- readr::read_csv(
-  population_path,
-  col_types = readr::cols(
-    prov_cod = readr::col_character(),
-    prov_nom = readr::col_character(),
-    poblacion_2021 = readr::col_double()
-  ),
-  show_col_types = FALSE
-)
-
 
 # 3. Validaciones ----------------------------------------------------------
 
@@ -93,122 +81,136 @@ for (level in c("prov", "cant", "parr", "area")) {
   }
 }
 
-province_ras <- ras$prov |>
-  dplyr::filter(.data$anio == target_year) |>
-  dplyr::mutate(prov_cod = sprintf("%02d", as.integer(.data$prov_cod)))
-
-if (nrow(province_ras) != 24L || nrow(population) != 24L) {
-  stop("Se esperaban 24 provincias en ambas fuentes.")
+area_codes <- as.numeric(unclass(ras$area$area))
+area_labels <- attr(ras$area$area, "labels")
+if (is.null(area_labels) || length(area_codes) != nrow(ras$area)) {
+  stop("La variable de área no contiene etiquetas utilizables.")
 }
+area_label_map <- setNames(names(area_labels), as.character(unname(area_labels)))
 
-missing_population <- dplyr::anti_join(
-  province_ras,
-  population,
-  by = dplyr::join_by(prov_cod)
-)
+area_ras <- ras$area |>
+  dplyr::mutate(
+    area_code = area_codes,
+    area_label = unname(area_label_map[as.character(.data$area_code)])
+  )
 
-missing_ras <- dplyr::anti_join(
-  population,
-  province_ras,
-  by = dplyr::join_by(prov_cod)
-)
-
-if (nrow(missing_population) > 0L || nrow(missing_ras) > 0L) {
-  stop("Los códigos provinciales del RAS y del INEC no coinciden.")
-}
-
-if (anyNA(population$poblacion_2021) || any(population$poblacion_2021 <= 0)) {
-  stop("La población provincial contiene valores faltantes o no positivos.")
+if (anyNA(area_ras$area_label)) {
+  stop("La variable de área contiene códigos sin etiqueta.")
 }
 
 
 # 4. Indicadores -----------------------------------------------------------
 
-plot_df <- province_ras |>
-  dplyr::select(
-    prov_cod,
-    prov_nom_ras = prov_nom,
-    dplyr::all_of(occupation_cols)
-  ) |>
-  dplyr::left_join(
-    population,
-    by = dplyr::join_by(prov_cod),
-    relationship = "one-to-one"
-  ) |>
-  dplyr::mutate(
-    personal = rowSums(dplyr::pick(dplyr::all_of(occupation_cols))),
-    personal_10k = .data$personal / .data$poblacion_2021 * 10000
-  ) |>
-  dplyr::arrange(dplyr::desc(.data$personal_10k))
+area_totals <- area_ras |>
+  dplyr::filter(.data$anio >= start_year, .data$anio <= target_year) |>
+  dplyr::group_by(.data$anio, .data$area_label) |>
+  dplyr::summarise(
+    dplyr::across(dplyr::all_of(occupation_cols), ~ sum(.x, na.rm = TRUE)),
+    .groups = "drop"
+  )
 
-if (anyNA(plot_df$personal_10k)) {
-  stop("Los indicadores calculados contienen valores faltantes.")
+if (anyNA(area_totals[[occupation_cols[1]]]) || anyNA(area_totals[[occupation_cols[2]]])) {
+  stop("La serie de área contiene valores faltantes.")
 }
 
-plot_df <- plot_df |>
+rural_share <- area_totals |>
+  dplyr::group_by(.data$anio) |>
+  dplyr::summarise(
+    Obstetrices = .data$tobst[.data$area_label == "Rural"] / sum(.data$tobst),
+    TAPS = .data$ttaps[.data$area_label == "Rural"] / sum(.data$ttaps),
+    .groups = "drop"
+  ) |>
+  tidyr::pivot_longer(
+    cols = c("Obstetrices", "TAPS"),
+    names_to = "occupation",
+    values_to = "rural_share"
+  )
+
+if (anyNA(rural_share$rural_share)) {
+  stop("La participación rural contiene valores faltantes.")
+}
+
+endpoint_df <- rural_share |>
+  dplyr::filter(.data$anio == target_year) |>
   dplyr::mutate(
-    prov_nom = dplyr::if_else(
-      .data$prov_cod == "23",
-      "Santo Domingo",
-      .data$prov_nom
+    endpoint_label = paste0(
+      .data$occupation, ": ",
+      label_percent_intl(accuracy = 1)(.data$rural_share)
     )
   )
 
-province_levels <- rev(plot_df$prov_nom)
-plot_df <- plot_df |>
-  dplyr::mutate(
-    prov_nom = factor(.data$prov_nom, levels = province_levels)
-  )
+title_raw <- "TAPS y obstetrices tienen una mayor presencia rural"
 
-title_raw <- paste0(
-  "Guayas tenía 59 miembros del personal médico por cada 10 mil habitantes, ",
-  "mientras que Pichincha solo 19"
+subtitle_raw <- paste0(
+  "Porcentaje del personal de cada tipo ubicado en áreas rurales, RAS, ",
+  start_year, "-", target_year
 )
 
-subtitle_raw <- "Personal del MSP por cada 10.000 habitantes, por provincia, 2021"
-
 caption_raw <- paste0(
-  "Fuentes: INEC, RAS y Estimaciones y Proyecciones de Población, Revisión 2024. ",
+  "Fuente: Registro de Actividades y Recursos de Salud (RAS). ",
   "Elaboración: Odalis Clemente y Alonso Quijano Ruiz para El Quantificador de Laboratorio LIDE. ",
-  "Nota: personal incluye médicos, enfermeros, obstetrices y TAPS. Las cifras son integrantes ",
-  "por cada 10.000 habitantes. TAPS: Técnicos de Atención Primaria en Salud."
+  "En 2021, el área rural concentra ",
+  label_percent_intl(accuracy = 1)(endpoint_df$rural_share[endpoint_df$occupation == "Obstetrices"]),
+  " de las obstetrices y ",
+  label_percent_intl(accuracy = 1)(endpoint_df$rural_share[endpoint_df$occupation == "TAPS"]),
+  " de los TAPS. La serie de TAPS comienza en 2013."
 )
 
 
 # 5. Visualización ---------------------------------------------------------
 
 chart <- ggplot2::ggplot(
-  plot_df,
-  ggplot2::aes(x = .data$personal_10k, y = .data$prov_nom)
+  rural_share,
+  ggplot2::aes(
+    x = .data$anio,
+    y = .data$rural_share,
+    colour = .data$occupation,
+    group = .data$occupation
+  )
 ) +
-  ggplot2::geom_col(width = 0.62, fill = blue) +
+  ggplot2::geom_hline(
+    yintercept = 0.5,
+    colour = "grey70",
+    linetype = "dotted",
+    linewidth = 0.4
+  ) +
+  ggplot2::geom_line(linewidth = 0.8) +
+  ggplot2::geom_point(size = 2.4) +
   ggplot2::geom_text(
-    ggplot2::aes(
-      label = label_number_intl(accuracy = 0.1)(.data$personal_10k)
-    ),
-    hjust = -0.18,
-    size = 2.35,
-    colour = "grey20"
+    data = endpoint_df,
+    ggplot2::aes(label = .data$endpoint_label),
+    hjust = -0.05,
+    size = 2.4,
+    show.legend = FALSE
   ) +
   ggplot2::scale_x_continuous(
-    labels = label_number_intl(accuracy = 10),
-    expand = ggplot2::expansion(mult = c(0, 0.14))
+    breaks = seq(start_year, target_year, by = 2),
+    expand = ggplot2::expansion(mult = c(0.02, 0.18))
+  ) +
+  ggplot2::scale_y_continuous(
+    labels = label_percent_intl(accuracy = 1),
+    limits = c(0.2, 0.6),
+    breaks = seq(0.2, 0.6, by = 0.1),
+    expand = ggplot2::expansion(mult = c(0, 0.02))
+  ) +
+  ggplot2::scale_colour_manual(
+    values = occupation_colors,
+    guide = "none"
   ) +
   ggplot2::coord_cartesian(clip = "off") +
   ggplot2::labs(
-    x = NULL,
-    y = NULL,
+    x = "Año",
+    y = "Personal ubicado en área rural",
     title = wrap_title_house(title_raw),
-    subtitle = wrap_subtitle_house(subtitle_raw, width = 100),
+    subtitle = wrap_subtitle_house(subtitle_raw),
     caption = wrap_caption_house(caption_raw)
   ) +
   theme_quantificador() +
   ggplot2::theme(
-    axis.line.y = ggplot2::element_blank(),
-    axis.ticks.y = ggplot2::element_blank(),
-    axis.text.y = ggplot2::element_text(size = 7.2),
+    axis.title.x = ggplot2::element_text(size = 7),
+    axis.title.y = ggplot2::element_text(size = 7),
     plot.subtitle = ggplot2::element_text(size = 8),
-    plot.margin = ggplot2::margin(10, 42, 6, 16)
+    plot.margin = ggplot2::margin(10, 58, 6, 16)
   )
 
 
