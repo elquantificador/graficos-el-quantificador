@@ -24,3 +24,15 @@ La pieza responde a qué hora del día se registra la mayor cantidad de asesinat
 Rscript scripts/data-cleaning/clean_homicidios_hora.R
 Rscript scripts/plots/plot_homicidios_hora.R
 ```
+
+## Copy de publicación
+
+La violencia homicida en Ecuador tiene una hora pico: las 21:00.
+
+Entre 2017 y 2025, los asesinatos registrados alcanzan su mayor concentración a esa hora, que representa el 7,4% de los casos con hora disponible.
+
+Los registros aumentan durante la tarde y alcanzan su máximo durante la noche.
+
+Elaboración: [Angel Alava González](https://www.linkedin.com/company/65035345/admin/page-posts/published/#) para El Quantificador.
+
+#Ecuador #Seguridad #ElQuantificador
