@@ -190,3 +190,17 @@ Los registros aumentan durante la tarde y alcanzan su máximo durante la noche.
 Elaboración: Angel Alava González para El Quantificador.
 
 #Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_homicidios_hora.R,38,published,homicidios-hora,"Fuente: repositorio LIDE-Grafico_Horas, commit cb2b375. Se incluyen registros tipificados como asesinato de 2017 a 2025; el archivo de origen llega hasta mayo de 2026."
+"Aunque el presupuesto de la Policía aumentó 34%, las muertes intencionales aumentaron 10 veces","Casos registrados y presupuesto liquidado de la Policía Nacional, 2017-2025",,,39_crimen-desapariciones-ecuador.png,outputs/figures/39_crimen-desapariciones-ecuador.png,Angel Alava González,"En Ecuador, las muertes intencionales pasaron de 970 casos en 2017 a 9.282 en 2025, mientras el presupuesto liquidado de la Policía Nacional subió de USD 1,20 mil millones a USD 1,61 mil millones.
+
+La serie de muertes intencionales reúne asesinatos, homicidios, femicidios y sicariatos.
+
+Elaboración: Angel Alava González para El Quantificador.
+
+#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R,39,draft,crimen-desapariciones,"Fuente: LIDE-Grafico_Crimen, commit 6ce297f. Años completos de 2017 a 2025; la serie combina casos registrados y presupuesto policial en ejes distintos."
+"La crisis de las desapariciones revela menos hallazgos y más fatalidad","Porcentaje de denuncias anuales que permanecen sin resolver o culminan en muerte, 2017-2025",,,40_desapariciones-fatalidad-ecuador.png,outputs/figures/40_desapariciones-fatalidad-ecuador.png,Eddie Bryan Tomalá Figueroa,"Cada vez más denuncias de desaparición permanecen sin resolver: la proporción pasó de 0,8% en 2017 a 10,5% en 2025.
+
+Los casos que terminan en fallecimiento también aumentaron, de 1,7% a 5,9% en el mismo periodo. En 2025, ambos desenlaces sumaron 16,4% de las denuncias registradas.
+
+Elaboración: Eddie Bryan Tomalá Figueroa para El Quantificador.
+
+#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R,40,draft,desaparecidos-fatalidad,"Fuente: Github-Eddie-Tomala, commit 407ebdf. El denominador es el total anual de denuncias con estado disponible; ENCONTRADO queda incluido en el denominador."

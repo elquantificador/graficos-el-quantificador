@@ -78,6 +78,8 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 9. `37_a_ninis-razones-estudio-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
 10. `37_b_ninis-razones-trabajo-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
 11. `38_hora-asesinatos-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_homicidios_hora.R)
+12. `39_crimen-desapariciones-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R)
+13. `40_desapariciones-fatalidad-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R)
 
 ## Notas sobre los datos
 
