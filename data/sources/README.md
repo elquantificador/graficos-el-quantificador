@@ -45,6 +45,8 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENEMDU anual 2025, informalidad y empleo no remunerado por provincia | `enemdu/enemdu_anual_2025_provincial.csv` | Usado en `clean_enemdu_informalidad_provincial.R` | `enemdu_informalidad_provincial.md` |
 | ENEMDU anual 2025, razones para no estudiar ni trabajar entre jóvenes NINI | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_nini_razones_sexo.R` | `enemdu_nini_razones_sexo.md` |
 | Muertes violentas por hora, 2014–mayo 2026 | `homicidios/mdi_homicidiosintencionales_pm_2014_2026.xlsx` | Usado en `clean_homicidios_hora.R` | `homicidios_hora.md` |
+| Muertes intencionales, desapariciones y presupuesto policial, 2017–2025 | `crimen/mdi_homicidiosintencionales_pm_2014_2026.xlsx`, `mdi_personasdesaparecidas_pm_2017_2026.xlsx`, `Gasto_proforma.xlsx` | Usado en `clean_crimen_desapariciones.R` | `crimen_desapariciones.md` |
+| Desapariciones y fallecimientos, 2017–2025 | `desapariciones/mdi_personasdesaparecidas_pm_2017_2025.xlsx` | Usado en `clean_desaparecidos_fatalidad.R` | `desaparecidos_fatalidad.md` |
 
 ## Cobertura de documentacion
 
