@@ -64,7 +64,7 @@ p <- ggplot(plot_data, aes(x = anio, y = porcentaje, color = estado, group = est
     expand = expansion(mult = c(0, 0.05))
   ) +
   labs(
-    title = wrap_title_house("Cada vez más denuncias de desaparición permanecen sin resolver."),
+    title = wrap_title_house("Cada vez más denuncias de desaparición permanecen sin resolver"),
     subtitle = wrap_subtitle_house("Denuncias anuales que permanecen en estado desaparecido, 2017–2025"),
     x = "A\u00F1o de desaparici\u00F3n",
     y = "Porcentaje del total de denuncias",
