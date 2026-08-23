@@ -1,5 +1,5 @@
 # plot_desaparecidos_fatalidad.R
-# Renderiza la proporción anual de denuncias desaparecidas o con desenlace fatal.
+# Renderiza la proporción anual de denuncias que permanecen sin resolver.
 # Requiere: data/processed/desaparecidos_fatalidad.rds
 # Guarda: outputs/figures/40_desapariciones-fatalidad-ecuador.png
 
@@ -12,39 +12,27 @@ out_path <- "outputs/figures/40_desapariciones-fatalidad-ecuador.png"
 
 processed <- readRDS(in_path)
 plot_data <- processed$data |>
+  filter(situacion_actual == "DESAPARECIDO") |>
   mutate(
-    estado = dplyr::recode(
-      situacion_actual,
-      DESAPARECIDO = "Permanece desaparecido",
-      FALLECIDO = "Fallece"
-    )
+    estado = "Permanece desaparecido"
   )
 
 end_labels <- plot_data |>
   filter(anio == max(anio)) |>
   mutate(
     x_label = anio + 0.30,
-    y_label = porcentaje + case_when(
-      estado == "Permanece desaparecido" ~ 0.0018,
-      TRUE ~ -0.0018
-    ),
-    label = case_when(
-      estado == "Permanece desaparecido" ~ paste0(
-        "Permanece\ndesaparecido\n",
-        percent_intl(porcentaje, accuracy = 0.1)
-      ),
-      TRUE ~ paste0(
-        "Fallece\n",
-        percent_intl(porcentaje, accuracy = 0.1)
-      )
+    y_label = porcentaje + 0.0018,
+    label = paste0(
+      "Permanece\ndesaparecido\n",
+      percent_intl(porcentaje, accuracy = 0.1)
     )
   )
 
 caption_raw <- paste0(
   "Fuente: Portal de Datos Abiertos y Subsecretaría de Estudios y Estadística de la Seguridad del Ministerio del Interior. ",
   "Elaboración: Eddie Tomalá para El Quantificador. ",
-  "Nota: el porcentaje se calcula sobre el total de denuncias ingresadas al sistema en cada año; " ,
-  "los estados se presentan sin distinguir la motivación o tipificación final del hecho. " ,
+  "Nota: el porcentaje se calcula sobre el total de denuncias ingresadas al sistema en cada año con estado disponible; " ,
+  "los casos ENCONTRADO permanecen en el denominador. " ,
   "Se usan años completos de 2017 a 2025."
 )
 
@@ -63,8 +51,7 @@ p <- ggplot(plot_data, aes(x = anio, y = porcentaje, color = estado, group = est
   ) +
   scale_color_manual(
     values = c(
-      "Permanece desaparecido" = "#146C94",
-      "Fallece" = "#D96C2C"
+      "Permanece desaparecido" = "#146C94"
     )
   ) +
   scale_x_continuous(
@@ -77,8 +64,8 @@ p <- ggplot(plot_data, aes(x = anio, y = porcentaje, color = estado, group = est
     expand = expansion(mult = c(0, 0.05))
   ) +
   labs(
-    title = wrap_title_house("La crisis de las desapariciones revela menos hallazgos y más fatalidad"),
-    subtitle = wrap_subtitle_house("Porcentaje de denuncias anuales que permanecen sin resolver o culminan en muerte, 2017–2025"),
+    title = wrap_title_house("Cada vez más denuncias de desaparición permanecen sin resolver."),
+    subtitle = wrap_subtitle_house("Denuncias anuales que permanecen en estado desaparecido, 2017–2025"),
     x = "A\u00F1o de desaparici\u00F3n",
     y = "Porcentaje del total de denuncias",
     caption = wrap_caption_house(caption_raw)
