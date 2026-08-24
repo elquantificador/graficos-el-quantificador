@@ -1,14 +1,14 @@
 # plot_crimen_desapariciones.R
 # Renderiza muertes intencionales y presupuesto policial.
 # Requiere: data/processed/crimen_desapariciones.rds
-# Guarda: outputs/figures/39_crimen-desapariciones-ecuador.png
+# Guarda: outputs/figures/39_b_crimen-presupuesto-ecuador.png
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg"))
 
 in_path <- "data/processed/crimen_desapariciones.rds"
-out_path <- "outputs/figures/39_crimen-desapariciones-ecuador.png"
+out_path <- "outputs/figures/39_b_crimen-presupuesto-ecuador.png"
 
 processed <- readRDS(in_path)
 annual <- processed$data
