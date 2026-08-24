@@ -190,15 +190,21 @@ Los registros aumentan durante la tarde y alcanzan su máximo durante la noche.
 Elaboración: Angel Alava González para El Quantificador.
 
 #Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_homicidios_hora.R,38,published,homicidios-hora,"Fuente: repositorio LIDE-Grafico_Horas, commit cb2b375. Se incluyen registros tipificados como asesinato de 2017 a 2025; el archivo de origen llega hasta mayo de 2026."
-"Aunque el presupuesto de la Policía aumentó 34%, las muertes intencionales aumentaron 10 veces","Casos registrados y presupuesto liquidado de la Policía Nacional, 2017-2025",,,39_crimen-desapariciones-ecuador.png,outputs/figures/39_crimen-desapariciones-ecuador.png,Angel Alava González,"En Ecuador, las muertes intencionales pasaron de 970 casos en 2017 a 9.282 en 2025, mientras el presupuesto liquidado de la Policía Nacional subió de USD 1,20 mil millones a USD 1,61 mil millones.
+"Cada vez más denuncias de desaparición permanecen sin resolver","Denuncias anuales que permanecen en estado desaparecido, 2017-2025",2026-08-24,https://www.linkedin.com/feed/update/urn:li:activity:7497719880281010176,39_a_desapariciones-sin-resolver-ecuador.png,outputs/figures/39_a_desapariciones-sin-resolver-ecuador.png,Eddie Bryan Tomalá Figueroa,"La crisis de seguridad no aparece solo en las cifras de homicidios.
 
-La serie de muertes intencionales reúne asesinatos, homicidios, femicidios y sicariatos.
+Entre las denuncias de desaparición ingresadas cada año, la proporción que permanece en estado desaparecido subió de menos de 1% en 2017 a 10,5% en 2025. El deterioro se acelera desde 2022.
 
-Elaboración: Angel Alava González para El Quantificador.
+Al mismo tiempo, entre 2017 y 2025 el presupuesto liquidado de la Policía Nacional aumentó 34% en dólares corrientes, mientras las muertes intencionales registradas se multiplicaron por 10.
 
-#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R,39,draft,crimen-desapariciones,"Fuente: LIDE-Grafico_Crimen, commit 6ce297f. Años completos de 2017 a 2025; la serie combina casos registrados y presupuesto policial en ejes distintos."
-"Cada vez más denuncias de desaparición permanecen sin resolver","Denuncias anuales que permanecen en estado desaparecido, 2017-2025",,,40_desapariciones-fatalidad-ecuador.png,outputs/figures/40_desapariciones-fatalidad-ecuador.png,Eddie Bryan Tomalá Figueroa,"Cada vez más denuncias de desaparición permanecen sin resolver: la proporción pasó de 0,8% en 2017 a 10,5% en 2025.
+Análisis de Eddie Bryan Tomalá Figueroa y Angel Alava González para El Quantificador.
 
-Elaboración: Eddie Bryan Tomalá Figueroa para El Quantificador.
+#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R,39_a,published,desaparecidos-sin-resolver,"Fuente: Github-Eddie-Tomala, commit 407ebdf. El denominador es el total anual de denuncias con estado disponible; ENCONTRADO y otros estados quedan incluidos en el denominador."
+"Aunque el presupuesto de la Policía aumentó 34%, las muertes intencionales aumentaron 10 veces","Casos registrados y presupuesto liquidado de la Policía Nacional, 2017-2025",2026-08-24,https://www.linkedin.com/feed/update/urn:li:activity:7497719880281010176,39_b_crimen-presupuesto-ecuador.png,outputs/figures/39_b_crimen-presupuesto-ecuador.png,Angel Alava González,"La crisis de seguridad no aparece solo en las cifras de homicidios.
 
-#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R,40,draft,desaparecidos-sin-resolver,"Fuente: Github-Eddie-Tomala, commit 407ebdf. El denominador es el total anual de denuncias con estado disponible; ENCONTRADO y otros estados quedan incluidos en el denominador."
+Entre las denuncias de desaparición ingresadas cada año, la proporción que permanece en estado desaparecido subió de menos de 1% en 2017 a 10,5% en 2025. El deterioro se acelera desde 2022.
+
+Al mismo tiempo, entre 2017 y 2025 el presupuesto liquidado de la Policía Nacional aumentó 34% en dólares corrientes, mientras las muertes intencionales registradas se multiplicaron por 10.
+
+Análisis de Eddie Bryan Tomalá Figueroa y Angel Alava González para El Quantificador.
+
+#Ecuador #Seguridad #ElQuantificador",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R,39_b,published,crimen-presupuesto,"Fuente: LIDE-Grafico_Crimen, commit 6ce297f. Años completos de 2017 a 2025; la serie combina casos registrados y presupuesto policial en ejes distintos."

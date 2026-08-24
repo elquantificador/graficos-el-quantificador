@@ -1,14 +1,14 @@
 # plot_desaparecidos_fatalidad.R
 # Renderiza la proporción anual de denuncias que permanecen sin resolver.
 # Requiere: data/processed/desaparecidos_fatalidad.rds
-# Guarda: outputs/figures/40_desapariciones-fatalidad-ecuador.png
+# Guarda: outputs/figures/39_a_desapariciones-sin-resolver-ecuador.png
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg"))
 
 in_path <- "data/processed/desaparecidos_fatalidad.rds"
-out_path <- "outputs/figures/40_desapariciones-fatalidad-ecuador.png"
+out_path <- "outputs/figures/39_a_desapariciones-sin-resolver-ecuador.png"
 
 processed <- readRDS(in_path)
 plot_data <- processed$data |>
