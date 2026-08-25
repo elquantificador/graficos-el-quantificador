@@ -80,6 +80,9 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 11. `38_hora-asesinatos-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_homicidios_hora.R)
 12. `39_a_desapariciones-sin-resolver-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R)
 13. `39_b_crimen-presupuesto-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R)
+14. `40_a_crecimiento-remesas-region-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_regional.R)
+15. `40_b_remesas-estados-unidos.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_origin.R)
+16. `40_c_evolucion-remesas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_merged.R)
 
 ## Notas sobre los datos
 

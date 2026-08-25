@@ -47,6 +47,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Muertes violentas por hora, 2014–mayo 2026 | `homicidios/mdi_homicidiosintencionales_pm_2014_2026.xlsx` | Usado en `clean_homicidios_hora.R` | `homicidios_hora.md` |
 | Muertes intencionales, desapariciones y presupuesto policial, 2017–2025 | `crimen/mdi_homicidiosintencionales_pm_2014_2026.xlsx`, `mdi_personasdesaparecidas_pm_2017_2026.xlsx`, `Gasto_proforma.xlsx` | Usado en `clean_crimen_desapariciones.R` | `crimen_desapariciones.md` |
 | Desapariciones y fallecimientos, 2017–2025 | `desapariciones/mdi_personasdesaparecidas_pm_2017_2025.xlsx` | Usado en `clean_desaparecidos_fatalidad.R` | `desaparecidos_fatalidad.md` |
+| Remesas recibidas, PIB nominal y país de origen, Ecuador, Colombia y Perú, 2000–2025 | `remesas_regional/world_bank_remesas_wdi.csv`, `remesas_regional/world_bank_ecuador_gdp_wdi.csv`, `remesas_regional/bce_eren2025anual.pdf`, `remesas_regional/bce_RemesasIntegradoWEB_PUB.xlsx` | Usado en `clean_remesas_regional.R` | `remesas_regional.md` |
 
 ## Cobertura de documentacion
 
