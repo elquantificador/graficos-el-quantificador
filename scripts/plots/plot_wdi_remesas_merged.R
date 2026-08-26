@@ -78,7 +78,7 @@ palette_color <- c(
   "Monto absoluto" = "#D97729"
 )
 
-title_raw <- "Las remesas se disparan post-pandemia, acercándose al nivel de la crisis del 99"
+title_raw <- "Las remesas se dispararon post-pandemia, acercándose al nivel de la crisis del 99"
 subtitle_raw <- "Evolución de remesas recibidas, millones de USD y % del PIB, 2000-2025"
 caption_raw <- paste(
   "Fuente: Banco Mundial, indicadores BX.TRF.PWKR.CD.DT y NY.GDP.MKTP.CD, descargados con el paquete R WDI.",
