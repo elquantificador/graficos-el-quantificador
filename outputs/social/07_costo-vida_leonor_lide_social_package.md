@@ -4,7 +4,8 @@
 
 - Imagen: `outputs/figures/41_a_costo-vida-ciudades-heatmap.png`
 - Autora: Leonor Molina Zapata
-- Estado: listo para publicación
+- Estado: publicado
+- Enlace de publicación: https://www.linkedin.com/feed/update/urn:li:share:7499539946844663808?actorCompanyId=65035345
 
 ## LinkedIn
 
