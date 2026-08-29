@@ -84,7 +84,6 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 15. `40_b_remesas-estados-unidos.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_origin.R)
 16. `40_c_evolucion-remesas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_merged.R)
 17. `41_a_costo-vida-ciudades-heatmap.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ipc_ciudades_heatmap_leonor.R)
-18. `41_b_costo-vida-ciudades-ranking.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ipc_ciudades_ranking_leonor.R)
 
 ## Notas sobre los datos
 
