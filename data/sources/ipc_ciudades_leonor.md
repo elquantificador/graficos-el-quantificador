@@ -18,15 +18,14 @@ La variación acumulada se calcula como:
 
 `(IPC del periodo / IPC de enero de 2021 - 1) × 100`
 
-El ranking usa el primer y último dato de cada ciudad. El heatmap muestra cortes de diciembre de cada año y junio de 2026, siempre como variación respecto de enero de 2021.
+La visualización muestra cortes de diciembre de cada año y junio de 2026, siempre como variación respecto de enero de 2021. Las ciudades se ordenan según el aumento acumulado hasta junio de 2026.
 
 ## Reproducción
 
 - Limpieza: `scripts/data-cleaning/clean_ipc_ciudades_leonor.R`
-- Heatmap: `scripts/plots/plot_ipc_ciudades_heatmap_leonor.R`
-- Ranking: `scripts/plots/plot_ipc_ciudades_ranking_leonor.R`
-- Salidas: `outputs/figures/41_a_costo-vida-ciudades-heatmap.png` y `outputs/figures/41_b_costo-vida-ciudades-ranking.png`
+- Visualización: `scripts/plots/plot_ipc_ciudades_heatmap_leonor.R`
+- Salida: `outputs/figures/41_a_costo-vida-ciudades-heatmap.png`
 
 ## Limitaciones
 
-Las visualizaciones comparan índices de precios, no niveles de gasto ni el costo absoluto de una canasta específica. La diferencia entre ciudades describe la evolución acumulada del índice general durante el periodo observado.
+La visualización compara índices de precios, no niveles de gasto ni el costo absoluto de una canasta específica. La diferencia entre ciudades describe la evolución acumulada del índice general durante el periodo observado.
