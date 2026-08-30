@@ -1,5 +1,5 @@
 Chart Name,Subtitle,Date,LinkedIn Link,Image Filename,Image Path,Author,Description,Script Link,Chart ID,Status,Series,Notes
-"El costo de vida subió más en unas ciudades que en otras","Variación acumulada del IPC frente a enero de 2021, cortes seleccionados, enero 2021 - junio 2026",2026-08-29,https://www.linkedin.com/feed/update/urn:li:share:7499539946844663808?actorCompanyId=65035345,41_a_costo-vida-ciudades-heatmap.png,outputs/figures/41_a_costo-vida-ciudades-heatmap.png,Leonor Molina Zapata,"Los precios no subieron al mismo ritmo en todas las ciudades del Ecuador.
+"El costo de vida subió más en unas ciudades que en otras","Variación acumulada del IPC frente a enero de 2021, cortes seleccionados, enero 2021 - junio 2026",2026-08-29,https://www.linkedin.com/feed/update/urn:li:share:7499539946844663808?actorCompanyId=65035345,41_costo-vida-ciudades-heatmap.png,outputs/figures/41_costo-vida-ciudades-heatmap.png,Leonor Molina Zapata,"Los precios no subieron al mismo ritmo en todas las ciudades del Ecuador.
 
 Entre enero de 2021 y junio de 2026, Santo Domingo acumuló el mayor aumento del Índice de Precios al Consumidor entre las nueve ciudades comparadas: 14,8%. Además, encabezó cada corte mostrado desde diciembre de 2021.
 
