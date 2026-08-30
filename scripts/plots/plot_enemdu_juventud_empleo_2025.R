@@ -105,7 +105,7 @@ sex_plot <- ggplot(
   coord_cartesian(ylim = c(0, 55), clip = "off") +
   labs(
     title = wrap_title_house(
-      "Las mujeres jóvenes tienen 10 puntos menos de empleo adecuado"
+      "Las mujeres jóvenes enfrentan más desempleo y menos empleo adecuado"
     ),
     subtitle = wrap_subtitle_house(
       "Empleo adecuado y desempleo entre la PEA de 18 a 29 años, por sexo, Ecuador, 2025"
@@ -166,7 +166,7 @@ province_plot <- ggplot(
   coord_cartesian(xlim = c(0, 55), clip = "off") +
   labs(
     title = wrap_title_house(
-      "El empleo adecuado juvenil va de 8% a 48% según la provincia"
+      "Morona Santiago tiene 6 veces menos empleo adecuado juvenil que Pichincha"
     ),
     subtitle = wrap_subtitle_house(
       "Porcentaje de la PEA joven con empleo adecuado, por provincia, Ecuador, 2025"
