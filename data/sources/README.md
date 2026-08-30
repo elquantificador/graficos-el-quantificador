@@ -49,6 +49,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Desapariciones y fallecimientos, 2017–2025 | `desapariciones/mdi_personasdesaparecidas_pm_2017_2025.xlsx` | Usado en `clean_desaparecidos_fatalidad.R` | `desaparecidos_fatalidad.md` |
 | Remesas recibidas, PIB nominal y país de origen, Ecuador, Colombia y Perú, 2000–2025 | `remesas_regional/world_bank_remesas_wdi.csv`, `remesas_regional/world_bank_ecuador_gdp_wdi.csv`, `remesas_regional/bce_eren2025anual.pdf`, `remesas_regional/bce_RemesasIntegradoWEB_PUB.xlsx` | Usado en `clean_remesas_regional.R` | `remesas_regional.md` |
 | IPC por ciudad, enero de 2021–junio de 2026 | `ipc_inec_2026_06/` | Usado en `clean_ipc_ciudades_leonor.R` | `ipc_ciudades_leonor.md` |
+| ENEMDU anual 2025, empleo adecuado y desempleo juvenil por sexo y provincia | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_juventud_empleo_2025.R` | `enemdu_juventud_empleo_2025.md` |
 
 ## Cobertura de documentacion
 
