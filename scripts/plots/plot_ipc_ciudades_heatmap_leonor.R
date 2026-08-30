@@ -2,7 +2,7 @@
 # plot_ipc_ciudades_heatmap_leonor.R
 # Renderiza el heatmap de la variacion acumulada del IPC por ciudad.
 # Requiere: data/processed/ipc_ciudades_inec_2026_06.rds
-# Guarda:   outputs/figures/41_a_costo-vida-ciudades-heatmap.png
+# Guarda:   outputs/figures/41_costo-vida-ciudades-heatmap.png
 # ============================================================
 
 source("scripts/utils.R")
@@ -10,7 +10,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/ipc_ciudades_inec_2026_06.rds"
-out_path <- "outputs/figures/41_a_costo-vida-ciudades-heatmap.png"
+out_path <- "outputs/figures/41_costo-vida-ciudades-heatmap.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
