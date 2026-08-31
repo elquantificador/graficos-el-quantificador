@@ -59,15 +59,15 @@ sex_long <- sex_data |>
 sex_caption <- paste(
   "Fuente: INEC, ENEMDU anual 2025.",
   "Elaboración: Cristhian Guamán Saca; adaptación de El Quantificador.",
-  "Nota: Jóvenes = personas de 18 a 29 años. Cada porcentaje se calcula sobre la PEA joven",
-  "del grupo correspondiente y usa el factor de expansión fexp."
+  "Nota: Jóvenes = 18 a 29 años. Porcentajes calculados sobre la PEA joven de cada grupo,",
+  "con el factor de expansión fexp."
 )
 
 province_caption <- paste(
   "Fuente: INEC, ENEMDU anual 2025.",
   "Elaboración: Cristhian Guamán Saca; adaptación de El Quantificador.",
-  "Nota: Jóvenes = personas de 18 a 29 años. Cada porcentaje se calcula sobre la PEA joven",
-  "de la provincia correspondiente y usa el factor de expansión fexp."
+  "Nota: Jóvenes = 18 a 29 años. Porcentajes calculados sobre la PEA joven de cada provincia,",
+  "con el factor de expansión fexp."
 )
 
 chart_palette <- c(
