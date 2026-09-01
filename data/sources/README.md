@@ -50,6 +50,8 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | Remesas recibidas, PIB nominal y país de origen, Ecuador, Colombia y Perú, 2000–2025 | `remesas_regional/world_bank_remesas_wdi.csv`, `remesas_regional/world_bank_ecuador_gdp_wdi.csv`, `remesas_regional/bce_eren2025anual.pdf`, `remesas_regional/bce_RemesasIntegradoWEB_PUB.xlsx` | Usado en `clean_remesas_regional.R` | `remesas_regional.md` |
 | IPC por ciudad, enero de 2021–junio de 2026 | `ipc_inec_2026_06/` | Usado en `clean_ipc_ciudades_leonor.R` | `ipc_ciudades_leonor.md` |
 | ENEMDU anual 2025, empleo adecuado y desempleo juvenil por sexo y provincia | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_juventud_empleo_2025.R` | `enemdu_juventud_empleo_2025.md` |
+| Canasta básica e ingreso familiar, enero 2018–2026 | `inec_canasta_ingreso/canasta_vs_ingreso_karel.csv` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
+| ENEMDU, ingreso per cápita observado para la serie de canasta | `enemdu/ENEMDU_PERSONAS_2018_12_hom.sav`, `enemdu/enemdu_persona_201912.sav`, `enemdu/enemdu_persona_2020_12.sav`, `enemdu/enemdu_persona_2021_12.sav`, `enemdu/enemdu_persona_2022_12.sav`, `enemdu/enemdu_persona_2023_12.sav`, `enemdu/enemdu_persona_2024_12.sav`, `enemdu/enemdu_persona_2025_12.sav`, `enemdu/enemdu_persona_2026_l_trimestre.sav` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
 
 ## Cobertura de documentacion
 

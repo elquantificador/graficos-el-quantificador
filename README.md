@@ -86,6 +86,7 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 17. `41_costo-vida-ciudades-heatmap.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ipc_ciudades_heatmap_leonor.R)
 18. `42_a_empleo-adecuado-juvenil_sexo-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_juventud_empleo_2025.R)
 19. `42_b_empleo-adecuado-juvenil_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_juventud_empleo_2025.R)
+20. `43_canasta-basica-ingreso-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_inec_canasta_ingreso.R)
 
 ## Notas sobre los datos
 
