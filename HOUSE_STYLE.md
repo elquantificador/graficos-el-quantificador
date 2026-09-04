@@ -96,7 +96,7 @@ Rules:
 - Default logo placement uses `add_logo()` from `scripts/utils.R`
 - Fixed x-position: `x = 0.88`
 - Fixed size: `width = 0.09`, `height = 0.09`
-- Default y-position in the helper: `y = 0.07`
+- Default y-position in the helper: `y = 0.28`, aligned with the x-axis zone
 - Only `y` may vary by chart, and only when the user decides
 
 ## Editorial consistency

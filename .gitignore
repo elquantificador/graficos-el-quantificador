@@ -6,6 +6,11 @@ scripts/plots/plot_salario_vs_ipc.R
 # Datos procesados (derivados de los datos crudos)
 data/processed/
 
+# Insumos locales grandes para la réplica del mapa de conflicto
+data/raw/acled_conflicto_ecuador/
+data/raw/inec_geoestadistico_2022/
+outputs/figures/43_conflicto-tacticas-ecuador.png
+
 # Entorno R
 .Rhistory
 .RData

@@ -41,7 +41,7 @@ house_spec <- function(orientation = "portrait") {
     title_wrap    = HOUSE_TITLE_WRAP_WIDTH,
     subtitle_wrap = HOUSE_SUBTITLE_WRAP_WIDTH,
     caption_wrap  = HOUSE_CAPTION_WRAP_WIDTH,
-    logo_y        = 0.07
+    logo_y        = 0.28
   )
 }
 
@@ -153,7 +153,7 @@ wrap_caption_house <- function(text, width = HOUSE_CAPTION_WRAP_WIDTH) {
 #' @param width, height Tamaño del logo (fracción del área del gráfico)
 add_logo <- function(plot,
                      logo_path = LOGO_PATH,
-                     x = 0.88, y = 0.07,
+                     x = 0.88, y = 0.28,
                      width = 0.09, height = 0.09) {
   logo_layer <- if (requireNamespace("magick", quietly = TRUE)) {
     draw_image(logo_path, x = x, y = y, width = width, height = height)
