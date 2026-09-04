@@ -1,6 +1,6 @@
 ---
 name: lide-social-package
-description: Produce the complete LIDE / El Quantificador social-media package from charts, analyses, article drafts, or research findings. Use when asked to draft or adapt El Quantificador content for LinkedIn, X/Twitter, Instagram, and Facebook, including multi-chart posts, author attribution, source notes, article CTAs, hashtags, and optional New Dimensions promotion. Enforce LIDE's concise Ecuador-focused quantitative voice, validate every standard X post against the 280 weighted-character limit, and validate Instagram captions for the 5-hashtag maximum and no raw URLs.
+description: Produce evidence-led LIDE / El Quantificador social-media packages from charts, analyses, article drafts, or research findings. Use when drafting or adapting content for LinkedIn, X/Twitter, Instagram, and Facebook. Research and state the supported explanation behind empirical patterns, then validate X's 280 weighted-character limit and Instagram's 5-hashtag, no-URL rules.
 ---
 
 # LIDE Social Package
@@ -8,6 +8,20 @@ description: Produce the complete LIDE / El Quantificador social-media package f
 Produce platform-native copy for LIDE / El Quantificador. Treat the chart or analysis as the evidence and the caption as the interpretation.
 
 Read `references/platform-spec.md` before drafting. If producing X/Twitter copy, validate every post with `scripts/validate_x_posts.py`. If producing Instagram copy, validate it with `scripts/validate_instagram_caption.py`.
+
+## Research the explanation
+
+For every empirical pattern, research why it occurs before drafting. Use the
+strongest available external evidence, prioritizing original datasets,
+institutional reports, and peer-reviewed research. State the resulting
+explanation directly in the copy, with only the factual context needed to make
+it credible.
+
+Do not use meta-writing such as `el mapa no explica`, `los datos no permiten`,
+`se requiere más investigación`, or process disclaimers. Do not substitute a
+generic caveat for an explanation. If credible evidence for the explanation is
+not available, do not invent one: ask the user for a source or limit the piece
+to the verified finding.
 
 ## Inputs
 
@@ -50,21 +64,25 @@ At least one of:
 1. Extract the evidence.
    - Identify the main finding and one useful supporting finding per chart.
    - Preserve denominators, units, dates, populations, and comparison groups.
-   - Never infer causality from descriptive evidence.
    - Never invent a value, source, author, date, or methodological detail.
 
-2. Find the narrative.
-   - State what the graph means, not everything the graph contains.
-   - Prefer a concrete empirical tension or comparison as the hook.
+2. Research and state the explanation.
+   - Find the strongest source-backed reason for the observed pattern.
+   - Separate what the chart shows from the external evidence that explains it.
+   - Use direct, concise prose. Do not add hedging or meta commentary.
+
+3. Find the narrative.
+   - State what the graph means and why the pattern matters, not everything the graph contains.
+   - Prefer a concrete empirical tension, comparison, or explanation as the hook.
    - Keep institutional self-reference secondary.
 
-3. Draft each platform independently.
+4. Draft each platform independently.
    - Do not copy-paste one platform's caption into another.
    - Always include Facebook in the full package.
    - Treat Facebook as the normal link-bearing counterpart to Instagram when `article_url` exists.
    - Follow `references/platform-spec.md` exactly.
 
-4. Validate X/Twitter.
+5. Validate X/Twitter.
    - Draft standard posts, not Premium long-form posts, unless explicitly requested.
    - Write the proposed posts to a JSON file as an array of strings.
    - Run:
@@ -72,7 +90,7 @@ At least one of:
    - If any post exceeds 280 weighted characters, revise and rerun until all are valid.
    - Never return an unvalidated X thread.
 
-5. Validate Instagram.
+6. Validate Instagram.
    - Never include `http://`, `https://`, or `www.` in the caption.
    - Include 3-5 targeted hashtags by default.
    - Never exceed 5 hashtags in a post or Reel caption.
@@ -81,8 +99,9 @@ At least one of:
      `python scripts/validate_instagram_caption.py caption.txt`
    - If validation fails, revise and rerun until valid.
 
-6. Final factual and platform check.
+7. Final factual and platform check.
    - Confirm every number and claim is supported by the supplied evidence.
+   - Confirm each explanatory claim is supported by the research consulted.
    - Confirm chart order matches X thread order.
    - Confirm authorship/source/promotion are separated correctly.
    - Confirm Instagram has no raw URL and has 3-5 targeted hashtags, maximum 5.
@@ -113,6 +132,7 @@ Only add Threads, newsletter, or other channels when explicitly requested. Adapt
 
 A successful package:
 - opens with the empirical insight;
+- explains the pattern with researched, source-backed context;
 - is concise enough that the chart remains the evidence-bearing object;
 - distinguishes result from interpretation;
 - credits the analyst when known;
@@ -121,6 +141,7 @@ A successful package:
 - uses natural Ecuadorian Spanish;
 - keeps promotional material separate from the analytical finding;
 - contains no unsupported causal or policy claim;
+- contains no meta-writing or generic hedging in place of an explanation;
 - contains no X post above 280 weighted characters;
 - contains no raw URL in Instagram;
 - contains 3-5 relevant Instagram hashtags and never more than 5;
