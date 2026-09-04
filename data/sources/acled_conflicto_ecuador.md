@@ -39,4 +39,4 @@ Rscript scripts/data-cleaning/clean_acled_conflicto_ecuador.R
 Rscript scripts/plots/plot_acled_conflicto_ecuador.R
 ```
 
-La salida es `outputs/figures/44_conflicto-tacticas-visual-pass-ecuador.png`.
+La salida es `outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png`.
