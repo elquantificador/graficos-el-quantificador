@@ -12,6 +12,12 @@ ACLED, Armed Conflict Location & Event Data Project. El CSV maestro fue entregad
 
 El archivo se conserva localmente y no se versiona en Git por su tamaño.
 
+## Disponibilidad
+
+Por la sensibilidad de los datos, la base puede estar disponible previa
+solicitud y su entrega se evalúa según el propósito de uso. No se publica ni
+se versiona en este repositorio.
+
 ## Cobertura y variables
 
 El archivo contiene eventos de Ecuador con `event_id_cnty`, `event_date`, `year_month`, `sub_event_type`, `latitude` y `longitude`, entre otras variables. La base entregada contiene 13.226 eventos únicos con coordenadas, desde el 2 de enero de 2018 hasta el 8 de junio de 2025.

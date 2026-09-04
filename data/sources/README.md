@@ -52,7 +52,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENEMDU anual 2025, empleo adecuado y desempleo juvenil por sexo y provincia | `enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | Usado en `clean_enemdu_juventud_empleo_2025.R` | `enemdu_juventud_empleo_2025.md` |
 | Canasta básica e ingreso familiar, enero 2018–2026 | `inec_canasta_ingreso/canasta_vs_ingreso_karel.csv` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
 | ENEMDU, ingreso per cápita observado para la serie de canasta | `enemdu/ENEMDU_PERSONAS_2018_12_hom.sav`, `enemdu/enemdu_persona_201912.sav`, `enemdu/enemdu_persona_2020_12.sav`, `enemdu/enemdu_persona_2021_12.sav`, `enemdu/enemdu_persona_2022_12.sav`, `enemdu/enemdu_persona_2023_12.sav`, `enemdu/enemdu_persona_2024_12.sav`, `enemdu/enemdu_persona_2025_12.sav`, `enemdu/enemdu_persona_2026_l_trimestre.sav` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
-| ACLED conflicto en Ecuador, 2018-2025 | `acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv` | Usado en `clean_acled_conflicto_ecuador.R` | `acled_conflicto_ecuador.md` |
+| ACLED conflicto en Ecuador, 2018-2025 | `acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv` | Usado en `clean_acled_conflicto_ecuador.R`; disponible previa solicitud por sensibilidad | `acled_conflicto_ecuador.md` |
 | Marco Geoestadístico 2022 del INEC | `inec_geoestadistico_2022/shapefile/` | Usado en `plot_acled_conflicto_ecuador.R` | `inec_geoestadistico_2022.md` |
 
 ## Cobertura de documentacion
