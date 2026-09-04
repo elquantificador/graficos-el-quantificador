@@ -3,7 +3,7 @@
 # Renderiza la vista acumulada del mapa de tácticas de conflicto en Ecuador.
 # Requiere: data/processed/acled_conflicto_ecuador.rds,
 #           data/raw/inec_geoestadistico_2022/shapefile/provincias/provincias.shp
-# Guarda:   outputs/figures/44_conflicto-tacticas-visual-pass-ecuador.png
+# Guarda:   outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_acled_conflicto_ecuador.R
@@ -15,7 +15,7 @@ ensure_packages(c("cowplot", "dplyr", "ggplot2", "sf", "ragg", "scales"))
 
 processed_path <- "data/processed/acled_conflicto_ecuador.rds"
 boundary_path <- "data/raw/inec_geoestadistico_2022/shapefile/provincias/provincias.shp"
-out_path <- "outputs/figures/44_conflicto-tacticas-visual-pass-ecuador.png"
+out_path <- "outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png"
 
 objeto <- readRDS(processed_path)
 datos <- objeto$data
