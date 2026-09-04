@@ -6,6 +6,12 @@ Use a serious, quantitative, accessible, Ecuador-focused register.
 
 Core rule: **tell people what the graph means, not what the graph contains.**
 
+For every empirical pattern, research and state the strongest supported
+explanation before drafting. Present the explanation directly. Do not use
+meta-writing such as `el mapa no explica`, `los datos no permiten`, or generic
+caveats in place of an explanation. If no credible explanatory source is
+available, ask the user for one or restrict the copy to the verified finding.
+
 Prefer:
 - concrete findings;
 - short declarative hooks;
@@ -191,4 +197,6 @@ If multiple numbers are available, select only those needed to support the messa
 - time period;
 - sample/population scope.
 
-Use words such as `se asocia`, `coincide`, `es consistente con`, or purely descriptive language when causal identification is absent.
+When a chart is descriptive, distinguish the observed pattern from the
+external evidence used to explain it. State the supported explanation directly;
+do not convert descriptive evidence into an unsupported causal claim.
