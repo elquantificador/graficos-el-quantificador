@@ -67,7 +67,7 @@ p_base <- ggplot(df, aes(x = antiguedad_anios, y = porcentaje_empresas)) +
   ) +
   labs(
     title = wrap_title_house(
-      "En 2025, la tipica empresa activa ecuatoriana ha existido por 11 años"
+      "En 2025, más de la mitad de las empresas activas ecuatorianas tenía 11 años o más de antigüedad"
     ),
     subtitle = wrap_subtitle_house(
       "Antigüedad de empresas activas, Ecuador, 2025"
