@@ -26,7 +26,7 @@ df <- chart_data$antiguedad
 mediana <- chart_data$mediana_anios
 
 caption_txt <- paste(
-  "Fuente: INEC, Registro Estadístico de Empresas (REEM) 2025 provisional.",
+  "Fuente: INEC, Registro Estadístico de Empresas (REEM), que integra registros administrativos para identificar empresas activas, 2025 provisional.",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador de Laboratorio LIDE.",
   "Nota: antigüedad = 2025 menos el año de inicio de actividad.",
   "Incluye 1.204.165 empresas activas con fecha válida de inicio; 60 años o más se agrupa."
@@ -70,7 +70,7 @@ p_base <- ggplot(df, aes(x = antiguedad_anios, y = porcentaje_empresas)) +
       "En 2025, más de la mitad de las empresas activas ecuatorianas tenía 11 años o más de antigüedad"
     ),
     subtitle = wrap_subtitle_house(
-      "Antigüedad de empresas activas, Ecuador, 2025"
+      "Distribución de empresas por antigüedad, REEM 2025"
     ),
     x = "Antig\u00fcedad de la empresa (a\u00f1os)",
     y = "Porcentaje de empresas activas",
