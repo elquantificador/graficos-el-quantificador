@@ -23,6 +23,13 @@ generic caveat for an explanation. If credible evidence for the explanation is
 not available, do not invent one: ask the user for a source or limit the piece
 to the verified finding.
 
+When the user supplies copy marked as final, proofread it for spelling,
+grammar, accents, punctuation, and readability, then preserve its substantive
+claims and level of certainty. Do not add hedging, caveats, alternative framing,
+or explanatory qualifiers that the user did not request. Only flag or change a
+claim when it directly conflicts with the supplied evidence or an explicitly
+identified source.
+
 ## Inputs
 
 Accept any combination of the following. Do not demand fields that can be reliably inferred from supplied charts or text.
