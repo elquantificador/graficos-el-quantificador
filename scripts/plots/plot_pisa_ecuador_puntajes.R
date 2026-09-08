@@ -104,8 +104,8 @@ p_base <- p_base +
     y = NULL,
     caption = wrap_caption_house(paste(
       "Fuente: OECD, PISA 2025 Results Volume I.",
-      "Elaboración: Daniel Sánchez Pazmiño para el Quantificador de Laboratorio LIDE.",
-      "Nota: 2017 corresponde a PISA for Development. Los intervalos de confianza del 95% usan los errores estándar reportados por el OECD. La diferencia en ciencias no fue estadísticamente significativa según el OECD."
+      "Elaboración: Daniel Sánchez Pazmiño y Alonso Quijano Ruiz para el Quantificador de Laboratorio LIDE.",
+      "Nota: Ecuador participó en PISA para el Desarrollo (PISA-D) en 2017, una versión diseñada para incluir mejor a estudiantes con desempeños bajos y con una concentración algo mayor de ítems de menor dificultad. En 2025 participó por primera vez en la PISA estándar. Aunque la OECD vinculó ambos resultados en una escala común, el cambio de instrumento y de población evaluada aconseja interpretar la comparación con cautela. Los intervalos de confianza del 95% usan los errores estándar reportados por la OECD. La diferencia en Ciencias no fue estadísticamente significativa."
     ))
   ) +
   theme_quantificador() +
