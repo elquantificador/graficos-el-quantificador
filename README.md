@@ -89,7 +89,7 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 20. `43_conflicto-tacticas-visual-pass-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_acled_conflicto_ecuador.R)
 21. `44_antiguedad-empresas-activas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reem_antiguedad_empresas_activas.R)
 22. `45_canasta-basica-ingreso-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_inec_canasta_ingreso.R)
-- `pisa-puntajes-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_pisa_ecuador_puntajes.R)
+23. `pisa-puntajes-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_pisa_ecuador_puntajes.R)
 
 ## Notas sobre los datos
 
