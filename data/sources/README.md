@@ -55,6 +55,7 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ACLED conflicto en Ecuador, 2018-2025 | `acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv` | Usado en `clean_acled_conflicto_ecuador.R`; disponible previa solicitud por sensibilidad | `acled_conflicto_ecuador.md` |
 | Marco Geoestadístico 2022 del INEC | `inec_geoestadistico_2022/shapefile/` | Usado en `plot_acled_conflicto_ecuador.R` | `inec_geoestadistico_2022.md` |
 | REEM 2025, tabulado de antigüedad de empresas activas | `reem/reem_2025_antiguedad_empresas_activas.csv` | Usado en `clean_reem_antiguedad_empresas_activas.R` y `plot_reem_antiguedad_empresas_activas.R` | `reem_antiguedad_empresas_activas.md` |
+| PISA Ecuador, PISA-D 2017 y PISA 2025 | `pisa_ecuador/pisa_ecuador_mean_scores.csv`, `pisa_ecuador/pisa_2025_tables_ib1_2a_36_38.xlsx`, `pisa_ecuador/pisa_participation_by_cycle.xlsx` | Usado en `clean_pisa_ecuador_puntajes.R` y `plot_pisa_ecuador_puntajes.R` | `pisa_ecuador.md` |
 
 ## Cobertura de documentacion
 

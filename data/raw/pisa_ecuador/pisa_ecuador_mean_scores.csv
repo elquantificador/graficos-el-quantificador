@@ -1,0 +1,7 @@
+year,subject,mean_score,standard_error,source_cycle
+2017,science,399.26305,2.936287,PISA-D 2017
+2025,science,393.42125,2.16190,PISA 2025
+2017,reading,408.90244,3.395679,PISA-D 2017
+2025,reading,384.99799,2.29628,PISA 2025
+2017,mathematics,377.48745,3.052863,PISA-D 2017
+2025,mathematics,365.83936,1.72171,PISA 2025
