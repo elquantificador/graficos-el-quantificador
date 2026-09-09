@@ -2,7 +2,7 @@
 # plot_inec_canasta_ingreso.R
 # Adapta al house style la comparación de canasta e ingresos para un hogar tipo.
 # Requiere: data/processed/inec_canasta_ingreso.rds
-# Guarda:   outputs/figures/45_canasta-basica-ingreso-ecuador.png
+# Guarda:   outputs/figures/46_canasta-basica-ingreso-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_inec_canasta_ingreso.R
@@ -13,7 +13,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/inec_canasta_ingreso.rds"
-out_path <- "outputs/figures/45_canasta-basica-ingreso-ecuador.png"
+out_path <- "outputs/figures/46_canasta-basica-ingreso-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
