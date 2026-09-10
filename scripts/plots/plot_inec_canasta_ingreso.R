@@ -154,7 +154,7 @@ spec <- house_spec("portrait")
 dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
 ggplot2::ggsave(
   filename = out_path,
-  plot = house_apply_logo(p_base, "portrait", y = 0.18),
+  plot = house_apply_logo(p_base, "portrait", y = 0.22),
   width = spec$width,
   height = spec$height,
   units = "in",
