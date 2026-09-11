@@ -70,8 +70,8 @@ subtitle_raw <- paste(
 )
 caption_raw <- paste(
   "Fuente: INEC, ENIGHUR 2024-2025 e Índice de Precios al Consumidor.",
-  "Elaboración: El Quantificador.",
-  "Nota: se incluyen hogares de cuatro personas con dos adultos de 18 años o más, dos hijos menores de 18 años, un representante del hogar y un cónyuge o conviviente; el ingreso es monetario mensual y se pondera con Fexp. La línea azul marca el ingreso familiar oficial de 1,6 perceptores, incluidos los décimos ($877,33); la naranja, el costo de la Canasta Familiar Básica en diciembre de 2025 ($819,01). El porcentaje se calcula sobre los hogares seleccionados; el gráfico muestra ingresos hasta el percentil 95."
+  "Elaboración: Karel Lázaro González Ruíz; adaptación: El Quantificador.",
+  "Nota: se incluyen hogares de cuatro personas con dos adultos de 18 años o más, dos hijos menores de 18 años, un representante del hogar y un cónyuge o conviviente. El INEC compara la Canasta Familiar Básica con un ingreso de 1,6 perceptores por hogar, lo que implica un perceptor del SBU a tiempo completo y otro a tiempo parcial. El porcentaje se calcula sobre los hogares; el gráfico muestra ingresos hasta el percentil 95."
 )
 
 p_base <- ggplot2::ggplot() +
