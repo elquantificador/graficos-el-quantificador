@@ -1,6 +1,6 @@
 # ============================================================
 # plot_inec_canasta_ingreso.R
-# Adapta al house style la comparación de canasta e ingresos para un hogar tipo.
+# Grafica la distribución de ingreso y los umbrales de canasta básica.
 # Requiere: data/processed/inec_canasta_ingreso.rds
 # Guarda:   outputs/figures/46_canasta-basica-ingreso-ecuador.png
 # ============================================================
@@ -10,7 +10,7 @@
 
 source("scripts/utils.R")
 source("scripts/packages.R")
-ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
+ensure_packages(c("dplyr", "ggplot2", "ragg", "scales", "tibble"))
 
 data_path <- "data/processed/inec_canasta_ingreso.rds"
 out_path <- "outputs/figures/46_canasta-basica-ingreso-ecuador.png"
@@ -21,133 +21,160 @@ if (!file.exists(data_path)) {
 }
 
 processed <- readRDS(data_path)
-df <- processed$data
+income_data <- processed$data
+summary <- processed$summary
 
-last_year <- max(df$anio)
-last_row <- df |>
-  dplyr::filter(.data$anio == last_year)
+ingreso_familiar <- summary$ingreso_familiar_usd[[1]]
+canasta_value <- summary$canasta_basica_usd[[1]]
+p95 <- summary$ingreso_p95[[1]]
+share_below <- summary$share_below_canasta[[1]]
 
-line_df <- dplyr::bind_rows(
-  df |>
-    dplyr::transmute(
-      anio = .data$anio,
-      valor = .data$canasta_basica_usd,
-      serie = "Costo de la canasta básica",
-      tipo = "Referencia normativa"
-    ),
-  df |>
-    dplyr::transmute(
-      anio = .data$anio,
-      valor = .data$ingreso_familiar_usd,
-      serie = "Ingresos de 1,6 perceptores, hogar tipo",
-      tipo = "Referencia normativa"
-    ),
-  df |>
-    dplyr::transmute(
-      anio = .data$anio,
-      valor = .data$ingreso_familiar_mediano_referencia_equiv_usd,
-      serie = "Ingreso observado, hogar de referencia",
-      tipo = "Observado"
-    )
+max_break <- max(
+  ceiling(max(income_data$ingreso_monetario_hogar) / 100) * 100,
+  ceiling(p95 / 100) * 100
+)
+breaks <- sort(unique(c(seq(0, max_break, by = 100), canasta_value, ingreso_familiar)))
+bin_id <- pmin(
+  findInterval(income_data$ingreso_monetario_hogar, breaks, rightmost.closed = TRUE),
+  length(breaks) - 1
 )
 
-label_df <- dplyr::bind_rows(
-  last_row |>
-    dplyr::transmute(
-      x = .data$anio - 0.08,
-      y = .data$canasta_basica_usd + 20,
-      label = paste0("Canasta: ", label_dollar_intl(accuracy = 1)(.data$canasta_basica_usd)),
-      serie = "Costo de la canasta básica"
-    ),
-  last_row |>
-    dplyr::transmute(
-      x = .data$anio - 0.08,
-      y = .data$ingreso_familiar_usd + 22,
-      label = paste0("Ingresos de 1,6\nperceptores: ", label_dollar_intl(accuracy = 1)(.data$ingreso_familiar_usd)),
-      serie = "Ingresos de 1,6 perceptores, hogar tipo"
-    ),
-  last_row |>
-    dplyr::transmute(
-      x = .data$anio - 0.08,
-      y = .data$ingreso_familiar_mediano_referencia_equiv_usd + 18,
-      label = paste0("Ingreso observado\nHogar de referencia: ", label_dollar_intl(accuracy = 1)(.data$ingreso_familiar_mediano_referencia_equiv_usd)),
-      serie = "Ingreso observado, hogar de referencia"
+hist_data <- tibble::tibble(
+  xmin = breaks[bin_id],
+  xmax = breaks[bin_id + 1],
+  fexp = income_data$fexp
+) |>
+  dplyr::group_by(.data$xmin, .data$xmax) |>
+  dplyr::summarise(weight = sum(.data$fexp), .groups = "drop") |>
+  dplyr::mutate(
+    share = .data$weight / sum(.data$weight),
+    xmid = (.data$xmin + .data$xmax) / 2,
+    zona = dplyr::case_when(
+      .data$xmax <= canasta_value ~ "Por debajo de la canasta",
+      .data$xmin >= ingreso_familiar ~ "Por encima del ingreso familiar",
+      TRUE ~ "Entre la canasta y el ingreso familiar"
     )
-)
+  )
 
-title_raw <- "¿Alcanza el ingreso familiar para la canasta básica? Realmente, no"
-subtitle_raw <- "Canasta Familiar Básica e ingresos mensuales comparables para un hogar de 4 personas, Ecuador, 2018-2026"
+max_share <- max(hist_data$share[hist_data$xmin <= p95], na.rm = TRUE)
+label_y <- max_share * 1.12
+
+title_raw <- paste0(
+  "Un ",
+  round(100 * share_below),
+  "% de hogares* gana menos de lo que cuesta la canasta básica"
+)
+subtitle_raw <- paste(
+  "Ingreso monetario mensual de hogares con dos adultos y dos hijos menores,",
+  "Ecuador, ENIGHUR 2024-2025"
+)
 caption_raw <- paste(
-  "Fuente: INEC, IPC y ENEMDU.",
-  "Elaboración: Karel Lázaro González Ruíz; adaptación: El Quantificador.",
-  "Nota: la mediana observada es la mediana ponderada de ingpc en hogares de 4 personas con 2 adultos y 2 hijos menores de 18 años; se multiplica por cuatro para expresarla en escala de hogar. Los cortes son diciembre de 2018-2025; para 2026 se usa el I trimestre."
+  "Fuente: INEC, ENIGHUR 2024-2025 e Índice de Precios al Consumidor.",
+  "Elaboración: El Quantificador.",
+  "Nota: se incluyen hogares de cuatro personas con dos adultos de 18 años o más, dos hijos menores de 18 años, un representante del hogar y un cónyuge o conviviente; el ingreso es monetario mensual y se pondera con Fexp. La línea azul marca el ingreso familiar oficial de 1,6 perceptores, incluidos los décimos ($877,33); la naranja, el costo de la Canasta Familiar Básica en diciembre de 2025 ($819,01). El porcentaje se calcula sobre los hogares seleccionados; el gráfico muestra ingresos hasta el percentil 95."
 )
 
-p_base <- ggplot2::ggplot(df, ggplot2::aes(x = .data$anio)) +
-  ggplot2::geom_ribbon(
+p_base <- ggplot2::ggplot() +
+  ggplot2::geom_rect(
+    data = hist_data,
     ggplot2::aes(
-      ymin = pmin(.data$canasta_basica_usd, .data$ingreso_familiar_mediano_referencia_equiv_usd),
-      ymax = pmax(.data$canasta_basica_usd, .data$ingreso_familiar_mediano_referencia_equiv_usd)
+      xmin = .data$xmin,
+      xmax = .data$xmax,
+      ymin = 0,
+      ymax = .data$share,
+      fill = .data$zona
     ),
-    fill = "#f3d6bb",
-    alpha = 0.9
+    colour = "white",
+    linewidth = 0.15
   ) +
-  ggplot2::geom_line(
-    data = line_df,
-    ggplot2::aes(y = .data$valor, colour = .data$serie, linetype = .data$tipo),
+  ggplot2::geom_vline(
+    xintercept = ingreso_familiar,
+    colour = "#2D7DB3",
+    linetype = "dashed",
+    linewidth = 0.8
+  ) +
+  ggplot2::geom_vline(
+    xintercept = canasta_value,
+    colour = "#D97729",
     linewidth = 0.9
   ) +
-  ggplot2::geom_point(
-    data = line_df,
-    ggplot2::aes(y = .data$valor, colour = .data$serie, shape = .data$tipo),
-    size = 1.7
+  ggplot2::annotate(
+    "segment",
+    x = canasta_value - 165,
+    xend = canasta_value,
+    y = label_y * 0.98,
+    yend = label_y * 0.98,
+    colour = "#D97729",
+    linewidth = 0.55
   ) +
-  ggplot2::geom_text(
-    data = label_df,
-    ggplot2::aes(x = .data$x, y = .data$y, label = .data$label, colour = .data$serie),
+  ggplot2::annotate(
+    "label",
+    x = canasta_value - 180,
+    y = label_y,
+    label = paste0("Canasta\nb\u00e1sica\n$", format(round(canasta_value), big.mark = ".", scientific = FALSE)),
     hjust = 1,
-    size = 2.45,
-    fontface = "bold",
-    show.legend = FALSE
+    vjust = 0.5,
+    size = 3,
+    lineheight = 0.95,
+    colour = "#D97729",
+    fill = "white",
+    linewidth = 0,
+    label.padding = grid::unit(0.18, "lines"),
+    fontface = "bold"
   ) +
-  ggplot2::scale_colour_manual(
+  ggplot2::annotate(
+    "segment",
+    x = ingreso_familiar + 165,
+    xend = ingreso_familiar,
+    y = label_y * 0.98,
+    yend = label_y * 0.98,
+    colour = "#2D7DB3",
+    linewidth = 0.55
+  ) +
+  ggplot2::annotate(
+    "label",
+    x = ingreso_familiar + 180,
+    y = label_y,
+    label = paste0("Ingreso familiar de referencia\n(1,6 salarios b\u00e1sicos\nunificados)\n$", format(round(ingreso_familiar), big.mark = ".", scientific = FALSE)),
+    hjust = 0,
+    vjust = 0.5,
+    size = 3,
+    lineheight = 0.95,
+    colour = "#2D7DB3",
+    fill = "white",
+    linewidth = 0,
+    label.padding = grid::unit(0.18, "lines"),
+    fontface = "bold"
+  ) +
+  ggplot2::scale_fill_manual(
     values = c(
-        "Costo de la canasta básica" = "#d97729",
-        "Ingresos de 1,6 perceptores, hogar tipo" = "#2D7DB3",
-        "Ingreso observado, hogar de referencia" = "#4F5D75"
+      "Por debajo de la canasta" = "#D97729",
+      "Entre la canasta y el ingreso familiar" = "#B8C7D2",
+      "Por encima del ingreso familiar" = "#6FA0C4"
     )
   ) +
-  ggplot2::scale_linetype_manual(
-    values = c("Referencia normativa" = "solid", "Observado" = "dashed")
-  ) +
-  ggplot2::scale_shape_manual(
-    values = c("Referencia normativa" = 16, "Observado" = 1)
-  ) +
   ggplot2::scale_x_continuous(
-    breaks = df$anio,
-    expand = ggplot2::expansion(mult = c(0.02, 0.04))
+    labels = label_dollar_intl(accuracy = 1),
+    breaks = scales::breaks_width(250),
+    expand = ggplot2::expansion(mult = c(0, 0.02))
   ) +
   ggplot2::scale_y_continuous(
-    labels = label_dollar_intl(accuracy = 1),
-    breaks = seq(400, 1000, by = 200),
-    limits = c(400, 1000),
-    expand = ggplot2::expansion(mult = c(0, 0))
+    labels = label_percent_intl(accuracy = 1),
+    expand = ggplot2::expansion(mult = c(0, 0.30))
   ) +
+  ggplot2::coord_cartesian(xlim = c(0, p95), clip = "off") +
   ggplot2::labs(
     title = wrap_title_house(title_raw),
     subtitle = wrap_subtitle_house(subtitle_raw),
-    x = NULL,
-    y = "USD mensuales por hogar de referencia (4 personas)",
+    x = "Ingreso monetario mensual del hogar",
+    y = "Porcentaje de hogares",
     caption = wrap_caption_house(caption_raw)
   ) +
-  ggplot2::coord_cartesian(clip = "off") +
   theme_quantificador() +
   ggplot2::theme(
     axis.text.x = ggplot2::element_text(size = 7.5, angle = 45, hjust = 1),
-    axis.title.y = ggplot2::element_text(hjust = 0.5, vjust = 0.5),
-    legend.position = "none",
     panel.grid.major.y = ggplot2::element_line(colour = "grey90", linetype = "dashed"),
-    plot.margin = ggplot2::margin(6, 16, 6, 16)
+    plot.margin = ggplot2::margin(6, 36, 6, 16)
   )
 
 spec <- house_spec("portrait")

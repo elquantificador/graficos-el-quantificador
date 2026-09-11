@@ -1,4 +1,4 @@
-# Canasta básica e ingresos comparables para un hogar tipo, Ecuador, 2018-2026
+# Ingreso de hogares con dos adultos y dos hijos y canasta básica, Ecuador, 2025
 
 ## Pieza
 
@@ -8,61 +8,42 @@
 
 ## Fuente y procedencia
 
-La serie proviene de los boletines técnicos de enero del Índice de Precios al
-Consumidor del Instituto Nacional de Estadística y Censos (INEC), para 2018 a
-2026. Los enlaces directos a cada boletín se conservan en
-`data/raw/inec_canasta_ingreso/canasta_vs_ingreso_karel.csv`.
+El gráfico usa la distribución de ingreso de la ENIGHUR 2024-2025 y el valor de
+la Canasta Familiar Básica publicado por el INEC para diciembre de 2025. El archivo
+compacto de hogares se conserva en
+`data/raw/enighur/enighur_2025_hogares_2adultos_2hijos.csv`; los umbrales de SBU
+y canasta se conservan en `data/raw/inec_canasta_ingreso/canasta_vs_ingreso_karel.csv`.
 
-El insumo fue entregado por Karel Lázaro González Ruíz como parte de su
-participación en el concurso Ecuador Quantificado 2026. La entrega original y
-su código reproducible están disponibles en:
+El insumo original de canasta fue entregado por Karel Lázaro González Ruíz como
+parte de su participación en el concurso Ecuador Quantificado 2026. La entrega
+original y su código reproducible están disponibles en:
 
 https://github.com/karelgonzalezruiz/Concurso-Ecuador-Quantificado-2026-Participacion
 
+El extracto de ENIGHUR se construyó desde las bases de trabajo de ENIGHUR 2025
+del repositorio `enighur-quantificador`, usando la base de hogares agregados y
+la base de personas para reconstruir la composición del hogar.
+
 ## Variables y definición
 
-El gráfico compara, para cada año:
+El gráfico muestra la distribución del ingreso corriente monetario mensual
+(`ing_mon_cor`) de hogares de cuatro personas con dos adultos de 18 años o más,
+dos hijos menores de 18 años, un representante del hogar y un cónyuge o
+conviviente. Los hogares se ponderan con `Fexp`.
 
-- el costo nacional de la Canasta Familiar Básica para el hogar de referencia;
-- el ingreso mensual del hogar tipo de cuatro miembros con 1,6 perceptores del
-  salario básico unificado;
-- la mediana del ingreso observado en ENEMDU para hogares de referencia, usando la
-  variable oficial `ingpc` y expresándola como equivalente para cuatro personas;
-- el salario básico unificado del año, conservado como variable de referencia.
+El porcentaje principal se calcula como la suma de los factores de expansión de
+los hogares cuyo ingreso es menor que el costo de la canasta, dividida para la
+suma de los factores de expansión de todos los hogares seleccionados. La línea
+azul representa el ingreso familiar oficial de 1,6 perceptores, que incorpora
+las partes proporcionales de los décimos; la línea naranja marca el costo de la
+canasta y es el umbral central del título.
 
-El ingreso familiar del hogar tipo incluye las partes proporcionales de los
-décimos tercero y cuarto sueldos y no considera fondos de reserva, de acuerdo
-con la definición publicada por el INEC en la sección de Canastas Familiares.
-El ingreso observado usa `ingpc`, que INEC define como ingreso per cápita del
-hogar y emplea en la medición de pobreza por ingresos. Se calcula como mediana
-ponderada por `fexp` entre hogares con cuatro miembros, dos adultos de 18 años o
-más y dos hijos menores de 18 años, con un jefe y un cónyuge. Para 2026, la
-mediana se calcula por trimestre y se promedia entre los periodos disponibles.
-Para compararla con los montos del hogar de referencia, el resultado se
-multiplica por cuatro. La fuente base sigue siendo per cápita.
-
-## Cobertura de ENEMDU
-
-La serie usa los archivos de diciembre de 2018 a 2025 ya conservados en
-`data/raw/enemdu/`. Para 2026 usa el archivo del I trimestre, porque EcuDataMCP
-no mostró un archivo anual completo de 2026. INEC publica bases anuales
-consolidadas para años recientes, pero no existe una serie anual homogénea
-2018-2026 en el repositorio.
-
-Páginas oficiales consultadas mediante EcuDataMCP:
-
-- https://www.ecuadorencifras.gob.ec/enemdu-2018/
-- https://www.ecuadorencifras.gob.ec/enemdu-diciembre-2019/
-- https://www.ecuadorencifras.gob.ec/empleo-dic-2020/
-- https://www.ecuadorencifras.gob.ec/enemdu-anual-2021/
-- https://www.ecuadorencifras.gob.ec/enemdu-anual-2022/
-- https://www.ecuadorencifras.gob.ec/enemdu-anual-2023/
-- https://www.ecuadorencifras.gob.ec/enemdu-anual-2024/
-- https://www.ecuadorencifras.gob.ec/enemdu-anual/
+La ENIGHUR 2024-2025 recolecta información entre diciembre de 2024 y noviembre
+de 2025. El extracto contiene 2.704 hogares muestrales antes de aplicar `Fexp`.
 
 ## Construcción
 
-El script de limpieza valida las columnas, incorpora `ingpc` desde ENEMDU y
-calcula la cobertura del ingreso del hogar tipo sobre la canasta y la brecha en
-dólares. El script de visualización conserva la escala del hogar de referencia y
-adapta la comparación al lienzo vertical y al house style de El Quantificador.
+El script de limpieza valida el extracto de hogares, incorpora los umbrales de
+2025 y calcula la proporción de hogares por debajo y por encima de la canasta.
+El script de visualización conserva el estilo del histograma de distribución de
+ingresos de ENIGHUR y adapta la pieza al lienzo vertical de El Quantificador.
