@@ -3,7 +3,7 @@
 # Genera el grafico de la participacion de la gasolina dentro del
 # gasto monetario del hogar por quintil y encuesta.
 # Requiere: data/processed/enighur_gasolina_share_quintiles_years.rds
-# Guarda:   outputs/figures/31_b_gasolina-share_quintil-ingreso-2012-2025.png
+# Guarda:   outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png
 # ============================================================
 
 source("scripts/utils.R")
@@ -13,7 +13,7 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 input_path <- "data/processed/enighur_gasolina_share_quintiles_years.rds"
 out_path <- Sys.getenv(
   "OUT_PATH",
-  unset = "outputs/figures/31_b_gasolina-share_quintil-ingreso-2012-2025.png"
+  unset = "outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png"
 )
 
 chart_data <- readRDS(input_path)
@@ -22,7 +22,7 @@ plot_df <- chart_data$summary |>
     quintil_ingreso = factor(
       .data$quintil_ingreso,
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
-      labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
+      labels = c("Q1 (m\u00e1s pobre)", "Q2", "Q3", "Q4", "Q5 (m\u00e1s rico)")
     ),
     encuesta = factor(
       .data$encuesta,
@@ -32,10 +32,10 @@ plot_df <- chart_data$summary |>
     etiqueta = percent_intl(.data$share_gasto_monetario, accuracy = 0.1)
   )
 
-title_raw <- "El peso de la gasolina en el presupuesto del hogar cambió mucho entre 2012 y 2025"
+title_raw <- "Los hogares m\u00e1s pobres destinan m\u00e1s de sus recursos en gasolina que en 2012"
 subtitle_raw <- "Gasolina como porcentaje del gasto monetario del hogar, por quintil de ingreso, ENIGHUR 2011-2012 y 2024-2025"
 caption_raw <- paste(
-  "Fuente: ENIGHUR 2011-2012 y ENIGHUR 2024-2025, INEC. Elaboracion: Daniel Sánchez para El Quantificador.",
+  "Fuente: ENIGHUR 2011-2012 y ENIGHUR 2024-2025, INEC. Elaboración: Daniel Sánchez para El Quantificador.",
   "Nota: Las barras muestran la participación de la gasolina dentro del gasto monetario total del hogar en cada quintil.",
   "En cada encuesta, los quintiles dividen a los hogares en cinco grupos de 20%, ordenados por ingreso monetario del hogar dentro de esa misma ronda. El quintil 1 corresponde al 20% con menores ingresos y el quintil 5 al 20% con mayores ingresos."
 )
@@ -87,7 +87,7 @@ build_chart <- function() {
 
 dir.create("outputs/figures", showWarnings = FALSE, recursive = TRUE)
 spec <- house_spec("portrait")
-p_final <- house_apply_logo(build_chart(), "portrait", x = 0.91, y = 0.145, width = 0.08, height = 0.08)
+p_final <- house_apply_logo(build_chart(), "portrait", x = 0.91, y = 0.19, width = 0.08, height = 0.08)
 
 ggsave(
   filename = out_path,
