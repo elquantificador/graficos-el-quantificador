@@ -29,6 +29,6 @@ Estos insumos resumen dos comparaciones sobre la gasolina en los hogares ecuator
 
 - INEC Ecuador, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR) 2011-2012.
 - INEC Ecuador, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR) 2024-2025.
-- Articulo asociado: https://elquantificador.blog/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/
+- Articulo asociado: https://elquantificador.org/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/
 
 
