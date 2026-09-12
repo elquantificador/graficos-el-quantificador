@@ -3,11 +3,11 @@
 ## Gráficos asociados
 
 - outputs/figures/31_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png
-- outputs/figures/gasolina-share_quintil-ingreso-2012-2025.png
+- outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png
 - Script de limpieza del gráfico 31: scripts/data-cleaning/clean_enighur_gasolina_transporte_quintiles.R
 - Script de visualización del gráfico 31: scripts/plots/plot_enighur_gasolina_transporte_quintiles.R
-- Script de limpieza del gráfico archivado: scripts/data-cleaning/clean_enighur_gasolina_share_quintiles_years.R
-- Script de visualización del gráfico archivado: scripts/plots/plot_enighur_gasolina_share_quintiles_years.R
+- Script de limpieza del gráfico 31_b: scripts/data-cleaning/clean_enighur_gasolina_share_quintiles_years.R
+- Script de visualización del gráfico 31_b: scripts/plots/plot_enighur_gasolina_share_quintiles_years.R
 
 ## Archivos fuente utilizados
 
