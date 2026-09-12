@@ -28,4 +28,4 @@ Estos insumos contienen tabulados de la Encuesta Nacional de Ingresos y Gastos d
 ## Fuente institucional
 
 - INEC Ecuador, Encuesta Nacional de Ingresos y Gastos de los Hogares Urbanos y Rurales (ENIGHUR) 2024-2025.
-- Artículo asociado: https://elquantificador.blog/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/
+- Artículo asociado: https://elquantificador.org/post/economia/2026-06-01-enighur-ingresos-gastos-ecuador/
