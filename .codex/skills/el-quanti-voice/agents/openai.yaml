@@ -1,0 +1,4 @@
+interface:
+  display_name: "Voz de El Quanti"
+  short_description: "Escribe y revisa artículos con la voz editorial"
+  default_prompt: "Usa $el-quanti-voice para escribir o revisar un artículo de El Quantificador."
