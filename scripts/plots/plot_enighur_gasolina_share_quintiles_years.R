@@ -3,7 +3,7 @@
 # Genera el grafico de la participacion de la gasolina dentro del
 # gasto monetario del hogar por quintil y encuesta.
 # Requiere: data/processed/enighur_gasolina_share_quintiles_years.rds
-# Guarda:   outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png
+# Guarda:   outputs/figures/47_gasolina-hogares-pobres-2012-2025.png
 # ============================================================
 
 source("scripts/utils.R")
@@ -13,7 +13,7 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 input_path <- "data/processed/enighur_gasolina_share_quintiles_years.rds"
 out_path <- Sys.getenv(
   "OUT_PATH",
-  unset = "outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png"
+  unset = "outputs/figures/47_gasolina-hogares-pobres-2012-2025.png"
 )
 
 chart_data <- readRDS(input_path)

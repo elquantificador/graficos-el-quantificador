@@ -29,11 +29,11 @@
   - Archivo draft: `outputs/figures/32_habilidades-demandadas-ecuador.png`
   - Pendiente: revisión editorial, fecha y enlace de publicación.
 
-- `31_b` - comparación de shares de gasolina entre encuestas.
+- `47` - comparación de shares de gasolina entre encuestas.
   - Status actual: `draft`
   - Serie: `enighur-gasolina`
   - Script ya disponible: `scripts/plots/plot_enighur_gasolina_share_quintiles_years.R`
-  - Archivo para publicación: `outputs/figures/31_b_gasolina-hogares-pobres-2012-2025.png`
+  - Archivo para publicación: `outputs/figures/47_gasolina-hogares-pobres-2012-2025.png`
   - Título definido: `Los hogares más pobres destinan más de sus recursos en gasolina que en 2012`.
   - Pendiente: publicar el 13 de septiembre de 2026 y añadir el enlace de publicación.
 
