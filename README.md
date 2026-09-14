@@ -90,6 +90,7 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 21. `44_antiguedad-empresas-activas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reem_antiguedad_empresas_activas.R)
 22. `46_canasta-basica-ingreso-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_inec_canasta_ingreso.R)
 23. `45_pisa-puntajes-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_pisa_ecuador_puntajes.R)
+24. `48_divorcios-hijos-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_remd_matrimonios_hijos.R)
 
 ## Notas sobre los datos
 
