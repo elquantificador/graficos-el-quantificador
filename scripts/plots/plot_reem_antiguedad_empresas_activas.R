@@ -49,7 +49,7 @@ p_base <- ggplot(df, aes(x = antiguedad_anios, y = porcentaje_empresas)) +
     "label",
     x = mediana + 2,
     y = max(df$porcentaje_empresas) * 0.92,
-    label = "Mediana: 11 a\u00f1os",
+    label = "Mediana: 11 años",
     size = 3,
     hjust = 0,
     linewidth = 0.2,
@@ -72,7 +72,7 @@ p_base <- ggplot(df, aes(x = antiguedad_anios, y = porcentaje_empresas)) +
     subtitle = wrap_subtitle_house(
       "Distribución de empresas por antigüedad, REEM 2025"
     ),
-    x = "Antig\u00fcedad de la empresa (a\u00f1os)",
+    x = "Antigüedad de la empresa (años)",
     y = "Porcentaje de empresas activas",
     caption = wrap_caption_house(caption_txt)
   ) +

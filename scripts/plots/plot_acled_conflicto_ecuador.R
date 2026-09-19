@@ -47,8 +47,8 @@ color_map <- c(
 
 category_labels <- c(
   "control_crimen" = "Control y Crimen Organizado",
-  "represion_manifestantes" = "Represi\u00F3n a Manifestantes",
-  "manifestacion_violenta" = "Manifestaci\u00F3n Violenta",
+  "represion_manifestantes" = "Represión a Manifestantes",
+  "manifestacion_violenta" = "Manifestación Violenta",
   "violencia_turbas" = "Violencia de Turbas",
   "enfrentamiento_armado" = "Enfrentamiento Armado",
   "ataques_explosivos_drones" = "Ataques Explosivos y con Drones",
@@ -61,12 +61,12 @@ total_box <- data.frame(
   label = paste0("Total de eventos\n", total_eventos_label)
 )
 
-title_raw <- "\u00BFC\u00F3mo ha evolucionado el conflicto en Ecuador?"
+title_raw <- "¿Cómo ha evolucionado el conflicto en Ecuador?"
 subtitle_raw <- "Eventos de conflicto registrados en Ecuador, 2018-2025"
 caption_raw <- paste0(
   "Fuente: ACLED (Armed Conflict Location & Event Data Project). ",
-  "Elaboraci\u00F3n: Mayari Tapia, ganadora del Concurso Ecuador Quantificado 2026, adaptaci\u00F3n por El Quantificador. ",
-  "Nota: El mapa re\u00FAne ", total_eventos_label, " eventos registrados entre enero de 2018 y el 8 de junio de 2025, sin incluir protestas pac\u00EDficas. El color identifica la categor\u00EDa t\u00E1ctica. Cada punto corresponde a una combinaci\u00F3n de categor\u00EDa y ubicaci\u00F3n; el tama\u00F1o indica el total de eventos y los valores de 15 o m\u00E1s se agrupan en la categor\u00EDa m\u00E1xima."
+  "Elaboración: Mayari Tapia, ganadora del Concurso Ecuador Quantificado 2026, adaptación por El Quantificador. ",
+  "Nota: El mapa reúne ", total_eventos_label, " eventos registrados entre enero de 2018 y el 8 de junio de 2025, sin incluir protestas pacíficas. El color identifica la categoría táctica. Cada punto corresponde a una combinación de categoría y ubicación; el tamaño indica el total de eventos y los valores de 15 o más se agrupan en la categoría máxima."
 )
 
 spec <- house_spec("portrait")
@@ -113,7 +113,7 @@ p_map <- ggplot2::ggplot() +
     values = color_map,
     breaks = names(color_map),
     labels = unname(category_labels[names(color_map)]),
-    name = "Categor\u00EDa",
+    name = "Categoría",
     drop = FALSE,
     guide = ggplot2::guide_legend(
       order = 2,
@@ -124,7 +124,7 @@ p_map <- ggplot2::ggplot() +
     range = c(0.7, 3.8),
     breaks = c(1, 3, 6, 10, 15),
     labels = c("1", "3", "6", "10", "15+"),
-    name = "N\u00B0 total de eventos",
+    name = "N° total de eventos",
     guide = ggplot2::guide_legend(
       order = 1,
       override.aes = list(fill = "#a0aec0", colour = "white", alpha = 1)

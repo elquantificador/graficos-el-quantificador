@@ -15,6 +15,11 @@ ensure_packages(c("dplyr", "ggplot2", "ragg"))
 in_path <- "data/processed/homicidios_hora.rds"
 out_path <- "outputs/figures/38_hora-asesinatos-ecuador.png"
 
+if (!file.exists(in_path)) {
+  message("No existe ", in_path, ". Ejecutando limpieza previa...")
+  source("scripts/data-cleaning/clean_homicidios_hora.R")
+}
+
 processed <- readRDS(in_path)
 df <- processed$data
 
@@ -80,10 +85,10 @@ p_base <- ggplot(df, aes(x = hora_factor, y = asesinatos)) +
   ) +
   labs(
     title = wrap_title_house(paste0("La mayor cantidad de asesinatos en Ecuador se registra a las ", peak$etiqueta_hora)),
-    subtitle = wrap_subtitle_house("Asesinatos por hora del d\u00EDa en Ecuador, 2017-2025"),
+    subtitle = wrap_subtitle_house("Asesinatos por hora del día en Ecuador, 2017-2025"),
     caption = wrap_caption_house(caption_raw),
     x = NULL,
-    y = "N\u00FAmero de asesinatos"
+    y = "Número de asesinatos"
   ) +
   theme_quantificador() +
   theme(

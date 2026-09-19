@@ -1,0 +1,28 @@
+name: Validate graphics pipeline
+
+on:
+  push:
+    paths:
+      - "outputs/chart_catalog/**"
+      - "outputs/figures/**"
+      - "scripts/**"
+      - ".github/workflows/validate-graphics.yml"
+  pull_request:
+    paths:
+      - "outputs/chart_catalog/**"
+      - "outputs/figures/**"
+      - "scripts/**"
+      - ".github/workflows/validate-graphics.yml"
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate chart catalog and PNG assets
+        run: python scripts/validate_chart_catalog.py

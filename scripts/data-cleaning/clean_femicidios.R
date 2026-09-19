@@ -12,12 +12,13 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr"))
 
 muertes_fem <- read.csv("data/raw/fiscalia/muertes_fem_fiscalia_2026.csv") %>%
-  rename(año = year, cantidad = value, tipo = category) %>%
-  filter(año < 2026) %>%
+  rename(anio = year, cantidad = value, tipo = category) %>%
+  filter(anio < 2026) %>%
   mutate(tipo = case_when(
     tipo == "Femicidios" ~ "Femicidios",
     TRUE                 ~ "Otras muertes"
-  ))
+  )) %>%
+  rename("año" = anio)
 
 dir.create("data/processed", showWarnings = FALSE)
 saveRDS(muertes_fem, "data/processed/femicidios.rds")
