@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import re
+import struct
 import sys
 from pathlib import Path
 
@@ -10,6 +11,8 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = REPO_ROOT / 'outputs' / 'chart_catalog' / 'chart_catalog.csv'
 FIGURES_DIR = REPO_ROOT / 'outputs' / 'figures'
 ALLOWED_STATUS = {'published', 'draft', 'supplementary', 'archived', 'hold'}
+PNG_SIGNATURE = b'\x89PNG\r\n\x1a\n'
+STANDARD_IMAGE_SIZE = (1200, 1500)
 REQUIRED_COLUMNS = [
     'Chart Name',
     'Subtitle',
@@ -27,6 +30,20 @@ REQUIRED_COLUMNS = [
 ]
 
 
+def read_png_dimensions(image_path: Path) -> tuple[int, int]:
+    with image_path.open('rb') as handle:
+        if handle.read(8) != PNG_SIGNATURE:
+            raise ValueError('file does not have a valid PNG signature')
+        chunk_length = handle.read(4)
+        chunk_type = handle.read(4)
+        if len(chunk_length) != 4 or chunk_type != b'IHDR':
+            raise ValueError('file does not begin with a PNG IHDR chunk')
+        dimensions = handle.read(8)
+        if len(dimensions) != 8:
+            raise ValueError('PNG IHDR chunk is incomplete')
+        return struct.unpack('>II', dimensions)
+
+
 def script_link_to_repo_path(script_link: str) -> Path | None:
     marker = '/blob/main/'
     if marker not in script_link:
@@ -42,6 +59,7 @@ def main() -> int:
         rows = list(reader)
 
     errors: list[str] = []
+    warnings: list[str] = []
     for column in REQUIRED_COLUMNS:
         if column not in fieldnames:
             errors.append(f'Missing required column: {column}')
@@ -102,6 +120,16 @@ def main() -> int:
 
         if image_path and not (REPO_ROOT / image_path).exists():
             errors.append(f'Row {row_number}: missing published image at {image_path}')
+        elif image_path:
+            try:
+                image_size = read_png_dimensions(REPO_ROOT / image_path)
+            except ValueError as exc:
+                errors.append(f'Row {row_number}: invalid PNG at {image_path}: {exc}')
+            else:
+                if image_size != STANDARD_IMAGE_SIZE:
+                    warnings.append(
+                        f'Row {row_number}: non-standard image size {image_size} at {image_path}'
+                    )
 
         repo_script_path = script_link_to_repo_path(script_link)
         if not script_link:
@@ -112,8 +140,16 @@ def main() -> int:
         if status == 'published':
             if not date_value:
                 errors.append(f'Row {row_number}: published row missing Date')
+            elif not re.fullmatch(r'\d{4}-\d{2}-\d{2}', date_value):
+                errors.append(
+                    f'Row {row_number}: published Date must use YYYY-MM-DD: {date_value}'
+                )
             if not linkedin_link:
                 errors.append(f'Row {row_number}: published row missing LinkedIn Link')
+            elif not re.match(r'https?://', linkedin_link):
+                errors.append(
+                    f'Row {row_number}: published LinkedIn Link must be an HTTP URL'
+                )
             if not image_path:
                 errors.append(f'Row {row_number}: published row missing Image Path')
 
@@ -123,6 +159,8 @@ def main() -> int:
             print(f'- {error}', file=sys.stderr)
         return 1
 
+    for warning in warnings:
+        print(f'Warning: {warning}', file=sys.stderr)
     print(f'Catalog OK: {len(rows)} rows validated.')
     return 0
 

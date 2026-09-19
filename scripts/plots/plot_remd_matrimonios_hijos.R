@@ -111,7 +111,7 @@ p_base <- ggplot2::ggplot(
   ggplot2::labs(
     title = wrap_title_house("A menos hijos, mayor la probabilidad de divorcio"),
     subtitle = wrap_subtitle_house("Porcentaje acumulado de matrimonios con un divorcio registrado, cohorte de 2020, seguimiento de cinco años"),
-    x = "A\u00f1os desde la inscripci\u00f3n",
+    x = "Años desde la inscripción",
     y = "Matrimonios con un divorcio registrado",
     caption = wrap_caption_house(paste(
       "Fuente: Registro Estadístico de Matrimonios y Divorcios (REMD) 2020-2025, INEC.",

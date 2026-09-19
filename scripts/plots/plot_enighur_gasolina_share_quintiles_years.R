@@ -22,7 +22,7 @@ plot_df <- chart_data$summary |>
     quintil_ingreso = factor(
       .data$quintil_ingreso,
       levels = c("Q1", "Q2", "Q3", "Q4", "Q5"),
-      labels = c("Q1 (m\u00e1s pobre)", "Q2", "Q3", "Q4", "Q5 (m\u00e1s rico)")
+      labels = c("Q1 (más pobre)", "Q2", "Q3", "Q4", "Q5 (más rico)")
     ),
     encuesta = factor(
       .data$encuesta,
@@ -32,7 +32,7 @@ plot_df <- chart_data$summary |>
     etiqueta = percent_intl(.data$share_gasto_monetario, accuracy = 0.1)
   )
 
-title_raw <- "Los hogares m\u00e1s pobres destinan m\u00e1s de sus recursos en gasolina que en 2012"
+title_raw <- "Los hogares más pobres destinan más de sus recursos en gasolina que en 2012"
 subtitle_raw <- "Gasolina como porcentaje del gasto monetario del hogar, por quintil de ingreso, ENIGHUR 2011-2012 y 2024-2025"
 caption_raw <- paste(
   "Fuente: ENIGHUR 2011-2012 y ENIGHUR 2024-2025, INEC. Elaboración: Daniel Sánchez para El Quantificador.",

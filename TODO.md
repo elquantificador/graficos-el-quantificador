@@ -8,34 +8,9 @@
 
 ## Next charts
 
-- `37_a` - razones para no estudiar entre jóvenes NINI, por sexo y nivel educativo.
-- `37_b` - razones para no trabajar entre jóvenes NINI, por sexo y nivel educativo.
-  - Status actual: `draft`
-  - Serie: `ecuador-quantificado-2026`
-  - Autora: Valeria Lizeth Marcayata Ojeda
-  - Archivos draft: `outputs/figures/37_a_ninis-razones-estudio-ecuador.png` y `outputs/figures/37_b_ninis-razones-trabajo-ecuador.png`
-  - Pendiente: aprobación editorial, fecha y enlace de publicación.
-
-- `36_a` - ranking provincial de informalidad frente a la tasa nacional.
-- `36_b` - informalidad y empleo no remunerado por provincia.
-  - Status actual: `draft`
-  - Serie: `ecuador-quantificado-2026`
-  - Autor: Juan Diego Sotomayor Jiménez
-  - Pendiente: fecha y enlace de publicación.
-
-- `32` - herramientas técnicas más demandadas en ofertas de empleo de datos y tecnología.
-  - Status actual: `draft`
-  - Serie: `mercado-laboral-datos`
-  - Archivo draft: `outputs/figures/32_habilidades-demandadas-ecuador.png`
-  - Pendiente: revisión editorial, fecha y enlace de publicación.
-
-- `47` - comparación de shares de gasolina entre encuestas.
-  - Status actual: `draft`
-  - Serie: `enighur-gasolina`
-  - Script ya disponible: `scripts/plots/plot_enighur_gasolina_share_quintiles_years.R`
-  - Archivo para publicación: `outputs/figures/47_gasolina-hogares-pobres-2012-2025.png`
-  - Título definido: `Los hogares más pobres destinan más de sus recursos en gasolina que en 2012`.
-  - Pendiente: publicar el 13 de septiembre de 2026 y añadir el enlace de publicación.
+- El catalogo actual no tiene filas en estado `draft`. Agrega aqui los nuevos
+  graficos mientras esten en preparacion y actualiza el estado cuando pasen la
+  revision editorial y la validacion tecnica.
 
 ## Archive / hold
 

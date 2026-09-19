@@ -83,7 +83,7 @@ p <- ggplot(plot_data, aes(x = anio, y = casos, color = serie, linetype = serie)
   labs(
     title = wrap_title_house("Aunque el presupuesto de la Policía aumentó 34%, las muertes intencionales aumentaron 10 veces"),
     subtitle = wrap_subtitle_house("Casos registrados y presupuesto liquidado de la Policía Nacional, 2017–2025"),
-    x = "A\u00F1o",
+    x = "Año",
     color = NULL,
     linetype = NULL,
     caption = wrap_caption_house(caption_raw)

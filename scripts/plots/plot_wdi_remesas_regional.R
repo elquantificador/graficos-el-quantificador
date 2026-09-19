@@ -39,7 +39,7 @@ growth_df <- plot_df |>
     .groups = "drop"
   ) |>
   dplyr::mutate(
-    pais_label = dplyr::recode(pais, Peru = "Per\u00FA"),
+    pais_label = dplyr::recode(pais, Peru = "Perú"),
     label = paste0(pais_label, " ", percent_intl(crecimiento / 100, accuracy = 0.1)),
     x_label = 2024.12,
     y_label = indice_final + dplyr::case_when(

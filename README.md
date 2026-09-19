@@ -67,30 +67,15 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 
 ## Graficos actuales
 
-1. `30_aranceles-colombia-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_aranceles_colombia.R)
-2. `31_gasolina-vs-transporte-publico_quintil-ingreso-ecuador.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_gasolina_transporte_quintiles.R)
-3. `31_b_gasolina-hogares-pobres-2012-2025.png` - [script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enighur_gasolina_share_quintiles_years.R)
-4. `32_habilidades-demandadas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_jobs_habilidades_mensuales.R)
-5. `33_a_horas-promedio_sector-formal-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_horas_sector_formal_linea.R)
-6. `33_b_horas-promedio_sector-informal-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_horas_sector_informal_linea.R)
-7. `36_a_ranking-informalidad_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_informalidad_provincial.R)
-8. `36_b_informalidad-empleo-no-remunerado_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_informalidad_provincial.R)
-9. `37_a_ninis-razones-estudio-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
-10. `37_b_ninis-razones-trabajo-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_nini_razones_sexo.R)
-11. `38_hora-asesinatos-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_homicidios_hora.R)
-12. `39_a_desapariciones-sin-resolver-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_desaparecidos_fatalidad.R)
-13. `39_b_crimen-presupuesto-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_crimen_desapariciones.R)
-14. `40_a_crecimiento-remesas-region-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_regional.R)
-15. `40_b_remesas-estados-unidos.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_origin.R)
-16. `40_c_evolucion-remesas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_wdi_remesas_merged.R)
-17. `41_costo-vida-ciudades-heatmap.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_ipc_ciudades_heatmap_leonor.R)
-18. `42_a_empleo-adecuado-juvenil_sexo-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_juventud_empleo_2025.R)
-19. `42_b_empleo-adecuado-juvenil_provincia-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_enemdu_juventud_empleo_2025.R)
-20. `43_conflicto-tacticas-visual-pass-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_acled_conflicto_ecuador.R)
-21. `44_antiguedad-empresas-activas-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_reem_antiguedad_empresas_activas.R)
-22. `46_canasta-basica-ingreso-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_inec_canasta_ingreso.R)
-23. `45_pisa-puntajes-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_pisa_ecuador_puntajes.R)
-24. `48_divorcios-hijos-ecuador.png` - [draft script](https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_remd_matrimonios_hijos.R)
+La lista completa y el estado de cada grafico estan en
+`outputs/chart_catalog/chart_catalog.csv`. Solo las filas con `Status=published`
+se sincronizan con el sitio de El Quantificador. El catalogo actual contiene 56
+graficos publicados.
+
+Los ultimos graficos publicados son:
+
+- `47_gasolina-hogares-pobres-2012-2025.png`
+- `48_divorcios-hijos-ecuador.png`
 
 ## Notas sobre los datos
 
