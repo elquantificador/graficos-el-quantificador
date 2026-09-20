@@ -11,6 +11,9 @@
 - El catalogo actual no tiene filas en estado `draft`. Agrega aqui los nuevos
   graficos mientras esten en preparacion y actualiza el estado cuando pasen la
   revision editorial y la validacion tecnica.
+- `49_contribuciones-inflacion-ecuador.png` esta en estado `draft`; revisar el
+  titulo, la paleta, la gasolina como componente separado, la leyenda y la
+  lectura editorial antes de publicar.
 
 ## Archive / hold
 
