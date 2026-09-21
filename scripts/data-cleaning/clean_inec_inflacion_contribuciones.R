@@ -12,6 +12,10 @@ input_zip <- file.path(
   "data/raw/ipc_inec_2026_08",
   "Tabulados_y_series_historicas_CSV_2026_08.zip"
 )
+old_incidence_zip <- file.path(
+  "data/raw/ipc_inec_2026_06",
+  "Series Incidencias.zip"
+)
 empalme_input_zip <- file.path(
   "data/raw/ipc_inec_2026_08",
   "Series_empalmadas_2026_07.zip"
@@ -94,9 +98,14 @@ parse_index <- function(raw_data) {
     "-",
     "_"
   )
-  column_names <- c(
-    "nivel", "codigo_ccif", "division", "ponderacion", month_names
-  )
+  column_names <- if (stringr::str_detect(
+    stringr::str_to_lower(header_values[2]),
+    "ponder"
+  )) {
+    c("nivel", "ponderacion", "codigo_ccif", "division", month_names)
+  } else {
+    c("nivel", "codigo_ccif", "division", "ponderacion", month_names)
+  }
 
   raw_data[-1, ] |>
     stats::setNames(column_names) |>
@@ -120,6 +129,79 @@ parse_index <- function(raw_data) {
       )
     ) |>
     dplyr::filter(!is.na(.data$fecha), !is.na(.data$indice))
+}
+
+read_old_annual_incidence <- function(zip_path) {
+  inner_zip_name <- "Series Incidencias/ipc_incid_nac_div_06_2026.zip"
+  annual_csv_name <- "ipc_incid_nac_div_06_2026/2.INCID. ANUAL.csv"
+  extraction_dir <- tempfile("ipc_old_incidence_")
+  dir.create(extraction_dir)
+  on.exit(unlink(extraction_dir, recursive = TRUE), add = TRUE)
+
+  utils::unzip(zip_path, files = inner_zip_name, exdir = extraction_dir)
+  inner_zip <- file.path(extraction_dir, inner_zip_name)
+  raw_data <- readr::read_csv(
+    unz(inner_zip, annual_csv_name),
+    skip = 4,
+    col_names = FALSE,
+    show_col_types = FALSE,
+    locale = readr::locale(encoding = "Latin1")
+  )
+  header_values <- raw_data[1, ] |>
+    unlist(use.names = FALSE) |>
+    as.character()
+  last_data_column <- max(
+    which(!is.na(header_values) & stringr::str_squish(header_values) != "")
+  )
+  month_names <- stringr::str_replace_all(
+    header_values[5:last_data_column], "-", "_"
+  )
+  column_names <- c(
+    "nivel", "ponderacion", "codigo", "division", month_names
+  )
+
+  data <- raw_data[-1, seq_len(last_data_column)] |>
+    stats::setNames(column_names)
+  month_index <- tibble::tibble(
+    month_name = month_names,
+    fecha = seq(
+      from = lubridate::ymd("2016-01-01"),
+      by = "month",
+      length.out = length(month_names)
+    )
+  )
+
+  list(
+    incidencias = data |>
+      dplyr::filter(
+        .data$nivel == "División",
+        stringr::str_detect(.data$codigo, "^[0-9]{2}$")
+      ) |>
+      tidyr::pivot_longer(
+        cols = dplyr::all_of(month_names),
+        names_to = "month_name",
+        values_to = "incidencia_anual"
+      ) |>
+      dplyr::mutate(
+        incidencia_anual = readr::parse_number(.data$incidencia_anual),
+        fecha = month_index$fecha[match(.data$month_name, month_index$month_name)]
+      ) |>
+      dplyr::filter(.data$fecha >= start_date, .data$fecha < lubridate::ymd("2026-07-01")) |>
+      dplyr::select(.data$fecha, .data$codigo, .data$division, .data$incidencia_anual),
+    inflacion_anual = data |>
+      dplyr::filter(.data$division == "Variación Anual Nacional") |>
+      tidyr::pivot_longer(
+        cols = dplyr::all_of(month_names),
+        names_to = "month_name",
+        values_to = "inflacion_anual"
+      ) |>
+      dplyr::mutate(
+        inflacion_anual = readr::parse_number(.data$inflacion_anual),
+        fecha = month_index$fecha[match(.data$month_name, month_index$month_name)]
+      ) |>
+      dplyr::filter(.data$fecha >= start_date, .data$fecha < lubridate::ymd("2026-07-01")) |>
+      dplyr::select(.data$fecha, .data$inflacion_anual)
+  )
 }
 
 calculate_contributions <- function(indices, weights, general_indices) {
@@ -155,6 +237,7 @@ indices_nueva_base_raw <- read_nested_csv(
 
 indices_empalmados <- parse_index(indices_empalmados_raw)
 indices_nueva_base <- parse_index(indices_nueva_base_raw)
+old_annual <- read_old_annual_incidence(old_incidence_zip)
 
 ponderaciones <- indices_nueva_base |>
   dplyr::filter(.data$fecha == max(.data$fecha)) |>
@@ -174,7 +257,7 @@ indices <- dplyr::bind_rows(
 
 # 3. Calculate contributions ----
 
-inflacion_anual <- indices |>
+inflacion_calculada <- indices |>
   dplyr::filter(.data$nivel == "General", .data$codigo_ccif == "Total") |>
   dplyr::transmute(
     fecha = .data$fecha,
@@ -187,10 +270,10 @@ inflacion_anual <- indices |>
     !is.na(.data$inflacion_anual)
   )
 
-general_indices <- inflacion_anual |>
+general_indices <- inflacion_calculada |>
   dplyr::select(.data$fecha, .data$indice_general_12_meses)
 
-incidencias <- indices |>
+incidencias_calculadas <- indices |>
   dplyr::filter(
     .data$nivel == "División",
     stringr::str_detect(.data$codigo_ccif, "^[0-9]{2}$")
@@ -205,14 +288,28 @@ incidencias <- indices |>
     division = .data$division,
     incidencia_anual = .data$incidencia_anual
   ) |>
+  dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01")) |>
   dplyr::group_by(.data$fecha) |>
   dplyr::mutate(
     incidencia_anual = .data$incidencia_anual *
-      inflacion_anual$inflacion_anual[
-        match(.data$fecha, inflacion_anual$fecha)
+      inflacion_calculada$inflacion_anual[
+        match(.data$fecha, inflacion_calculada$fecha)
       ] / sum(.data$incidencia_anual)
   ) |>
   dplyr::ungroup()
+
+incidencias <- dplyr::bind_rows(
+  old_annual$incidencias,
+  incidencias_calculadas
+)
+
+inflacion_anual <- dplyr::bind_rows(
+  old_annual$inflacion_anual,
+  inflacion_calculada |>
+    dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01")) |>
+    dplyr::select(.data$fecha, .data$inflacion_anual)
+) |>
+  dplyr::arrange(.data$fecha)
 
 # La clase 0722 incluye combustibles y lubricantes para equipo de transporte
 # personal. Sustituye la estimación previa de gasolina por una categoría INEC.
