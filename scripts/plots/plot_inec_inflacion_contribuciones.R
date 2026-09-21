@@ -21,7 +21,7 @@ base_change_date <- lubridate::ymd("2026-07-01")
 component_labels <- c(
   "Alimentos y bebidas",
   "Vivienda y servicios básicos",
-  "Gasolina",
+  "Combustibles y lubricantes",
   "Resto del transporte",
   "Bienes y servicios diversos",
   "Restaurantes y hoteles",
@@ -77,7 +77,7 @@ incidencias <- processed$incidencias |>
     .data$fecha <= end_date
   )
 
-gasolina <- processed$gasolina |>
+combustibles <- processed$combustibles |>
   dplyr::filter(
     .data$fecha >= start_date,
     .data$fecha <= end_date
@@ -85,43 +85,43 @@ gasolina <- processed$gasolina |>
 
 component_data <- dplyr::bind_rows(
   incidencias |>
-    dplyr::filter(.data$codigo_ccif == "01") |>
+    dplyr::filter(.data$codigo == "01") |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Alimentos y bebidas",
       incidencia_anual = .data$incidencia_anual
     ),
   incidencias |>
-    dplyr::filter(.data$codigo_ccif == "04") |>
+    dplyr::filter(.data$codigo == "04") |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Vivienda y servicios básicos",
       incidencia_anual = .data$incidencia_anual
     ),
-  gasolina |>
+  combustibles |>
     dplyr::transmute(
       fecha = .data$fecha,
-      component = "Gasolina",
-      incidencia_anual = .data$incidencia_gasolina
+      component = "Combustibles y lubricantes",
+      incidencia_anual = .data$incidencia_anual
     ),
   incidencias |>
-    dplyr::filter(.data$codigo_ccif == "07") |>
-    dplyr::left_join(gasolina, by = "fecha") |>
+    dplyr::filter(.data$codigo == "07") |>
+    dplyr::left_join(combustibles, by = "fecha") |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Resto del transporte",
-      incidencia_anual = .data$incidencia_anual -
-        .data$incidencia_gasolina
+      incidencia_anual = .data$incidencia_anual.x -
+        .data$incidencia_anual.y
     ),
   incidencias |>
-    dplyr::filter(.data$codigo_ccif == "12") |>
+    dplyr::filter(.data$codigo == "12") |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Bienes y servicios diversos",
       incidencia_anual = .data$incidencia_anual
     ),
   incidencias |>
-    dplyr::filter(.data$codigo_ccif == "11") |>
+    dplyr::filter(.data$codigo == "11") |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Restaurantes y hoteles",
@@ -129,86 +129,7 @@ component_data <- dplyr::bind_rows(
     ),
   incidencias |>
     dplyr::filter(
-      .data$codigo_ccif %in% c(
-        "02", "03", "05", "06", "08", "09", "10"
-      )
-    ) |>
-    dplyr::group_by(.data$fecha) |>
-    dplyr::summarise(
-      component = "Otras divisiones",
-      incidencia_anual = sum(.data$incidencia_anual),
-      .groups = "drop"
-    )
-)
-
-component_data <- component_data |>
-  dplyr::mutate(
-    component = factor(
-      .data$component,
-      levels = component_labels,
-      labels = names(component_colors)[seq_along(component_labels)]
-    )
-  )
-
-new_incidencias <- processed$incidencias_nueva |>
-  dplyr::filter(
-    .data$fecha >= base_change_date,
-    .data$fecha <= end_date
-  )
-
-new_gasolina <- processed$gasolina_nueva |>
-  dplyr::filter(
-    .data$fecha >= base_change_date,
-    .data$fecha <= end_date
-  )
-
-new_component_data <- dplyr::bind_rows(
-  new_incidencias |>
-    dplyr::filter(.data$codigo_ccif == "01") |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Alimentos y bebidas",
-      incidencia_anual = .data$incidencia_anual
-    ),
-  new_incidencias |>
-    dplyr::filter(.data$codigo_ccif == "04") |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Vivienda y servicios básicos",
-      incidencia_anual = .data$incidencia_anual
-    ),
-  new_gasolina |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Gasolina",
-      incidencia_anual = .data$incidencia_gasolina
-    ),
-  new_incidencias |>
-    dplyr::filter(.data$codigo_ccif == "07") |>
-    dplyr::left_join(new_gasolina, by = "fecha") |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Resto del transporte",
-      incidencia_anual = .data$incidencia_anual -
-        .data$incidencia_gasolina
-    ),
-  new_incidencias |>
-    dplyr::filter(.data$codigo_ccif == "12") |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Bienes y servicios diversos",
-      incidencia_anual = .data$incidencia_anual
-    ),
-  new_incidencias |>
-    dplyr::filter(.data$codigo_ccif == "11") |>
-    dplyr::transmute(
-      fecha = .data$fecha,
-      component = "Restaurantes y hoteles",
-      incidencia_anual = .data$incidencia_anual
-    ),
-  new_incidencias |>
-    dplyr::filter(
-      .data$codigo_ccif %in% c(
+      .data$codigo %in% c(
         "02", "03", "05", "06", "08", "09", "10", "13"
       )
     ) |>
@@ -218,28 +139,7 @@ new_component_data <- dplyr::bind_rows(
       incidencia_anual = sum(.data$incidencia_anual),
       .groups = "drop"
     )
-)
-
-new_line <- processed$inflacion_anual |>
-  dplyr::filter(
-    .data$fecha >= base_change_date,
-    .data$fecha <= end_date
-  )
-
-new_component_data <- new_component_data |>
-  dplyr::left_join(new_line, by = "fecha") |>
-  dplyr::group_by(.data$fecha) |>
-  dplyr::mutate(
-    incidencia_anual = dplyr::if_else(
-      .data$component == "Otras divisiones",
-      .data$incidencia_anual + .data$inflacion_anual - sum(
-        .data$incidencia_anual
-      ),
-      .data$incidencia_anual
-    )
-  ) |>
-  dplyr::ungroup() |>
-  dplyr::select(-inflacion_anual) |>
+) |>
   dplyr::mutate(
     component = factor(
       .data$component,
@@ -247,11 +147,6 @@ new_component_data <- new_component_data |>
       labels = names(component_colors)[seq_along(component_labels)]
     )
   )
-
-component_data <- dplyr::bind_rows(
-  component_data,
-  new_component_data
-)
 
 inflacion_anual <- processed$inflacion_anual |>
   dplyr::filter(
@@ -289,23 +184,21 @@ y_limits <- c(
 
 # 3. Calculate estimates ----
 
-title_raw <- "¿Qué explica la inflación anual en Ecuador?"
+title_raw <- paste(
+  "Combustibles y lubricantes lideran la inflación en 2026,",
+  "tras años dominados por alimentos y vivienda"
+)
 subtitle_raw <- paste(
-  "Siete componentes de la inflación anual, con gasolina separada,",
+  "Siete componentes de la inflación anual, con combustibles y lubricantes separados,",
   "enero de 2022 a agosto de 2026"
 )
 caption_raw <- paste(
-  "Fuente: INEC, Índice de Precios al Consumidor, serie oficial de",
-  "incidencias y series empalmadas, corte agosto de 2026. Elaboración:",
-  "Daniel Sánchez Pazmiño para El Quantificador. Las barras muestran puntos",
-  "porcentuales aportados por cada componente y la línea muestra la inflación",
-  "anual. Hasta junio de 2026 se usa la base 2014 = 100; desde julio se usa",
-  "la nueva base julio 2025 - junio 2026 = 100. La línea vertical marca el",
-  "cambio de base y canasta. Gasolina se calcula con productos del INEC hasta",
-  "junio de 2026 y se aproxima desde julio distribuyendo la clase 0722 según",
-  "el peso de los productos de gasolina de la nueva canasta. Las otras",
-  "divisiones agrupan los rubros no desagregados. Otras divisiones incorpora",
-  "el residual de la nueva base para cerrar con la línea."
+  "Fuente: INEC, Índice de Precios al Consumidor, corte agosto de 2026.",
+  "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
+  "Las barras muestran puntos porcentuales y la línea la inflación anual.",
+  "Combustibles y lubricantes corresponde a la clase 0722 del INEC.",
+  "Desde julio de 2026, las contribuciones se calculan con las series",
+  "empalmadas y las ponderaciones de la nueva canasta."
 )
 
 p_base <- ggplot(
@@ -317,13 +210,6 @@ p_base <- ggplot(
   )
 ) +
   geom_col(width = 25, alpha = 0.94) +
-  geom_vline(
-    xintercept = base_change_date,
-    colour = "grey35",
-    linewidth = 0.35,
-    linetype = "dashed",
-    inherit.aes = FALSE
-  ) +
   geom_line(
     data = inflacion_anual,
     aes(
@@ -354,6 +240,12 @@ p_base <- ggplot(
     key_glyph = draw_key_component_or_line
   ) +
   geom_hline(yintercept = 0, colour = "grey45", linewidth = 0.35) +
+  geom_vline(
+    xintercept = base_change_date,
+    colour = "grey45",
+    linetype = "dashed",
+    linewidth = 0.35
+  ) +
   scale_fill_manual(
     values = component_colors,
     breaks = names(component_colors),
@@ -361,13 +253,7 @@ p_base <- ggplot(
   ) +
   scale_x_date(
     date_breaks = "1 year",
-    minor_breaks = seq(
-      from = start_date,
-      to = end_date,
-      by = "month"
-    ),
     date_labels = "%Y",
-    guide = ggplot2::guide_axis(minor.ticks = TRUE),
     expand = expansion(mult = c(0.01, 0.02))
   ) +
   scale_y_continuous(
@@ -391,13 +277,6 @@ p_base <- ggplot(
     panel.grid.major.y = element_line(colour = "grey88", linewidth = 0.25),
     panel.grid.minor = element_blank(),
     axis.line = element_line(colour = "grey60", linewidth = 0.3),
-    axis.ticks.x = element_line(colour = "grey55", linewidth = 0.3),
-    axis.minor.ticks.x.bottom = element_line(
-      colour = "grey45",
-      linewidth = 0.45
-    ),
-    axis.ticks.length.x = grid::unit(2.5, "pt"),
-    axis.minor.ticks.length.x.bottom = grid::unit(2, "pt"),
     legend.position = "bottom",
     legend.title = element_text(size = 6.2),
     legend.text = element_text(size = 5.1, lineheight = 0.9),
@@ -405,8 +284,8 @@ p_base <- ggplot(
     legend.spacing.x = grid::unit(0.08, "cm"),
     legend.box = "vertical",
     legend.box.spacing = grid::unit(0.05, "cm"),
-    legend.box.margin = margin(t = 2, unit = "pt"),
-    plot.margin = margin(6, 10, 8, 8)
+    legend.box.margin = margin(t = -3, unit = "pt"),
+    plot.margin = margin(6, 10, 4, 8)
   ) +
   guides(
     fill = guide_legend(
