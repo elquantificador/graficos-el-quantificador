@@ -322,7 +322,8 @@ combustibles <- indices |>
   dplyr::transmute(
     fecha = .data$fecha,
     incidencia_anual = .data$incidencia_anual
-  )
+  ) |>
+  dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01"))
 
 # 4. Write outputs ----
 
@@ -338,7 +339,8 @@ processed <- list(
     method = paste(
       "Contribuciones anuales calculadas con índices empalmados y",
       "ponderaciones de la canasta vigente desde julio de 2026,",
-      "normalizadas para reconciliar con la inflación general publicada."
+      "normalizadas para reconciliar con la inflación general publicada.",
+      "La clase 0722 se muestra solo desde julio de 2026."
     )
   )
 )

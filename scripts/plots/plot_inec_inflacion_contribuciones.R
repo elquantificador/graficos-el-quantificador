@@ -22,7 +22,7 @@ component_labels <- c(
   "Alimentos y bebidas",
   "Vivienda y servicios básicos",
   "Combustibles y lubricantes",
-  "Resto del transporte",
+  "Transporte",
   "Bienes y servicios diversos",
   "Restaurantes y hoteles",
   "Otras divisiones"
@@ -105,11 +105,18 @@ component_data <- dplyr::bind_rows(
       incidencia_anual = .data$incidencia_anual
     ),
   incidencias |>
-    dplyr::filter(.data$codigo == "07") |>
+    dplyr::filter(.data$codigo == "07", .data$fecha < base_change_date) |>
+    dplyr::transmute(
+      fecha = .data$fecha,
+      component = "Transporte",
+      incidencia_anual = .data$incidencia_anual
+    ),
+  incidencias |>
+    dplyr::filter(.data$codigo == "07", .data$fecha >= base_change_date) |>
     dplyr::left_join(combustibles, by = "fecha") |>
     dplyr::transmute(
       fecha = .data$fecha,
-      component = "Resto del transporte",
+      component = "Transporte",
       incidencia_anual = .data$incidencia_anual.x -
         .data$incidencia_anual.y
     ),
@@ -185,20 +192,24 @@ y_limits <- c(
 # 3. Calculate estimates ----
 
 title_raw <- paste(
-  "Combustibles y lubricantes lideran la inflación en 2026,",
-  "tras años dominados por alimentos y vivienda"
+  "Los motores de la inflación cambian entre alimentos,",
+  "vivienda y combustibles"
 )
 subtitle_raw <- paste(
-  "Siete componentes de la inflación anual, con combustibles y lubricantes separados,",
-  "enero de 2022 a agosto de 2026"
+  "Contribuciones a la inflación anual, enero de 2022 a agosto de 2026.",
+  "Combustibles y lubricantes se separan desde julio de 2026,",
+  "con la nueva canasta del IPC"
 )
 caption_raw <- paste(
   "Fuente: INEC, Índice de Precios al Consumidor, corte agosto de 2026.",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
   "Las barras muestran puntos porcentuales y la línea la inflación anual.",
-  "Combustibles y lubricantes corresponde a la clase 0722 del INEC.",
+  "Antes de julio de 2026, transporte se muestra como división completa.",
+  "Combustibles y lubricantes corresponde a la clase 0722 del INEC",
+  "desde julio de 2026.",
   "Desde julio de 2026, las contribuciones se calculan con las series",
-  "empalmadas y las ponderaciones de la nueva canasta."
+  "empalmadas y las ponderaciones de la nueva canasta; son estimaciones",
+  "reconstruidas que se ajustan al total de inflación publicado."
 )
 
 p_base <- ggplot(

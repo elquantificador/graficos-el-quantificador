@@ -4,7 +4,7 @@
 
 Instituto Nacional de Estadística y Censos (INEC), Índice de Precios al Consumidor (IPC), corte de agosto de 2026.
 
-Los insumos están en `data/raw/ipc_inec_2026_08/`: los tabulados de agosto y las series empalmadas publicadas con el cambio de base de julio de 2026.
+Los insumos son `data/raw/ipc_inec_2026_06/Series Incidencias.zip`, con las incidencias oficiales hasta junio de 2026, y los tabulados y series empalmadas de `data/raw/ipc_inec_2026_08/`.
 
 La fuente oficial es <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-consumidor-2026/>.
 
@@ -12,9 +12,9 @@ La fuente oficial es <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-co
 
 El gráfico cubre enero de 2022 a agosto de 2026. Se muestran las divisiones 01, 04, 07, 11 y 12, y se agrupan las demás en `Otras divisiones`.
 
-`Combustibles y lubricantes` corresponde a la clase 0722 del INEC. `Resto del transporte` es la contribución de transporte menos esa clase.
+Hasta junio de 2026, transporte se muestra como división completa. `Combustibles y lubricantes` corresponde a la clase 0722 del INEC y se desagrega únicamente desde julio de 2026, cuando entra la nueva canasta.
 
-Desde julio de 2026 el INEC usa una nueva base, canasta y clasificación. El script combina las series empalmadas con los tabulados de agosto. Las contribuciones se calculan a partir de los índices y ponderaciones vigentes y se normalizan al total de inflación anual publicado, de modo que las barras reconcilien con la línea sin agregar una categoría residual.
+Desde julio de 2026 el INEC usa una nueva base, canasta y clasificación. El script combina las series empalmadas con los tabulados de agosto. Las contribuciones posteriores se calculan a partir de los índices y ponderaciones vigentes y se normalizan al total de inflación anual publicado. Son estimaciones reconstruidas, no incidencias anuales publicadas directamente por el INEC.
 
 ## Reproducción
 
