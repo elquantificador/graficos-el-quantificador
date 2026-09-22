@@ -192,8 +192,8 @@ y_limits <- c(
 # 3. Calculate estimates ----
 
 title_raw <- paste(
-  "Repuntó el aporte de vivienda tras la crisis energética;",
-  "combustibles lideran la inflación en 2026"
+  "Los combustibles lideran la inflación en 2026 tras el repunte de vivienda",
+  "después de la crisis energética"
 )
 subtitle_raw <- "Contribuciones a la inflación (IPC), por componente, 2024-2026"
 caption_raw <- paste(
