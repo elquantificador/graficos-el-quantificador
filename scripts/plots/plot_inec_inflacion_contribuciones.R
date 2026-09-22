@@ -196,9 +196,7 @@ title_raw <- paste(
   "vivienda y combustibles"
 )
 subtitle_raw <- paste(
-  "Contribuciones a la inflación anual, enero de 2022 a agosto de 2026.",
-  "Combustibles y lubricantes se separan desde julio de 2026,",
-  "con la nueva canasta del IPC"
+  "Contribuciones a la inflación (IPC), por componente, 2022-2026"
 )
 caption_raw <- paste(
   "Fuente: INEC, Índice de Precios al Consumidor, corte agosto de 2026.",
