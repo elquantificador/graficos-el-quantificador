@@ -192,8 +192,8 @@ y_limits <- c(
 # 3. Calculate estimates ----
 
 title_raw <- paste(
-  "Combustibles y lubricantes lideran la inflación en 2026,",
-  "tras años dominados por alimentos y vivienda"
+  "Descuentos eléctricos redujeron el aporte de vivienda en 2025;",
+  "combustibles lideran en 2026"
 )
 subtitle_raw <- "Contribuciones a la inflación (IPC), por componente, 2024-2026"
 caption_raw <- paste(
