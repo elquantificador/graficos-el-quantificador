@@ -260,7 +260,9 @@ p_base <- ggplot(
   ) +
   scale_x_date(
     date_breaks = "1 year",
+    date_minor_breaks = "1 month",
     date_labels = "%Y",
+    guide = guide_axis(minor.ticks = TRUE),
     expand = expansion(mult = c(0.01, 0.02))
   ) +
   scale_y_continuous(
@@ -279,6 +281,8 @@ p_base <- ggplot(
   theme_quantificador() +
   theme(
     axis.text.x = element_text(size = 6.2),
+    axis.minor.ticks.x.bottom = element_line(colour = "grey45", linewidth = 0.25),
+    axis.minor.ticks.length.x = grid::unit(1.2, "mm"),
     axis.text.y = element_text(size = 6.4),
     axis.title.y = element_text(size = 7),
     panel.grid.major.y = element_line(colour = "grey88", linewidth = 0.25),
