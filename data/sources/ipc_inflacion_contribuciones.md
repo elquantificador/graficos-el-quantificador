@@ -4,7 +4,7 @@
 
 Instituto Nacional de Estadística y Censos (INEC), Índice de Precios al Consumidor (IPC), corte de agosto de 2026.
 
-Los insumos son `data/raw/ipc_inec_2026_06/Series Incidencias.zip`, con las incidencias oficiales hasta junio de 2026, y los tabulados y series empalmadas de `data/raw/ipc_inec_2026_08/`.
+Los insumos son `data/raw/ipc_inec_2026_06/Series Incidencias.zip`, con las incidencias oficiales hasta junio de 2026, y los tabulados de julio y agosto junto con las series empalmadas de `data/raw/ipc_inec_2026_08/`.
 
 La fuente oficial es <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-consumidor-2026/>.
 
