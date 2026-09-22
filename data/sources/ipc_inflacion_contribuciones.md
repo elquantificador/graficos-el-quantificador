@@ -10,7 +10,7 @@ La fuente oficial es <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-co
 
 ## Método
 
-El gráfico cubre enero de 2022 a agosto de 2026. Se muestran las divisiones 01, 04, 07, 11 y 12, y se agrupan las demás en `Otras divisiones`.
+El gráfico cubre enero de 2024 a agosto de 2026. Se muestran las divisiones 01, 04, 07, 11 y 12, y se agrupan las demás en `Otras divisiones`.
 
 Hasta junio de 2026, transporte se muestra como división completa. `Combustibles y lubricantes` corresponde a la clase 0722 del INEC y se desagrega únicamente desde julio de 2026, cuando entra la nueva canasta.
 
