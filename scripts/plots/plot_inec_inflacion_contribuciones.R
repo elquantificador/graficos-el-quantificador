@@ -14,7 +14,7 @@ ensure_packages(c("dplyr", "ggplot2", "lubridate", "ragg", "scales", "stringr"))
 
 input_path <- "data/processed/inec_inflacion_contribuciones.rds"
 out_path <- "outputs/figures/49_contribuciones-inflacion-ecuador.png"
-start_date <- lubridate::ymd("2022-01-01")
+start_date <- lubridate::ymd("2024-01-01")
 end_date <- lubridate::ymd("2026-08-01")
 base_change_date <- lubridate::ymd("2026-07-01")
 
@@ -195,7 +195,7 @@ title_raw <- paste(
   "Combustibles y lubricantes lideran la inflación en 2026,",
   "tras años dominados por alimentos y vivienda"
 )
-subtitle_raw <- "Contribuciones a la inflación (IPC), por componente, 2022-2026"
+subtitle_raw <- "Contribuciones a la inflación (IPC), por componente, 2024-2026"
 caption_raw <- paste(
   "Fuente: INEC, Índice de Precios al Consumidor, corte agosto de 2026.",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
