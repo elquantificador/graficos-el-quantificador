@@ -5,7 +5,7 @@
 - Archivo crudo: `data/raw/lgbti/7. Base_datos_ENCV_LGBTI+_2025_tratada_fexp_VF_V3.xlsx`
 - Archivo procesado: `data/processed/lgbti_aceptacion_orientacion_identidad_2025.rds`
 - Script de limpieza: `scripts/data-cleaning/clean_lgbti_aceptacion_orientacion_identidad.R`
-- Script de gráfico: `scripts/plots/plot_lgbti_aceptacion_orientacion_identidad.R`
+- Script de gráfico: `scripts/plots/plot_27_a_lgbti_aceptacion_orientacion_identidad.R`
 
 ## Construcción
 

@@ -36,7 +36,7 @@ La pieza conserva el periodo declarado por la autora, 2018–2025, y documenta q
 
 ```powershell
 Rscript scripts/data-cleaning/clean_acled_conflicto_ecuador.R
-Rscript scripts/plots/plot_acled_conflicto_ecuador.R
+Rscript scripts/plots/plot_43_acled_conflicto_ecuador.R
 ```
 
 La salida es `outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png`.

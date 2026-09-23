@@ -30,5 +30,5 @@ Desde la raíz del repositorio, tras descargar localmente el ZIP oficial en la r
 
 ```powershell
 Rscript scripts/data-cleaning/clean_reem_antiguedad_empresas_activas.R
-Rscript scripts/plots/plot_reem_antiguedad_empresas_activas.R
+Rscript scripts/plots/plot_44_reem_antiguedad_empresas_activas.R
 ```

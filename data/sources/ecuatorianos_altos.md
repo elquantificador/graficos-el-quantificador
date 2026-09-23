@@ -5,7 +5,7 @@
 - Archivo crudo: `data/raw/ensanut/1_BDD_ENS2018_f1_personas.dta.zip`
 - Archivo procesado: `data/processed/ecuatorianos_altos_ensanut_2018.rds`
 - Script de limpieza: `scripts/data-cleaning/clean_ecuatorianos_altos.R`
-- Script de gráfico: `scripts/plots/plot_ecuatorianos_altos.R`
+- Script de gráfico: `scripts/plots/plot_01_ecuatorianos_altos.R`
 
 ## Construcción
 

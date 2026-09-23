@@ -29,4 +29,4 @@ El script `clean_ras_personal_salud.R` reorganiza la serie nacional a formato la
 ## Script asociado
 
 - Limpieza: `scripts/data-cleaning/clean_ras_personal_salud.R`
-- Visualización: `scripts/plots/plot_ras_personal_salud.R`
+- Visualización: `scripts/plots/plot_18_ras_personal_salud.R`

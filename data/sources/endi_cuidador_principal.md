@@ -33,7 +33,7 @@ Niños y niñas menores de 5 años incluidos en el módulo `f2_salud_niñez`, co
 ## Notas
 
 - Script de limpieza: `scripts/data-cleaning/clean_endi_cuidador_principal.R`
-- Script de gráfico: `scripts/plots/plot_endi_cuidador_principal.R`
+- Script de gráfico: `scripts/plots/plot_15_endi_cuidador_principal.R`
 - La categoría `Padre o abuelos` agrupa `Padre` y `Abuelo, abuela`.
 - La categoría `Otros` agrupa `Tíos/tías`, `Miembros del hogar de 10 años y más`, `Miembros del hogar menores de 10 años`, `Otros familiares, vecinos/as o amigos/as`, `Empleada o niñera` y `Se queda solo`.
 - `Centro de Desarrollo Infantil (CDI)` se mantiene como categoría separada.

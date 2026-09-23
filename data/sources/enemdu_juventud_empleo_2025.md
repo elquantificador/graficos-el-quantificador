@@ -40,5 +40,5 @@ Desde la raíz del repositorio:
 
 ```powershell
 Rscript scripts/data-cleaning/clean_enemdu_juventud_empleo_2025.R
-Rscript scripts/plots/plot_enemdu_juventud_empleo_2025.R
+Rscript scripts/plots/plot_42_a_42_b_enemdu_juventud_empleo_2025.R
 ```

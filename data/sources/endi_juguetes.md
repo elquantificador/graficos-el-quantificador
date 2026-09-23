@@ -41,7 +41,7 @@ Niños y niñas incluidos en el módulo `f3_desarrollo_inf` con respuesta válid
 ## Notas
 
 - Script de limpieza: `scripts/data-cleaning/clean_endi_juguetes.R`
-- Script de gráfico: `scripts/plots/plot_endi_juguetes.R`
+- Script de gráfico: `scripts/plots/plot_19_endi_juguetes.R`
 - El módulo `f3` contiene 9,836 registros en esta copia del dataset.
 - La visualización publicada omite la barra de `f3_s1_100_c` y destaca ese resultado en el texto de apoyo: `97,2%` juega con juguetes comprados en un almacén o mercado.
 - La pregunta se interpreta como batería de selección múltiple, por lo que las proporciones no suman 100%.

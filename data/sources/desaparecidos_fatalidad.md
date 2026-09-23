@@ -30,5 +30,5 @@ Elaboración: Eddie Bryan Tomalá Figueroa para El Quantificador.
 
 ```powershell
 Rscript scripts/data-cleaning/clean_desaparecidos_fatalidad.R
-Rscript scripts/plots/plot_desaparecidos_fatalidad.R
+Rscript scripts/plots/plot_39_a_desaparecidos_fatalidad.R
 ```

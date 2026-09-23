@@ -54,10 +54,10 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 | ENIGHUR 2024-2025, hogares con dos adultos y dos hijos para comparación con la canasta | `enighur/enighur_2025_hogares_2adultos_2hijos.csv` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
 | Canasta básica e ingreso familiar, enero 2025 | `inec_canasta_ingreso/canasta_vs_ingreso_karel.csv` | Usado en `clean_inec_canasta_ingreso.R` | `inec_canasta_ingreso.md` |
 | ACLED conflicto en Ecuador, 2018-2025 | `acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv` | Usado en `clean_acled_conflicto_ecuador.R`; disponible previa solicitud por sensibilidad | `acled_conflicto_ecuador.md` |
-| Marco Geoestadístico 2022 del INEC | `inec_geoestadistico_2022/shapefile/` | Usado en `plot_acled_conflicto_ecuador.R` | `inec_geoestadistico_2022.md` |
-| REEM 2025, tabulado de antigüedad de empresas activas | `reem/reem_2025_antiguedad_empresas_activas.csv` | Usado en `clean_reem_antiguedad_empresas_activas.R` y `plot_reem_antiguedad_empresas_activas.R` | `reem_antiguedad_empresas_activas.md` |
-| PISA Ecuador, PISA-D 2017 y PISA 2025 | `pisa_ecuador/pisa_ecuador_mean_scores.csv`, `pisa_ecuador/pisa_2025_tables_ib1_2a_36_38.xlsx`, `pisa_ecuador/pisa_participation_by_cycle.xlsx` | Usado en `clean_pisa_ecuador_puntajes.R` y `plot_pisa_ecuador_puntajes.R` | `pisa_ecuador.md` |
-| REMD 2020-2025, cohorte de matrimonios inscritos en 2020 | `remd_matrimonios/cohort_2020_survival_input.csv` | Usado en `clean_remd_matrimonios_hijos.R` y `plot_remd_matrimonios_hijos.R` | `remd_matrimonios_hijos.md` |
+| Marco Geoestadístico 2022 del INEC | `inec_geoestadistico_2022/shapefile/` | Usado en `plot_43_acled_conflicto_ecuador.R` | `inec_geoestadistico_2022.md` |
+| REEM 2025, tabulado de antigüedad de empresas activas | `reem/reem_2025_antiguedad_empresas_activas.csv` | Usado en `clean_reem_antiguedad_empresas_activas.R` y `plot_44_reem_antiguedad_empresas_activas.R` | `reem_antiguedad_empresas_activas.md` |
+| PISA Ecuador, PISA-D 2017 y PISA 2025 | `pisa_ecuador/pisa_ecuador_mean_scores.csv`, `pisa_ecuador/pisa_2025_tables_ib1_2a_36_38.xlsx`, `pisa_ecuador/pisa_participation_by_cycle.xlsx` | Usado en `clean_pisa_ecuador_puntajes.R` y `plot_45_pisa_ecuador_puntajes.R` | `pisa_ecuador.md` |
+| REMD 2020-2025, cohorte de matrimonios inscritos en 2020 | `remd_matrimonios/cohort_2020_survival_input.csv` | Usado en `clean_remd_matrimonios_hijos.R` y `plot_48_remd_matrimonios_hijos.R` | `remd_matrimonios_hijos.md` |
 
 ## Cobertura de documentacion
 

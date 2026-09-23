@@ -4,7 +4,7 @@
 
 - `outputs/figures/20_descomposicion-ingreso-hogar-ecuador.png`
 - Script de limpieza: `scripts/data-cleaning/clean_enighur_ingreso_gasto.R`
-- Script de visualización: `scripts/plots/plot_enighur_ingreso_gasto.R`
+- Script de visualización: `scripts/plots/plot_20_enighur_ingreso_gasto.R`
 
 ## Archivos fuente utilizados
 

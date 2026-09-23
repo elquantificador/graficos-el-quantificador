@@ -33,6 +33,6 @@ El script también calcula un estimado nacional agregado y lo guarda por separad
 ## Notas
 
 - Script de limpieza: `scripts/data-cleaning/clean_endi_anemia_quintil.R`
-- Script de gráfico: `scripts/plots/plot_endi_anemia_quintil.R`
+- Script de gráfico: `scripts/plots/plot_14_endi_anemia_quintil.R`
 - El indicador `ane6_23_new` solo está disponible para la subpoblación relevante; el resto de observaciones se excluye mediante `NA`.
 - El archivo por quintil contiene la prevalencia, su intervalo de confianza y un conteo simple `n` por grupo. Ese `n` no reemplaza la estimación ponderada.

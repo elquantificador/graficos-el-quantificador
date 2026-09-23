@@ -4,7 +4,7 @@
 
 - `outputs/figures/46_canasta-basica-ingreso-ecuador.png`
 - Limpieza: `scripts/data-cleaning/clean_inec_canasta_ingreso.R`
-- Visualización: `scripts/plots/plot_inec_canasta_ingreso.R`
+- Visualización: `scripts/plots/plot_46_inec_canasta_ingreso.R`
 
 ## Fuente y procedencia
 
