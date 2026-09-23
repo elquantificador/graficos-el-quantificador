@@ -59,5 +59,5 @@ Desde la raíz del repositorio:
 
 ```r
 Rscript scripts/data-cleaning/clean_enemdu_nini_razones_sexo.R
-Rscript scripts/plots/plot_enemdu_nini_razones_sexo.R
+Rscript scripts/plots/plot_37_a_37_b_enemdu_nini_razones_sexo.R
 ```

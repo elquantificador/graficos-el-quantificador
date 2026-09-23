@@ -30,4 +30,4 @@ Prevalencia de desnutrición crónica (retardo en talla) por grupo étnico, con 
 
 ## Notas
 - Script de limpieza: `scripts/data-cleaning/clean_endi_desnutricion.R`
-- Script de gráfico: `scripts/plots/plot_endi_desnutricion.R`
+- Script de gráfico: `scripts/plots/plot_07_endi_desnutricion.R`

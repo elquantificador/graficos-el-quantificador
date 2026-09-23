@@ -19,5 +19,5 @@ Desde julio de 2026 el INEC usa una nueva base, canasta y clasificación. El scr
 ## Reproducción
 
 - Limpieza: `scripts/data-cleaning/clean_inec_inflacion_contribuciones.R`
-- Visualización: `scripts/plots/plot_inec_inflacion_contribuciones.R`
+- Visualización: `scripts/plots/plot_49_inec_inflacion_contribuciones.R`
 - Salida: `outputs/figures/49_contribuciones-inflacion-ecuador.png`

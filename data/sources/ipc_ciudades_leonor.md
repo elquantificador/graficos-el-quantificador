@@ -23,7 +23,7 @@ La visualización muestra cortes de diciembre de cada año y junio de 2026, siem
 ## Reproducción
 
 - Limpieza: `scripts/data-cleaning/clean_ipc_ciudades_leonor.R`
-- Visualización: `scripts/plots/plot_ipc_ciudades_heatmap_leonor.R`
+- Visualización: `scripts/plots/plot_41_a_ipc_ciudades_heatmap_leonor.R`
 - Salida: `outputs/figures/41_costo-vida-ciudades-heatmap.png`
 
 ## Limitaciones

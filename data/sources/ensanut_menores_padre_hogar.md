@@ -5,7 +5,7 @@
 - Archivo crudo: `data/raw/ensanut/1_BDD_ENS2018_f1_personas.dta.zip`
 - Archivo procesado: `data/processed/ensanut_menores_padre_hogar.rds`
 - Script de limpieza: `scripts/data-cleaning/clean_ensanut_menores_padre_hogar.R`
-- Script de gráfico: `scripts/plots/plot_ensanut_menores_padre_hogar.R`
+- Script de gráfico: `scripts/plots/plot_24_ensanut_menores_padre_hogar.R`
 
 ## Construcción
 

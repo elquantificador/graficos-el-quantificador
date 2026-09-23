@@ -55,7 +55,7 @@ Estados permitidos en `Status`:
 
 1. Colocar datos crudos en `data/raw/[source]/`.
 2. Crear `scripts/data-cleaning/clean_[source]_[topic].R`.
-3. Crear `scripts/plots/plot_[source]_[topic].R`.
+3. Crear `scripts/plots/plot_[viz_number]_[source]_[topic].R`.
 4. Generar el `.png` en `outputs/figures/`.
 5. Registrar o actualizar la fila en `outputs/chart_catalog/chart_catalog.csv`.
 6. Validar con `python scripts/validate_chart_catalog.py`.

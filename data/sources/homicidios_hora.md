@@ -22,7 +22,7 @@ La pieza responde a qué hora del día se registra la mayor cantidad de asesinat
 
 ```powershell
 Rscript scripts/data-cleaning/clean_homicidios_hora.R
-Rscript scripts/plots/plot_homicidios_hora.R
+Rscript scripts/plots/plot_38_homicidios_hora.R
 ```
 
 ## Copy de publicación

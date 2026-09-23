@@ -41,4 +41,4 @@ Archivo utilizado: `data/raw/ef_epi/ef_epi_ecuador_extracted.xlsx`, hoja `Job_Fu
 ## Notas
 - Los valores de `Job_Functions_Exact` son extraídos directamente de texto visible en el PDF (método: `exact_text`), no estimados visualmente.
 - Script de limpieza: `scripts/data-cleaning/clean_ef_epi_job.R`
-- Script de gráfico: `scripts/plots/plot_ef_epi_job.R`
+- Script de gráfico: `scripts/plots/plot_08_ef_epi_job.R`

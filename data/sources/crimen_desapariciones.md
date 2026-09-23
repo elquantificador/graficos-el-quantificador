@@ -35,5 +35,5 @@ Elaboración: Angel Alava González para El Quantificador.
 
 ```powershell
 Rscript scripts/data-cleaning/clean_crimen_desapariciones.R
-Rscript scripts/plots/plot_crimen_desapariciones.R
+Rscript scripts/plots/plot_39_b_crimen_desapariciones.R
 ```

@@ -5,7 +5,7 @@
 - Archivo crudo: `data/raw/fbref/ecuatorianos_big5_minutos_2019_2026.csv`
 - Archivo procesado: `data/processed/fbref_ecuatorianos_big5.rds`
 - Script de limpieza: `scripts/data-cleaning/clean_fbref_ecuatorianos_big5.R`
-- Script de gráfico: `scripts/plots/plot_fbref_ecuatorianos_big5.R`
+- Script de gráfico: `scripts/plots/plot_23_fbref_ecuatorianos_big5.R`
 
 ## Construcción
 

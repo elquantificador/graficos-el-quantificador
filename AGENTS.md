@@ -35,7 +35,7 @@ graficos-el-quantificador/
 | Raw data folder | `data/raw/[source_abbreviation]/` | `data/raw/enighur/` |
 | Processed file | `data/processed/[source]_[topic].rds` | `data/processed/enighur_ingreso_gasto.rds` |
 | Clean script | `scripts/data-cleaning/clean_[source]_[topic].R` | `clean_enighur_ingreso_gasto.R` |
-| Plot script | `scripts/plots/plot_[source]_[topic].R` | `plot_enighur_ingreso_gasto.R` |
+| Plot script | `scripts/plots/plot_[viz_number]_[source]_[topic].R` | `plot_20_enighur_ingreso_gasto.R` |
 | Output PNG (portrait) | `outputs/figures/NN_[slug]-ecuador.png` | `20_descomposicion-ingreso-hogar-ecuador.png` |
 
 `NN` is the chart's sequential number in the catalog (zero-padded to 2 digits).
@@ -191,7 +191,7 @@ message("Guardado: ", out_path)
 
 1. Place raw data in `data/raw/[source]/`
 2. Write `scripts/data-cleaning/clean_[source]_[topic].R`
-3. Write `scripts/plots/plot_[source]_[topic].R`
+3. Write `scripts/plots/plot_[viz_number]_[source]_[topic].R`
 4. Run both from repo root and verify output at `outputs/figures/NN_slug-ecuador.png`
 5. Add a row to `outputs/chart_catalog/chart_catalog.csv`
 6. Run `python scripts/validate_chart_catalog.py` and fix any catalog errors before commit
@@ -221,7 +221,7 @@ Always from the **repo root**:
 
 ```bash
 Rscript scripts/data-cleaning/clean_enighur_ingreso_gasto.R
-Rscript scripts/plots/plot_enighur_ingreso_gasto.R
+Rscript scripts/plots/plot_20_enighur_ingreso_gasto.R
 ```
 
 ## What not to do
