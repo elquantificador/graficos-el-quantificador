@@ -191,7 +191,7 @@ y_limits <- c(
 
 # 3. Calculate estimates ----
 
-title_raw <- "Tras el repunte de vivienda, los combustibles ganan peso en la inflación"
+title_raw <- "Los combustibles ganan peso\ntras el repunte de vivienda"
 subtitle_raw <- "Contribuciones a la inflación (IPC), por componente, 2024-2026"
 caption_raw <- paste(
   "Fuente: INEC, Índice de Precios al Consumidor, corte agosto de 2026.",
@@ -269,7 +269,7 @@ p_base <- ggplot(
     expand = expansion(mult = c(0, 0))
   ) +
   labs(
-    title = wrap_title_house(title_raw),
+    title = title_raw,
     subtitle = wrap_subtitle_house(subtitle_raw, width = 62),
     x = NULL,
     y = "Puntos porcentuales",
