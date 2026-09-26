@@ -7,7 +7,7 @@
 - `Chart Name`: titulo publico del grafico.
 - `Subtitle`: subtitulo publico.
 - `Date`: fecha de publicacion o fecha prevista en formato `YYYY-MM-DD`.
-- `LinkedIn Link`: enlace a la publicacion original.
+- `LinkedIn Link`: enlace a la publicacion original en LinkedIn (`linkedin.com`). Las filas `published` que comparten este enlace se publican como una sola pagina en el sitio.
 - `Image Filename`: nombre del PNG publicado.
 - `Image Path`: ruta relativa al repo bajo `outputs/figures/`.
 - `Author`: nombre visible del autor o autores.
