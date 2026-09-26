@@ -150,6 +150,10 @@ def main() -> int:
                 errors.append(
                     f'Row {row_number}: published LinkedIn Link must be an HTTP URL'
                 )
+            elif not re.match(r'https?://([a-z]{2,3}\.|www\.)?linkedin\.com/', linkedin_link):
+                errors.append(
+                    f'Row {row_number}: published LinkedIn Link must point to linkedin.com: {linkedin_link}'
+                )
             if not image_path:
                 errors.append(f'Row {row_number}: published row missing Image Path')
 
