@@ -95,9 +95,9 @@ png_device <- if (requireNamespace("ragg", quietly = TRUE)) ragg::agg_png else "
 ggplot2::ggsave(
   filename = out_path,
   plot = p_final,
-  width = 3.6,
-  height = 4.9,
-  dpi = 320,
+  width = 4,
+  height = 5,
+  dpi = 300,
   device = png_device,
   bg = "white"
 )
