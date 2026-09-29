@@ -98,7 +98,6 @@ p_base <- ggplot(df, aes(x = hora_factor, y = asesinatos)) +
     axis.ticks = element_blank(),
     panel.grid.major = element_line(color = "grey85", linewidth = 0.35, linetype = "dashed"),
     panel.grid.minor = element_blank(),
-    # Excepción autorizada para aprovechar el espacio vertical del lienzo.
     plot.margin = margin(-12, 36, -12, 16)
   )
 
@@ -110,8 +109,7 @@ ggsave(
   out_path,
   plot = p_final,
   width = spec$width,
-  # Excepción autorizada: lienzo más corto para eliminar bandas vacías.
-  height = 4.2,
+  height = spec$height,
   units = "in",
   dpi = spec$dpi,
   device = ragg::agg_png,
