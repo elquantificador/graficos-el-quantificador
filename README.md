@@ -77,6 +77,10 @@ Los ultimos graficos publicados son:
 - `47_gasolina-hogares-pobres-2012-2025.png`
 - `48_divorcios-hijos-ecuador.png`
 
+En preparacion:
+
+- `50_importaciones-colombia-ecuador.png` (fila 47 del pipeline; comparar enero-julio de 2025 y 2026)
+
 ## Notas sobre los datos
 
 Los archivos de datos crudos viven bajo `data/raw/`, organizados por tema o fuente. El inventario y las fichas metodologicas estan en `data/sources/`, empezando por `data/sources/README.md`.
