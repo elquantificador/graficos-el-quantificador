@@ -8,12 +8,14 @@
 
 ## Next charts
 
-- El catalogo actual no tiene filas en estado `draft`. Agrega aqui los nuevos
-  graficos mientras esten en preparacion y actualiza el estado cuando pasen la
-  revision editorial y la validacion tecnica.
+- Registra aqui los graficos en estado `draft` mientras esten en preparacion y
+  actualiza su estado cuando pasen la revision editorial y la validacion tecnica.
 - `49_contribuciones-inflacion-ecuador.png` esta en estado `draft`; revisar el
   titulo, la paleta, la gasolina como componente separado, la leyenda y la
   lectura editorial antes de publicar.
+- `50_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
+  titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
+  de publicar.
 
 ## Archive / hold
 
