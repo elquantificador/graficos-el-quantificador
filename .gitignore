@@ -11,7 +11,6 @@ data/raw/reem/DATOS_ABIERTOS_REEM_2025.zip
 
 # Insumos locales grandes para la réplica del mapa de conflicto
 data/raw/acled_conflicto_ecuador/
-outputs/figures/43_conflicto-tacticas-ecuador.png
 
 # Artefactos locales de revisión y difusión
 quality_reports/
