@@ -8,6 +8,20 @@ Este directorio documenta los insumos crudos almacenados en `data/raw/` y las fi
 - `data/processed/` contiene derivados generados por los scripts de `scripts/data-cleaning/`.
 - `data/sources/` contiene fichas descriptivas, notas metodologicas e inventario.
 
+## Datos crudos no versionados
+
+Para mantener el repositorio liviano, los archivos comprimidos y los microdatos grandes no se versionan. Para reproducir un grafico, descarga el archivo desde la fuente oficial y colocalo en la ruta indicada, desde la raiz del proyecto. Los scripts de limpieza listados leen exactamente esas rutas.
+
+| Archivo local esperado | Fuente oficial | Scripts que lo usan |
+|---|---|---|
+| `data/raw/enemdu/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip` | <https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2025/anual/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip> | `clean_enemdu_juventud_empleo_2025.R`, `clean_enemdu_nini_razones_sexo.R` |
+| `data/raw/ensanut/1_BDD_ENS2018_f1_personas.dta.zip` | Portal del INEC (<https://www.ecuadorencifras.gob.ec>), seccion ENSANUT 2018, base de datos del formulario 1 (personas), formato Stata | `clean_ecuatorianos_altos.R`, `clean_ensanut_menores_padre_hogar.R` |
+| `data/raw/ipc_inec_2026_06/` y `data/raw/ipc_inec_2026_08/` (zips de series, tabulados e incidencias del IPC) | <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-consumidor-2026/>; cada zip lleva el mes de publicacion en su nombre | `clean_inec_inflacion_contribuciones.R`, `clean_ipc_ciudades_leonor.R` |
+| `data/raw/reem/DATOS_ABIERTOS_REEM_2025.zip` (622 MB; solo se versiona el tabulado derivado) | <https://www.ecuadorencifras.gob.ec/documentos/web-inec/Estadisticas_Economicas/Registro_Empresas_Establecimientos/2025/Semestre_I/DATOS_ABIERTOS_REEM_2025.zip> | `clean_reem_antiguedad_empresas_activas.R` |
+| `data/raw/acled_conflicto_ecuador/` | ACLED, disponible previa solicitud por sensibilidad; ver `acled_conflicto_ecuador.md` | `clean_acled_conflicto_ecuador.R` |
+
+Las fichas `.md` de cada fuente documentan la version, el archivo interno utilizado y las notas metodologicas.
+
 ## Inventario actual de datasets crudos
 
 | Tema | Ruta en `data/raw/` | Estado | Fuente |
