@@ -16,7 +16,7 @@ graficos-el-quantificador/
 │   └── sources/        # Dataset inventory and methodological notes
 ├── outputs/
 │   ├── figures/        # Published PNG files (versioned, numbered NN_slug-ecuador.png)
-│   ├── tables/         # Generated Excel/HTML (not versioned)
+│   ├── tables/         # Generated Excel/HTML/CSV summary tables (versioned, small)
 │   └── chart_catalog/  # chart_catalog.csv (manual catalog consumed by the website)
 ├── scripts/
 │   ├── packages.R      # ensure_packages() helper — auto-installs from CRAN
@@ -231,4 +231,6 @@ Rscript scripts/plots/plot_20_enighur_ingreso_gasto.R
 - Do not hardcode absolute paths.
 - Do not export SVG to `outputs/figures/` — PNG only.
 - Do not commit files under `data/processed/` (gitignored).
+- Do not overload the repo. Keep it light: no zip archives, no large microdata, no files that scripts regenerate. Commit only small extracted inputs and the tables and figures that are published. Large or restricted raw inputs stay local and are documented in `data/sources/README.md` (section "Datos crudos no versionados") with the official URL and the exact local path, so anyone can re-download them to reproduce a chart.
+- Do not commit a file over ~50 MB. If a raw input is larger, document how to obtain it instead.
 - Do not add per-chart README files — the central `README.md` and `data/sources/README.md` cover documentation.
