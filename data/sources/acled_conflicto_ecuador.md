@@ -32,6 +32,8 @@ La pieza conserva el periodo declarado por la autora, 2018–2025, y documenta q
 4. Para la visualización final se excluyen las protestas pacíficas. Los eventos restantes se agrupan por latitud, longitud y categoría. El tamaño del punto se limita a 15 para conservar legibilidad.
 5. El mapa utiliza los segmentos de límites provinciales del Marco Geoestadístico 2022 del INEC, documentados en `inec_geoestadistico_2022.md`.
 
+El RDS específico del gráfico, `data/processed/acled_conflicto_ecuador_43.rds`, contiene únicamente las 1.269 combinaciones de ubicación y categoría que se dibujan, con `n_eventos` y `n_eventos_cap`.
+
 ## Reproducción
 
 ```powershell
@@ -40,3 +42,4 @@ Rscript scripts/plots/plot_43_acled_conflicto_ecuador.R
 ```
 
 La salida es `outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png`.
+La réplica Observable usa el mismo RDS reducido mediante `quantificador/scripts/export_observable_charts.R`.
