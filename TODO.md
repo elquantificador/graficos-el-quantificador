@@ -13,9 +13,12 @@
 - `49_contribuciones-inflacion-ecuador.png` esta en estado `draft`; revisar el
   titulo, la paleta, la gasolina como componente separado, la leyenda y la
   lectura editorial antes de publicar.
-- `50_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
+- `51_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
   titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
   de publicar.
+- `50_mercado-laboral-pobreza-ecuador.png` esta en estado `draft`; es la pieza
+  de apoyo al articulo sobre el retraso de las cifras del INEC y tiene fecha
+  prevista de publicacion el 9 de octubre de 2026.
 
 ## Archive / hold
 
