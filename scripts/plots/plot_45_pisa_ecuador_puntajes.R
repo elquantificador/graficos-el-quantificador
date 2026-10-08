@@ -3,7 +3,6 @@
 # Genera el panel de puntajes promedio de Ecuador en PISA.
 # Requiere: data/processed/pisa_ecuador_puntajes.rds
 # Guarda:   outputs/figures/45_pisa-puntajes-ecuador.png
-#           outputs/figures/45_pisa-puntajes-ecuador.svg
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/plots/plot_45_pisa_ecuador_puntajes.R
@@ -11,11 +10,10 @@
 
 source("scripts/utils.R")
 source("scripts/packages.R")
-ensure_packages(c("dplyr", "ggplot2", "scales", "ragg", "svglite"))
+ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 input_path <- "data/processed/pisa_ecuador_puntajes.rds"
 png_path <- "outputs/figures/45_pisa-puntajes-ecuador.png"
-svg_path <- "outputs/figures/45_pisa-puntajes-ecuador.svg"
 
 chart_data <- readRDS(input_path)
 plot_df <- chart_data$summary |>
@@ -136,14 +134,4 @@ ggplot2::ggsave(
   bg = "white"
 )
 
-ggplot2::ggsave(
-  filename = svg_path,
-  plot = house_apply_logo(p_base, "portrait", x = 0.88, y = 0.16),
-  width = spec$width,
-  height = spec$height,
-  device = svglite::svglite,
-  bg = "white"
-)
-
 message("Guardado: ", png_path)
-message("Guardado: ", svg_path)

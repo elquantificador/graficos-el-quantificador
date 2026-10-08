@@ -43,11 +43,11 @@ Para comparar años, usa los mismos meses en ambos períodos y mantén una sola 
 
 El [boletín oficial de SENAE](https://www.aduana.gob.ec/gaceta-boletin/aplicacion-de-la-resolucion-nro-senae-senae-2026-0006-re-acerca-de-tasa-por-servicio-aduanero-por-concepto-de-control-aduanero-a-las-mercancias-que-ingresen-desde-colombia/) informó que la tasa por servicio de control aduanero a las mercancías que ingresaran desde Colombia entró en vigor el 1 de febrero de 2026, bajo la Resolución SENAE-SENAE-2026-0006-RE. La página oficial actualmente indica que la resolución no está vigente. La coincidencia de fechas no permite atribuir a esta medida todo el cambio observado en importaciones.
 
-## Scripts del gráfico 50
+## Scripts del gráfico 51
 
 - Limpieza: `scripts/data-cleaning/clean_bce_comercio_colombia.R`.
-- Gráfico: `scripts/plots/plot_50_bce_importaciones_colombia.R`.
-- Salida: `outputs/figures/50_importaciones-colombia-ecuador.png`.
+- Gráfico: `scripts/plots/plot_51_bce_importaciones_colombia.R`.
+- Salida: `outputs/figures/51_importaciones-colombia-ecuador.png`.
 
 ## Exportaciones hacia Colombia
 
@@ -89,11 +89,11 @@ Al comparar los totales de enero a julio de 2026 con los mismos meses de 2025, l
 
 El limpiador `scripts/data-cleaning/clean_bce_comercio_colombia.R` lee los CSV de importaciones y exportaciones. Guarda `data/processed/bce_comercio_colombia.rds`, con las columnas `fecha`, `serie` y `valor_millones_usd`: 31 meses por serie y 62 filas en total.
 
-El gráfico `scripts/plots/plot_50_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/50_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. La línea punteada marca el 1 de febrero de 2026. Los datos de recaudación se conservan como material complementario.
+El gráfico `scripts/plots/plot_51_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/51_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. La línea punteada marca el 1 de febrero de 2026. Los datos de recaudación se conservan como material complementario.
 
 Ejecuta desde la raíz del repositorio:
 
 ```powershell
 Rscript scripts/data-cleaning/clean_bce_comercio_colombia.R
-Rscript scripts/plots/plot_50_bce_importaciones_colombia.R
+Rscript scripts/plots/plot_51_bce_importaciones_colombia.R
 ```

@@ -79,7 +79,7 @@ Los ultimos graficos publicados son:
 
 En preparacion:
 
-- `50_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
+- `51_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
 
 ## Notas sobre los datos
 
