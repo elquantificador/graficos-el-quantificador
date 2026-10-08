@@ -1,7 +1,7 @@
 # ============================================================
 # plot_43_acled_conflicto_ecuador.R
 # Renderiza la vista acumulada del mapa de tácticas de conflicto en Ecuador.
-# Requiere: data/processed/acled_conflicto_ecuador.rds,
+# Requiere: data/processed/acled_conflicto_ecuador_43.rds,
 #           data/raw/inec_geoestadistico_2022/shapefile/provincias/provincias.shp
 # Guarda:   outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png
 # ============================================================
@@ -13,19 +13,14 @@ source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("cowplot", "dplyr", "ggplot2", "sf", "ragg", "scales"))
 
-processed_path <- "data/processed/acled_conflicto_ecuador.rds"
+processed_path <- "data/processed/acled_conflicto_ecuador_43.rds"
 boundary_path <- "data/raw/inec_geoestadistico_2022/shapefile/provincias/provincias.shp"
 out_path <- "outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png"
 
-objeto <- readRDS(processed_path)
-datos <- objeto$data
+datos <- readRDS(processed_path)
 ecuador_base <- sf::st_read(boundary_path, quiet = TRUE)
 
-data_agregada <- datos %>%
-  dplyr::group_by(latitude, longitude, categoria_id) %>%
-  dplyr::summarise(n_eventos = dplyr::n(), .groups = "drop") %>%
-  dplyr::filter(categoria_id != "protesta_pacifica") %>%
-  dplyr::mutate(n_eventos_cap = pmin(n_eventos, 15))
+data_agregada <- datos
 
 total_eventos <- sum(data_agregada$n_eventos)
 total_eventos_label <- scales::number(

@@ -3,6 +3,7 @@
 # Limpia el CSV maestro de ACLED y recategoriza los eventos para el mapa.
 # Requiere: data/raw/acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv
 # Guarda:   data/processed/acled_conflicto_ecuador.rds
+#           data/processed/acled_conflicto_ecuador_43.rds
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/data-cleaning/clean_acled_conflicto_ecuador.R
@@ -13,6 +14,7 @@ ensure_packages(c("dplyr", "readr"))
 
 raw_path <- "data/raw/acled_conflicto_ecuador/acled_ecuador_maestro_20260903.csv"
 out_path <- "data/processed/acled_conflicto_ecuador.rds"
+plot_out_path <- "data/processed/acled_conflicto_ecuador_43.rds"
 
 required_columns <- c(
   "event_id_cnty", "event_date", "year_month", "sub_event_type",
@@ -116,8 +118,16 @@ metadata <- list(
   category_counts = datos_limpios %>% dplyr::count(concurso, name = "events")
 )
 
+datos_grafico_43 <- datos_limpios %>%
+  dplyr::group_by(latitude, longitude, categoria_id) %>%
+  dplyr::summarise(n_eventos = dplyr::n(), .groups = "drop") %>%
+  dplyr::filter(categoria_id != "protesta_pacifica") %>%
+  dplyr::mutate(n_eventos_cap = pmin(n_eventos, 15))
+
 dir.create(dirname(out_path), showWarnings = FALSE, recursive = TRUE)
 saveRDS(list(data = datos_limpios, metadata = metadata), out_path)
+saveRDS(datos_grafico_43, plot_out_path)
 message("Guardado: ", out_path)
+message("Guardado: ", plot_out_path, " (", nrow(datos_grafico_43), " puntos agregados)")
 message("Eventos crudos: ", n_raw, " | eventos usados: ", nrow(datos_limpios))
 message("Cobertura del archivo: ", format(metadata$first_event), " a ", format(metadata$last_event))

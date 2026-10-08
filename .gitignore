@@ -4,7 +4,9 @@ outputs/figures/*.pdf
 scripts/plots/plot_salario_vs_ipc.R
 
 # Datos procesados (derivados de los datos crudos)
-data/processed/
+!data/processed/
+data/processed/*
+!data/processed/acled_conflicto_ecuador_43.rds
 
 # Microdato REEM usado solo localmente para generar el tabulado versionado
 data/raw/reem/DATOS_ABIERTOS_REEM_2025.zip
