@@ -29,11 +29,7 @@ plot_data <- processed$data |>
     )
   )
 
-title_raw <- paste(
-  "Ecuador no cuenta con cifras actualizadas",
-  "del mercado laboral desde mayo de 2026",
-  sep = "\n"
-)
+title_raw <- "Ecuador no tiene datos de empleo desde mayo de 2026 (y el Banco Mundial pide justificaciones)"
 subtitle_raw <- paste(
   "Indicadores del mercado laboral y pobreza, ENEMDU 2026"
 )
@@ -68,7 +64,7 @@ p_base <- ggplot2::ggplot(
   ) +
   ggplot2::coord_flip(clip = "off") +
   ggplot2::labs(
-    title = title_raw,
+    title = wrap_title_house(title_raw),
     subtitle = wrap_subtitle_house(subtitle_raw),
     x = NULL,
     y = "Porcentaje",
