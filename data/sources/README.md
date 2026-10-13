@@ -19,6 +19,8 @@ Para mantener el repositorio liviano, los archivos comprimidos y los microdatos 
 | `data/raw/ipc_inec_2026_06/` y `data/raw/ipc_inec_2026_08/` (zips de series, tabulados e incidencias del IPC) | <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-consumidor-2026/>; cada zip lleva el mes de publicacion en su nombre | `clean_inec_inflacion_contribuciones.R`, `clean_ipc_ciudades_leonor.R` |
 | `data/raw/reem/DATOS_ABIERTOS_REEM_2025.zip` (622 MB; solo se versiona el tabulado derivado) | <https://www.ecuadorencifras.gob.ec/documentos/web-inec/Estadisticas_Economicas/Registro_Empresas_Establecimientos/2025/Semestre_I/DATOS_ABIERTOS_REEM_2025.zip> | `clean_reem_antiguedad_empresas_activas.R` |
 | `data/raw/acled_conflicto_ecuador/` | ACLED, disponible previa solicitud por sensibilidad; ver `acled_conflicto_ecuador.md` | `clean_acled_conflicto_ecuador.R` |
+| `data/raw/enemdu/enemdu_persona_2017_12.sav` y microdatos ENEMDU de diciembre 2018-2020 | INEC, ENEMDU histórico; ver `rural_income_electricity.md` | `clean_rural_income_electricity.R` |
+| `data/raw/enemdu/rural_income_reference.csv`, `data/raw/ipc/ipc_december_indices.csv`, `data/raw/arconel/distribution_energy_reference.csv` | Series extraídas de INEC, IPC e ARCONEL; ver `rural_income_electricity.md` | `clean_rural_income_electricity.R` |
 
 Las fichas `.md` de cada fuente documentan la version, el archivo interno utilizado y las notas metodologicas.
 
