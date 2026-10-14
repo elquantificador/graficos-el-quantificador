@@ -10,11 +10,13 @@ La fuente oficial es <https://www.ecuadorencifras.gob.ec/indice-de-precios-al-co
 
 ## Método
 
-El gráfico cubre enero de 2024 a agosto de 2026. Se muestran las divisiones 01, 04, 07, 11 y 12, y se agrupan las demás en `Otras divisiones`.
+El gráfico cubre enero de 2024 a agosto de 2026. Se muestran las divisiones 01, 04, 07 y 11, junto con la categoría comparable de bienes y servicios diversos: código 12 hasta junio y código 13 desde julio. Las demás divisiones se agrupan en `Otras divisiones`.
 
 Hasta junio de 2026, transporte se muestra como división completa. `Combustibles y lubricantes` corresponde a la clase 0722 del INEC y se desagrega únicamente desde julio de 2026, cuando entra la nueva canasta.
 
-Desde julio de 2026 el INEC usa una nueva base, canasta y clasificación. El script combina las series empalmadas con los tabulados de agosto. Las contribuciones posteriores se calculan a partir de los índices y ponderaciones vigentes y se normalizan al total de inflación anual publicado. Son estimaciones reconstruidas, no incidencias anuales publicadas directamente por el INEC.
+Desde julio de 2026 el INEC usa una nueva base, canasta y clasificación. El script combina las series empalmadas con los tabulados de agosto. Las contribuciones posteriores se calculan a partir de los índices y ponderaciones vigentes y se normalizan al total de inflación anual publicado con un factor común. Ese mismo factor se aplica a la clase 0722 antes de separarla de la división Transporte. Son estimaciones reconstruidas, no incidencias anuales publicadas directamente por el INEC.
+
+La clasificación también cambia desde julio de 2026: bienes y servicios diversos corresponde al código 12 hasta junio y al código 13 desde julio. El código 12 desde julio identifica seguros y servicios financieros, que se agrupan en “Otras divisiones” para mantener la categoría comparable en el gráfico.
 
 ## Reproducción
 
