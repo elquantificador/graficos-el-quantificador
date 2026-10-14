@@ -121,7 +121,20 @@ component_data <- dplyr::bind_rows(
         .data$incidencia_anual.y
     ),
   incidencias |>
-    dplyr::filter(.data$codigo == "12") |>
+    dplyr::filter(
+      .data$codigo == "12",
+      .data$fecha < base_change_date
+    ) |>
+    dplyr::transmute(
+      fecha = .data$fecha,
+      component = "Bienes y servicios diversos",
+      incidencia_anual = .data$incidencia_anual
+    ),
+  incidencias |>
+    dplyr::filter(
+      .data$codigo == "13",
+      .data$fecha >= base_change_date
+    ) |>
     dplyr::transmute(
       fecha = .data$fecha,
       component = "Bienes y servicios diversos",
@@ -138,7 +151,8 @@ component_data <- dplyr::bind_rows(
     dplyr::filter(
       .data$codigo %in% c(
         "02", "03", "05", "06", "08", "09", "10", "13"
-      )
+      ) |
+        (.data$codigo == "12" & .data$fecha >= base_change_date)
     ) |>
     dplyr::group_by(.data$fecha) |>
     dplyr::summarise(
@@ -198,11 +212,11 @@ caption_raw <- paste(
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
   "Las barras muestran puntos porcentuales y la línea la inflación anual.",
   "Antes de julio de 2026, transporte se muestra como división completa.",
-  "Combustibles y lubricantes corresponde a la clase 0722 del INEC",
-  "desde julio de 2026.",
-  "Desde julio de 2026, las contribuciones se calculan con las series",
-  "empalmadas y las ponderaciones de la nueva canasta; son estimaciones",
-  "reconstruidas que se ajustan al total de inflación publicado."
+  "Combustibles y lubricantes corresponde a la clase 0722 del INEC desde",
+  "julio de 2026. La clasificación cambia ese mes: bienes y servicios",
+  "diversos pasa del código 12 al 13; el código 12 se agrupa en otras",
+  "divisiones. Desde julio, las contribuciones se reconstruyen con las",
+  "series empalmadas y ponderaciones nuevas, y se normalizan al IPC general."
 )
 
 p_base <- ggplot(

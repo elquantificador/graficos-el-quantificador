@@ -23,6 +23,7 @@ empalme_input_zip <- file.path(
 out_path <- "data/processed/inec_inflacion_contribuciones.rds"
 start_date <- lubridate::ymd("2022-01-01")
 end_date <- lubridate::ymd("2026-08-01")
+base_change_date <- lubridate::ymd("2026-07-01")
 
 # 1. Read inputs ----
 
@@ -273,7 +274,7 @@ inflacion_calculada <- indices |>
 general_indices <- inflacion_calculada |>
   dplyr::select(.data$fecha, .data$indice_general_12_meses)
 
-incidencias_calculadas <- indices |>
+incidencias_nueva_canasta_raw <- indices |>
   dplyr::filter(
     .data$nivel == "División",
     stringr::str_detect(.data$codigo_ccif, "^[0-9]{2}$")
@@ -288,15 +289,30 @@ incidencias_calculadas <- indices |>
     division = .data$division,
     incidencia_anual = .data$incidencia_anual
   ) |>
-  dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01")) |>
+  dplyr::filter(.data$fecha >= base_change_date)
+
+factores_normalizacion <- incidencias_nueva_canasta_raw |>
   dplyr::group_by(.data$fecha) |>
-  dplyr::mutate(
-    incidencia_anual = .data$incidencia_anual *
-      inflacion_calculada$inflacion_anual[
-        match(.data$fecha, inflacion_calculada$fecha)
-      ] / sum(.data$incidencia_anual)
+  dplyr::summarise(
+    incidencia_total_raw = sum(.data$incidencia_anual),
+    .groups = "drop"
   ) |>
-  dplyr::ungroup()
+  dplyr::left_join(
+    inflacion_calculada |>
+      dplyr::select(.data$fecha, .data$inflacion_anual),
+    by = "fecha"
+  ) |>
+  dplyr::transmute(
+    fecha = .data$fecha,
+    factor_normalizacion = .data$inflacion_anual / .data$incidencia_total_raw
+  )
+
+incidencias_calculadas <- incidencias_nueva_canasta_raw |>
+  dplyr::left_join(factores_normalizacion, by = "fecha") |>
+  dplyr::mutate(
+    incidencia_anual = .data$incidencia_anual * .data$factor_normalizacion
+  ) |>
+  dplyr::select(.data$fecha, .data$codigo, .data$division, .data$incidencia_anual)
 
 incidencias <- dplyr::bind_rows(
   old_annual$incidencias,
@@ -306,7 +322,7 @@ incidencias <- dplyr::bind_rows(
 inflacion_anual <- dplyr::bind_rows(
   old_annual$inflacion_anual,
   inflacion_calculada |>
-    dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01")) |>
+    dplyr::filter(.data$fecha >= base_change_date) |>
     dplyr::select(.data$fecha, .data$inflacion_anual)
 ) |>
   dplyr::arrange(.data$fecha)
@@ -323,7 +339,12 @@ combustibles <- indices |>
     fecha = .data$fecha,
     incidencia_anual = .data$incidencia_anual
   ) |>
-  dplyr::filter(.data$fecha >= lubridate::ymd("2026-07-01"))
+  dplyr::filter(.data$fecha >= base_change_date) |>
+  dplyr::left_join(factores_normalizacion, by = "fecha") |>
+  dplyr::mutate(
+    incidencia_anual = .data$incidencia_anual * .data$factor_normalizacion
+  ) |>
+  dplyr::select(.data$fecha, .data$incidencia_anual)
 
 # 4. Write outputs ----
 
@@ -339,8 +360,9 @@ processed <- list(
     method = paste(
       "Contribuciones anuales calculadas con índices empalmados y",
       "ponderaciones de la canasta vigente desde julio de 2026,",
-      "normalizadas para reconciliar con la inflación general publicada.",
-      "La clase 0722 se muestra solo desde julio de 2026."
+      "normalizadas por un factor común para reconciliar con la inflación",
+      "general publicada. El mismo factor se aplica a la clase 0722 antes",
+      "de separarla de transporte."
     )
   )
 )
