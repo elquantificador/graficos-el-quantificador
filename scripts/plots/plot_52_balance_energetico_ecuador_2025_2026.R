@@ -196,11 +196,12 @@ destination_stage <- destination_stage |>
     xmax = destination_xmax,
     label_short = case_when(
       .data$label == "Consumo total" ~ "Consumo",
-      .data$label == "Pérdidas técnicas en distribución" ~ "Técnicas",
-      .data$label == "Pérdidas no técnicas en distribución" ~ "No técnicas",
+      .data$label == "Pérdidas técnicas en distribución" ~ "Pérdidas técnicas",
+      .data$label == "Pérdidas no técnicas en distribución" ~
+        "Pérdidas no técnicas",
       .data$label == "No disponible para servicio público" ~
         "Uso interno",
-      .data$label == "Pérdidas en transmisión" ~ "Transmisión",
+      .data$label == "Pérdidas en transmisión" ~ "Pérdidas técnicas",
       TRUE ~ .data$label
     ),
     label_text = paste0(
@@ -271,13 +272,11 @@ title_raw <- paste0(
   percent_intl(total_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
-  "Distribución eléctrica: origen y uso, ago 2025-jul 2026"
+  "Suministro eléctrico: origen y uso, ago 2025-jul 2026"
 )
 caption_raw <- paste0(
-  "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026 | ",
-  "Elaboración: Daniel Sánchez para el Quantificador de Laboratorio LIDE | ",
-  "Nota: Los porcentajes usan 41.183 GWh como total; las pérdidas suman 18,1%: ",
-  "9,2% técnicas y 8,9% no técnicas, electricidad suministrada sin registro comercial."
+  "Fuente: ARCONEL, Balance Nacional de Energía Eléctrica, agosto de 2025-julio de 2026. ",
+  "Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE."
 )
 
 # 3. Write output ----
