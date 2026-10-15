@@ -253,7 +253,7 @@ title_raw <- paste0(
   label_number_intl(accuracy = 1)(distribution_loss_share * 100),
   " en distribución."
 )
-subtitle_raw <- "Origen y destino de la energía eléctrica"
+subtitle_raw <- "Suministro, consumo y pérdidas eléctricas"
 caption_raw <- "Fuente: ARCONEL, BNEE, ago. 2025-jul. 2026."
 
 # 3. Write output ----
