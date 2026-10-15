@@ -281,7 +281,12 @@ subtitle_raw <- paste0(
   percent_intl(1 - technical_loss_share, accuracy = 1),
   " no técnicas"
 )
-caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
+caption_raw <- paste0(
+  "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026 | ",
+  "Elaboración: El Quantificador | ",
+  "Nota: El 9% suma pérdidas técnicas en distribución (5%) y transmisión (4,2%); ",
+  "las pérdidas no técnicas (8,9%) se muestran aparte"
+)
 
 # 3. Write output ----
 
