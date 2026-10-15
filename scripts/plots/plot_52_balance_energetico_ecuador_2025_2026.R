@@ -169,12 +169,12 @@ destination_allocations <- allocate_within(
   total_stage$ymin[[1]], total_stage$ymax[[1]], destination_data$energia_gwh
 )
 
-source_xmin <- 2.15
-source_xmax <- 2.33
-total_xmin <- 3.5
-total_xmax <- 4.85
-destination_xmin <- 5.95
-destination_xmax <- 6.13
+source_xmin <- 1.8
+source_xmax <- 1.98
+total_xmin <- 4.0
+total_xmax <- 5.35
+destination_xmin <- 7.37
+destination_xmax <- 7.55
 source_label_x <- source_xmin - 0.08
 destination_label_x <- destination_xmax + 0.08
 
@@ -183,7 +183,7 @@ source_stage <- source_stage |>
     xmin = source_xmin,
     xmax = source_xmax,
     label_text = paste0(
-    str_wrap(.data$label, width = 24),
+    str_wrap(.data$label, width = 16),
       "\n",
       label_number_intl(accuracy = 1)(.data$value),
       " GWh | ",
@@ -195,16 +195,26 @@ destination_stage <- destination_stage |>
   mutate(
     xmin = destination_xmin,
     xmax = destination_xmax,
+    label_short = case_when(
+      .data$label == "Consumo total" ~ "Consumo",
+      .data$label == "Pérdidas técnicas en distribución" ~ "Técnicas",
+      .data$label == "Pérdidas no técnicas en distribución" ~ "No técnicas",
+      .data$label == "No disponible para servicio público" ~ "Uso propio",
+      .data$label == "Pérdidas en transmisión" ~ "Transmisión",
+      .data$label == "Exportación" ~ "Exportación",
+      TRUE ~ .data$label
+    ),
     label_text = if_else(
       .data$label == "Exportación",
       paste0(
-        "Exportación:\n",
+        .data$label_short,
+        "\n",
         label_number_intl(accuracy = 1)(.data$value),
         " GWh | ",
         percent_intl(.data$value / total_gwh, accuracy = 0.1)
       ),
       paste0(
-        str_wrap(.data$label, width = 22),
+        .data$label_short,
         "\n",
         label_number_intl(accuracy = 1)(.data$value),
         " GWh | ",
@@ -267,7 +277,7 @@ title_raw <- paste0(
   percent_intl(physical_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
-  "Pérdidas de distribución: ",
+  "En distribución: ",
   percent_intl(technical_loss_share, accuracy = 1),
   " son técnicas y ",
   percent_intl(1 - technical_loss_share, accuracy = 1),
@@ -278,9 +288,9 @@ caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
 # 3. Write output ----
 
 spec <- house_spec("portrait")
-# This Sankey needs a wider canvas to show its full left-to-right flow.
+# The left-to-right Sankey needs extra horizontal space to keep all labels legible.
 spec$width <- 8
-title_text <- wrap_title_house(title_raw, width = 70)
+title_text <- wrap_title_house(title_raw)
 subtitle_text <- wrap_subtitle_house(subtitle_raw)
 caption_text <- wrap_caption_house(caption_raw)
 
@@ -310,7 +320,7 @@ p_chart <- ggplot() +
     aes(y = .data$ymid, label = .data$label_text),
     x = source_label_x,
     hjust = 1,
-    size = 2.2,
+    size = 2.6,
     lineheight = 1.0,
     colour = "#212529"
   ) +
@@ -318,7 +328,7 @@ p_chart <- ggplot() +
     data = total_stage,
     aes(x = (.data$xmin + .data$xmax) / 2,
         y = .data$ymid, label = .data$label_text),
-    size = 2.0,
+    size = 2.8,
     lineheight = 1.0,
     fontface = "bold",
     colour = "#212529"
@@ -335,7 +345,7 @@ p_chart <- ggplot() +
       label = .data$label_text
     ),
     hjust = 0,
-    size = 1.95,
+    size = 2.6,
     lineheight = 1.0,
     colour = "#212529"
   ) +
@@ -343,7 +353,7 @@ p_chart <- ggplot() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  coord_cartesian(xlim = c(0.9, 7.35), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(0.55, 8.85), ylim = c(0, plot_height), clip = "off") +
   labs(
     x = NULL,
     y = NULL,
@@ -358,7 +368,7 @@ p_chart <- ggplot() +
     axis.line = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-  plot.margin = margin(6, 36, 6, 16),
+  plot.margin = margin(6, 36, 6, 28),
     plot.title = element_text(size = 12.5, lineheight = 1.02),
     plot.subtitle = element_text(size = 9, lineheight = 1.1),
     plot.caption = element_text(size = 6.5, lineheight = 1.1)
