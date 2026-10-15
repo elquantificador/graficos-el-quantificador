@@ -34,14 +34,15 @@ flow_data <- tibble(
     "No renovable",
     "Otras renovables",
     "Importaciones",
-    rep("Producción e importaciones", 5)
+    rep("Producción e importaciones", 6)
   ),
   destino = c(
     rep("Producción e importaciones", 4),
     "No disponible para servicio público",
     "Pérdidas en transmisión",
     "Exportación",
-    "Pérdidas en distribución",
+    "Pérdidas técnicas en distribución",
+    "Pérdidas no técnicas en distribución",
     "Consumo total"
   ),
   energia_gwh = c(
@@ -52,7 +53,8 @@ flow_data <- tibble(
     total_supply_gwh - energy_delivered_gwh,
     cell_gwh(9, 21),
     cell_gwh(13, 21),
-    cell_gwh(18, 21),
+    cell_gwh(19, 21),
+    cell_gwh(20, 21),
     cell_gwh(17, 21)
   )
 )
