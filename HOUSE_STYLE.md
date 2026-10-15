@@ -13,6 +13,8 @@ For Codex or any other agent:
 - Standard export: `4 × 5 inches`
 - Resolution: `300 dpi`
 - Output format: `PNG`
+- Pixel dimensions: `1200 × 1500`
+- A script comment does not authorize another canvas size. Fit labels and flows within the standard canvas unless the user explicitly requests another size.
 
 ## Typography
 
@@ -85,11 +87,16 @@ Rules:
 - Wrap the full caption once using the house caption helper.
 - Do not split captions into separately wrapped paragraphs.
 - Keep caption size at `6.5 pt`.
+- Name the source and reference period, then credit the author and El Quantificador.
+- Use the note to explain the denominator, unfamiliar categories, and calculations behind the headline. Distinguish percentages of the total from percentages of a subgroup.
+- Keep source-backed definitions accurate and concise; do not imply that an accounting loss is necessarily physical waste.
 
 ## Labels
 
 - Default label size: `3`
 - Applies to both `geom_text()` and `annotate("text")` unless the user decides otherwise
+- In Sankeys, prefer labels inside broad flows. Thin flows may use adjacent labels in clear space. Do not enlarge the canvas to accommodate outside labels.
+- When labels show percentages only, put the denominator in the caption. Do not show a second unit unless it helps the reader or the user requests it.
 
 ## Logo
 
@@ -111,3 +118,7 @@ Rules:
 - Keep all charts on the house typography, margins, wrap widths, and logo defaults.
 - Do not introduce one-off typography changes, margin changes, or wrapping changes autonomously.
 - If a chart appears to need an exception, stop and ask the user.
+
+## Rendered review
+
+Open the final PNG and inspect it both at full resolution and at normal reading width. Check that labels are readable, uncut, and clearly attached to their data; that the chart uses the available area; and that the caption and logo do not overlap. Re-render after a layout change. Successful script execution alone is not visual approval.

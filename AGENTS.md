@@ -96,7 +96,10 @@ base_dir <- normalizePath(file.path(getwd(), "some_folder"), mustWork = FALSE)
 
 ### Output sizing
 
-The standard canvas is **4 × 5 inches at 300 dpi**. Never use other sizes without a specific reason.
+The standard canvas is **4 × 5 inches at 300 dpi (1200 × 1500 pixels)**.
+Only the user may authorize another size. A comment in a script is not authorization.
+Read `HOUSE_STYLE.md` before changing a chart; it is the visual specification.
+Fit the chart and its labels inside this canvas, then render and inspect the PNG.
 
 ```r
 # Standard (default)
@@ -234,3 +237,11 @@ Rscript scripts/plots/plot_20_enighur_ingreso_gasto.R
 - Do not overload the repo. Keep it light: no zip archives, no large microdata, no files that scripts regenerate. Commit only small extracted inputs and the tables and figures that are published. Large or restricted raw inputs stay local and are documented in `data/sources/README.md` (section "Datos crudos no versionados") with the official URL and the exact local path, so anyone can re-download them to reproduce a chart.
 - Do not commit a file over ~50 MB. If a raw input is larger, document how to obtain it instead.
 - Do not add per-chart README files — the central `README.md` and `data/sources/README.md` cover documentation.
+
+## Final visual review
+
+- Open the regenerated PNG before calling a chart finished. A successful R run does not establish visual quality.
+- Inspect the full image and a reduced preview at normal reading width. Check clipped text, overlaps, contrast, caption, and logo.
+- For Sankeys, use the plotting area for the flows rather than reserving wide margins for labels. Put labels inside broad flows; put labels for thin flows in nearby clear space with an unambiguous connection.
+- Use percentages alone when the user requests them. State their denominator in the caption and distinguish any different denominator used in the subtitle.
+- Captions follow `Fuente: ... Elaboración: ... Nota: ...`, wrapped once with `wrap_caption_house()`. Name the source and period, credit the author, and explain terms or calculations needed to read the chart.
