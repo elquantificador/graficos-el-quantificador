@@ -90,9 +90,9 @@ transmission_loss_gwh <- destination_data |>
   pull("energia_gwh")
 physical_loss_share <- (technical_distribution_loss_gwh + transmission_loss_gwh) / total_gwh
 technical_loss_share <- technical_distribution_loss_gwh / distribution_loss_gwh
-source_gap <- total_gwh * 0.03
-destination_gap <- total_gwh * 0.06
-plot_height <- total_gwh * 1.48
+source_gap <- total_gwh * 0.07
+destination_gap <- total_gwh * 0.16
+plot_height <- total_gwh * 2.0
 
 stack_stage <- function(labels, values, gap, total_height, node_type) {
   stage_height <- sum(values, na.rm = FALSE) + gap * max(length(values) - 1, 0)
@@ -169,12 +169,12 @@ destination_allocations <- allocate_within(
   total_stage$ymin[[1]], total_stage$ymax[[1]], destination_data$energia_gwh
 )
 
-source_xmin <- 1.8
-source_xmax <- 1.98
-total_xmin <- 4.0
-total_xmax <- 5.35
-destination_xmin <- 7.37
-destination_xmax <- 7.55
+source_xmin <- 1.55
+source_xmax <- 1.73
+total_xmin <- 5.0
+total_xmax <- 5.13
+destination_xmin <- 8.45
+destination_xmax <- 8.63
 source_label_x <- source_xmin - 0.08
 destination_label_x <- destination_xmax + 0.08
 
@@ -183,7 +183,7 @@ source_stage <- source_stage |>
     xmin = source_xmin,
     xmax = source_xmax,
     label_text = paste0(
-    str_wrap(.data$label, width = 16),
+      str_wrap(.data$label, width = 22),
       "\n",
       label_number_intl(accuracy = 1)(.data$value),
       " GWh | ",
@@ -199,7 +199,7 @@ destination_stage <- destination_stage |>
       .data$label == "Consumo total" ~ "Consumo",
       .data$label == "Pérdidas técnicas en distribución" ~ "Técnicas",
       .data$label == "Pérdidas no técnicas en distribución" ~ "No técnicas",
-      .data$label == "No disponible para servicio público" ~ "Uso propio",
+      .data$label == "No disponible para servicio público" ~ paste("No disponible para", "servicio público", sep = "\n"),
       .data$label == "Pérdidas en transmisión" ~ "Transmisión",
       .data$label == "Exportación" ~ "Exportación",
       TRUE ~ .data$label
@@ -228,10 +228,11 @@ total_stage <- total_stage |>
     xmin = total_xmin,
     xmax = total_xmax,
     label_text = paste0(
-      "Producción +\nimportaciones\n",
+      "Suministro total\n",
       label_number_intl(accuracy = 1)(.data$value),
-      " GWh\n100%"
-    )
+      " GWh | 100%"
+    ),
+    label_y = .data$ymax + total_gwh * 0.09
   )
 
 source_flows <- bind_rows(lapply(seq_len(nrow(source_stage)), function(i) {
@@ -277,7 +278,7 @@ title_raw <- paste0(
   percent_intl(physical_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
-  "En distribución: ",
+  "De las pérdidas en distribución, ",
   percent_intl(technical_loss_share, accuracy = 1),
   " son técnicas y ",
   percent_intl(1 - technical_loss_share, accuracy = 1),
@@ -289,9 +290,9 @@ caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
 
 spec <- house_spec("portrait")
 # The left-to-right Sankey needs extra horizontal space to keep all labels legible.
-spec$width <- 8
-title_text <- wrap_title_house(title_raw)
-subtitle_text <- wrap_subtitle_house(subtitle_raw)
+spec$width <- 10
+title_text <- wrap_title_house(title_raw, width = 82)
+subtitle_text <- wrap_subtitle_house(subtitle_raw, width = 100)
 caption_text <- wrap_caption_house(caption_raw)
 
 p_chart <- ggplot() +
@@ -320,15 +321,15 @@ p_chart <- ggplot() +
     aes(y = .data$ymid, label = .data$label_text),
     x = source_label_x,
     hjust = 1,
-    size = 2.6,
+    size = 2.8,
     lineheight = 1.0,
     colour = "#212529"
   ) +
   geom_text(
     data = total_stage,
     aes(x = (.data$xmin + .data$xmax) / 2,
-        y = .data$ymid, label = .data$label_text),
-    size = 2.8,
+        y = .data$label_y, label = .data$label_text),
+    size = 3.2,
     lineheight = 1.0,
     fontface = "bold",
     colour = "#212529"
@@ -337,15 +338,11 @@ p_chart <- ggplot() +
     data = destination_stage,
     aes(
       x = .data$xmax + 0.08,
-      y = if_else(
-        .data$label == "Exportación",
-        .data$ymid - total_gwh * 0.018,
-        .data$ymid
-      ),
+      y = .data$ymid,
       label = .data$label_text
     ),
     hjust = 0,
-    size = 2.6,
+    size = 2.8,
     lineheight = 1.0,
     colour = "#212529"
   ) +
@@ -353,7 +350,7 @@ p_chart <- ggplot() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  coord_cartesian(xlim = c(0.55, 8.85), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(-0.35, 11.25), ylim = c(0, plot_height), clip = "off") +
   labs(
     x = NULL,
     y = NULL,
@@ -368,7 +365,7 @@ p_chart <- ggplot() +
     axis.line = element_blank(),
     axis.title = element_blank(),
     panel.grid = element_blank(),
-  plot.margin = margin(6, 36, 6, 28),
+    plot.margin = margin(6, 36, 6, 16),
     plot.title = element_text(size = 12.5, lineheight = 1.02),
     plot.subtitle = element_text(size = 9, lineheight = 1.1),
     plot.caption = element_text(size = 6.5, lineheight = 1.1)
@@ -378,7 +375,7 @@ dir.create(spec$dir, showWarnings = FALSE, recursive = TRUE)
 p_final <- house_apply_logo(
   p_chart,
   "portrait",
-  y = 0
+  y = 0.04
 )
 
 ggsave(
