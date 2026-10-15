@@ -281,7 +281,7 @@ caption_raw <- paste0(
   "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026 | ",
   "Elaboración: Daniel Sánchez para el Quantificador de Laboratorio LIDE | ",
   "Nota: Los porcentajes usan 41.183 GWh como total; el 9% suma pérdidas técnicas ",
-  "en distribución (5%) y transmisión (4,2%)"
+  "en distribución (5%) y transmisión (4,2%)."
 )
 
 # 3. Write output ----
