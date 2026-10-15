@@ -27,6 +27,8 @@ Los demás destinos se reconstruyen con las relaciones contables del BNEE:
 
 El BNEE desglosa las pérdidas de distribución en 2.061,969943022 GWh técnicas y 3.664,926667723 GWh no técnicas. Suman el total publicado. Equivalen a 5,0% y 8,9% de la producción e importaciones, respectivamente; juntas, 13,9%. Sobre la energía disponible para los sistemas de distribución, representan 5,94% y 10,55%.
 
+El titular suma las pérdidas en transmisión (1.727,72 GWh) y las pérdidas técnicas en distribución (2.061,97 GWh): 3.789,69 GWh, equivalentes a 9,2% del suministro total. Deja fuera las pérdidas no técnicas, porque ARCONEL las define como energía suministrada que no se mide o registra comercialmente, no como energía disipada físicamente.
+
 Los seis destinos del flujo suman el total publicado de producción e importaciones. Las diferencias residuales inferiores a 0,000001 GWh se deben al redondeo binario de las cifras del archivo.
 
 ## Lectura y límites

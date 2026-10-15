@@ -82,10 +82,14 @@ distribution_loss_gwh <- destination_data |>
   )) |>
   summarise(value = sum(.data$energia_gwh)) |>
   pull("value")
-distribution_loss_share <- distribution_loss_gwh / total_gwh
-technical_loss_share <- destination_data |>
+technical_distribution_loss_gwh <- destination_data |>
   filter(.data$destino == "Pérdidas técnicas en distribución") |>
-  pull("energia_gwh") / distribution_loss_gwh
+  pull("energia_gwh")
+transmission_loss_gwh <- destination_data |>
+  filter(.data$destino == "Pérdidas en transmisión") |>
+  pull("energia_gwh")
+physical_loss_share <- (technical_distribution_loss_gwh + transmission_loss_gwh) / total_gwh
+technical_loss_share <- technical_distribution_loss_gwh / distribution_loss_gwh
 source_gap <- total_gwh * 0.03
 destination_gap <- total_gwh * 0.06
 plot_height <- total_gwh * 1.48
@@ -257,14 +261,14 @@ node_rectangles <- bind_rows(
 )
 
 title_raw <- paste0(
-  "Ecuador consume ",
-  label_number_intl(accuracy = 1)(consumption_share * 100),
-  "% del suministro; pierde ",
-  label_number_intl(accuracy = 1)(distribution_loss_share * 100),
-  "% en distribución."
+  "Ecuador consume el ",
+  percent_intl(consumption_share, accuracy = 1),
+  " de su suministro, pero desperdicia el ",
+  percent_intl(physical_loss_share, accuracy = 1),
+  "."
 )
 subtitle_raw <- paste0(
-  "De esas pérdidas, ",
+  "Pérdidas de distribución: ",
   percent_intl(technical_loss_share, accuracy = 1),
   " son técnicas y ",
   percent_intl(1 - technical_loss_share, accuracy = 1),
