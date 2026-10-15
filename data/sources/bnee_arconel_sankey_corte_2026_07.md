@@ -25,8 +25,10 @@ Los demás destinos se reconstruyen con las relaciones contables del BNEE:
 - `Consumo Total Energía Eléctrica`: 29.014,446717833 GWh.
 - `Pérdidas en Distribución`: 5.726,896610745 GWh.
 
-Los cinco destinos del flujo suman el total publicado de producción e importaciones. Las diferencias residuales inferiores a 0,000001 GWh se deben al redondeo binario de las cifras del archivo.
+El BNEE desglosa las pérdidas de distribución en 2.061,969943022 GWh técnicas y 3.664,926667723 GWh no técnicas. Suman el total publicado. Equivalen a 5,0% y 8,9% de la producción e importaciones, respectivamente; juntas, 13,9%. Sobre la energía disponible para los sistemas de distribución, representan 5,94% y 10,55%.
+
+Los seis destinos del flujo suman el total publicado de producción e importaciones. Las diferencias residuales inferiores a 0,000001 GWh se deben al redondeo binario de las cifras del archivo.
 
 ## Lectura y límites
 
-El Sankey conecta el desglose nacional de fuentes con el balance agregado de los destinos. No asigna una fuente particular a un tipo específico de consumo porque el BNEE no publica esos cruces. `Consumo total` es el valor utilizado por ARCONEL para calcular pérdidas y difiere de la energía facturada: su nota indica que se ajusta al número de días calendario de cada mes. El balance agregado no permite identificar las causas ni los horarios de interrupciones en los hogares.
+ARCONEL describe las pérdidas técnicas como pérdidas físicas en redes y equipos, y las no técnicas como energía suministrada que no se mide o registra comercialmente; entre sus ejemplos están los medidores dañados o alterados, errores de lectura o facturación y conexiones ilegales. Fuente: [Estadística del Sector Eléctrico 2025, sección 1.4 y glosario](https://arconel.gob.ec/wp-content/uploads/downloads/2026/03/Estadistica2025.pdf). El BNEE usado aquí no desglosa las pérdidas de transmisión por causa ni las pérdidas de distribución por empresa, provincia, fuente de generación o momento. Tampoco asigna una fuente particular de generación a un destino. `Consumo total` es el valor que ARCONEL utiliza para calcular pérdidas y difiere de la energía facturada; su nota indica que se ajusta al número de días calendario de cada mes. Este balance no identifica las causas ni los horarios de interrupciones en los hogares.

@@ -23,7 +23,8 @@ source_order <- c(
 )
 destination_order <- c(
   "Consumo total",
-  "Pérdidas en distribución",
+  "Pérdidas técnicas en distribución",
+  "Pérdidas no técnicas en distribución",
   "No disponible para servicio público",
   "Pérdidas en transmisión",
   "Exportación"
@@ -36,7 +37,8 @@ source_colours <- c(
 )
 destination_colours <- c(
   "Consumo total" = "#59636E",
-  "Pérdidas en distribución" = "#C85450",
+  "Pérdidas técnicas en distribución" = "#C85450",
+  "Pérdidas no técnicas en distribución" = "#E29A93",
   "No disponible para servicio público" = "#89939D",
   "Pérdidas en transmisión" = "#C6CDD3",
   "Exportación" = "#A58A63"
@@ -73,11 +75,19 @@ total_gwh <- sum(source_data$energia_gwh, na.rm = FALSE)
 consumption_share <- destination_data |>
   filter(.data$destino == "Consumo total") |>
   pull("energia_gwh") / total_gwh
-distribution_loss_share <- destination_data |>
-  filter(.data$destino == "Pérdidas en distribución") |>
-  pull("energia_gwh") / total_gwh
+distribution_loss_gwh <- destination_data |>
+  filter(.data$destino %in% c(
+    "Pérdidas técnicas en distribución",
+    "Pérdidas no técnicas en distribución"
+  )) |>
+  summarise(value = sum(.data$energia_gwh)) |>
+  pull("value")
+distribution_loss_share <- distribution_loss_gwh / total_gwh
+technical_loss_share <- destination_data |>
+  filter(.data$destino == "Pérdidas técnicas en distribución") |>
+  pull("energia_gwh") / distribution_loss_gwh
 source_gap <- total_gwh * 0.03
-destination_gap <- total_gwh * 0.1
+destination_gap <- total_gwh * 0.06
 plot_height <- total_gwh * 1.48
 
 stack_stage <- function(labels, values, gap, total_height, node_type) {
@@ -247,18 +257,26 @@ node_rectangles <- bind_rows(
 )
 
 title_raw <- paste0(
-  "Ecuador consume solo ",
+  "Ecuador consume ",
   label_number_intl(accuracy = 1)(consumption_share * 100),
-  " de cada 100 GWh; pierde ",
+  "% del suministro; pierde ",
   label_number_intl(accuracy = 1)(distribution_loss_share * 100),
-  " en distribución."
+  "% en distribución."
 )
-subtitle_raw <- "Suministro, consumo y pérdidas eléctricas"
+subtitle_raw <- paste0(
+  "De esas pérdidas, ",
+  percent_intl(technical_loss_share, accuracy = 1),
+  " son técnicas y ",
+  percent_intl(1 - technical_loss_share, accuracy = 1),
+  " no técnicas"
+)
 caption_raw <- "Fuente: ARCONEL, BNEE, ago. 2025-jul. 2026."
 
 # 3. Write output ----
 
 spec <- house_spec("portrait")
+# Wider canvas gives the Sankey more horizontal room without shrinking labels.
+spec$width <- 5
 title_text <- wrap_title_house(title_raw, width = 37)
 subtitle_text <- wrap_subtitle_house(subtitle_raw)
 caption_text <- wrap_caption_house(caption_raw)
@@ -304,7 +322,15 @@ p_chart <- ggplot() +
   ) +
   geom_text(
     data = destination_stage,
-    aes(x = .data$xmax + 0.08, y = .data$ymid, label = .data$label_text),
+    aes(
+      x = .data$xmax + 0.08,
+      y = if_else(
+        .data$label == "Exportación",
+        .data$ymid - total_gwh * 0.018,
+        .data$ymid
+      ),
+      label = .data$label_text
+    ),
     hjust = 0,
     size = 1.95,
     lineheight = 1.0,
@@ -314,7 +340,7 @@ p_chart <- ggplot() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  coord_cartesian(xlim = c(0.05, 7.35), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(0.9, 7.35), ylim = c(0, plot_height), clip = "off") +
   labs(
     x = NULL,
     y = NULL,
