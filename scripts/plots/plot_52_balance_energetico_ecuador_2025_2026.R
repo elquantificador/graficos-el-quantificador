@@ -264,8 +264,7 @@ title_raw <- paste0(
   "Ecuador consume el ",
   percent_intl(consumption_share, accuracy = 1),
   " de su suministro, pero desperdicia el ",
-  percent_intl(physical_loss_share, accuracy = 1),
-  "."
+  percent_intl(physical_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
   "Pérdidas de distribución: ",
@@ -274,14 +273,14 @@ subtitle_raw <- paste0(
   percent_intl(1 - technical_loss_share, accuracy = 1),
   " no técnicas"
 )
-caption_raw <- "Fuente: ARCONEL, BNEE, ago. 2025-jul. 2026."
+caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
 
 # 3. Write output ----
 
 spec <- house_spec("portrait")
-# Wider canvas gives the Sankey more horizontal room without shrinking labels.
-spec$width <- 5
-title_text <- wrap_title_house(title_raw, width = 37)
+# This Sankey needs a wider canvas to show its full left-to-right flow.
+spec$width <- 8
+title_text <- wrap_title_house(title_raw, width = 70)
 subtitle_text <- wrap_subtitle_house(subtitle_raw)
 caption_text <- wrap_caption_house(caption_raw)
 
