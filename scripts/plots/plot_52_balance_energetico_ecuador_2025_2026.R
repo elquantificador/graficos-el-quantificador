@@ -286,7 +286,7 @@ caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
 # 3. Write output ----
 
 spec <- house_spec("portrait")
-title_text <- wrap_title_house(title_raw)
+title_text <- wrap_title_house(title_raw, width = 42)
 subtitle_text <- wrap_subtitle_house(subtitle_raw)
 caption_text <- wrap_caption_house(caption_raw)
 
