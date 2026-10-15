@@ -80,7 +80,7 @@ distribution_loss_gwh <- destination_data |>
     "Pérdidas técnicas en distribución",
     "Pérdidas no técnicas en distribución"
   )) |>
-  summarise(value = sum(.data$energia_gwh, na.rm = FALSE)) |>
+  summarise(value = sum(.data$energia_gwh)) |>
   pull("value")
 technical_distribution_loss_gwh <- destination_data |>
   filter(.data$destino == "Pérdidas técnicas en distribución") |>
@@ -91,7 +91,7 @@ transmission_loss_gwh <- destination_data |>
 physical_loss_share <- (technical_distribution_loss_gwh + transmission_loss_gwh) / total_gwh
 technical_loss_share <- technical_distribution_loss_gwh / distribution_loss_gwh
 source_gap <- total_gwh * 0.07
-destination_gap <- total_gwh * 0.15
+destination_gap <- total_gwh * 0.16
 plot_height <- total_gwh * 2.0
 
 stack_stage <- function(labels, values, gap, total_height, node_type) {
@@ -126,8 +126,7 @@ allocate_within <- function(ymin, ymax, values) {
 
 make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id, alpha = 0.7) {
   t <- seq(0, 1, length.out = 50)
-  bend <- pmin(t * 2, 1)
-  eased <- bend^2 * (3 - 2 * bend)
+  eased <- t^2 * (3 - 2 * t)
   x <- x0 + (x1 - x0) * t
   upper <- from_range$ymax + (to_range$ymax - from_range$ymax) * eased
   lower <- from_range$ymin + (to_range$ymin - from_range$ymin) * eased
@@ -170,27 +169,25 @@ destination_allocations <- allocate_within(
   total_stage$ymin[[1]], total_stage$ymax[[1]], destination_data$energia_gwh
 )
 
-source_xmin <- 0.1
-source_xmax <- 0.25
-total_xmin <- 4.9
-total_xmax <- 5.05
-destination_xmin <- 9.75
-destination_xmax <- 9.9
+source_xmin <- 1.55
+source_xmax <- 1.73
+total_xmin <- 5.0
+total_xmax <- 5.13
+destination_xmin <- 8.45
+destination_xmax <- 8.63
+source_label_x <- source_xmin - 0.08
+destination_label_x <- destination_xmax + 0.08
 
 source_stage <- source_stage |>
   mutate(
     xmin = source_xmin,
     xmax = source_xmax,
     label_text = paste0(
-      str_wrap(.data$label, width = 20),
+      str_wrap(.data$label, width = 22),
       "\n",
+      label_number_intl(accuracy = 1)(.data$value),
+      " GWh | ",
       percent_intl(.data$value / total_gwh, accuracy = 0.1)
-    ),
-    label_x = 2.1,
-    label_y = if_else(
-      .data$label == "Otras renovables e importaciones",
-      .data$ymin - total_gwh * 0.15,
-      .data$ymid
     )
   )
 
@@ -202,21 +199,27 @@ destination_stage <- destination_stage |>
       .data$label == "Consumo total" ~ "Consumo",
       .data$label == "Pérdidas técnicas en distribución" ~ "Técnicas",
       .data$label == "Pérdidas no técnicas en distribución" ~ "No técnicas",
-      .data$label == "No disponible para servicio público" ~
-        "Uso interno",
+      .data$label == "No disponible para servicio público" ~ paste("No disponible para", "servicio público", sep = "\n"),
       .data$label == "Pérdidas en transmisión" ~ "Transmisión",
+      .data$label == "Exportación" ~ "Exportación",
       TRUE ~ .data$label
     ),
-    label_text = paste0(
-      .data$label_short,
-      if_else(.data$label == "Consumo total", "\n", ": "),
-      percent_intl(.data$value / total_gwh, accuracy = 0.1)
-    ),
-    label_x = if_else(.data$label == "Consumo total", 8.0, 9.65),
-    label_y = case_when(
-      .data$label == "Consumo total" ~ .data$ymid,
-      .data$label == "Exportación" ~ .data$ymin - total_gwh * 0.06,
-      TRUE ~ .data$ymax + total_gwh * 0.065
+    label_text = if_else(
+      .data$label == "Exportación",
+      paste0(
+        .data$label_short,
+        "\n",
+        label_number_intl(accuracy = 1)(.data$value),
+        " GWh | ",
+        percent_intl(.data$value / total_gwh, accuracy = 0.1)
+      ),
+      paste0(
+        .data$label_short,
+        "\n",
+        label_number_intl(accuracy = 1)(.data$value),
+        " GWh | ",
+        percent_intl(.data$value / total_gwh, accuracy = 0.1)
+      )
     )
   )
 
@@ -225,11 +228,11 @@ total_stage <- total_stage |>
     xmin = total_xmin,
     xmax = total_xmax,
     label_text = paste0(
-      "Suministro total: ",
-      label_number_intl(accuracy = 1)(total_gwh),
-      " GWh"
+      "Suministro total\n",
+      label_number_intl(accuracy = 1)(.data$value),
+      " GWh | 100%"
     ),
-    label_y = total_gwh * 1.93
+    label_y = .data$ymax + total_gwh * 0.09
   )
 
 source_flows <- bind_rows(lapply(seq_len(nrow(source_stage)), function(i) {
@@ -271,7 +274,7 @@ node_rectangles <- bind_rows(
 title_raw <- paste0(
   "Ecuador consume el ",
   percent_intl(consumption_share, accuracy = 1),
-  " de su suministro, pero desperdicia el ",
+  " de su suministro eléctrico, pero desperdicia el ",
   percent_intl(physical_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
@@ -281,21 +284,15 @@ subtitle_raw <- paste0(
   percent_intl(1 - technical_loss_share, accuracy = 1),
   " no técnicas"
 )
-caption_raw <- paste(
-  "Fuente: ARCONEL, Balance Nacional de Energía Eléctrica,",
-  "agosto de 2025 a julio de 2026.",
-  "Elaboración: Daniel Sánchez-Pazmiño para El Quantificador.",
-  "Nota: Los flujos muestran porcentajes del suministro (41.183 GWh).",
-  "El 9,2% suma pérdidas en transmisión y distribución técnica.",
-  "Las no técnicas son energía suministrada no medida o registrada.",
-  "El uso interno es energía usada por productores, fuera del servicio público."
-)
+caption_raw <- "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026"
 
 # 3. Write output ----
 
 spec <- house_spec("portrait")
-title_text <- wrap_title_house(title_raw)
-subtitle_text <- wrap_subtitle_house(subtitle_raw)
+# The left-to-right Sankey needs extra horizontal space to keep all labels legible.
+spec$width <- 10
+title_text <- wrap_title_house(title_raw, width = 82)
+subtitle_text <- wrap_subtitle_house(subtitle_raw, width = 100)
 caption_text <- wrap_caption_house(caption_raw)
 
 p_chart <- ggplot() +
@@ -321,34 +318,39 @@ p_chart <- ggplot() +
   ) +
   geom_text(
     data = source_stage,
-    aes(x = .data$label_x, y = .data$label_y,
-        label = .data$label_text),
-    size = 3,
+    aes(y = .data$ymid, label = .data$label_text),
+    x = source_label_x,
+    hjust = 1,
+    size = 2.8,
     lineheight = 1.0,
-    colour = "grey20"
+    colour = "#212529"
   ) +
   geom_text(
     data = total_stage,
     aes(x = (.data$xmin + .data$xmax) / 2,
         y = .data$label_y, label = .data$label_text),
-    size = 3,
+    size = 3.2,
+    lineheight = 1.0,
     fontface = "bold",
-    colour = "grey20"
+    colour = "#212529"
   ) +
   geom_text(
     data = destination_stage,
-    aes(x = .data$label_x, y = .data$label_y,
-        label = .data$label_text,
-        hjust = if_else(.data$label == "Consumo total", 0.5, 1)),
-    size = 3,
+    aes(
+      x = .data$xmax + 0.08,
+      y = .data$ymid,
+      label = .data$label_text
+    ),
+    hjust = 0,
+    size = 2.8,
     lineheight = 1.0,
-    colour = "grey20"
+    colour = "#212529"
   ) +
   scale_fill_identity() +
   scale_alpha_identity() +
   scale_x_continuous(expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  coord_cartesian(xlim = c(0, 10), ylim = c(0, plot_height), clip = "off") +
+  coord_cartesian(xlim = c(-0.35, 11.25), ylim = c(0, plot_height), clip = "off") +
   labs(
     x = NULL,
     y = NULL,
@@ -364,7 +366,7 @@ p_chart <- ggplot() +
     axis.title = element_blank(),
     panel.grid = element_blank(),
     plot.margin = margin(6, 36, 6, 16),
-    plot.title = element_text(size = 12.5),
+    plot.title = element_text(size = 12.5, lineheight = 1.02),
     plot.subtitle = element_text(size = 9, lineheight = 1.1),
     plot.caption = element_text(size = 6.5, lineheight = 1.1)
   )
@@ -373,7 +375,7 @@ dir.create(spec$dir, showWarnings = FALSE, recursive = TRUE)
 p_final <- house_apply_logo(
   p_chart,
   "portrait",
-  y = 0.23
+  y = 0.04
 )
 
 ggsave(
