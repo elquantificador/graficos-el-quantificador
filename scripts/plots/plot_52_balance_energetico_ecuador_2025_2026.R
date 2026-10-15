@@ -275,17 +275,13 @@ title_raw <- paste0(
   percent_intl(physical_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
-  "Pérdidas de distribución: ",
-  percent_intl(technical_loss_share, accuracy = 1),
-  " técnicas y ",
-  percent_intl(1 - technical_loss_share, accuracy = 1),
-  " no técnicas"
+  "Distribución eléctrica: origen y uso, ago 2025-jul 2026"
 )
 caption_raw <- paste0(
   "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026 | ",
-  "Elaboración: El Quantificador | ",
-  "Nota: El 9% suma pérdidas técnicas en distribución (5%) y transmisión (4,2%); ",
-  "las pérdidas no técnicas (8,9%) se muestran aparte"
+  "Elaboración: Daniel Sánchez para el Quantificador de Laboratorio LIDE | ",
+  "Nota: Los porcentajes usan 41.183 GWh como total; el 9% suma pérdidas técnicas ",
+  "en distribución (5%) y transmisión (4,2%)"
 )
 
 # 3. Write output ----
@@ -370,7 +366,7 @@ dir.create(spec$dir, showWarnings = FALSE, recursive = TRUE)
 p_final <- house_apply_logo(
   p_chart,
   "portrait",
-  y = 0.23
+  y = 0.15
 )
 
 ggsave(
