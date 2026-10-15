@@ -80,6 +80,7 @@ Los ultimos graficos publicados son:
 En preparacion:
 
 - `51_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
+- `52_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
 
 ## Notas sobre los datos
 

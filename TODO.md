@@ -19,6 +19,9 @@
 - `50_mercado-laboral-pobreza-ecuador.png` esta en estado `draft`; es la pieza
   de apoyo al articulo sobre el retraso de las cifras del INEC y tiene fecha
   prevista de publicacion el 9 de octubre de 2026.
+- `52_balance-energetico-ecuador.png` esta en estado `draft`; muestra las
+  fuentes y destinos de la energia electrica del BNEE de ARCONEL, agosto de
+  2025 a julio de 2026.
 
 ## Archive / hold
 

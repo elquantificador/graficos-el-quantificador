@@ -78,6 +78,7 @@ Las fichas `.md` de cada fuente documentan la version, el archivo interno utiliz
 | REEM 2025, tabulado de antigüedad de empresas activas | `reem/reem_2025_antiguedad_empresas_activas.csv` | Usado en `clean_reem_antiguedad_empresas_activas.R` y `plot_44_reem_antiguedad_empresas_activas.R` | `reem_antiguedad_empresas_activas.md` |
 | PISA Ecuador, PISA-D 2017 y PISA 2025 | `pisa_ecuador/pisa_ecuador_mean_scores.csv`, `pisa_ecuador/pisa_2025_tables_ib1_2a_36_38.xlsx`, `pisa_ecuador/pisa_participation_by_cycle.xlsx` | Usado en `clean_pisa_ecuador_puntajes.R` y `plot_45_pisa_ecuador_puntajes.R` | `pisa_ecuador.md` |
 | REMD 2020-2025, cohorte de matrimonios inscritos en 2020 | `remd_matrimonios/cohort_2020_survival_input.csv` | Usado en `clean_remd_matrimonios_hijos.R` y `plot_48_remd_matrimonios_hijos.R` | `remd_matrimonios_hijos.md` |
+| Balance Nacional de Energía Eléctrica, corte a julio de 2026 | `BNEE_julio_2026.xls` | Usado en `clean_bnee_arconel_sankey_corte_2026_07.R` | `bnee_arconel_sankey_corte_2026_07.md` |
 
 ## Cobertura de documentacion
 

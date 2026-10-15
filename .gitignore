@@ -7,6 +7,7 @@ scripts/plots/plot_salario_vs_ipc.R
 !data/processed/
 data/processed/*
 !data/processed/acled_conflicto_ecuador_43.rds
+!data/processed/bnee_arconel_sankey_corte_2026_07.csv
 
 # Microdato REEM usado solo localmente para generar el tabulado versionado
 data/raw/reem/DATOS_ABIERTOS_REEM_2025.zip
