@@ -82,14 +82,10 @@ distribution_loss_gwh <- destination_data |>
   )) |>
   summarise(value = sum(.data$energia_gwh, na.rm = FALSE)) |>
   pull("value")
-technical_distribution_loss_gwh <- destination_data |>
-  filter(.data$destino == "Pérdidas técnicas en distribución") |>
-  pull("energia_gwh")
 transmission_loss_gwh <- destination_data |>
   filter(.data$destino == "Pérdidas en transmisión") |>
   pull("energia_gwh")
-physical_loss_share <- (technical_distribution_loss_gwh + transmission_loss_gwh) / total_gwh
-technical_loss_share <- technical_distribution_loss_gwh / distribution_loss_gwh
+total_loss_share <- (distribution_loss_gwh + transmission_loss_gwh) / total_gwh
 source_gap <- total_gwh * 0.07
 destination_gap <- total_gwh * 0.15
 plot_height <- total_gwh * 2.0
@@ -271,8 +267,8 @@ node_rectangles <- bind_rows(
 title_raw <- paste0(
   "Ecuador consume el ",
   percent_intl(consumption_share, accuracy = 1),
-  " de su suministro eléctrico, pero desperdicia el ",
-  percent_intl(physical_loss_share, accuracy = 1)
+  " de su suministro eléctrico y registra pérdidas del ",
+  percent_intl(total_loss_share, accuracy = 1)
 )
 subtitle_raw <- paste0(
   "Distribución eléctrica: origen y uso, ago 2025-jul 2026"
@@ -280,8 +276,8 @@ subtitle_raw <- paste0(
 caption_raw <- paste0(
   "Fuente: ARCONEL, BNEE, agosto de 2025 a julio de 2026 | ",
   "Elaboración: Daniel Sánchez para el Quantificador de Laboratorio LIDE | ",
-  "Nota: Los porcentajes usan 41.183 GWh como total; el 9% suma pérdidas técnicas ",
-  "en distribución (5%) y transmisión (4,2%)."
+  "Nota: Los porcentajes usan 41.183 GWh como total; las pérdidas suman 18,1%: ",
+  "9,2% técnicas y 8,9% no técnicas, electricidad suministrada sin registro comercial."
 )
 
 # 3. Write output ----
