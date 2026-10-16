@@ -2,9 +2,9 @@
 
 ## Pieza
 
-- `outputs/figures/50_mercado-laboral-pobreza-ecuador.png`
+- `outputs/figures/draft_mercado-laboral-pobreza-ecuador.png`
 - Limpieza: `scripts/data-cleaning/clean_inec_mercado_laboral_pobreza_2026.R`
-- Visualización: `scripts/plots/plot_50_inec_mercado_laboral_pobreza_2026.R`
+- Visualización: `scripts/plots/plot_inec_mercado_laboral_pobreza_2026.R`
 
 ## Fuente y procedencia
 
