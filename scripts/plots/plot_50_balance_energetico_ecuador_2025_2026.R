@@ -41,7 +41,7 @@ destination_colours <- c(
   "Pérdidas no técnicas en distribución" = "#E29A93",
   "No disponible para servicio público" = "#89939D",
   "Pérdidas en transmisión" = "#C6CDD3",
-  "Exportación" = "#A58A63"
+  "Exportación" = "#805022"
 )
 
 # 1. Read inputs ----
@@ -120,9 +120,10 @@ allocate_within <- function(ymin, ymax, values) {
   })
 }
 
-make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id, alpha = 0.7) {
+make_flow_polygon <- function(x0, x1, from_range, to_range, fill, flow_id,
+                              alpha = 0.7, bend_factor = 2) {
   t <- seq(0, 1, length.out = 50)
-  bend <- pmin(t * 2, 1)
+  bend <- pmin(t * bend_factor, 1)
   eased <- bend^2 * (3 - 2 * bend)
   x <- x0 + (x1 - x0) * t
   upper <- from_range$ymax + (to_range$ymax - from_range$ymax) * eased
@@ -196,24 +197,30 @@ destination_stage <- destination_stage |>
     xmax = destination_xmax,
     label_short = case_when(
       .data$label == "Consumo total" ~ "Consumo",
-      .data$label == "Pérdidas técnicas en distribución" ~ "Pérdidas técnicas",
+      .data$label == "Pérdidas técnicas en distribución" ~
+        "Pérdidas técnicas distribución",
       .data$label == "Pérdidas no técnicas en distribución" ~
-        "Pérdidas no técnicas",
+        "Pérdidas no técnicas distribución",
       .data$label == "No disponible para servicio público" ~
         "Uso interno",
-      .data$label == "Pérdidas en transmisión" ~ "Pérdidas técnicas",
+      .data$label == "Pérdidas en transmisión" ~ "Pérdidas transmisión",
       TRUE ~ .data$label
     ),
-    label_text = paste0(
+    label_text = str_wrap(paste0(
       .data$label_short,
       if_else(.data$label == "Consumo total", "\n", ": "),
       percent_intl(.data$value / total_gwh, accuracy = 0.1)
+    ), width = 22),
+    label_text = if_else(
+      .data$label == "Consumo total",
+      paste0("Consumo\n", percent_intl(.data$value / total_gwh, accuracy = 0.1)),
+      .data$label_text
     ),
     label_x = if_else(.data$label == "Consumo total", 8.0, 9.65),
     label_y = case_when(
       .data$label == "Consumo total" ~ .data$ymid,
       .data$label == "Exportación" ~ .data$ymin - total_gwh * 0.06,
-      TRUE ~ .data$ymax + total_gwh * 0.065
+      TRUE ~ .data$ymax + total_gwh * 0.075
     )
   )
 
@@ -255,7 +262,8 @@ destination_flows <- bind_rows(lapply(seq_len(nrow(destination_stage)), function
       ymax = destination_stage$ymax[[i]]
     ),
     fill = unname(destination_colours[[destination_name]]),
-    flow_id = paste0("destination-", i)
+    flow_id = paste0("destination-", i),
+    bend_factor = 4
   )
 }))
 
@@ -276,7 +284,8 @@ subtitle_raw <- paste0(
 )
 caption_raw <- paste0(
   "Fuente: ARCONEL, Balance Nacional de Energía Eléctrica, agosto de 2025-julio de 2026. ",
-  "Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE."
+  "Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE. ",
+  "Nota: porcentajes sobre el suministro total."
 )
 
 # 3. Write output ----
