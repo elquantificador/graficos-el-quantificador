@@ -3,7 +3,7 @@
 # Author: Daniel Sanchez
 # Purpose: Sigue la energía desde sus fuentes hasta sus destinos.
 # Inputs:  data/processed/bnee_arconel_sankey_corte_2026_07.csv
-# Outputs: outputs/figures/52_balance-energetico-ecuador.png
+# Outputs: outputs/figures/50_balance-energetico-ecuador.png
 # ============================================================
 
 # 0. Setup ----
@@ -13,7 +13,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "readr", "ragg", "scales", "stringr"))
 
 input_path <- "data/processed/bnee_arconel_sankey_corte_2026_07.csv"
-out_path <- "outputs/figures/52_balance-energetico-ecuador.png"
+out_path <- "outputs/figures/50_balance-energetico-ecuador.png"
 total_node <- "Producción e importaciones"
 
 source_order <- c(
