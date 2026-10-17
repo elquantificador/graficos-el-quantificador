@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "Si usas estos gráficos o scripts, cítalos con estos datos."
+title: "Gráficos de El Quantificador"
+type: software
+authors:
+  - name: "El Quantificador (LIDE)"
+    website: "https://elquantificador.org/"
+repository-code: "https://github.com/elquantificador/graficos-el-quantificador"
+license: MIT
+# Los gráficos son CC BY-NC 4.0 (LICENSE-images). Cita también cada gráfico con
+# el crédito que aparece en su página de elquantificador.org.

@@ -32,3 +32,5 @@ Thumbs.db
 # Herramientas locales
 .claude/
 
+# Ofertas laborales de terceros: no se publican (ver DATA-NOTICE.md)
+data/raw/jobs_scrape/*.csv

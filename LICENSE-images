@@ -1,28 +1,46 @@
-Creative Commons Attribution-NonCommercial 4.0 International
+Creative Commons Atribución-NoComercial 4.0 Internacional (CC BY-NC 4.0)
 
-This repository's image assets are licensed under the Creative Commons
-Attribution-NonCommercial 4.0 International License.
+Copyright (c) 2026 Laboratorio de Investigación para el Desarrollo del Ecuador (LIDE). Los derechos sobre el material elaborado por quienes
+colaboran con El Quantificador pertenecen a LIDE.
 
-Covered material includes, unless otherwise noted:
+Las imágenes y tablas elaboradas en este repositorio se distribuyen bajo la
+licencia Creative Commons Atribución-NoComercial 4.0 Internacional.
 
-- Files in `figures/`
-- `quantificador.png`
+Material cubierto, salvo nota en contrario:
 
-You are free to:
+- Archivos en `outputs/figures/`
+- Archivos en `outputs/tables/`
 
-- Share — copy and redistribute the material in any medium or format
-- Adapt — remix, transform, and build upon the material
+Material NO cubierto por esta licencia:
 
-Under the following terms:
+- `quantificador.png`, el logotipo y cualquier elemento de la identidad visual
+  de El Quantificador y LIDE. Todos los derechos reservados. Puedes mantener el
+  logotipo visible en los gráficos como parte del crédito, pero no se concede
+  permiso para usarlo como marca propia ni para sugerir respaldo.
+- Datos de terceros en `data/` (ver `DATA-NOTICE.md`).
+- El código, regido por la licencia MIT del archivo `LICENSE`.
 
-- Attribution — You must give appropriate credit, provide a link to the
-  license, and indicate if changes were made.
-- NonCommercial — You may not use the material for commercial purposes.
-- No additional restrictions — You may not apply legal terms or technological
-  measures that legally restrict others from doing anything the license permits.
+Puedes:
 
-Full license text:
-https://creativecommons.org/licenses/by-nc/4.0/
+- Compartir: copiar y redistribuir el material en cualquier medio o formato.
+- Adaptar: remezclar, transformar y construir a partir del material.
 
-Human-readable summary:
-https://creativecommons.org/licenses/by-nc/4.0/deed.en
+Bajo estas condiciones:
+
+- Atribución: debes dar crédito adecuado a El Quantificador (LIDE) y a sus
+  autores, enlazar la licencia e indicar si hiciste cambios.
+- NoComercial: no puedes usar el material con fines comerciales.
+- Sin restricciones adicionales: no puedes aplicar términos legales ni medidas
+  tecnológicas que restrinjan lo que la licencia permite.
+
+Las cifras y hechos que muestran los gráficos pueden citarse libremente. Te
+pedimos que nombres a los autores y a El Quantificador (LIDE) y que enlaces la
+publicación original. Los usos comerciales de gráficos o tablas, como
+promocionar cursos o servicios, requieren autorización previa:
+elquantificador@laboratoriolide.org.
+
+Texto legal completo:
+https://creativecommons.org/licenses/by-nc/4.0/legalcode.es
+
+Resumen:
+https://creativecommons.org/licenses/by-nc/4.0/deed.es

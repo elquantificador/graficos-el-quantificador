@@ -7,7 +7,11 @@ Repositorio para la reproduccion y publicacion de los graficos de El Quantificad
 El repositorio usa un esquema de licencias separadas:
 
 - **Codigo y scripts**: [MIT](LICENSE)
-- **Imagenes y graficos del repositorio** (incluyendo `outputs/figures/` y `quantificador.png`, salvo nota en contrario): [CC BY-NC 4.0](LICENSE-images)
+- **Graficos y tablas** (`outputs/figures/` y `outputs/tables/`, salvo nota en contrario): [CC BY-NC 4.0](LICENSE-images)
+- **Datos de terceros** (`data/raw/`): conservan los terminos de su fuente ([aviso](DATA-NOTICE.md))
+- **Logotipo y marca** (incluyendo `quantificador.png`): todos los derechos reservados
+
+Las cifras y resultados pueden citarse libremente. Menciona a los autores y a El Quantificador (LIDE) y enlaza la publicacion original. Los usos comerciales de graficos o tablas requieren autorizacion previa: elquantificador@laboratoriolide.org. Ver tambien `CITATION.cff` y `CONTRIBUTING.md`.
 
 ## Estructura del proyecto
 
