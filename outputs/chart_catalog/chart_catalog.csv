@@ -277,4 +277,6 @@ En ese período, Ecuador produjo e importó 41.183 GWh. El 70% provino de centra
 
 Las pérdidas no técnicas, entre otras cosas, comprenden conexiones ilegales. Una conexión ilegal toma energía de la red sin autorización y deja ese consumo fuera del registro. También generan pérdidas los medidores dañados o alterados y los errores de lectura o facturación.
 
-Fuente: ARCONEL, Balance Nacional de Energía Eléctrica, agosto de 2025-julio de 2026.",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_50_balance_energetico_ecuador_2025_2026.R,50,published,,Publicación de LinkedIn registrada; versión interactiva en Observable.
+Fuente: ARCONEL, Balance Nacional de Energía Eléctrica, agosto de 2025-julio de 2026.
+
+Corrección: aclaramos las etiquetas de pérdidas del gráfico: técnicas en distribución (5,0%), no técnicas en distribución (8,9%) y transmisión (4,2%). Las cifras no cambian.",https://github.com/elquantificador/graficos-el-quantificador/blob/main/scripts/plots/plot_50_balance_energetico_ecuador_2025_2026.R,50,published,,Publicación de LinkedIn registrada; versión interactiva en Observable.
