@@ -2,9 +2,9 @@
 
 ## Pieza
 
-- `outputs/figures/draft_mercado-laboral-pobreza-ecuador.png`
+- `outputs/figures/50_mercado-laboral-pobreza-ecuador.png`
 - Limpieza: `scripts/data-cleaning/clean_inec_mercado_laboral_pobreza_2026.R`
-- Visualización: `scripts/plots/plot_inec_mercado_laboral_pobreza_2026.R`
+- Visualización: `scripts/plots/plot_50_inec_mercado_laboral_pobreza_2026.R`
 
 ## Fuente y procedencia
 
@@ -27,6 +27,5 @@ Pobreza por ingresos: pobreza extrema (8,3 %), pobreza por ingresos (21,4 %),
 pobreza urbana (13,8 %) y pobreza rural (37,6 %).
 
 La fecha prevista de publicación de los datos de junio a octubre de 2026 es el
-22 de diciembre de 2026, según el calendario del INEC. La visualización tiene
-fecha prevista de publicación el 9 de octubre de 2026 y el catálogo la mantiene
-como `draft` hasta que exista una decisión editorial y un enlace de publicación.
+22 de diciembre de 2026, según el calendario del INEC. La visualización se publicó
+el 9 de octubre de 2026 y acompaña el artículo sobre el retraso de esas cifras.

@@ -1,11 +1,11 @@
 # ============================================================
-# plot_inec_mercado_laboral_pobreza_2026.R
+# plot_50_inec_mercado_laboral_pobreza_2026.R
 # Grafica los últimos indicadores oficiales disponibles del mercado laboral y la pobreza.
 # Requiere: data/processed/inec_mercado_laboral_pobreza_2026.rds
-# Guarda:   outputs/figures/draft_mercado-laboral-pobreza-ecuador.png
+# Guarda:   outputs/figures/50_mercado-laboral-pobreza-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_inec_mercado_laboral_pobreza_2026.R
+#   Rscript scripts/plots/plot_50_inec_mercado_laboral_pobreza_2026.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -13,7 +13,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/inec_mercado_laboral_pobreza_2026.rds"
-out_path <- "outputs/figures/draft_mercado-laboral-pobreza-ecuador.png"
+out_path <- "outputs/figures/50_mercado-laboral-pobreza-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")

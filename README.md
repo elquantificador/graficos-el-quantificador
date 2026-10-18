@@ -73,18 +73,18 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 
 La lista completa y el estado de cada grafico estan en
 `outputs/chart_catalog/chart_catalog.csv`. Solo las filas con `Status=published`
-se sincronizan con el sitio de El Quantificador. El catalogo actual contiene 58
+se sincronizan con el sitio de El Quantificador. El catalogo actual contiene 59
 graficos publicados.
 
 Los ultimos graficos publicados son:
 
 - `49_contribuciones-inflacion-ecuador.png`
-- `50_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
+- `50_mercado-laboral-pobreza-ecuador.png` (indicadores de mercado laboral y pobreza, ENEMDU 2026)
+- `51_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
 
 En preparacion (borradores sin numero hasta su publicacion):
 
 - `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
-- `draft_mercado-laboral-pobreza-ecuador.png` (indicadores del mercado laboral y pobreza, ENEMDU 2026)
 - `draft_rural_income_electricity-ecuador.png` (ingreso rural y recaudacion electrica, 2007-2025)
 
 ## Notas sobre los datos
