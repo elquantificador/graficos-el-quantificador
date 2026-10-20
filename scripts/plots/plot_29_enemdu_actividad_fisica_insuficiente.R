@@ -17,6 +17,7 @@ out_path <- "outputs/figures/29_actividad-fisica-insuficiente_area-edad-ecuador.
 
 plot_df <- readRDS("data/processed/enemdu_actividad_fisica_insuficiente.rds") |>
   mutate(
+    etiqueta = paste0(number(prevalencia, accuracy = 0.1, decimal.mark = ","), "%"),
     grupo_edad = factor(
       grupo_edad,
       levels = c(
@@ -29,7 +30,8 @@ plot_df <- readRDS("data/processed/enemdu_actividad_fisica_insuficiente.rds") |>
       area_residencia,
       levels = c("Entorno urbano", "Entorno rural")
     )
-  )
+  ) |>
+  arrange(area_residencia, grupo_edad)
 
 title_raw <- "La actividad física insuficiente es menos frecuente en el área rural"
 subtitle_raw <- "Prevalencia de actividad física insuficiente, por zona de residencia y grupo de edad, diciembre de 2024"
@@ -37,7 +39,8 @@ caption_raw <- paste(
   "Fuente: INEC, ENEMDU, módulo de actividad física de diciembre de 2024.",
   "Elaboración: Joan Mogro Ponce para El Quantificador de Laboratorio LIDE.",
   "Nota: Población de 18 a 69 años. Actividad insuficiente: menos de 150 minutos",
-  "moderados equivalentes semanales. Se suman caminata y actividad moderada, más el doble de los minutos de actividad vigorosa."
+  "moderados equivalentes semanales: caminata + actividad moderada + el doble de la vigorosa.",
+  "Se excluyen respuestas con códigos 88 y 99. Estimaciones ponderadas."
 )
 
 palette <- c(
@@ -60,10 +63,7 @@ build_chart <- function() {
       width = 0.58
     ) +
     geom_text(
-      aes(label = paste0(
-        number(prevalencia, accuracy = 0.1, decimal.mark = ","),
-        "%"
-      )),
+      aes(label = etiqueta),
       position = position_dodge(width = 0.82),
       vjust = -0.35,
       size = 3,

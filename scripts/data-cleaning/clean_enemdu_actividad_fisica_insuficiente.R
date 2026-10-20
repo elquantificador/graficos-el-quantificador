@@ -25,7 +25,11 @@ enemdu_df <- fread(
 
 enemdu_df[, area_residencia := fifelse(area == 1, "Entorno urbano", "Entorno rural")]
 
-adultos_df <- copy(enemdu_df[p03 >= 18 & p03 <= 69 & !is.na(fexp)])
+# Los códigos 88 y 99 no son respuestas de actividad y no equivalen a cero minutos.
+adultos_df <- copy(enemdu_df[
+  p03 >= 18 & p03 <= 69 & !is.na(fexp) &
+    af201cod %in% c(1, 2) & af202cod %in% c(1, 2) & af203cod %in% c(1, 2)
+])
 adultos_df[
   ,
   minutos_vigorosa := fifelse(
