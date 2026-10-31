@@ -59,10 +59,10 @@ p_base <- ggplot(df, aes(y = fruta)) +
     x        = "Variación frente al precio mayorista de septiembre",
     y        = NULL,
     title    = wrap_title_house(
-      "La mora cuesta 47% más la semana antes de Difuntos"
+      "La mora de la colada morada sube 47% antes de Difuntos"
     ),
     subtitle = wrap_subtitle_house(
-      "Precio mayorista de las frutas de la colada morada, antes y después del feriado, frente a septiembre, mediana 2021-2025"
+      "Precio mayorista de las frutas que lleva la colada morada, la semana antes y la semana después del feriado, frente a septiembre, mediana 2021-2025"
     ),
     caption  = caption_txt
   ) +
