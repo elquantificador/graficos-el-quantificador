@@ -36,7 +36,7 @@ mora    <- df[df$y == y_top, ]
 caption_txt <- wrap_caption_house(paste0(
   "Fuente: Ministerio de Agricultura y Ganadería (MAG), Sistema de Información ",
   "Pública Agropecuaria (SIPA), precios mayoristas diarios por mercado, 2025. ",
-  "Elaboración: El Quantificador. Nota: promedio por libra entre los mercados con ",
+  "Elaboración: Daniel Sánchez Pazmiño para El Quantificador. Nota: promedio por libra entre los mercados con ",
   "datos en ambos periodos. Septiembre: promedio del mes; octubre: semana del 26 ",
   "de octubre al 1 de noviembre. Babaco solo en Ambato, Loja y Riobamba."
 ))

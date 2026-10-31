@@ -27,7 +27,7 @@ caption_txt <- wrap_caption_house(paste0(
   "Fuente: precios publicados por siete panaderías en sus sitios web, Rappi y ",
   "Uber Eats; supermercados en Rappi y tiendas en línea; MAG, SIPA, precios ",
   "mayoristas; receta de Laylita's Recipes. Consulta: 31 de octubre de 2026. ",
-  "Elaboración: El Quantificador. Nota: receta de 10 porciones, unos 4 litros, ",
+  "Elaboración: Daniel Sánchez Pazmiño para El Quantificador. Nota: receta de 10 porciones, unos 4 litros, ",
   "sin gas ni tiempo de preparación. Al por mayor solo cambian mora, frutilla, ",
   "naranjilla y piña. Las apps de reparto pueden incluir recargo."
 ))
