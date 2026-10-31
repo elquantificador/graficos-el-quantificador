@@ -79,6 +79,7 @@ Las fichas `.md` de cada fuente documentan la version, el archivo interno utiliz
 | PISA Ecuador, PISA-D 2017 y PISA 2025 | `pisa_ecuador/pisa_ecuador_mean_scores.csv`, `pisa_ecuador/pisa_2025_tables_ib1_2a_36_38.xlsx`, `pisa_ecuador/pisa_participation_by_cycle.xlsx` | Usado en `clean_pisa_ecuador_puntajes.R` y `plot_45_pisa_ecuador_puntajes.R` | `pisa_ecuador.md` |
 | REMD 2020-2025, cohorte de matrimonios inscritos en 2020 | `remd_matrimonios/cohort_2020_survival_input.csv` | Usado en `clean_remd_matrimonios_hijos.R` y `plot_48_remd_matrimonios_hijos.R` | `remd_matrimonios_hijos.md` |
 | Balance Nacional de Energía Eléctrica, corte a julio de 2026 | `BNEE_julio_2026.xls` | Usado en `clean_bnee_arconel_sankey_corte_2026_07.R` | `bnee_arconel_sankey_corte_2026_07.md` |
+| Colada morada: costo por litro (octubre 2026) y precios mayoristas SIPA alrededor de Difuntos (2021-2025) | `colada_morada/costo_litro_colada_2026_10.csv`, `colada_morada/sipa_semana_difuntos_2021_2025.csv` | Usado en `plot_52_colada_hacer_comprar.R` y `plot_53_sipa_colada_difuntos.R` | `colada_morada.md` |
 
 ## Cobertura de documentacion
 
