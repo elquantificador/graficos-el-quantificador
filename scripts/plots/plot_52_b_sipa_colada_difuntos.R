@@ -43,12 +43,12 @@ caption_txt <- wrap_caption_house(paste0(
 
 p_base <- ggplot(df, aes(y = fruta)) +
   geom_segment(aes(x = septiembre, xend = octubre, yend = fruta),
-               colour = "grey85", linewidth = 1.1) +
-  geom_point(aes(x = septiembre), colour = col_sep, size = 2.6) +
-  geom_point(aes(x = octubre), colour = col_oct, size = 3.2) +
+               colour = "grey85", linewidth = 0.8) +
+  geom_point(aes(x = septiembre), colour = col_sep, size = 1.8) +
+  geom_point(aes(x = octubre), colour = col_oct, size = 1.8) +
   # Aumento a la derecha del punto de octubre
-  geom_text(aes(x = octubre + 0.04, label = etiqueta),
-            hjust = 0, size = 3, colour = col_oct, fontface = "bold",
+  geom_text(aes(x = octubre + 0.03, label = etiqueta),
+            hjust = 0, size = 2.5, colour = col_oct, fontface = "bold",
             family = fuente) +
   # Precios en dólares debajo de cada punto
   geom_text(aes(x = septiembre, y = y - 0.32, label = usd(septiembre)),
