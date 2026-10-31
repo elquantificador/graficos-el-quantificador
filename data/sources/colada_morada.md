@@ -40,7 +40,7 @@ Costo por litro de colada morada hecha en casa y comprada en locales.
 
 El gráfico muestra el más barato (Restaurante Morada Colada), la mediana y el más caro (Cyrano, con nota de que el precio es de Uber Eats). Los precios en apps de reparto pueden incluir recargo.
 
-## `sipa_precios_sep_oct_2021_2025.csv` y `sipa_sep_oct_anual_2021_2025.csv` (gráfico 52_b)
+## `sipa_precios_sep_oct_2025.csv` (gráfico 52_b)
 
 **Proveedor:** Ministerio de Agricultura y Ganadería (MAG), Sistema de Información Pública Agropecuaria (SIPA), precios mayoristas diarios por mercado. Compilación diaria del repositorio público `alexeperez/precios-agro-ecuador`.
 
@@ -48,20 +48,19 @@ El gráfico muestra el más barato (Restaurante Morada Colada), la mediana y el 
 
 **Cálculo:**
 
-1. Para cada producto, año (2021 a 2025) y mercado, se promedia el precio por kilo de septiembre y el de la semana del 26 de octubre al 1 de noviembre.
-2. Se conservan solo los mercados con datos en ambos periodos de ese año.
-3. Se promedian los mercados y se convierte a dólares por libra (1 kg = 2,20462 lb). El resultado por año está en `sipa_sep_oct_anual_2021_2025.csv`.
-4. Se promedian los cinco años para cada periodo (dólares corrientes). `cambio` es la variación entre ambos promedios.
+1. Para cada producto y mercado, se promedia el precio por kilo de septiembre de 2025 y el de la semana del 26 de octubre al 1 de noviembre de 2025.
+2. Se conservan solo los mercados con datos en ambos periodos.
+3. Se promedian los mercados y se convierte a dólares por libra (1 kg = 2,20462 lb). `cambio` es la variación entre ambos promedios.
 
-| Fruta | Mercados por año | Septiembre (USD/lb) | Fin de octubre (USD/lb) | Cambio |
+| Fruta | Mercados | Septiembre (USD/lb) | Fin de octubre (USD/lb) | Cambio |
 |---|---|---|---|---|
-| Mora | 6 a 10 | 0,65 | 0,92 | +41% |
-| Babaco | 2 a 3 | 0,28 | 0,33 | +19% |
-| Piña | 5 a 8 | 0,25 | 0,27 | +9% |
-| Naranjilla | 8 a 11 | 0,38 | 0,41 | +8% |
-| Frutilla | 7 a 10 | 0,93 | 0,98 | +6% |
-| Maracuyá | 9 a 13 | 0,31 | 0,31 | -1% |
+| Mora | 10 | 0,72 | 1,10 | +52% |
+| Babaco | 3 | 0,31 | 0,37 | +21% |
+| Naranjilla | 11 | 0,41 | 0,49 | +19% |
+| Piña | 7 | 0,26 | 0,29 | +10% |
+| Maracuyá | 13 | 0,33 | 0,36 | +9% |
+| Frutilla | 10 | 0,99 | 1,04 | +5% |
 
-Cambio de la mora por año: +65% (2021), +38% (2022), +36% (2023), +18% (2024) y +52% (2025).
+Se usa 2025 porque los datos de octubre de 2026 están incompletos: la mora solo tiene un mercado y el babaco y la piña no tienen registros ese mes.
 
-No se incluye 2026 porque los datos de octubre están incompletos: la mora solo tiene un mercado y el babaco y la piña no tienen registros ese mes.
+Contexto adicional: con la mediana de 2021 a 2025, la mora sube cada año la semana previa al feriado (+46% en 2021, +37% en 2022, +44% en 2023, +16% en 2024 y +79% en 2025, frente a su promedio de septiembre por mercado).
