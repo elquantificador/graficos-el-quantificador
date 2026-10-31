@@ -78,11 +78,7 @@ p_base <- ggplot(df, aes(y = fruta)) +
   ) +
   coord_cartesian(clip = "off") +
   theme_quantificador() +
-  theme(
-    text         = element_text(family = fuente),
-    axis.line.y  = element_blank(),
-    axis.ticks.y = element_blank()
-  )
+  theme(text = element_text(family = fuente))
 
 p_final <- add_logo(p_base, y = 0.20)
 
