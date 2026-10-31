@@ -1,8 +1,8 @@
 # ============================================================
 # plot_52_b_sipa_colada_difuntos.R
-# Precio mayorista de las frutas de la colada morada antes y
-# después del Día de Difuntos, frente a septiembre (2021-2025).
-# Requiere: data/raw/colada_morada/sipa_semana_difuntos_2021_2025.csv
+# Precio mayorista por libra de las frutas de la colada morada:
+# septiembre vs. semana previa al Día de Difuntos, 2025.
+# Requiere: data/raw/colada_morada/sipa_precios_sep_oct_2025.csv
 # Guarda:   outputs/figures/52_b_sipa-colada-difuntos-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
@@ -15,54 +15,64 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
 out_path <- "outputs/figures/52_b_sipa-colada-difuntos-ecuador.png"
 
-df <- read.csv("data/raw/colada_morada/sipa_semana_difuntos_2021_2025.csv",
+usd <- function(x) paste0("$", sub(".", ",", sprintf("%.2f", x), fixed = TRUE))
+
+df <- read.csv("data/raw/colada_morada/sipa_precios_sep_oct_2025.csv",
                encoding = "UTF-8") |>
+  arrange(desc(cambio)) |>
   mutate(
-    fruta   = factor(fruta, levels = rev(fruta)),
-    pct     = floor(antes * 100 + 0.5),
-    etiqueta = paste0(ifelse(pct > 0, "+", ""), pct, "%")
+    fruta    = factor(fruta, levels = rev(fruta)),
+    pct      = floor(cambio * 100 + 0.5),
+    etiqueta = paste0(ifelse(pct > 0, "+", ""), pct, "%"),
+    y        = as.numeric(fruta)
   )
 
-col_antes   <- "#D97729"
-col_despues <- "#2D7DB3"
+col_oct <- "#D97729"
+col_sep <- "#2D7DB3"
+fuente  <- "Arial"
+y_top   <- max(df$y)
+mora    <- df[df$y == y_top, ]
 
 caption_txt <- wrap_caption_house(paste0(
   "Fuente: Ministerio de Agricultura y Ganadería (MAG), Sistema de Información ",
-  "Pública Agropecuaria (SIPA), precios mayoristas diarios por mercado, 2021-2025. ",
-  "Elaboración: El Quantificador. Nota: precio de cada mercado y año dividido ",
-  "para su promedio de septiembre; mediana semanal. Antes: 26 oct a 1 nov. ",
-  "Después: 9 a 15 nov. Babaco solo en Ambato, Loja y Riobamba."
+  "Pública Agropecuaria (SIPA), precios mayoristas diarios por mercado, 2025. ",
+  "Elaboración: El Quantificador. Nota: promedio por libra entre los mercados con ",
+  "datos en ambos periodos. Septiembre: promedio del mes; octubre: semana del 26 ",
+  "de octubre al 1 de noviembre. Babaco solo en Ambato, Loja y Riobamba."
 ))
 
-fuente <- "Arial"
-
 p_base <- ggplot(df, aes(y = fruta)) +
-  geom_segment(aes(x = despues, xend = antes, yend = fruta),
+  geom_segment(aes(x = septiembre, xend = octubre, yend = fruta),
                colour = "grey85", linewidth = 1.1) +
-  annotate("segment", x = 0, xend = 0, y = 0.6, yend = 6.3,
-           colour = "grey60", linewidth = 0.4, linetype = "dashed") +
-  geom_point(aes(x = antes), colour = col_antes, size = 3.2) +
-  geom_point(aes(x = despues), colour = col_despues, size = 2.2) +
-  geom_text(aes(x = pmax(antes, despues) + 0.03, label = etiqueta),
-            hjust = 0, size = 3, colour = col_antes, fontface = "bold",
+  geom_point(aes(x = septiembre), colour = col_sep, size = 2.6) +
+  geom_point(aes(x = octubre), colour = col_oct, size = 3.2) +
+  # Aumento a la derecha del punto de octubre
+  geom_text(aes(x = octubre + 0.04, label = etiqueta),
+            hjust = 0, size = 3, colour = col_oct, fontface = "bold",
             family = fuente) +
-  annotate("text", x = 0.465, y = 6.45, label = "Semana antes",
-           colour = col_antes, size = 2.6, hjust = 0.5, family = fuente) +
-  annotate("text", x = 0.013, y = 6.45, label = "Semana después",
-           colour = col_despues, size = 2.6, hjust = 0.5, family = fuente) +
+  # Precios en dólares debajo de cada punto
+  geom_text(aes(x = septiembre, y = y - 0.32, label = usd(septiembre)),
+            hjust = 1, size = 2.5, colour = col_sep, family = fuente) +
+  geom_text(aes(x = octubre, y = y - 0.32, label = usd(octubre)),
+            hjust = 0, size = 2.5, colour = col_oct, family = fuente) +
+  annotate("text", x = mora$septiembre, y = y_top + 0.42, label = "Septiembre",
+           colour = col_sep, size = 2.6, hjust = 0.5, family = fuente) +
+  annotate("text", x = mora$octubre, y = y_top + 0.42, label = "Fin de octubre",
+           colour = col_oct, size = 2.6, hjust = 0.5, family = fuente) +
   scale_x_continuous(
-    labels = label_percent_intl(accuracy = 1),
-    breaks = seq(-0.1, 0.5, 0.1),
-    limits = c(-0.13, 0.55)
+    labels = label_dollar_intl(accuracy = 0.01),
+    breaks = seq(0, 1.25, 0.25),
+    limits = c(0, 1.32),
+    expand = expansion(mult = c(0, 0))
   ) +
   labs(
-    x        = "Variación frente al precio mayorista de septiembre",
+    x        = "Precio mayorista (USD por libra)",
     y        = NULL,
     title    = wrap_title_house(
-      "La mora de la colada morada sube 47% antes de Difuntos"
+      "La mora de la colada morada subió 52% antes de Difuntos"
     ),
     subtitle = wrap_subtitle_house(
-      "Precio mayorista de las frutas que lleva la colada morada, la semana antes y la semana después del feriado, frente a septiembre, mediana 2021-2025"
+      "Precios de los ingredientes de la colada morada, septiembre y octubre de 2025"
     ),
     caption  = caption_txt
   ) +
