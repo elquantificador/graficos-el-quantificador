@@ -13,8 +13,6 @@
 - `draft_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
   titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
   de publicar.
-- `draft_rural_income_electricity-ecuador.png` esta en estado `draft`; borrador
-  metodologico que compara el ingreso rural con la recaudacion electrica.
 - Los borradores no llevan numero. Al publicarse reciben un identificador libre
   del catalogo.
 
