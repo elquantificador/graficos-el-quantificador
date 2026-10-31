@@ -25,12 +25,13 @@ df <- read.csv("data/raw/colada_morada/costo_litro_colada_2026_10.csv",
 
 caption_txt <- wrap_caption_house(paste0(
   "Fuente: precios publicados por siete locales (panaderías y un restaurante) en ",
-  "sus sitios web, Rappi y Uber Eats; supermercados en Rappi y tiendas en línea; MAG, SIPA, precios ",
-  "mayoristas; receta de Laylita's Recipes. Consulta: 31 de octubre de 2026. ",
-  "Elaboración: Daniel Sánchez Pazmiño para El Quantificador. Nota: receta de 10 porciones, unos 4 litros, ",
-  "sin gas ni tiempo de preparación. Al por mayor solo cambian mora, frutilla, ",
-  "naranjilla y piña. Las apps de reparto pueden incluir recargo."
-))
+  "sus sitios web, Rappi y Uber Eats; supermercados en Rappi y tiendas en línea; ",
+  "MAG, SIPA, precios mayoristas; receta de El Comercio (2026). Consulta: 31 de ",
+  "octubre de 2026. Elaboración: Daniel Sánchez Pazmiño para El Quantificador. ",
+  "Nota: la receta usa 4 litros de agua; se asume que rinde unos 5 litros. Sin ",
+  "hierbas, gas ni tiempo de preparación. Arándanos en lugar de mortiño. Al por ",
+  "mayor solo cambian mora, frutilla, naranjilla y piña. *Precio en Uber Eats; ",
+  "las apps de reparto pueden incluir recargo."))
 
 p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
   geom_col(width = 0.6) +
@@ -46,7 +47,7 @@ p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
     x        = NULL,
     y        = "Precio por litro (USD)",
     title    = wrap_title_house(
-      "Fuera de casa, la colada morada cuesta hasta 5 veces más"
+      "Fuera de casa, la colada morada cuesta hasta 4 veces más"
     ),
     subtitle = wrap_subtitle_house(
       "Precio por litro, en casa y en locales, octubre de 2026"
