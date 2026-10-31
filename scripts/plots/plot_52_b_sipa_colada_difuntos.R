@@ -69,7 +69,7 @@ p_base <- ggplot(df, aes(y = fruta)) +
     x        = "Precio mayorista (USD por libra)",
     y        = NULL,
     title    = wrap_title_house(
-      "La mora de la colada morada subió 52% antes de Difuntos"
+      "De septiembre a octubre, la mora sube de precio en un 52% por Difuntos"
     ),
     subtitle = wrap_subtitle_house(
       "Precios de los ingredientes de la colada morada, septiembre y octubre de 2025"
