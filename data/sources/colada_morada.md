@@ -1,8 +1,8 @@
 # Fuente de datos: colada morada, Día de Difuntos 2026
 
-Insumos de los gráficos 52 y 53. Consulta: 31 de octubre de 2026.
+Insumos de los gráficos 52_a y 52_b. Consulta: 31 de octubre de 2026.
 
-## `costo_litro_colada_2026_10.csv` (gráfico 52)
+## `costo_litro_colada_2026_10.csv` (gráfico 52_a)
 
 Costo por litro de colada morada hecha en casa y comprada en panadería.
 
@@ -37,7 +37,7 @@ Costo por litro de colada morada hecha en casa y comprada en panadería.
 
 El gráfico muestra la más barata, la mediana y la más cara. Los precios en apps de reparto pueden incluir recargo.
 
-## `sipa_semana_difuntos_2021_2025.csv` (gráfico 53)
+## `sipa_semana_difuntos_2021_2025.csv` (gráfico 52_b)
 
 **Proveedor:** Ministerio de Agricultura y Ganadería (MAG), Sistema de Información Pública Agropecuaria (SIPA), precios mayoristas diarios por mercado. Compilación diaria del repositorio público `alexeperez/precios-agro-ecuador`, desde enero de 2021.
 

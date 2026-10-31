@@ -1,19 +1,19 @@
 # ============================================================
-# plot_52_colada_hacer_comprar.R
+# plot_52_a_colada_hacer_comprar.R
 # Costo por litro de colada morada: hecha en casa vs. panadería,
 # octubre 2026.
 # Requiere: data/raw/colada_morada/costo_litro_colada_2026_10.csv
-# Guarda:   outputs/figures/52_colada-hacer-comprar-ecuador.png
+# Guarda:   outputs/figures/52_a_colada-hacer-comprar-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_52_colada_hacer_comprar.R
+#   Rscript scripts/plots/plot_52_a_colada_hacer_comprar.R
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
-out_path <- "outputs/figures/52_colada-hacer-comprar-ecuador.png"
+out_path <- "outputs/figures/52_a_colada-hacer-comprar-ecuador.png"
 
 df <- read.csv("data/raw/colada_morada/costo_litro_colada_2026_10.csv",
                encoding = "UTF-8") |>

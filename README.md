@@ -81,8 +81,8 @@ Los ultimos graficos publicados son:
 - `49_contribuciones-inflacion-ecuador.png`
 - `50_mercado-laboral-pobreza-ecuador.png` (indicadores de mercado laboral y pobreza, ENEMDU 2026)
 - `51_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
-- `52_colada-hacer-comprar-ecuador.png` (costo por litro de colada morada hecha en casa y comprada en panadería, octubre de 2026; en espera del enlace de LinkedIn)
-- `53_sipa-colada-difuntos-ecuador.png` (precio mayorista de las frutas de la colada morada antes y después de Difuntos, SIPA 2021-2025; en espera del enlace de LinkedIn)
+- `52_a_colada-hacer-comprar-ecuador.png` (costo por litro de colada morada hecha en casa y comprada en panadería, octubre de 2026; en espera del enlace de LinkedIn)
+- `52_b_sipa-colada-difuntos-ecuador.png` (precio mayorista de las frutas de la colada morada antes y después de Difuntos, SIPA 2021-2025; en espera del enlace de LinkedIn)
 
 En preparacion (borradores sin numero hasta su publicacion):
 

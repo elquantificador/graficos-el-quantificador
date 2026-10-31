@@ -1,19 +1,19 @@
 # ============================================================
-# plot_53_sipa_colada_difuntos.R
+# plot_52_b_sipa_colada_difuntos.R
 # Precio mayorista de las frutas de la colada morada antes y
 # después del Día de Difuntos, frente a septiembre (2021-2025).
 # Requiere: data/raw/colada_morada/sipa_semana_difuntos_2021_2025.csv
-# Guarda:   outputs/figures/53_sipa-colada-difuntos-ecuador.png
+# Guarda:   outputs/figures/52_b_sipa-colada-difuntos-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_53_sipa_colada_difuntos.R
+#   Rscript scripts/plots/plot_52_b_sipa_colada_difuntos.R
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
-out_path <- "outputs/figures/53_sipa-colada-difuntos-ecuador.png"
+out_path <- "outputs/figures/52_b_sipa-colada-difuntos-ecuador.png"
 
 df <- read.csv("data/raw/colada_morada/sipa_semana_difuntos_2021_2025.csv",
                encoding = "UTF-8") |>
