@@ -4,7 +4,7 @@ Insumos de los gráficos 52_a y 52_b. Consulta: 31 de octubre de 2026.
 
 ## `costo_litro_colada_2026_10.csv` (gráfico 52_a)
 
-Costo por litro de colada morada hecha en casa y comprada en panadería.
+Costo por litro de colada morada hecha en casa y comprada en locales.
 
 **Hecha en casa.** Receta de Laylita's Recipes (10 porciones; se asume que rinde unos 4 litros: 12 tazas de agua, 14 oz de pulpa de naranjilla y la fruta).
 
@@ -23,11 +23,11 @@ Costo por litro de colada morada hecha en casa y comprada en panadería.
 - Frutas al por mayor: mora ($2,26/kg), frutilla ($1,83/kg), naranjilla híbrida ($1,05/kg; ~800 g de fruta para la pulpa) y piña ($0,44/kg; ~1,8 kg) con la mediana de precios mayoristas de octubre de 2026 del SIPA (MAG); el resto a precio de supermercado. Total $11,28, $2,82 por litro.
 - No incluye ishpingo, anís, hierbas, gas ni tiempo de preparación.
 
-**Panaderías** (precio de 1 litro publicado en sitio web o app de reparto):
+**Locales** (seis panaderías y un restaurante; precio de 1 litro publicado en sitio web o app de reparto):
 
-| Panadería | Canal | Precio por litro |
+| Local | Canal | Precio por litro |
 |---|---|---|
-| Morada Colada | moradacolada.com | $5,00 |
+| Morada Colada (marca del Restaurante Micasa) | moradacolada.com | $5,00 |
 | Guaguas Quito | guaguasquito.com | $5,25 |
 | San Honoré | sanhonore.com | $7,71 ($8,48 por 1,1 litros) |
 | Panificadora Ambato | Rappi | $7,94 |
@@ -35,7 +35,7 @@ Costo por litro de colada morada hecha en casa y comprada en panadería.
 | Panpe | Rappi | $9,99 |
 | Cyrano | Uber Eats | $16,10 |
 
-El gráfico muestra la más barata, la mediana y la más cara. Los precios en apps de reparto pueden incluir recargo.
+El gráfico muestra el más barato, la mediana y el más caro, sin nombres. Los precios en apps de reparto pueden incluir recargo.
 
 ## `sipa_precios_sep_oct_2025.csv` (gráfico 52_b)
 

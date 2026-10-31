@@ -1,6 +1,6 @@
 # ============================================================
 # plot_52_a_colada_hacer_comprar.R
-# Costo por litro de colada morada: hecha en casa vs. panadería,
+# Costo por litro de colada morada: hecha en casa vs. locales (panaderías y restaurantes),
 # octubre 2026.
 # Requiere: data/raw/colada_morada/costo_litro_colada_2026_10.csv
 # Guarda:   outputs/figures/52_a_colada-hacer-comprar-ecuador.png
@@ -24,8 +24,8 @@ df <- read.csv("data/raw/colada_morada/costo_litro_colada_2026_10.csv",
   )
 
 caption_txt <- wrap_caption_house(paste0(
-  "Fuente: precios publicados por siete panaderías en sus sitios web, Rappi y ",
-  "Uber Eats; supermercados en Rappi y tiendas en línea; MAG, SIPA, precios ",
+  "Fuente: precios publicados por siete locales (panaderías y un restaurante) en ",
+  "sus sitios web, Rappi y Uber Eats; supermercados en Rappi y tiendas en línea; MAG, SIPA, precios ",
   "mayoristas; receta de Laylita's Recipes. Consulta: 31 de octubre de 2026. ",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador. Nota: receta de 10 porciones, unos 4 litros, ",
   "sin gas ni tiempo de preparación. Al por mayor solo cambian mora, frutilla, ",
@@ -36,7 +36,7 @@ p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
   geom_col(width = 0.6) +
   geom_text(aes(label = valor), hjust = -0.15, size = 3, colour = "grey20",
             family = "Arial") +
-  scale_fill_manual(values = c(casa = "#EF9F4E", panaderia = "#2D7DB3")) +
+  scale_fill_manual(values = c(casa = "#EF9F4E", local = "#2D7DB3")) +
   scale_y_continuous(
     labels = label_dollar_intl(accuracy = 1),
     breaks = seq(0, 16, 4),
@@ -49,7 +49,7 @@ p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
       "Fuera de casa, la colada morada cuesta hasta 5 veces más"
     ),
     subtitle = wrap_subtitle_house(
-      "Precio por litro, en casa y en panadería, octubre de 2026"
+      "Precio por litro, en casa y en locales, octubre de 2026"
     ),
     caption  = caption_txt
   ) +
