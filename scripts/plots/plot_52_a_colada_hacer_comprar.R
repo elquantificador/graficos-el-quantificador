@@ -44,10 +44,12 @@ p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
   ) +
   labs(
     x        = NULL,
-    y        = "Costo por litro (USD), octubre 2026",
-    title    = wrap_title_house("¿Hacer o comprar colada morada?"),
+    y        = "Precio por litro (USD)",
+    title    = wrap_title_house(
+      "En panadería, la colada morada puede costar casi cinco veces más"
+    ),
     subtitle = wrap_subtitle_house(
-      "Precio de la colada morada por litro, por ubicación, octubre de 2026"
+      "Precio por litro de colada morada, en casa y en panadería, octubre de 2026"
     ),
     caption  = caption_txt
   ) +
