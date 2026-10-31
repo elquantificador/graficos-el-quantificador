@@ -16,9 +16,9 @@ ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 out_path <- "outputs/figures/52_a_colada-hacer-comprar-ecuador.png"
 
 df <- read.csv("data/raw/colada_morada/costo_litro_colada_2026_10.csv",
-               encoding = "UTF-8") |>
+               encoding = "UTF-8", na.strings = character(0)) |>
   mutate(
-    etiqueta = paste0(opcion, "\n(", detalle, ")"),
+    etiqueta = ifelse(detalle == "", opcion, paste0(opcion, "\n(", detalle, ")")),
     etiqueta = factor(etiqueta, levels = rev(etiqueta)),
     valor    = paste0("$", sub(".", ",", sprintf("%.2f", costo_litro), fixed = TRUE))
   )
@@ -47,7 +47,7 @@ p_base <- ggplot(df, aes(x = etiqueta, y = costo_litro, fill = tipo)) +
     y        = "Costo por litro (USD), octubre 2026",
     title    = wrap_title_house("¿Hacer o comprar colada morada?"),
     subtitle = wrap_subtitle_house(
-      "En panadería, el litro puede costar casi cinco veces más que hecho en casa"
+      "Precio de la colada morada por litro, por ubicación, octubre de 2026"
     ),
     caption  = caption_txt
   ) +
