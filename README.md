@@ -86,8 +86,8 @@ Los ultimos graficos publicados son:
 
 En preparacion (borradores sin numero hasta su publicacion):
 
-- `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
-- `draft_rural_income_electricity-ecuador.png` (ingreso rural y recaudacion electrica, 2007-2025)
+- `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
+- `draft_rural_income_electricity-ecuador.png` (ingreso rural y recaudacion electrica, 2007-2025; fila 96 del pipeline, programado para el 11 de noviembre de 2026)
 
 ## Notas sobre los datos
 
