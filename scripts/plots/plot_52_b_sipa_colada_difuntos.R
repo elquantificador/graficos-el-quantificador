@@ -57,7 +57,7 @@ p_base <- ggplot(df, aes(y = fruta)) +
             hjust = 0, size = 2.5, colour = col_oct, family = fuente) +
   annotate("text", x = mora$septiembre, y = y_top + 0.42, label = "Septiembre",
            colour = col_sep, size = 2.6, hjust = 0.5, family = fuente) +
-  annotate("text", x = mora$octubre, y = y_top + 0.42, label = "Fin de octubre",
+  annotate("text", x = mora$octubre, y = y_top + 0.42, label = "26 oct. a 1 nov.",
            colour = col_oct, size = 2.6, hjust = 0.5, family = fuente) +
   scale_x_continuous(
     labels = label_dollar_intl(accuracy = 0.01),
@@ -69,10 +69,10 @@ p_base <- ggplot(df, aes(y = fruta)) +
     x        = "Precio mayorista (USD por libra)",
     y        = NULL,
     title    = wrap_title_house(
-      "De septiembre a octubre, la mora sube de precio en un 52% por Difuntos"
+      "Antes de Difuntos, el precio mayorista de la mora subió 52% en 2025"
     ),
     subtitle = wrap_subtitle_house(
-      "Precios de los ingredientes de la colada morada, septiembre y octubre de 2025"
+      "Frutas para la colada morada: septiembre y del 26 de octubre al 1 de noviembre de 2025"
     ),
     caption  = caption_txt
   ) +
