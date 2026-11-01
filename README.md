@@ -73,16 +73,15 @@ Hay esqueletos base para acelerar piezas nuevas en `scripts/templates/clean_temp
 
 La lista completa y el estado de cada grafico estan en
 `outputs/chart_catalog/chart_catalog.csv`. Solo las filas con `Status=published`
-se sincronizan con el sitio de El Quantificador. El catalogo actual contiene 59
-graficos publicados.
+se sincronizan con el sitio de El Quantificador. Consulta el catalogo para conocer el numero de graficos publicados.
 
 Los ultimos graficos y su estado son:
 
 - `49_contribuciones-inflacion-ecuador.png`
 - `50_mercado-laboral-pobreza-ecuador.png` (indicadores de mercado laboral y pobreza, ENEMDU 2026)
 - `51_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
-- `52_a_colada-hacer-comprar-ecuador.png` (costo por litro de colada morada hecha en casa y comprada en locales, octubre de 2026; en espera de la revisión final del gráfico 52_b)
-- `52_b_sipa-colada-difuntos-ecuador.png` (precio mayorista por libra de las frutas de la colada morada, septiembre y semana del 26 de octubre al 1 de noviembre de 2025, SIPA; en espera de regenerar y revisar la imagen corregida)
+- `52_a_colada-hacer-comprar-ecuador.png` (costo por litro de colada morada hecha en casa y comprada en locales, octubre de 2026)
+- `52_b_sipa-colada-difuntos-ecuador.png` (precio mayorista por libra de las frutas de la colada morada, septiembre y semana del 26 de octubre al 1 de noviembre de 2025, SIPA; imagen pendiente de regenerar con el título corregido)
 
 En preparacion (borradores sin numero hasta su publicacion):
 
