@@ -53,7 +53,7 @@ title_raw <- paste0(
 caption_raw <- paste(
   "Fuente: INEC, ENEMDU marzo 2026. Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
   "Nota: Ingreso total del hogar suma los ingresos laborales, de capital, transferencias, pensiones y bonos de sus miembros.",
-  "Los componentes de ingreso sin dato se registran como cero. Histograma ponderado con intervalos de USD 100; se muestran ingresos hasta el percentil 99. La línea señala USD 1.500."
+  "Se excluyen hogares con algún ingreso no informado o sin componentes de ingreso observados. Histograma ponderado con intervalos de USD 100; se muestran ingresos hasta el percentil 99. La línea señala USD 1.500."
 )
 
 build_chart <- function() {

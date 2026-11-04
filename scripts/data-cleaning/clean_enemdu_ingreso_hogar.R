@@ -22,50 +22,36 @@ rds_path <- "data/processed/enemdu_ingreso_hogar_2026_03.rds"
 xlsx_path <- "outputs/tables/enemdu_ingreso_hogar_2026_03_summary.xlsx"
 html_path <- "outputs/tables/enemdu_ingreso_hogar_2026_03_summary.html"
 
+income_columns <- c("p63", "p66", "p68b", "p69", "p70b", "p71b", "p72b", "p73b", "p74b", "p76", "p78")
+
 enemdu_ingreso_hogar <- read_sav(input_path) %>%
   mutate(
-    across(
-      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
-      ~ as.numeric(zap_labels(.x))
-    ),
-    across(
-      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
-      ~ na_if(.x, 999999)
-    ),
-    across(
-      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
-      ~ na_if(.x, -1)
-    ),
-    across(
-      c(p63, p66, p68b, p69, p70b, p71b, p72b, p73b, p74b, p76, p78),
-      ~ replace_na(.x, 0)
-    ),
-    ingreso_laboral_primaria = p63 + p66 + p68b,
-    ingreso_laboral_secundaria = p69 + p70b,
-    ingreso_laboral_total = ingreso_laboral_primaria + ingreso_laboral_secundaria,
-    ingreso_capital_inversiones = p71b,
-    transferencias_prestaciones = p72b + p73b + p74b + p76 + p78,
-    bdh = p76,
-    bono_discapacidad = p78,
-    ingreso_total_hogar_persona =
-      ingreso_laboral_total +
-      ingreso_capital_inversiones +
-      transferencias_prestaciones
+    across(all_of(income_columns), ~ as.numeric(zap_labels(.x))),
+    ingreso_no_informado = if_any(all_of(income_columns), ~ !is.na(.x) & .x %in% c(-1, 999999)),
+    ingreso_observado = if_any(all_of(income_columns), ~ !is.na(.x) & !.x %in% c(-1, 999999)),
+    across(all_of(income_columns), ~ na_if(na_if(.x, 999999), -1))
   ) %>%
   group_by(id_hogar) %>%
   summarise(
     area = first(area),
     fexp = first(fexp),
-    ingreso_laboral_primaria = sum(ingreso_laboral_primaria, na.rm = TRUE),
-    ingreso_laboral_secundaria = sum(ingreso_laboral_secundaria, na.rm = TRUE),
-    ingreso_laboral_total = sum(ingreso_laboral_total, na.rm = TRUE),
-    ingreso_capital_inversiones = sum(ingreso_capital_inversiones, na.rm = TRUE),
-    transferencias_prestaciones = sum(transferencias_prestaciones, na.rm = TRUE),
-    bdh = sum(bdh, na.rm = TRUE),
-    bono_discapacidad = sum(bono_discapacidad, na.rm = TRUE),
-    ingreso_total_hogar = sum(ingreso_total_hogar_persona, na.rm = TRUE),
+    ingreso_no_informado = any(ingreso_no_informado),
+    ingreso_observado = any(ingreso_observado),
+    across(all_of(income_columns), ~ if (all(is.na(.x))) NA_real_ else sum(.x, na.rm = TRUE)),
     .groups = "drop"
-  )
+  ) %>%
+  filter(!ingreso_no_informado, ingreso_observado) %>%
+  mutate(
+    ingreso_laboral_primaria = rowSums(pick(p63, p66, p68b), na.rm = TRUE),
+    ingreso_laboral_secundaria = rowSums(pick(p69, p70b), na.rm = TRUE),
+    ingreso_laboral_total = ingreso_laboral_primaria + ingreso_laboral_secundaria,
+    ingreso_capital_inversiones = p71b,
+    transferencias_prestaciones = rowSums(pick(p72b, p73b, p74b, p76, p78), na.rm = TRUE),
+    bdh = p76,
+    bono_discapacidad = p78,
+    ingreso_total_hogar = rowSums(pick(ingreso_laboral_total, ingreso_capital_inversiones, transferencias_prestaciones), na.rm = TRUE)
+  ) %>%
+  select(-all_of(income_columns), -ingreso_no_informado, -ingreso_observado)
 
 summary_total <- enemdu_ingreso_hogar %>%
   summarise(
