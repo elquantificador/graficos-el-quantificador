@@ -22,6 +22,7 @@ wtd_q <- function(x, w, p) {
   as.numeric(Hmisc::wtd.quantile(x, weights = w, probs = p, na.rm = TRUE)[[1]])
 }
 
+p60_income <- wtd_q(df$ingreso_total_hogar, df$fexp, 0.60)
 p99_income <- wtd_q(df$ingreso_total_hogar, df$fexp, 0.99)
 share_below_1500 <- 100 * sum(df$fexp[df$ingreso_total_hogar < 1500], na.rm = TRUE) / sum(df$fexp, na.rm = TRUE)
 share_at_or_above_1500 <- 100 - share_below_1500
@@ -29,10 +30,11 @@ share_at_or_above_1500 <- 100 - share_below_1500
 plot_df <- df %>%
   filter(!is.na(ingreso_total_hogar), !is.na(fexp), ingreso_total_hogar >= 0) %>%
   mutate(
-    ingreso_plot = pmin(ingreso_total_hogar, p99_income),
+    ingreso_plot = ingreso_total_hogar,
     fue_recortado = ingreso_total_hogar > p99_income,
     tramo_1500 = if_else(ingreso_total_hogar < 1500, "Menos de $1,500", "$1,500 o más")
-  )
+  ) %>%
+  filter(ingreso_plot <= p99_income)
 
 bin_df <- plot_df %>%
   mutate(bin = floor(ingreso_plot / 100) * 100) %>%
@@ -43,26 +45,21 @@ y_max <- max(bin_df$weighted_count, na.rm = TRUE)
 
 subtitle_txt <- "Distribución del ingreso mensual de los hogares, ENEMDU 2026"
 
-title_raw <- "Solo el 14% de hogares ecuatorianos ganan $1.500 o más (el 60% gana $513 o menos)"
-caption_portrait <- paste0(
-  "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador\n",
-  "de Laboratorio LIDE. Ingreso total del hogar = suma del ingreso laboral primario y secundario,\n",
-  "ingresos de capital, transferencias, pensiones y bonos de todos los miembros del hogar.\n",
-  "Histograma ponderado por pesos de muestra con intervalos de USD 100. Visualización hasta\n",
-  "el percentil 99. Línea punteada = umbral de $1,500."
+title_raw <- paste0(
+  "Solo el ", scales::number(share_at_or_above_1500, accuracy = 1, decimal.mark = ","),
+  "% de los hogares gana $1.500 o más; el 60% gana ",
+  label_dollar_intl(accuracy = 1)(p60_income), " o menos"
 )
-caption_raw <- paste0(
-  "Fuente: ENEMDU - INEC, marzo 2026. Cálculos de Daniel Sánchez para El Quantificador ",
-  "de Laboratorio LIDE. Ingreso total del hogar = suma del ingreso laboral primario y secundario, ",
-  "ingresos de capital, transferencias, pensiones y bonos de todos los miembros del hogar. ",
-  "Histograma ponderado por pesos de muestra con intervalos de USD 100. Visualización hasta ",
-  "el percentil 99. Línea punteada = umbral de $1,500."
+caption_raw <- paste(
+  "Fuente: INEC, ENEMDU marzo 2026. Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE.",
+  "Nota: Ingreso total del hogar suma los ingresos laborales, de capital, transferencias, pensiones y bonos de sus miembros.",
+  "Los componentes de ingreso sin dato se registran como cero. Histograma ponderado con intervalos de USD 100; se muestran ingresos hasta el percentil 99. La línea señala USD 1.500."
 )
 
 build_chart <- function() {
   spec <- house_spec("portrait")
-    title_txt   <- "Solo el 14% de hogares ecuatorianos ganan\n$1.500 o más (el 60% gana $513 o menos)"
-    caption_txt <- caption_portrait
+    title_txt <- wrap_title_house(title_raw)
+    caption_txt <- wrap_caption_house(caption_raw)
 
   ggplot(plot_df, aes(x = ingreso_plot, weight = fexp)) +
   geom_histogram(
@@ -157,7 +154,7 @@ build_chart <- function() {
 dir.create("outputs/figures", showWarnings = FALSE)
 
   spec <- house_spec("portrait")
-  p_final <- house_apply_logo(build_chart(), "portrait", x = 0.895, y = 0.18, width = 0.09, height = 0.09)
+  p_final <- house_apply_logo(build_chart(), "portrait")
   dest <- out_path
   ggsave(
     filename = dest,

@@ -22,14 +22,13 @@ plot_data <- result$skills |>
   mutate(skill = factor(skill, levels = rev(skill)))
 
 title_txt <- wrap_title_house(
-  "Excel, Power BI y SQL dominan la demanda de habilidades técnicas en Ecuador",
-  width = 40
+  "Excel, Power BI y SQL dominan la demanda de habilidades técnicas en Ecuador"
 )
 subtitle_txt <- wrap_subtitle_house(
   "Porcentaje de ofertas que menciona cada herramienta técnica; cinco principales, Ecuador, junio-julio de 2026"
 )
 caption_txt <- wrap_caption_house(
-  "Fuente: Multitrabajos, Computrabajo y Mipleo, mediante web scraping de 745 ofertas laborales en análisis de datos o áreas adyacentes, entre junio y julio de 2026. Se consideran solamente herramientas de software técnico. Los porcentajes no suman 100%, ya que cada oferta puede listar más de una herramienta. Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE."
+  "Fuente: Multitrabajos, Computrabajo y Mipleo, junio-julio de 2026. Elaboración: Daniel Sánchez para El Quantificador de Laboratorio LIDE. Nota: De 745 ofertas recopiladas, se analizan 377 elegibles con habilidades declaradas. Los porcentajes no suman 100% porque cada oferta puede mencionar varias herramientas."
 )
 
 p_base <- ggplot(plot_data, aes(x = share, y = skill)) +

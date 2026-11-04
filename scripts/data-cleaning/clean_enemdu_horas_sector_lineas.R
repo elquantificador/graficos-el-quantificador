@@ -17,15 +17,15 @@ raw_dir <- "data/raw/enemdu"
 out_path <- "data/processed/enemdu_horas_sector_lineas_2018_2026.rds"
 
 annual_specs <- tibble::tribble(
-  ~anio, ~file_name, ~p05a_informal, ~p05b_informal,
-  2018, "ENEMDU_PERSONAS_2018_12_hom.sav", 7, 6,
-  2019, "enemdu_persona_201912.sav", 7, 7,
-  2020, "enemdu_persona_2020_12.sav", 8, 5,
-  2021, "enemdu_persona_2021_12.sav", 9, 6,
-  2022, "enemdu_persona_2022_12.sav", 7, 6,
-  2023, "enemdu_persona_2023_12.sav", 7, 5,
-  2024, "enemdu_persona_2024_12.sav", 7, 5,
-  2025, "enemdu_persona_2025_12.sav", 7, 5
+  ~anio, ~file_name,
+  2018, "ENEMDU_PERSONAS_2018_12_hom.sav",
+  2019, "enemdu_persona_201912.sav",
+  2020, "enemdu_persona_2020_12.sav",
+  2021, "enemdu_persona_2021_12.sav",
+  2022, "enemdu_persona_2022_12.sav",
+  2023, "enemdu_persona_2023_12.sav",
+  2024, "enemdu_persona_2024_12.sav",
+  2025, "enemdu_persona_2025_12.sav"
 ) |>
   dplyr::mutate(path = file.path(raw_dir, file_name))
 
@@ -43,8 +43,6 @@ q1_2026_spec <- tibble::tibble(
   path = file.path(raw_dir, "enemdu_persona_2026_l_trimestre.sav"),
   file_name = "enemdu_persona_2026_l_trimestre.sav",
   anio = 2026L,
-  p05a_informal = 7,
-  p05b_informal = 5,
   mes = NA_integer_
 )
 
@@ -52,16 +50,12 @@ if (!file.exists(q1_2026_spec$path[[1]])) {
   stop("Falta el archivo ENEMDU del I trimestre de 2026: ", q1_2026_spec$file_name[[1]])
 }
 
-summarise_hours <- function(path, anio, p05a_informal, p05b_informal, mes = NA_integer_) {
+summarise_hours <- function(path, anio, mes = NA_integer_) {
   raw_df <- haven::read_sav(path)
 
   raw_df |>
     dplyr::mutate(
-      secemp_new = dplyr::case_when(
-        !is.na(secemp) ~ as.numeric(secemp),
-        is.na(secemp) & p05a == p05a_informal & p05b == p05b_informal ~ 2,
-        is.na(secemp) ~ 1
-      ),
+      secemp_new = as.numeric(secemp),
       sexo = dplyr::case_when(
         p02 == 1 ~ "Hombres",
         p02 == 2 ~ "Mujeres",
@@ -72,17 +66,20 @@ summarise_hours <- function(path, anio, p05a_informal, p05b_informal, mes = NA_i
         secemp_new == 2 ~ "Sector Informal",
         TRUE ~ NA_character_
       ),
-      horas = as.numeric(p24)
+      horas = as.numeric(p24),
+      peso = as.numeric(fexp)
     ) |>
     dplyr::filter(
       !is.na(sexo),
       !is.na(sector_desc),
       p03 >= 15,
-      !is.na(horas)
+      !is.na(horas),
+      !is.na(peso),
+      peso > 0
     ) |>
     dplyr::group_by(sexo, sector_desc) |>
     dplyr::summarise(
-      horas_promedio = mean(horas, na.rm = TRUE),
+      horas_promedio = weighted.mean(horas, peso, na.rm = TRUE),
       .groups = "drop"
     ) |>
     dplyr::mutate(
@@ -94,12 +91,12 @@ summarise_hours <- function(path, anio, p05a_informal, p05b_informal, mes = NA_i
 }
 
 annual_snapshot_df <- purrr::pmap_dfr(
-  annual_specs[, c("path", "anio", "p05a_informal", "p05b_informal")],
+  annual_specs[, c("path", "anio")],
   summarise_hours
 )
 
 quarter_2026_df <- purrr::pmap_dfr(
-  q1_2026_spec[, c("path", "anio", "p05a_informal", "p05b_informal", "mes")],
+  q1_2026_spec[, c("path", "anio", "mes")],
   summarise_hours
 )
 
@@ -134,7 +131,8 @@ chart_data <- list(
     quarter_2026_file = q1_2026_spec$file_name[[1]],
     methodology = paste(
       "Serie 2018-2025 calculada con microdatos ENEMDU de diciembre.",
-      "Para 2026 se usa el archivo de personas del I trimestre 2026."
+      "Para 2026 se usa el archivo de personas del I trimestre 2026.",
+      "Los promedios usan el factor de expansión de la encuesta."
     )
   )
 )

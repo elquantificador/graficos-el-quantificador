@@ -46,9 +46,9 @@ title_raw <- "La semana laboral de los trabajadores formales cada vez se acerca 
 subtitle_raw <- "Horas semanales promedio trabajadas, por sexo, ENEMDU mensual de diciembre 2018-2025, sector formal"
 caption_raw <- paste(
   "Fuente: ENEMDU - INEC. Cálculos de Eddie Tomalá adaptados para El Quantificador de Laboratorio LIDE.",
-  "La serie muestra el promedio de horas trabajadas a diciembre de cada año para 2018-2025.",
+  "Nota: Promedios ponderados con el factor de expansión para diciembre de cada año, 2018-2025.",
   "La franja gris señala el periodo de la pandemia.",
-  "Las omisiones de sector se imputan con la tenencia de seguridad social."
+  "Se excluyen los registros sin clasificación de sector."
 )
 
 build_chart <- function() {

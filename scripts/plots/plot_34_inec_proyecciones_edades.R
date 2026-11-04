@@ -18,19 +18,19 @@ out_path <- "outputs/figures/34_composicion-edad-poblacion-2050-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
-  source("scripts/data-cleaning/clean_inec_proyecciones_edades.R")
+  source("scripts/data-cleaning/clean_inec_proyecciones_edades.R", local = new.env(parent = globalenv()))
 }
 
 datos_composicion <- readRDS(data_path)
 
-title_raw <- "En 2050, Ecuador proyecta más del doble de adultos mayores y 30% menos niños"
+title_raw <- "En 2050, la proporción de niños será 30% menor que en 2025"
 subtitle_raw <- "Porcentaje de cada grupo etario respecto a la población total, 1950-2050"
 caption_raw <- paste(
-  "Fuente: INEC, Proyecciones poblacionales Censo 2022. Cálculos de Eddie Tomalá para El Quantificador de Laboratorio LIDE.",
-  "Las trayectorias integran los registros históricos con las proyecciones del INEC hacia 2050."
+  "Fuente: INEC, Proyecciones poblacionales Censo 2022. Elaboración: Eddie Tomalá para El Quantificador de Laboratorio LIDE.",
+  "Nota: Entre 2025 y 2050, la proporción de niños de 0 a 14 años baja de 24,6% a 17,3%. Las trayectorias integran registros históricos y proyecciones del INEC."
 )
 
-title_txt <- "En 2050, Ecuador proyecta más del doble\nde adultos mayores y 30% menos niños"
+title_txt <- wrap_title_house(title_raw)
 subtitle_txt <- wrap_subtitle_house(subtitle_raw)
 caption_txt <- wrap_caption_house(caption_raw)
 
@@ -46,12 +46,12 @@ label_df <- datos_composicion |>
   dplyr::filter(anio == max(anio)) |>
   dplyr::mutate(
     label = grupo_edad,
-    x_label = anio + 2.2,
+    x_label = if_else(grupo_edad == "55-64 años", 2004, anio + 2.2),
     y_label = porcentaje + dplyr::case_when(
       grupo_edad == "25-54 años" ~ -0.006,
       grupo_edad == "65 años y más" ~ 0.012,
       grupo_edad == "0-14 años" ~ -0.014,
-      grupo_edad == "55-64 años" ~ 0.016,
+      grupo_edad == "55-64 años" ~ 0.008,
       grupo_edad == "15-24 años" ~ -0.014,
       TRUE ~ 0
     )

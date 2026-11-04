@@ -22,17 +22,10 @@ wtd_q <- function(x, w, p) {
 enemdu_df <- haven::read_sav(input_path) %>%
   mutate(
     secemp = as.numeric(haven::zap_labels(secemp)),
-    p05a = as.numeric(haven::zap_labels(p05a)),
-    p05b = as.numeric(haven::zap_labels(p05b)),
     p03 = as.numeric(haven::zap_labels(p03)),
     empleo = as.numeric(haven::zap_labels(empleo)),
     ingrl = as.numeric(haven::zap_labels(ingrl)),
-    fexp = as.numeric(fexp),
-    secemp = case_when(
-      is.na(secemp) & p05a == 10 & p05b == 10 ~ 2,
-      is.na(secemp) & (p05a != 10 | p05b != 10) ~ 1,
-      TRUE ~ secemp
-    )
+    fexp = as.numeric(fexp)
   ) %>%
   filter(
     empleo == 1,
@@ -61,7 +54,6 @@ counts_df <- enemdu_df %>%
   )
 
 summary_df <- enemdu_df %>%
-  filter(ingrl <= overall_p90) %>%
   group_by(sector) %>%
   summarise(
     p10 = wtd_q(ingrl, fexp, 0.10),
