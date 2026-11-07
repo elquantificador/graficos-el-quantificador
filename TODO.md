@@ -13,6 +13,9 @@
 - `draft_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
   titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
   de publicar.
+- `draft_desnutricion-cronica-edad-ecuador.png` y `draft_desnutricion-sobrepeso-area-ecuador.png`
+  (ENDI R3) estan en estado `draft`; verificar las cifras contra los tabulados
+  oficiales de la R3 y publicarlos juntos con un numero y sufijos a y b.
 - Los borradores no llevan numero. Al publicarse reciben un identificador libre
   del catalogo.
 
