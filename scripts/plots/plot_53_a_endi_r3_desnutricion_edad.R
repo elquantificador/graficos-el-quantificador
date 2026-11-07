@@ -1,11 +1,11 @@
 # ============================================================
-# plot_endi_r3_desnutricion_edad.R
+# plot_53_a_endi_r3_desnutricion_edad.R
 # Desnutrición crónica infantil por grupo de edad, ENDI rondas 1 a 3.
 # Requiere: data/processed/endi_r3_desnutricion_sobrepeso.rds
-# Guarda:   outputs/figures/draft_desnutricion-cronica-edad-ecuador.png
+# Guarda:   outputs/figures/53_a_desnutricion-cronica-edad-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_endi_r3_desnutricion_edad.R
+#   Rscript scripts/plots/plot_53_a_endi_r3_desnutricion_edad.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -13,7 +13,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/endi_r3_desnutricion_sobrepeso.rds"
-out_path <- "outputs/figures/draft_desnutricion-cronica-edad-ecuador.png"
+out_path <- "outputs/figures/53_a_desnutricion-cronica-edad-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
