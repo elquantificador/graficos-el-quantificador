@@ -13,9 +13,8 @@
 - `draft_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
   titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
   de publicar.
-- `53_a` y `53_b` (ENDI R3) estan en estado `draft`; verificar las cifras R3
-  contra los tabulados oficiales, agregar el enlace de LinkedIn y pasar a
-  `published`.
+- `53_a` y `53_b` (ENDI R3) estan en estado `draft`; agregar la fecha y el
+  enlace de LinkedIn cuando se publiquen y actualizar su estado.
 - Los borradores no llevan numero. Al publicarse reciben un identificador libre
   del catalogo.
 

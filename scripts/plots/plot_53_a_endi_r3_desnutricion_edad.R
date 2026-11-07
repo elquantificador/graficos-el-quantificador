@@ -70,11 +70,11 @@ sin_dato <- data.frame(
   xmin = as.Date("2024-09-01"), xmax = as.Date("2025-07-31")
 )
 
-title_raw <- "La desnutrición crónica bajó en los menores de 2 años, pero no en los niños de 2 a 5"
+title_raw <- "La desnutrición crónica bajó entre los menores de 2 años"
 subtitle_raw <- "Desnutrición crónica infantil, grupo de edad, 2022-2026"
 caption_raw <- paste(
   "Fuente: INEC, Encuesta Nacional sobre Desnutrición Infantil (ENDI), rondas 1 (julio 2022 a julio 2023),",
-  "2 (julio 2023 a agosto 2024) y 3 (agosto 2025 a septiembre 2026), boletín técnico de octubre de 2026.",
+  "2 (julio 2023 a agosto 2024) y 3 (agosto 2025 a septiembre 2026), tabulados oficiales.",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
   "Nota: desnutrición crónica es una talla para la edad menor a -2 desviaciones estándar del patrón de la OMS.",
   "* Diferencia entre las rondas 2 y 3 significativa al 95 % según el INEC; las otras dos no lo son.",

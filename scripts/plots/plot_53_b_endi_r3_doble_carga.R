@@ -53,18 +53,16 @@ plot_df <- readRDS(data_path)$doble_carga |>
 
 dodge <- ggplot2::position_dodge(width = 0.8)
 
-title_raw <- "La desnutrición casi no cambió, pero el sobrepeso subió en todo el país"
+title_raw <- "El sobrepeso infantil subió en áreas urbanas y rurales"
 subtitle_raw <- paste(
-  "Desnutrición crónica y sobrepeso en menores de 5 años, área, 2023-2026.",
-  "Barra clara: ronda 2 (2023-2024); barra oscura: ronda 3 (2025-2026)"
+  "Menores de 5 años por área. Barras claras: 2023-2024;",
+  "barras oscuras: 2025-2026"
 )
 caption_raw <- paste(
-  "Fuente: INEC, Encuesta Nacional sobre Desnutrición Infantil (ENDI), rondas 2 (julio 2023 a agosto 2024)",
-  "y 3 (agosto 2025 a septiembre 2026), boletín técnico de octubre de 2026.",
+  "Fuente: INEC, ENDI, tabulados de las rondas 2 (2023-2024) y 3 (2025-2026).",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
-  "Nota: junto a la barra de la ronda 3,",
-  "el cambio frente a la ronda 2 en puntos porcentuales; * significativo al 95 % según el INEC.",
-  "Ningún cambio en desnutrición crónica es significativo. Ecuador continental."
+  "Nota: el número junto a la barra oscura es el cambio en puntos porcentuales frente a la ronda 2.",
+  "Cambios calculados antes de redondear. * Cambio significativo al 95 %. Ecuador continental."
 )
 
 p_base <- ggplot2::ggplot(
@@ -102,7 +100,7 @@ p_base <- ggplot2::ggplot(
   )
 
 spec <- house_spec("portrait")
-p_final <- add_logo(p_base, y = 0.23)
+p_final <- add_logo(p_base)
 
 dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
 ggplot2::ggsave(
