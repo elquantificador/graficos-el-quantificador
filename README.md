@@ -81,7 +81,7 @@ Los ultimos graficos y su estado son:
 - `50_mercado-laboral-pobreza-ecuador.png` (indicadores de mercado laboral y pobreza, ENEMDU 2026)
 - `51_balance-energetico-ecuador.png` (balance de fuentes y destinos del BNEE de ARCONEL, agosto de 2025 a julio de 2026)
 - `52_a_colada-hacer-comprar-ecuador.png` (costo por litro de colada morada hecha en casa y comprada en locales, octubre de 2026)
-- `52_b_sipa-colada-difuntos-ecuador.png` (precio mayorista por libra de las frutas de la colada morada, septiembre y semana del 26 de octubre al 1 de noviembre de 2025, SIPA; imagen pendiente de regenerar con el título corregido)
+- `52_b_sipa-colada-difuntos-ecuador.png` (precio mayorista por libra de las frutas de la colada morada, septiembre y semana del 26 de octubre al 1 de noviembre de 2025, SIPA)
 
 En preparacion (borradores sin numero hasta su publicacion):
 
