@@ -43,3 +43,8 @@ Rscript scripts/plots/plot_43_acled_conflicto_ecuador.R
 
 La salida es `outputs/figures/43_conflicto-tacticas-visual-pass-ecuador.png`.
 La réplica Observable usa el mismo RDS reducido mediante `quantificador/scripts/export_observable_charts.R`.
+
+La imagen `outputs/figures/43_conflicto-tacticas-ecuador.png` es una versión
+histórica que incluye protestas pacíficas y muestra 13.226 eventos. No es la
+versión actual del catálogo, que excluye esas protestas. Se conserva para
+referencia y no se regenera con el script actual.

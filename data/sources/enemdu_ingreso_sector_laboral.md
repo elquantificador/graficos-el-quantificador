@@ -18,7 +18,6 @@ Archivo utilizado: `data/raw/enemdu/enemdu_persona_2026_03.sav` (formato SPSS)
 |---|---|
 | `ingrl` | Ingreso laboral mensual de la ocupación principal |
 | `secemp` | Sector de empleo (formal / informal / otros) |
-| `p05a`, `p05b` | Variables de afiliación y acceso a seguridad social usadas para imputar `secemp` faltante |
 | `p03` | Edad en años cumplidos |
 | `empleo` | Condición de ocupación |
 | `fexp` | Factor de expansión (pesos muestrales) |
@@ -29,6 +28,5 @@ Encuesta con diseño complejo y ponderación muestral. En este gráfico se usan 
 ## Notas
 - Se restringe el universo a personas ocupadas de 15 años o más con ingreso laboral positivo.
 - Se excluyen observaciones con `ingrl = 999999` o `ingrl = -1` por corresponder a no respuesta o valores inválidos.
-- Las observaciones con `secemp` faltante se imputan con base en la tenencia de seguridad social, siguiendo la lógica del script original.
-- Si una observación no tiene clasificación sectorial y tampoco tiene información suficiente en `p05a` y `p05b`, permanece como faltante y se excluye del análisis final.
-- Para la visualización, el eje se recorta en el percentil 90 ponderado del ingreso total observado.
+- Se incluyen los códigos observados 1 y 2 de `secemp`, correspondientes a los sectores formal e informal. Las observaciones sin esa clasificación se excluyen; no se imputa el sector.
+- Las medianas y los percentiles 10, 25, 75 y 90 se calculan por sector sobre la muestra completa seleccionada. Las cajas muestran los percentiles 25 y 75, los bigotes los percentiles 10 y 90, y el eje visible se extiende hasta USD 1.350.

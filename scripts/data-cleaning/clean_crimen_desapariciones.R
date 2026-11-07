@@ -1,12 +1,12 @@
 # clean_crimen_desapariciones.R
 # Prepara la serie anual de muertes intencionales, desapariciones y presupuesto policial.
-# Requiere archivos en data/raw/crimen/.
+# Requiere archivos en data/raw/homicidios/ y data/raw/crimen/.
 # Guarda: data/processed/crimen_desapariciones.rds
 
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "readxl", "lubridate"))
 
-death_path <- "data/raw/crimen/mdi_homicidiosintencionales_pm_2014_2026.xlsx"
+death_path <- "data/raw/homicidios/mdi_homicidiosintencionales_pm_2014_2026.xlsx"
 missing_path <- "data/raw/crimen/mdi_personasdesaparecidas_pm_2017_2026.xlsx"
 budget_path <- "data/raw/crimen/Gasto_proforma.xlsx"
 out_path <- "data/processed/crimen_desapariciones.rds"

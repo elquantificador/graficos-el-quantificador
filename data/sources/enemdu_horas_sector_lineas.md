@@ -34,11 +34,19 @@ Archivos utilizados:
 | `p02` | Sexo |
 | `p03` | Edad en años cumplidos |
 | `secemp` | Sector de empleo |
-| `p05a`, `p05b` | Variables de seguridad social usadas para imputar `secemp` faltante |
+| `fexp` | Factor de expansión usado para ponderar las horas |
 
 ## Notas
 
 - La serie 2018-2025 usa microdatos de diciembre de cada año.
 - Para 2026, el valor anual se calcula con el archivo de personas del I trimestre de 2026.
 - El universo se restringe a personas de 15 años o más.
-- Las observaciones con `secemp` faltante se imputan usando la tenencia de seguridad social, siguiendo la lógica del script original de Eddie Tomalá.
+- Se utilizan los códigos observados de `secemp`: 1 para el sector formal y 2 para el informal. Los registros sin una de estas clasificaciones se excluyen; no se imputa el sector.
+
+## Serie anterior
+
+Se conserva `data/raw/enemdu/enemdu_horas_sector_2007_2026.csv` como un
+agregado histórico de Eddie Tomalá. El script
+`scripts/data-cleaning/clean_enemdu_horas_sector.R` lo prepara, pero no es
+insumo de los gráficos actuales 33_a y 33_b. Los microdatos y el cálculo que
+produjeron el agregado no están en este repositorio.

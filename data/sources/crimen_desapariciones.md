@@ -7,7 +7,8 @@
 - Muertes intencionales: `mdi_homicidiosintencionales_pm_2014_2026.xlsx`
 - Desapariciones: `mdi_personasdesaparecidas_pm_2017_2026.xlsx`
 - Presupuesto policial: `Gasto_proforma.xlsx`
-- Copias locales: `data/raw/crimen/`
+- Copia local de muertes intencionales: `data/raw/homicidios/mdi_homicidiosintencionales_pm_2014_2026.xlsx`
+- Copias locales de desapariciones y presupuesto: `data/raw/crimen/`
 
 ## Pregunta y cobertura
 
