@@ -1,12 +1,12 @@
 # ============================================================
-# plot_endi_r3_doble_carga.R
+# plot_53_b_endi_r3_doble_carga.R
 # Desnutrición crónica y sobrepeso en menores de 5 años por área,
 # ENDI rondas 2 y 3.
 # Requiere: data/processed/endi_r3_desnutricion_sobrepeso.rds
-# Guarda:   outputs/figures/draft_desnutricion-sobrepeso-area-ecuador.png
+# Guarda:   outputs/figures/53_b_desnutricion-sobrepeso-area-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_endi_r3_doble_carga.R
+#   Rscript scripts/plots/plot_53_b_endi_r3_doble_carga.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/endi_r3_desnutricion_sobrepeso.rds"
-out_path <- "outputs/figures/draft_desnutricion-sobrepeso-area-ecuador.png"
+out_path <- "outputs/figures/53_b_desnutricion-sobrepeso-area-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")

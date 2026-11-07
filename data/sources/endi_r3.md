@@ -1,6 +1,6 @@
 # Fuente de datos: ENDI ronda 3, desnutrición crónica y sobrepeso
 
-Insumo de los borradores `draft_desnutricion-cronica-edad-ecuador.png` y `draft_desnutricion-sobrepeso-area-ecuador.png`. Consulta: 7 de noviembre de 2026.
+Insumo de los gráficos 53_a (`53_a_desnutricion-cronica-edad-ecuador.png`) y 53_b (`53_b_desnutricion-sobrepeso-area-ecuador.png`). Consulta: 7 de noviembre de 2026.
 
 ## `endi_r3/endi_r3_boletin_indicadores.csv`
 
