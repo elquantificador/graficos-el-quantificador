@@ -23,8 +23,8 @@ La pieza mide cuántos menores de 18 años fueron víctimas de muertes violentas
 
 ```bash
 Rscript scripts/data-cleaning/clean_homicidios_menores.R
-Rscript scripts/plots/plot_homicidios_menores_evolucion.R
-Rscript scripts/plots/plot_homicidios_menores_provincias.R
+Rscript scripts/plots/plot_homicidios_menores_b_evolucion.R
+Rscript scripts/plots/plot_homicidios_menores_a_provincias.R
 ```
 
 Ejecutar con una configuración regional UTF-8 (por ejemplo `LC_ALL=C.UTF-8`) para que los acentos se dibujen bien.

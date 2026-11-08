@@ -1,12 +1,12 @@
 # ============================================================
-# plot_homicidios_menores_evolucion.R
+# plot_homicidios_menores_b_evolucion.R
 # Víctimas menores de 18 años de muertes violentas intencionales,
 # enero a septiembre de cada año, 2014-2026.
 # Requiere: data/processed/homicidios_menores.rds
-# Guarda:   outputs/figures/draft_homicidios-menores-evolucion-ecuador.png
+# Guarda:   outputs/figures/draft_homicidios-menores-b-evolucion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_homicidios_menores_evolucion.R
+#   Rscript scripts/plots/plot_homicidios_menores_b_evolucion.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/homicidios_menores.rds"
-out_path <- "outputs/figures/draft_homicidios-menores-evolucion-ecuador.png"
+out_path <- "outputs/figures/draft_homicidios-menores-b-evolucion-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
