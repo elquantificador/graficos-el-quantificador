@@ -1,0 +1,11 @@
+year,data_status,source_series,fallecidos,lesionados,siniestros
+2016,definitive,INEC tabulado provincial 11,1967,21458,30269
+2017,definitive,INEC tabulado provincial 11,2153,22018,28967
+2018,definitive,INEC tabulado provincial 11,2151,19858,25530
+2019,definitive,INEC tabulado provincial 11,2180,19999,24595
+2020,definitive,INEC tabulado provincial 11,1591,13099,16972
+2021,semi_definitive,INEC tabulado provincial 11,2131,17532,21352
+2022,semi_definitive,INEC tabulado provincial 11,2202,19006,21739
+2023,semi_definitive,INEC tabulado provincial 11,2373,18605,20994
+2024,provisional,INEC tabulado provincial 11,2302,18312,21220
+2025,provisional,INEC tabulado provincial 11,2354,17932,20346
