@@ -36,7 +36,7 @@ plot_df <- readRDS(input_path) |>
     )
   )
 
-title_raw <- "La mayoría de ecuatorianos discrepa con que las parejas homosexuales sean tan buenos padres"
+title_raw <- "Un 44% de ecuatorianos discrepa que las parejas homosexuales sean tan buenos padres"
 subtitle_raw <- paste(
   "Respuesta a la afirmación \"Las parejas homosexuales son tan buenos padres",
   "como otras parejas\", WVS Ecuador 2018"
