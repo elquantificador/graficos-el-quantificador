@@ -92,3 +92,13 @@ Las fichas `.md` de cada fuente documentan la version, el archivo interno utiliz
 
 - Cada dataset usado por un script debe tener una ficha en este directorio.
 - Si se agrega un archivo nuevo bajo `data/raw/`, debe registrarse aqui aunque todavia no tenga grafico asociado.
+
+### GTA VI: ingreso laboral por hora y provincias
+
+- Microdatos: INEC, ENEMDU anual 2025, `data/raw/gta_vi/enemdu_2025_anual.zip`; descarga: https://www.ecuadorencifras.gob.ec/documentos/web-inec/EMPLEO/2025/anual/2_BDD_DATOS_ABIERTOS_ENEMDU_2025_CSV.zip. Miembro: `BDDenemdu_personas_2025_anual.csv`.
+- Geografía del mapa: CONALI, Organización Territorial del Estado, capa provincial simplificada de `geoecu` 0.4.2, datos publicados por el paquete con corte al 17 de julio de 2026. Insumo local no versionado: `data/raw/gta_vi/geoecu_dpa_baja.gpkg`; recuperación y documentación: https://f-slg.github.io/geoecu/. Se muestran las 23 provincias continentales; la zona en estudio queda sin estimación. La capa de referencia original del IGM, localizada mediante EcuDataMCP, se conserva en `data/raw/gta_vi/igm_provincias.zip` y se descargó de https://www.geoportaligm.gob.ec/nacional/wfs?service=WFS&version=2.0.0&request=GetFeature&typeNames=nacional_2024%3AORGANIZACION_TERRITORIAL_PROVINCIAL&outputFormat=SHAPE-ZIP.
+- Precio: edición estándar de PlayStation Ecuador, US$79,99; se supone IVA adicional de 15% (US$91,99), sin ISD ni consola. Fuente: https://www.playstation.com/es-ec/games/grand-theft-auto-vi/. Revisar el cargo efectivo al pagar antes de publicación.
+- Cálculo: ocupados de 15 años o más con ingreso laboral mensual positivo y válido, horas de la semana anterior entre 1 y 168 y factor de expansión positivo. Ingreso por hora = `ingrl / (p24 * 52 / 12)`. Se calcula la mediana ponderada por `fexp` en cada provincia; horas = precio dividido para la mediana. Se excluyen ingresos sin respuesta, negativos y cero. El ingreso mensual y las horas de la semana anterior pueden no referirse al mismo período; no representa ingreso disponible ni incluye gastos básicos. Verificar incertidumbre muestral antes de publicar.
+- Los dos ZIP y el GeoPackage son insumos locales no versionados. Scripts: `clean_enemdu_gta_vi.R` y `plot_enemdu_gta_vi.R`.
+
+- El titular nacional usa la mediana de las 24 provincias, incluida Galápagos; el mapa muestra las 23 provincias continentales. Con el precio supuesto, la mediana nacional equivale a 34,66 horas y el 51,49% de las personas incluidas requiere al menos 34 horas.

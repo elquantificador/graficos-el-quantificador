@@ -34,3 +34,6 @@ Thumbs.db
 
 # Ofertas laborales de terceros: no se publican (ver DATA-NOTICE.md)
 data/raw/jobs_scrape/*.csv
+
+# Local GTA VI survey and geographic inputs
+/data/raw/gta_vi/

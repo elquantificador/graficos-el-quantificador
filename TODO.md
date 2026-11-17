@@ -21,3 +21,5 @@
 ## Archive / hold
 
 - Mantener variantes no publicadas o experimentales fuera del flujo principal del catálogo público hasta que tengan título, copy y decisión editorial final.
+
+- Revisar el borrador GTA VI: precio con IVA, precisión provincial, mapa y presentación antes de publicar.
