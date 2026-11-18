@@ -22,4 +22,4 @@
 
 - Mantener variantes no publicadas o experimentales fuera del flujo principal del catálogo público hasta que tengan título, copy y decisión editorial final.
 
-- Revisar el borrador GTA VI: precio con IVA, precisión provincial, mapa y presentación antes de publicar.
+- GTA VI: verificar el precio efectivo con IVA y la precisión de las estimaciones provinciales.

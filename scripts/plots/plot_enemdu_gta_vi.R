@@ -2,7 +2,7 @@
 # plot_enemdu_gta_vi.R
 # Horas de trabajo para comprar GTA VI por provincia.
 # Requiere: data/processed/enemdu_gta_vi.rds, data/raw/gta_vi/geoecu_dpa_baja.gpkg
-# Guarda: outputs/figures/draft_gta-vi-horas-trabajo-ecuador.png
+# Guarda: outputs/figures/55_gta-vi-horas-trabajo-ecuador.png
 # ============================================================
 source('scripts/utils.R')
 source('scripts/packages.R')
@@ -67,6 +67,6 @@ body <- cowplot::ggdraw() +
 composed <- cowplot::plot_grid(header, body, footer, ncol = 1, rel_heights = c(0.21, 0.65, 0.14))
 framed <- cowplot::ggdraw() + cowplot::draw_plot(composed, x = 0.05, y = 0, width = 0.80, height = 1)
 final <- house_apply_logo(framed, y = 0.19)
-out <- 'outputs/figures/draft_gta-vi-horas-trabajo-ecuador.png'
+out <- 'outputs/figures/55_gta-vi-horas-trabajo-ecuador.png'
 ggplot2::ggsave(out, final, width = 4, height = 5, dpi = 300, device = ragg::agg_png, bg = 'white')
 message('Guardado: ', out)
