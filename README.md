@@ -85,7 +85,7 @@ Los ultimos graficos y su estado son:
 
 En preparacion (borradores sin numero hasta su publicacion):
 
-- `draft_gta-vi-horas-trabajo-ecuador.png` (horas equivalentes al precio de GTA VI, por provincia, ENEMDU anual 2025; pendiente de revisión)
+- `55_gta-vi-horas-trabajo-ecuador.png` (horas equivalentes al precio de GTA VI, por provincia, ENEMDU anual 2025; publicado en LinkedIn)
 
 - `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
 - `draft_homicidios-menores-b-evolucion-ecuador.png` (víctimas menores de 18 años de muertes violentas intencionales, enero a septiembre, 2014 a 2026, MDI; autora: Odalis Clemente)
