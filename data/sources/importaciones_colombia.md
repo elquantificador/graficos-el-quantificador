@@ -6,7 +6,7 @@ Insumos para la fila 47 del [Pipeline de gráficos El Quantificador](https://doc
 
 Banco Central del Ecuador (BCE), estadísticas de comercio exterior de bienes. Consulta y descarga mediante EcuDataMCP el 1 de octubre de 2026, hora de Edmonton. Las respuestas JSON registran la consulta del 2 de octubre en UTC.
 
-La serie descargada cubre enero de 2024 a julio de 2026, con 31 observaciones mensuales. Julio de 2026 es el último mes devuelto por BCEData al consultar hasta octubre de 2026. Los datos de junio que esperaba la ficha del pipeline ya están disponibles.
+La serie descargada cubre enero de 2024 a julio de 2026, con 31 observaciones mensuales. El 20 de noviembre de 2026 se agregaron agosto y septiembre de 2026 a los dos CSV (consulta de BCEData mediante EcuDataMCP, grupos 87, 78 y 80); julio de 2026 coincidió con el valor ya guardado. La serie queda en 33 observaciones; los JSON y los Excel IEM conservan la descarga original hasta julio. Julio de 2026 es el último mes devuelto por BCEData al consultar hasta octubre de 2026. Los datos de junio que esperaba la ficha del pipeline ya están disponibles.
 
 Los valores están en millones de dólares corrientes:
 
@@ -46,8 +46,8 @@ El [boletín oficial de SENAE](https://www.aduana.gob.ec/gaceta-boletin/aplicaci
 ## Scripts del gráfico 51
 
 - Limpieza: `scripts/data-cleaning/clean_bce_comercio_colombia.R`.
-- Gráfico: `scripts/plots/plot_bce_importaciones_colombia.R`.
-- Salida: `outputs/figures/draft_importaciones-colombia-ecuador.png`.
+- Gráfico: `scripts/plots/plot_57_bce_importaciones_colombia.R`.
+- Salida: `outputs/figures/57_importaciones-colombia-ecuador.png`.
 
 ## Exportaciones hacia Colombia
 
@@ -89,11 +89,15 @@ Al comparar los totales de enero a julio de 2026 con los mismos meses de 2025, l
 
 El limpiador `scripts/data-cleaning/clean_bce_comercio_colombia.R` lee los CSV de importaciones y exportaciones. Guarda `data/processed/bce_comercio_colombia.rds`, con las columnas `fecha`, `serie` y `valor_millones_usd`: 31 meses por serie y 62 filas en total.
 
-El gráfico `scripts/plots/plot_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/draft_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. La línea punteada marca el 1 de febrero de 2026. Los datos de recaudación se conservan como material complementario.
+El gráfico `scripts/plots/plot_57_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/57_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. La línea punteada marca el 1 de febrero de 2026. Los datos de recaudación se conservan como material complementario.
 
 Ejecuta desde la raíz del repositorio:
 
 ```powershell
 Rscript scripts/data-cleaning/clean_bce_comercio_colombia.R
-Rscript scripts/plots/plot_bce_importaciones_colombia.R
+Rscript scripts/plots/plot_57_bce_importaciones_colombia.R
 ```
+
+## Contexto de la tasa de seguridad
+
+Ecuador aplicó una tasa de seguridad a las importaciones desde Colombia del 1 de febrero al 31 de mayo de 2026: 30% en febrero, 50% desde el 1 de marzo y 100% en mayo. La resolución SENAE-SENAE-2026-0051-RE la llevó a 0% desde el 1 de junio de 2026. El gráfico sombrea ese período.
