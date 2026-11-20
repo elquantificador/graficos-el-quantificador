@@ -67,7 +67,7 @@ subtitle_raw <- paste(
 )
 caption_raw <- paste(
   "Fuente: Banco Central del Ecuador (BCE), comercio exterior por país, enero de 2024 a septiembre de 2026.",
-  "Elaboración: Ángel Alava para El Quantificador de Laboratorio LIDE.",
+  "Elaboración: Ángel Alava y Daniel Sánchez-Pazmiño para El Quantificador de Laboratorio LIDE.",
   "Nota: la tasa de seguridad rigió del 1 de febrero al 31 de mayo de 2026 (30%, 50% desde marzo y 100% en mayo).",
   "La caída compara febrero-mayo de 2026 con febrero-mayo de 2025. En agosto y septiembre",
   "de 2026 las importaciones quedaron a menos de 3% de los mismos meses de 2025."
