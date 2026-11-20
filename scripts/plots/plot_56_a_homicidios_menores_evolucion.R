@@ -1,12 +1,12 @@
 # ============================================================
-# plot_homicidios_menores_b_evolucion.R
+# plot_56_a_homicidios_menores_evolucion.R
 # Víctimas menores de 18 años de muertes violentas intencionales,
 # enero a septiembre de cada año, 2014-2026.
 # Requiere: data/processed/homicidios_menores.rds
-# Guarda:   outputs/figures/draft_homicidios-menores-b-evolucion-ecuador.png
+# Guarda:   outputs/figures/56_a_homicidios-menores-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_homicidios_menores_b_evolucion.R
+#   Rscript scripts/plots/plot_56_a_homicidios_menores_evolucion.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/homicidios_menores.rds"
-out_path <- "outputs/figures/draft_homicidios-menores-b-evolucion-ecuador.png"
+out_path <- "outputs/figures/56_a_homicidios-menores-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
@@ -50,7 +50,7 @@ p_base <- ggplot2::ggplot(anual, ggplot2::aes(x = anio, y = menores, fill = grup
     vjust = -0.5, size = 2.6, colour = "grey20"
   ) +
   ggplot2::annotate(
-    "text", x = 2026, y = v26 * 1.2,
+    "text", x = 2026, y = v26 + 42,
     label = paste0("+", round(variacion * 100), "%"),
     size = 3.5, fontface = "bold", colour = "#A8363D"
   ) +
