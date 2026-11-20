@@ -4,7 +4,7 @@
 
 Esta guía describe cómo publicar y amplificar contenido de El Quantificador en LinkedIn, X, Facebook e Instagram. Sirve para campañas de artículos, visualizaciones, convocatorias y videos.
 
-El agente debe usar el navegador interno de Codex, verificar cada cuenta antes de actuar y conservar abiertas las sesiones al terminar.
+El agente debe usar el navegador que tenga las sesiones abiertas (Claude in Chrome o el navegador interno de Codex), verificar cada cuenta antes de actuar y conservar abiertas las sesiones al terminar.
 
 ## Fuente de verdad
 
@@ -29,8 +29,8 @@ Para Instagram, seguir también `platform-spec.md`: máximo cinco hashtags y nin
 | Plataforma | Fuente | Cuentas o páginas | Acciones según el alcance autorizado |
 | --- | --- | --- | --- |
 | X | Post o hilo publicado de `@ElQuantificador` | `@ElQuantificador`, `@LaboratorioLIDE`, `@newdimension_ec` | Like y Repost únicamente en los posts incluidos en el alcance |
-| LinkedIn | Publicación preparada en LIDE Social | El Quantificador, LIDE Community Management, Ecuadorian Development Research Lab (LIDE), New Dimensions | Reacción y repost solo si están autorizados |
-| Facebook | Publicación preparada en LIDE Social | El Quantificador, Laboratorio LIDE, CM Lide, New Dimensions | Reacción y compartir solo si están autorizados |
+| LinkedIn | Publicación preparada en LIDE Social | El Quantificador, LIDE Community Management, Ecuadorian Development Research Lab (LIDE), New Dimensions; Bridges to the Future solo reacción | Reacción y repost solo si están autorizados |
+| Facebook | Publicación preparada en LIDE Social | El Quantificador (solo reacción), Laboratorio LIDE, CM Lide, New Dimensions; Bridges to the Future solo reacción | Reacción y compartir solo si están autorizados |
 | Instagram | Reel o post de `@elquantificador` | `@elquantificador`, `@laboratoriolide`, `@newdimensions_ec` | Like y repost solo si están autorizados |
 
 Los nombres de perfiles y páginas no deben inferirse entre plataformas. Antes de actuar, verificar el nombre y la URL de la identidad activa.
