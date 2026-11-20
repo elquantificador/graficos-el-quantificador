@@ -1,0 +1,13 @@
+interface:
+  display_name: "Redes de LIDE y El Quantificador"
+  short_description: "Redacta, publica, corrige y amplifica posts en redes"
+  icon_small: assets/icon.svg
+  icon_large: assets/icon.svg
+  default_prompt: "Usa $lide-social-media para preparar o publicar un post de El Quantificador."
+policy:
+  products:
+  - chatgpt
+  - codex
+  - api
+  - atlas
+  allow_implicit_invocation: true

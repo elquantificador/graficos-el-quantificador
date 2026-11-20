@@ -76,7 +76,7 @@ Distinguir:
 - inferencia causal;
 - hipótesis interpretativa.
 
-Pedir un lenguaje menos causal cuando el diseño no aísle explicaciones alternativas. Exigir que las limitaciones relevantes aparezcan cerca de la afirmación afectada o en una sección claramente accesible.
+Pedir un lenguaje menos causal cuando el diseño no aísle explicaciones alternativas. Los límites van solo en el cierre, y solo si corresponde. Marcar como problema los calificadores o límites dentro de las secciones, y cualquier calificador en textos para redes sociales o promoción.
 
 ## 4. Estructura y narrativa
 
