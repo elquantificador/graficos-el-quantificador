@@ -10,9 +10,8 @@
 
 - Registra aqui los graficos en estado `draft` mientras esten en preparacion y
   actualiza su estado cuando pasen la revision editorial y la validacion tecnica.
-- `draft_importaciones-colombia-ecuador.png` esta en estado `draft`; revisar el
-  titulo, la comparacion enero-julio y el contexto de la medida aduanera antes
-  de publicar.
+- `57` (importaciones desde Colombia) esta en estado `draft`, programado para el
+  24 de noviembre de 2026; agregar el enlace de LinkedIn y pasarlo a `published`.
 - `53_a` y `53_b` (ENDI R3) estan en estado `draft`; agregar la fecha y el
   enlace de LinkedIn cuando se publiquen y actualizar su estado.
 - Los borradores no llevan numero. Al publicarse reciben un identificador libre

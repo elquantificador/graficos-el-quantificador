@@ -3,11 +3,11 @@
 # Author: Daniel Sanchez
 # Purpose: Compare monthly imports from and exports to Colombia.
 # Inputs:  data/processed/bce_comercio_colombia.rds
-# Outputs: outputs/figures/draft_importaciones-colombia-ecuador.png
+# Outputs: outputs/figures/57_importaciones-colombia-ecuador.png
 # Datos BCE actualizados a septiembre de 2026 (consulta del 20 de noviembre de 2026).
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_bce_importaciones_colombia.R
+#   Rscript scripts/plots/plot_57_bce_importaciones_colombia.R
 # ============================================================
 
 # 0. Setup ----
@@ -17,7 +17,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "lubridate", "ragg", "scales"))
 
 input_path <- "data/processed/bce_comercio_colombia.rds"
-out_path <- "outputs/figures/draft_importaciones-colombia-ecuador.png"
+out_path <- "outputs/figures/57_importaciones-colombia-ecuador.png"
 event_date <- ymd("2026-02-01")
 end_date <- ymd("2026-06-01")
 spanish_months <- c(
@@ -67,7 +67,7 @@ subtitle_raw <- paste(
 )
 caption_raw <- paste(
   "Fuente: Banco Central del Ecuador (BCE), comercio exterior por país, enero de 2024 a septiembre de 2026.",
-  "Elaboración: Daniel Sánchez-Pazmiño para El Quantificador de Laboratorio LIDE.",
+  "Elaboración: Ángel Alava para El Quantificador de Laboratorio LIDE.",
   "Nota: la tasa de seguridad rigió del 1 de febrero al 31 de mayo de 2026 (30%, 50% desde marzo y 100% en mayo).",
   "La caída compara febrero-mayo de 2026 con febrero-mayo de 2025. En agosto y septiembre",
   "de 2026 las importaciones quedaron a menos de 3% de los mismos meses de 2025."
