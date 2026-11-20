@@ -1,12 +1,12 @@
 # ============================================================
-# plot_homicidios_menores_a_provincias.R
+# plot_56_b_homicidios_menores_provincias.R
 # Víctimas menores de 18 años de muertes violentas intencionales
 # por provincia, enero a septiembre de cada año, 2020-2026 acumulado.
 # Requiere: data/processed/homicidios_menores.rds
-# Guarda:   outputs/figures/draft_homicidios-menores-a-provincias-ecuador.png
+# Guarda:   outputs/figures/56_b_homicidios-menores-provincias-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_homicidios_menores_a_provincias.R
+#   Rscript scripts/plots/plot_56_b_homicidios_menores_provincias.R
 # ============================================================
 
 source("scripts/utils.R")
@@ -14,7 +14,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "ragg", "scales"))
 
 data_path <- "data/processed/homicidios_menores.rds"
-out_path <- "outputs/figures/draft_homicidios-menores-a-provincias-ecuador.png"
+out_path <- "outputs/figures/56_b_homicidios-menores-provincias-ecuador.png"
 
 if (!file.exists(data_path)) {
   message("No existe ", data_path, ". Ejecutando limpieza previa...")
@@ -39,7 +39,8 @@ caption_raw <- paste(
   "Elaboración: Odalis Clemente para El Quantificador de Laboratorio LIDE.",
   "Nota: se cuentan víctimas de 0 a 17 años, acumuladas en los siete años. El porcentaje es la participación",
   "de cada provincia en el total nacional de víctimas menores con provincia registrada.",
-  "Se muestran las diez provincias con más víctimas."
+  "Se muestran las diez provincias con más víctimas. Son conteos, no tasas:",
+  "Guayas es la provincia más poblada."
 )
 
 p_base <- ggplot2::ggplot(
@@ -67,7 +68,7 @@ p_base <- ggplot2::ggplot(
   theme_quantificador()
 
 spec <- house_spec("portrait")
-p_final <- add_logo(p_base, y = 0.23)
+p_final <- add_logo(p_base, y = 0.28)
 
 dir.create(dirname(out_path), recursive = TRUE, showWarnings = FALSE)
 ggplot2::ggsave(
