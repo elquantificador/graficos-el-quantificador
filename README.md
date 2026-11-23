@@ -88,6 +88,8 @@ En preparacion (borradores sin numero hasta su publicacion):
 - `55_gta-vi-horas-trabajo-ecuador.png` (horas equivalentes al precio de GTA VI, por provincia, ENEMDU anual 2025; publicado en LinkedIn)
 - `56_a_homicidios-menores-ecuador.png` (víctimas menores de 18 años de muertes violentas intencionales, enero a septiembre, 2014 a 2026, MDI; autora: Odalis Clemente; publicado en LinkedIn el 21 de noviembre de 2026)
 - `56_b_homicidios-menores-provincias-ecuador.png` (víctimas menores de 18 años por provincia, enero a septiembre, 2020 a 2026, MDI; autora: Odalis Clemente; publicado en LinkedIn el 21 de noviembre de 2026)
+- `57_a_arroz-incidencia-inflacion-ecuador.png` (incidencia de los diez productos con mayor aporte a la inflación mensual de octubre de 2026, IPC del INEC; carrusel del arroz, pendiente de publicación)
+- `57_b_arroz-indice-precios-ecuador.png` (índice nacional de precios al consumidor del arroz y general, base 2014, enero de 2015 a junio de 2026, IPC del INEC; carrusel del arroz, pendiente de publicación)
 
 - `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
 
