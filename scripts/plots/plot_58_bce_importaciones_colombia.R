@@ -3,11 +3,11 @@
 # Author: Daniel Sanchez
 # Purpose: Compare monthly imports from and exports to Colombia.
 # Inputs:  data/processed/bce_comercio_colombia.rds
-# Outputs: outputs/figures/57_importaciones-colombia-ecuador.png
+# Outputs: outputs/figures/58_importaciones-colombia-ecuador.png
 # Datos BCE actualizados a septiembre de 2026 (consulta del 20 de noviembre de 2026).
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_57_bce_importaciones_colombia.R
+#   Rscript scripts/plots/plot_58_bce_importaciones_colombia.R
 # ============================================================
 
 # 0. Setup ----
@@ -17,7 +17,7 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "lubridate", "ragg", "scales"))
 
 input_path <- "data/processed/bce_comercio_colombia.rds"
-out_path <- "outputs/figures/57_importaciones-colombia-ecuador.png"
+out_path <- "outputs/figures/58_importaciones-colombia-ecuador.png"
 event_date <- ymd("2026-02-01")
 end_date <- ymd("2026-06-01")
 spanish_months <- c(
