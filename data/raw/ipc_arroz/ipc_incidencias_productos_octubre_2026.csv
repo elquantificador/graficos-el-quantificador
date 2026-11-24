@@ -1,0 +1,29 @@
+division,producto,ponderacion,incidencia_mensual_pct,variacion_mensual_pct
+Alimentos y bebidas no alcohólicas,Arroz,0.0139,0.1995,14.95
+Alimentos y bebidas no alcohólicas,Huevos,0.0081,0.0494,5.59
+Alimentos y bebidas no alcohólicas,Pimiento,0.0021,0.0189,9.00
+Alimentos y bebidas no alcohólicas,Pescado fresco,0.0061,0.0164,2.72
+Alimentos y bebidas no alcohólicas,Choclo,0.0011,0.0146,16.47
+Alimentos y bebidas no alcohólicas,Zanahoria amarilla,0.0016,0.0141,11.58
+Alimentos y bebidas no alcohólicas,Carne de res con hueso,0.0043,0.0122,2.60
+Alimentos y bebidas no alcohólicas,Azúcar,0.0021,0.0111,5.10
+Alimentos y bebidas no alcohólicas,Café,0.0021,0.0093,4.45
+Alimentos y bebidas no alcohólicas,Papa,0.0043,0.0086,2.05
+Transporte,Taxi urbano,0.0129,0.0517,4.15
+Transporte,Gasolina de alto octanaje,0.0035,0.0292,6.67
+Transporte,Servicios mecánicos especializados de vehículos,0.0062,0.0087,1.33
+Transporte,Neumático para automóvil,0.0032,0.0073,2.23
+Transporte,Transporte de carga,0.0011,0.0016,1.40
+Transporte,Transporte interurbano,0.0076,0.0015,0.16
+Transporte,Repuestos del sistema de transmisión y dirección,0.0005,0.0009,1.77
+Transporte,"Servicio de lavado, engrasado y pulverizado",0.0003,0.0005,1.60
+Transporte,Servicio de mantenimiento de vehículos,0.0020,0.0004,0.21
+Transporte,Neumático para motocicleta,0.0005,0.0002,0.50
+Servicios de restaurantes y alojamiento,Almuerzo popular,0.0445,0.0244,0.55
+Servicios de restaurantes y alojamiento,Almuerzo ejecutivo,0.0099,0.0081,0.83
+Servicios de restaurantes y alojamiento,Desayuno,0.0099,0.0072,0.73
+Servicios de restaurantes y alojamiento,Platos preparados,0.0087,0.0025,0.29
+Servicios de restaurantes y alojamiento,Comida tradicional preparada,0.0059,0.0012,0.20
+Servicios de restaurantes y alojamiento,Servicios de alojamiento,0.0008,0.0006,0.79
+Servicios de restaurantes y alojamiento,Comidas ligeras,0.0037,0.0004,0.10
+Servicios de restaurantes y alojamiento,Bebidas alcohólicas servidas fuera del hogar,0.0006,0.0002,0.25
