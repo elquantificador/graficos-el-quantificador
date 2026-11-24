@@ -19,3 +19,10 @@ Insumos del carrusel 57 (`57_a` y `57_b`).
 
 - La incidencia es el aporte de cada producto a la variación mensual del IPC; la suma de las incidencias de todos los productos es igual a la variación mensual.
 - Las explicaciones del alza (reapertura de exportaciones a Colombia, lluvias asociadas a El Niño) vienen de prensa y gremios; estos datos no las identifican causalmente.
+
+## `sipa_piladoras/sipa_precios_piladoras_2012_2026_10.csv`
+
+- Fuente: Ministerio de Desarrollo Económico y Productivo, Sistema de Información Pública Agropecuaria (SIPA), archivo `precios-agroindustria.xlsx`, hoja `Histórico Piladoras 12-25` («Precios mensuales piladoras», información 2012 a 2026, actualización de noviembre de 2026). <https://sipa.agricultura.gob.ec/descargas/base-estadistica/modulo_economico/precios-agroindustria.xlsx>
+- Descargado el 23 de noviembre de 2026. Se exportó la hoja completa a CSV sin cambiar valores; solo se recortaron espacios al final de nombres de cantón, producto y mes, y se convirtió el mes a número.
+- Columnas: año, mes, provincia, cantón, producto, presentación, tipo (compra o venta de la piladora) y precio promedio en dólares por unidad de presentación.
+- El gráfico 57_c usa la compra de arroz en cáscara grano largo en saca de 200 libras (solo Guayas) y la venta de arroz pilado natural grano largo en quintal de 100 libras, promediadas sin ponderar entre los cantones con reporte en cada mes. El número de cantones cambia entre meses.

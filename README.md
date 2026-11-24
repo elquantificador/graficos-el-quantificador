@@ -90,6 +90,7 @@ En preparacion (borradores sin numero hasta su publicacion):
 - `56_b_homicidios-menores-provincias-ecuador.png` (víctimas menores de 18 años por provincia, enero a septiembre, 2020 a 2026, MDI; autora: Odalis Clemente; publicado en LinkedIn el 21 de noviembre de 2026)
 - `57_a_arroz-incidencia-inflacion-ecuador.png` (incidencia de los diez productos con mayor aporte a la inflación mensual de octubre de 2026, IPC del INEC; carrusel del arroz, pendiente de publicación)
 - `57_b_arroz-indice-precios-ecuador.png` (índice nacional de precios al consumidor del arroz y general, base 2014, enero de 2015 a junio de 2026, IPC del INEC; carrusel del arroz, pendiente de publicación)
+- `57_c_arroz-precios-piladoras-ecuador.png` (precios de compra de arroz en cáscara y de venta de arroz pilado en piladoras, grano largo, enero de 2022 a octubre de 2026, SIPA; carrusel del arroz, pendiente de publicación)
 
 - `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
 
