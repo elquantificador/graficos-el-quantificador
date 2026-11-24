@@ -1,20 +1,19 @@
 # ============================================================
-# plot_57_a_inec_ipc_arroz_incidencia.R
+# plot_57_b_inec_ipc_arroz_incidencia.R
 # Productos con mayor incidencia en la inflación mensual de octubre de 2026.
 # Requiere: data/processed/inec_ipc_arroz.rds
-# Guarda:   outputs/figures/57_a_arroz-incidencia-inflacion-ecuador.png
+# Guarda:   outputs/figures/57_b_arroz-incidencia-inflacion-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/data-cleaning/clean_inec_ipc_arroz.R
-#   Rscript scripts/plots/plot_57_a_inec_ipc_arroz_incidencia.R
+#   Rscript scripts/plots/plot_57_b_inec_ipc_arroz_incidencia.R
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "scales", "ragg"))
 
-out_path <- "outputs/figures/57_a_arroz-incidencia-inflacion-ecuador.png"
-inflacion_mensual <- 0.33
+out_path <- "outputs/figures/57_b_arroz-incidencia-inflacion-ecuador.png"
 n_productos <- 10
 
 incidencias <- readRDS("data/processed/inec_ipc_arroz.rds")$incidencias
@@ -27,21 +26,14 @@ plot_data <- incidencias |>
     etiqueta = formatC(incidencia_mensual_pct, format = "f", digits = 2, decimal.mark = ",")
   )
 
-participacion <- plot_data$incidencia_mensual_pct[plot_data$destacado] / inflacion_mensual
-
 title_text <- "El arroz aportó más de la mitad de la inflación de octubre"
-subtitle_text <- "Incidencia en la variación mensual del IPC, por producto, octubre de 2026"
+subtitle_text <- "Incidencia en la inflación, por producto, octubre 2026"
 caption_text <- wrap_caption_house(paste(
-  "Fuente: INEC, Índice de Precios al Consumidor, Boletín Técnico N° 10-2026.",
+  "Fuente: INEC, IPC, Boletín Técnico N° 10-2026.",
   "Elaboración: Daniel Sánchez Pazmiño para El Quantificador.",
-  "Nota: La incidencia es el aporte de cada producto a la variación mensual",
-  "del IPC, en puntos porcentuales; la suma de las incidencias de todos",
-  "los productos da la inflación mensual, que fue de 0,33%. El arroz aportó",
-  "0,20 puntos, cerca de", paste0(round(participacion * 100), "%"), "del total.",
-  "Se muestran los diez productos con mayor incidencia entre los publicados",
-  "por el INEC para las tres divisiones que más aportaron en octubre:",
-  "alimentos y bebidas no alcohólicas, transporte, y servicios de restaurantes",
-  "y alojamiento. En octubre, el precio del arroz subió 14,95% frente a septiembre."
+  "Nota: La incidencia es el aporte de cada producto a la inflación mensual",
+  "de 0,33%, en puntos porcentuales. Diez productos con mayor incidencia en",
+  "las tres divisiones que más aportaron."
 ))
 
 p_base <- ggplot(plot_data, aes(x = incidencia_mensual_pct, y = producto)) +
