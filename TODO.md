@@ -11,7 +11,7 @@
 - Registra aqui los graficos en estado `draft` mientras esten en preparacion y
   actualiza su estado cuando pasen la revision editorial y la validacion tecnica.
 - `58` (importaciones desde Colombia) esta en estado `draft`, programado para el
-  26 de noviembre de 2026; agregar el enlace de LinkedIn y pasarlo a `published`.
+  7 de diciembre de 2026; agregar el enlace de LinkedIn y pasarlo a `published`.
 - `57_a`, `57_b` y `57_c` (arroz e inflacion) estan en estado `draft`, programados
   para el 24 de noviembre de 2026; agregar el enlace de LinkedIn y pasarlos a `published`.
 - `53_a` y `53_b` (ENDI R3) estan en estado `draft`; agregar la fecha y el
