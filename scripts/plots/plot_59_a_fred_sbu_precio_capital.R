@@ -68,10 +68,11 @@ p_base <- ggplot(
   scale_y_continuous(breaks = c(0, 100, 200, 300), limits = c(0, 300)) +
   coord_cartesian(clip = "off") +
   labs(
-    title = wrap_title_house(
-      "Desde 2007, el salario básico casi se triplicó y las computadoras se abarataron 54%"
+    title = paste0(
+      "Desde 2007, el salario básico casi se triplicó\n",
+      "y las computadoras se abarataron 54%"
     ),
-    subtitle = wrap_subtitle_house("Índice, 2007 = 100"),
+    subtitle = "Evolución de precios y salario básico, 2007 = 100",
     caption = wrap_caption_house(
       paste(
         "Fuente: U.S. Bureau of Labor Statistics vía FRED (WPU11,",
@@ -85,7 +86,11 @@ p_base <- ggplot(
     x = NULL,
     y = NULL
   ) +
-  theme_quantificador()
+  theme_quantificador() +
+  theme(
+    plot.title = element_text(size = 10, lineheight = 1.05),
+    plot.subtitle = element_text(size = 7.5)
+  )
 
 p_final <- add_logo(p_base, y = 0.17)
 
