@@ -216,7 +216,8 @@ The website sync consumes `outputs/chart_catalog/chart_catalog.csv`.
 - Fill editorial fields manually from the publication context: `Date`, `LinkedIn Link`, `Description`, and any brief `Notes`.
 - `Author` must be a plain display name only. Do not add slugs or URLs.
 - `Description` stores the publication copy, including LinkedIn copy when available. The website sync strips hashtag residue and author-credit lines when creating the public page.
-- Run `python scripts/validate_chart_catalog.py` before commit or push.
+- Run `python scripts/validate_chart_catalog.py --base-ref origin/main` before commit or push. The check is exact: UTF-8 without BOM, LF line endings, final newline, columns in the fixed order, `Chart ID` as `NN`, `NN_x` or `draft-slug` matching the number and letter of `Image Filename`, `Date` as `YYYY-MM-DD`, no stray spaces, and no row whose raw text changes without a value change.
+- Edit the catalog as text, not by reading it with a CSV library and writing it back: a rewrite changes quoting in rows you did not touch, and the check rejects it. To add rows, append them; to change a row, edit that line.
 
 ## Running scripts
 

@@ -6,7 +6,7 @@ Insumos para la fila 47 del [Pipeline de gráficos El Quantificador](https://doc
 
 Banco Central del Ecuador (BCE), estadísticas de comercio exterior de bienes. Consulta y descarga mediante EcuDataMCP el 1 de octubre de 2026, hora de Edmonton. Las respuestas JSON registran la consulta del 2 de octubre en UTC.
 
-La serie descargada cubre enero de 2024 a julio de 2026, con 31 observaciones mensuales. El 20 de noviembre de 2026 se agregaron agosto y septiembre de 2026 a los dos CSV (consulta de BCEData mediante EcuDataMCP, grupos 87, 78 y 80); julio de 2026 coincidió con el valor ya guardado. La serie queda en 33 observaciones; los JSON y los Excel IEM conservan la descarga original hasta julio. Julio de 2026 es el último mes devuelto por BCEData al consultar hasta octubre de 2026. Los datos de junio que esperaba la ficha del pipeline ya están disponibles.
+La descarga original cubría enero de 2024 a julio de 2026, con 31 observaciones mensuales. El 20 de noviembre de 2026 se agregaron agosto y septiembre de 2026 a los dos CSV (consulta de BCEData mediante EcuDataMCP, grupos 87, 78 y 80); julio de 2026 coincidió con el valor ya guardado. La serie queda en 33 observaciones; los JSON y los Excel IEM conservan la descarga original hasta julio. Julio de 2026 era el último mes devuelto por BCEData en la consulta original. Los datos de junio que esperaba la ficha del pipeline ya están disponibles.
 
 Los valores están en millones de dólares corrientes:
 
@@ -79,17 +79,17 @@ La búsqueda de archivos de SENAE devolvió el catálogo histórico de 2012 a 20
 
 ## Gráfico definitivo en dólares nominales
 
-El gráfico muestra importaciones desde Colombia y exportaciones hacia Colombia, de enero de 2024 a julio de 2026. Cada punto corresponde a un mes. Los valores se expresan en millones de dólares nominales FOB, sin ajuste por inflación.
+El gráfico muestra importaciones desde Colombia y exportaciones hacia Colombia, de enero de 2024 a septiembre de 2026. Cada punto corresponde a un mes. Los valores se expresan en millones de dólares nominales FOB, sin ajuste por inflación.
 
 `Monto mensual del gráfico = monto FOB publicado por BCEData, en millones de USD`.
 
 Aquí, FOB mide el valor de la mercancía sin transporte internacional ni seguro. Por ejemplo, el punto de exportaciones de julio de 2026 representa USD 82,107720903 millones; el punto de importaciones del mismo mes representa USD 129,761418213 millones.
 
-Al comparar los totales de enero a julio de 2026 con los mismos meses de 2025, las caídas son de 31,9% en importaciones y 10,0% en exportaciones, según la fórmula explicada en «Exportaciones hacia Colombia». Las dos líneas muestran los montos mensuales de los 31 meses disponibles.
+Al comparar los totales de enero a julio de 2026 con los mismos meses de 2025, las caídas son de 31,9% en importaciones y 10,0% en exportaciones, según la fórmula explicada en «Exportaciones hacia Colombia». Las dos líneas muestran los montos mensuales de los 33 meses disponibles.
 
 El limpiador `scripts/data-cleaning/clean_bce_comercio_colombia.R` lee los CSV de importaciones y exportaciones. Guarda `data/processed/bce_comercio_colombia.rds`, con las columnas `fecha`, `serie` y `valor_millones_usd`: 31 meses por serie y 62 filas en total.
 
-El gráfico `scripts/plots/plot_59_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/59_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. La línea punteada marca el 1 de febrero de 2026. Los datos de recaudación se conservan como material complementario.
+El gráfico `scripts/plots/plot_59_bce_importaciones_colombia.R` lee ese archivo y guarda `outputs/figures/59_importaciones-colombia-ecuador.png`. El eje vertical comienza en USD 25 millones. Cada serie se identifica con una etiqueta de su color en un espacio libre dentro del área de trazado. No hay leyenda ni líneas de cuadrícula. El sombreado indica el período de aplicación de la tasa de seguridad, de febrero a mayo de 2026. Los datos de recaudación se conservan como material complementario.
 
 Ejecuta desde la raíz del repositorio:
 
