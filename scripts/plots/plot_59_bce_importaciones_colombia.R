@@ -3,10 +3,11 @@
 # Author: Daniel Sanchez
 # Purpose: Compare monthly imports from and exports to Colombia.
 # Inputs:  data/processed/bce_comercio_colombia.rds
-# Outputs: outputs/figures/draft_importaciones-colombia-ecuador.png
+# Outputs: outputs/figures/59_importaciones-colombia-ecuador.png
+# Datos BCE actualizados a septiembre de 2026 (consulta del 20 de noviembre de 2026).
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_bce_importaciones_colombia.R
+#   Rscript scripts/plots/plot_59_bce_importaciones_colombia.R
 # ============================================================
 
 # 0. Setup ----
@@ -16,8 +17,9 @@ source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "lubridate", "ragg", "scales"))
 
 input_path <- "data/processed/bce_comercio_colombia.rds"
-out_path <- "outputs/figures/draft_importaciones-colombia-ecuador.png"
+out_path <- "outputs/figures/59_importaciones-colombia-ecuador.png"
 event_date <- ymd("2026-02-01")
+end_date <- ymd("2026-06-01")
 spanish_months <- c(
   "ene", "feb", "mar", "abr", "may", "jun",
   "jul", "ago", "sep", "oct", "nov", "dic"
@@ -56,19 +58,19 @@ etiquetas_series <- tibble(
 )
 
 title_raw <- paste(
-  "La guerra comercial redujo las",
-  "importaciones desde Colombia en 31.9%",
-  "y las exportaciones en un 10%",
-  sep = "\n"
+  "Las importaciones desde Colombia cayeron 46% con la tasa de seguridad",
+  "y ya volvieron a su nivel de 2025"
 )
 subtitle_raw <- paste(
-  "Comercio exterior con Colombia, exportaciones e importaciones,",
-  "enero 2024 a julio 2026"
+  "Importaciones y exportaciones mensuales con Colombia,",
+  "millones de USD FOB, enero 2024 a septiembre 2026"
 )
 caption_raw <- paste(
-  "Fuente: Banco Central del Ecuador (BCE), comercio bilateral con Colombia.",
-  "Caídas: enero-julio de 2026 frente al mismo período de 2025.",
-  "Elaboración: Daniel Sánchez-Pazmiño para El Quantificador."
+  "Fuente: Banco Central del Ecuador (BCE), comercio exterior por país, enero de 2024 a septiembre de 2026.",
+  "Elaboración: Ángel Alava y Daniel Sánchez-Pazmiño para El Quantificador de Laboratorio LIDE.",
+  "Nota: la tasa de seguridad rigió del 1 de febrero al 31 de mayo de 2026 (30%, 50% desde marzo y 100% en mayo).",
+  "La caída compara febrero-mayo de 2026 con febrero-mayo de 2025. En agosto y septiembre",
+  "de 2026 las importaciones quedaron a menos de 3% de los mismos meses de 2025."
 )
 
 # 3. Write output ----
@@ -82,6 +84,15 @@ p_base <- ggplot(
     group = .data$serie
   )
 ) +
+  annotate(
+    "rect",
+    xmin = event_date,
+    xmax = end_date,
+    ymin = -Inf,
+    ymax = Inf,
+    fill = "grey85",
+    alpha = 0.5
+  ) +
   geom_line(linewidth = 0.65) +
   geom_point(size = 1.1) +
   geom_text(
@@ -92,18 +103,12 @@ p_base <- ggplot(
     fontface = "bold",
     show.legend = FALSE
   ) +
-  geom_vline(
-    xintercept = event_date,
-    colour = "grey45",
-    linetype = "dashed",
-    linewidth = 0.5
-  ) +
   annotate(
     "text",
-    x = event_date - days(7),
+    x = event_date + (end_date - event_date) / 2,
     y = Inf,
-    label = "Inicio de la tasa\n1 feb. 2026",
-    hjust = 1,
+    label = "Tasa de\nseguridad",
+    hjust = 0.5,
     vjust = 1.2,
     size = 2.5,
     colour = "grey30"
@@ -128,12 +133,12 @@ p_base <- ggplot(
     expand = expansion(mult = c(0, 0.14))
   ) +
   labs(
-    title = title_raw,
+    title = wrap_title_house(title_raw),
     subtitle = wrap_subtitle_house(subtitle_raw),
     x = NULL,
     y = "Millones de USD nominales (FOB)",
     colour = NULL,
-    caption = wrap_caption_house(caption_raw)
+    caption = wrap_caption_house(caption_raw, width = 78)  # ajuste óptico: los porcentajes ensanchan las líneas
   ) +
   coord_cartesian(clip = "off") +
   theme_quantificador() +
@@ -145,7 +150,7 @@ p_base <- ggplot(
   )
 
 dir.create("outputs/figures", recursive = TRUE, showWarnings = FALSE)
-p_final <- add_logo(p_base, x = 0.88, y = 0.15, width = 0.09, height = 0.09)
+p_final <- add_logo(p_base, x = 0.88, y = 0.30, width = 0.09, height = 0.09)
 
 ggsave(
   filename = out_path,

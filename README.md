@@ -94,7 +94,7 @@ En preparacion (borradores sin numero hasta su publicacion):
 - `58_salario-basico-precio-capital-ecuador.png` (salario básico unificado frente a los índices de precios productor de maquinaria, computadoras y software de Estados Unidos, 2007 a 2026, con 2007 = 100; Gráfico 4 del artículo sobre el salario básico de $500)
 - `60_gana-menos-basico-sector-ecuador.png` (porcentaje de personas que trabajan y ganan menos de $482, por sector y con o sin empleo formal, ENEMDU de enero a mayo de 2026; Gráfico 3 del artículo sobre el salario básico de $500; pausado hasta enero de 2027)
 
-- `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
+- `59_importaciones-colombia-ecuador.png` (fila 47 del pipeline; importaciones y exportaciones mensuales FOB con Colombia, enero de 2024 a septiembre de 2026, en dólares nominales, con el período de la tasa de seguridad sombreado)
 
 ## Notas sobre los datos
 
