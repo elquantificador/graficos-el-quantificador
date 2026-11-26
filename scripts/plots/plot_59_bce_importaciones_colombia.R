@@ -7,7 +7,7 @@
 # Datos BCE actualizados a septiembre de 2026 (consulta del 20 de noviembre de 2026).
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
-#   Rscript scripts/plots/plot_60ce_importaciones_colombia.R
+#   Rscript scripts/plots/plot_59_bce_importaciones_colombia.R
 # ============================================================
 
 # 0. Setup ----
