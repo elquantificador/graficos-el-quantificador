@@ -20,9 +20,20 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Validate chart catalog and PNG assets
-        run: python scripts/validate_chart_catalog.py
+      - name: Validate chart catalog and PNG assets (pull request)
+        if: github.event_name == 'pull_request'
+        run: python scripts/validate_chart_catalog.py --base-ref "origin/${{ github.base_ref }}"
+      - name: Validate chart catalog and PNG assets (push)
+        if: github.event_name != 'pull_request'
+        run: |
+          if git rev-parse --verify --quiet "${{ github.event.before }}^{commit}" >/dev/null; then
+            python scripts/validate_chart_catalog.py --base-ref "${{ github.event.before }}"
+          else
+            python scripts/validate_chart_catalog.py
+          fi
