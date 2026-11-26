@@ -1,20 +1,20 @@
 # ============================================================
-# plot_60_enemdu_gana_menos_basico_sector.R
+# plot_59_b_enemdu_gana_menos_basico_sector.R
 # Personas que trabajan y ganan menos del salario básico ($482), por sector,
 # con y sin empleo formal, enero a mayo de 2026.
 # Requiere: data/processed/enemdu_gana_menos_basico_sector.rds
-# Guarda:   outputs/figures/60_gana-menos-basico-sector-ecuador.png
+# Guarda:   outputs/figures/59_b_gana-menos-basico-sector-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/data-cleaning/clean_enemdu_gana_menos_basico_sector.R
-#   Rscript scripts/plots/plot_60_enemdu_gana_menos_basico_sector.R
+#   Rscript scripts/plots/plot_59_b_enemdu_gana_menos_basico_sector.R
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "tidyr", "ggplot2", "stringr", "ragg"))
 
-out_path <- "outputs/figures/60_gana-menos-basico-sector-ecuador.png"
+out_path <- "outputs/figures/59_b_gana-menos-basico-sector-ecuador.png"
 azul <- "#2D7DB3"
 gris <- "grey45"
 

@@ -1,20 +1,20 @@
 # ============================================================
-# plot_59_fred_sbu_precio_capital.R
+# plot_59_a_fred_sbu_precio_capital.R
 # Salario básico unificado frente al precio productor de maquinaria,
 # computadoras y software, 2007 a 2026 (índice, 2007 = 100).
 # Requiere: data/processed/fred_precio_capital.rds
-# Guarda:   outputs/figures/59_salario-basico-precio-capital-ecuador.png
+# Guarda:   outputs/figures/59_a_salario-basico-precio-capital-ecuador.png
 # ============================================================
 # Ejecutar desde la raíz del proyecto:
 #   Rscript scripts/data-cleaning/clean_fred_precio_capital.R
-#   Rscript scripts/plots/plot_59_fred_sbu_precio_capital.R
+#   Rscript scripts/plots/plot_59_a_fred_sbu_precio_capital.R
 # ============================================================
 
 source("scripts/utils.R")
 source("scripts/packages.R")
 ensure_packages(c("dplyr", "ggplot2", "stringr", "ragg"))
 
-out_path <- "outputs/figures/59_salario-basico-precio-capital-ecuador.png"
+out_path <- "outputs/figures/59_a_salario-basico-precio-capital-ecuador.png"
 azul <- "#2D7DB3"
 gris <- "grey45"
 
