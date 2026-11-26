@@ -91,8 +91,8 @@ En preparacion (borradores sin numero hasta su publicacion):
 - `57_a_arroz-precios-piladoras-ecuador.png` (precios de compra de arroz en cáscara y de venta de arroz pilado en piladoras, grano largo, 2022 a octubre de 2026, SIPA, con franjas de El Niño, inundaciones y cierre de Colombia; carrusel del arroz; publicado en LinkedIn el 24 de noviembre de 2026)
 - `57_b_arroz-incidencia-inflacion-ecuador.png` (incidencia de los diez productos con mayor aporte a la inflación mensual de octubre de 2026, IPC del INEC; carrusel del arroz; publicado en LinkedIn el 24 de noviembre de 2026)
 - `57_c_arroz-indice-precios-ecuador.png` (índice nacional de precios al consumidor del arroz y general, base 2014, enero de 2015 a junio de 2026, IPC del INEC, con franjas de eventos; carrusel del arroz; publicado en LinkedIn el 24 de noviembre de 2026)
-- `59_a_salario-basico-precio-capital-ecuador.png` (salario básico unificado frente a los índices de precios productor de maquinaria, computadoras y software de Estados Unidos, 2007 a 2026, con 2007 = 100; Gráfico 4 del artículo sobre el salario básico de $500)
-- `59_b_gana-menos-basico-sector-ecuador.png` (porcentaje de personas que trabajan y ganan menos de $482, por sector y con o sin empleo formal, ENEMDU de enero a mayo de 2026; Gráfico 3 del artículo sobre el salario básico de $500; pausado hasta enero de 2027)
+- `58_salario-basico-precio-capital-ecuador.png` (salario básico unificado frente a los índices de precios productor de maquinaria, computadoras y software de Estados Unidos, 2007 a 2026, con 2007 = 100; Gráfico 4 del artículo sobre el salario básico de $500)
+- `60_gana-menos-basico-sector-ecuador.png` (porcentaje de personas que trabajan y ganan menos de $482, por sector y con o sin empleo formal, ENEMDU de enero a mayo de 2026; Gráfico 3 del artículo sobre el salario básico de $500; pausado hasta enero de 2027)
 
 - `draft_importaciones-colombia-ecuador.png` (fila 47 del pipeline, programado para el 4 de noviembre de 2026; importaciones y exportaciones mensuales FOB, enero de 2024 a julio de 2026, en dólares nominales)
 
